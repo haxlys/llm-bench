@@ -1,0 +1,671 @@
+=== cmd ===
+/Users/haxlys/llm-bench/.venv/bin/python3 -m lm_eval --model local-chat-completions --model_args base_url=http://127.0.0.1:9090/v1/chat/completions,model=lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit,tokenizer_backend=None,num_concurrent=1,max_retries=2 --tasks mmlu_generative --output_path /Users/haxlys/llm-bench/results/eval_scores/20260428T080426Z_26B-MoE-mlx-8bit_smoke/mmlu_generative --batch_size 1 --apply_chat_template --limit 2
+=== stdout ===
+local-chat-completions ({'base_url': 'http://127.0.0.1:9090/v1/chat/completions', 'model': 'lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit', 'tokenizer_backend': None, 'num_concurrent': 1, 'max_retries': 2}), gen_kwargs: ({}), limit: 2.0, num_fewshot: None, batch_size: 1
+|                 Tasks                 |Version|   Filter   |n-shot|  Metric   |   |Value|   |Stderr|
+|---------------------------------------|------:|------------|-----:|-----------|---|----:|---|-----:|
+|mmlu (generative)                      |      3|get_response|      |exact_match|↑  |    0|±  |     0|
+| - humanities                          |       |get_response|      |exact_match|↑  |    0|±  |     0|
+|  - formal_logic                       |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_european_history       |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_us_history             |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_world_history          |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - international_law                  |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - jurisprudence                      |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - logical_fallacies                  |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - moral_disputes                     |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - moral_scenarios                    |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - philosophy                         |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - prehistory                         |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - professional_law                   |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - world_religions                    |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+| - other                               |       |get_response|      |exact_match|↑  |    0|±  |     0|
+|  - business_ethics                    |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - clinical_knowledge                 |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - college_medicine                   |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - global_facts                       |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - human_aging                        |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - management                         |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - marketing                          |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - medical_genetics                   |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - miscellaneous                      |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - nutrition                          |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - professional_accounting            |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - professional_medicine              |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - virology                           |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+| - social sciences                     |       |get_response|      |exact_match|↑  |    0|±  |     0|
+|  - econometrics                       |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_geography              |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_government_and_politics|      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_macroeconomics         |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_microeconomics         |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_psychology             |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - human_sexuality                    |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - professional_psychology            |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - public_relations                   |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - security_studies                   |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - sociology                          |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - us_foreign_policy                  |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+| - stem                                |       |get_response|      |exact_match|↑  |    0|±  |     0|
+|  - abstract_algebra                   |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - anatomy                            |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - astronomy                          |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - college_biology                    |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - college_chemistry                  |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - college_computer_science           |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - college_mathematics                |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - college_physics                    |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - computer_security                  |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - conceptual_physics                 |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - electrical_engineering             |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - elementary_mathematics             |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_biology                |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_chemistry              |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_computer_science       |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_mathematics            |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_physics                |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - high_school_statistics             |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+|  - machine_learning                   |      3|get_response|     0|exact_match|↑  |    0|±  |     0|
+
+|      Groups      |Version|   Filter   |n-shot|  Metric   |   |Value|   |Stderr|
+|------------------|------:|------------|------|-----------|---|----:|---|-----:|
+|mmlu (generative) |      3|get_response|      |exact_match|↑  |    0|±  |     0|
+| - humanities     |       |get_response|      |exact_match|↑  |    0|±  |     0|
+| - other          |       |get_response|      |exact_match|↑  |    0|±  |     0|
+| - social sciences|       |get_response|      |exact_match|↑  |    0|±  |     0|
+| - stem           |       |get_response|      |exact_match|↑  |    0|±  |     0|
+
+
+=== stderr ===
+2026-04-28:17:04:28 WARNING  [config.evaluate_config:281] --limit SHOULD ONLY BE USED FOR TESTING. REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT.
+2026-04-28:17:04:28 INFO     [config.evaluate_config:301] Using default fewshot_as_multiturn=True.
+2026-04-28:17:04:32 INFO     [_cli.run:376] Selected Tasks: ['mmlu_generative']
+2026-04-28:17:04:32 INFO     [evaluator:211] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2026-04-28:17:04:32 INFO     [evaluator:236] Initializing local-chat-completions model, with arguments: {'base_url': 'http://127.0.0.1:9090/v1/chat/completions', 'model': 'lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit', 'tokenizer_backend': None, 'num_concurrent': 1, 'max_retries': 2}
+2026-04-28:17:04:32 INFO     [models.api_models:172] Using max length 2048 - 1
+2026-04-28:17:04:32 INFO     [models.api_models:175] Concurrent requests are disabled. To enable concurrent requests, set `num_concurrent` > 1.
+2026-04-28:17:04:32 INFO     [models.api_models:193] Using tokenizer None
+2026-04-28:17:06:00 INFO     [tasks:700] Selected tasks:
+2026-04-28:17:06:00 INFO     [tasks:703] Group: mmlu_generative
+2026-04-28:17:06:00 INFO     [tasks:711]   Subgroup: stem
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_abstract_algebra_generative (mmlu/generative/mmlu_abstract_algebra.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_anatomy_generative (mmlu/generative/mmlu_anatomy.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_astronomy_generative (mmlu/generative/mmlu_astronomy.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_college_biology_generative (mmlu/generative/mmlu_college_biology.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_college_chemistry_generative (mmlu/generative/mmlu_college_chemistry.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_college_computer_science_generative (mmlu/generative/mmlu_college_computer_science.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_college_mathematics_generative (mmlu/generative/mmlu_college_mathematics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_college_physics_generative (mmlu/generative/mmlu_college_physics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_computer_security_generative (mmlu/generative/mmlu_computer_security.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_conceptual_physics_generative (mmlu/generative/mmlu_conceptual_physics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_electrical_engineering_generative (mmlu/generative/mmlu_electrical_engineering.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_elementary_mathematics_generative (mmlu/generative/mmlu_elementary_mathematics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_biology_generative (mmlu/generative/mmlu_high_school_biology.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_chemistry_generative (mmlu/generative/mmlu_high_school_chemistry.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_computer_science_generative (mmlu/generative/mmlu_high_school_computer_science.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_mathematics_generative (mmlu/generative/mmlu_high_school_mathematics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_physics_generative (mmlu/generative/mmlu_high_school_physics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_statistics_generative (mmlu/generative/mmlu_high_school_statistics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_machine_learning_generative (mmlu/generative/mmlu_machine_learning.yaml)
+2026-04-28:17:06:00 INFO     [tasks:711]   Subgroup: other
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_business_ethics_generative (mmlu/generative/mmlu_business_ethics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_clinical_knowledge_generative (mmlu/generative/mmlu_clinical_knowledge.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_college_medicine_generative (mmlu/generative/mmlu_college_medicine.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_global_facts_generative (mmlu/generative/mmlu_global_facts.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_human_aging_generative (mmlu/generative/mmlu_human_aging.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_management_generative (mmlu/generative/mmlu_management.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_marketing_generative (mmlu/generative/mmlu_marketing.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_medical_genetics_generative (mmlu/generative/mmlu_medical_genetics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_miscellaneous_generative (mmlu/generative/mmlu_miscellaneous.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_nutrition_generative (mmlu/generative/mmlu_nutrition.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_professional_accounting_generative (mmlu/generative/mmlu_professional_accounting.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_professional_medicine_generative (mmlu/generative/mmlu_professional_medicine.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_virology_generative (mmlu/generative/mmlu_virology.yaml)
+2026-04-28:17:06:00 INFO     [tasks:711]   Subgroup: social sciences
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_econometrics_generative (mmlu/generative/mmlu_econometrics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_geography_generative (mmlu/generative/mmlu_high_school_geography.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_government_and_politics_generative (mmlu/generative/mmlu_high_school_government_and_politics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_macroeconomics_generative (mmlu/generative/mmlu_high_school_macroeconomics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_microeconomics_generative (mmlu/generative/mmlu_high_school_microeconomics.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_psychology_generative (mmlu/generative/mmlu_high_school_psychology.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_human_sexuality_generative (mmlu/generative/mmlu_human_sexuality.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_professional_psychology_generative (mmlu/generative/mmlu_professional_psychology.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_public_relations_generative (mmlu/generative/mmlu_public_relations.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_security_studies_generative (mmlu/generative/mmlu_security_studies.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_sociology_generative (mmlu/generative/mmlu_sociology.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_us_foreign_policy_generative (mmlu/generative/mmlu_us_foreign_policy.yaml)
+2026-04-28:17:06:00 INFO     [tasks:711]   Subgroup: humanities
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_formal_logic_generative (mmlu/generative/mmlu_formal_logic.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_european_history_generative (mmlu/generative/mmlu_high_school_european_history.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_us_history_generative (mmlu/generative/mmlu_high_school_us_history.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_high_school_world_history_generative (mmlu/generative/mmlu_high_school_world_history.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_international_law_generative (mmlu/generative/mmlu_international_law.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_jurisprudence_generative (mmlu/generative/mmlu_jurisprudence.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_logical_fallacies_generative (mmlu/generative/mmlu_logical_fallacies.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_moral_disputes_generative (mmlu/generative/mmlu_moral_disputes.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_moral_scenarios_generative (mmlu/generative/mmlu_moral_scenarios.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_philosophy_generative (mmlu/generative/mmlu_philosophy.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_prehistory_generative (mmlu/generative/mmlu_prehistory.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_professional_law_generative (mmlu/generative/mmlu_professional_law.yaml)
+2026-04-28:17:06:00 INFO     [tasks:691]     Task: mmlu_world_religions_generative (mmlu/generative/mmlu_world_religions.yaml)
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_abstract_algebra_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_anatomy_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_astronomy_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_college_biology_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_college_chemistry_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_college_computer_science_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_college_mathematics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_college_physics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_computer_security_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_conceptual_physics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_electrical_engineering_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_elementary_mathematics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_biology_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_chemistry_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_computer_science_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_mathematics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_physics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_statistics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_machine_learning_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_business_ethics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_clinical_knowledge_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_college_medicine_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_global_facts_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_human_aging_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_management_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_marketing_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_medical_genetics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_miscellaneous_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_nutrition_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_professional_accounting_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_professional_medicine_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_virology_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_econometrics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_geography_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_government_and_politics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_macroeconomics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_microeconomics_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_psychology_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_human_sexuality_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_professional_psychology_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_public_relations_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_security_studies_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_sociology_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_us_foreign_policy_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_formal_logic_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_european_history_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_us_history_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_high_school_world_history_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_international_law_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_jurisprudence_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_logical_fallacies_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_moral_disputes_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_moral_scenarios_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_philosophy_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_prehistory_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_professional_law_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 INFO     [evaluator:314] mmlu_world_religions_generative: Using gen_kwargs: {'until': ['</s>', '\n']}
+2026-04-28:17:06:00 WARNING  [evaluator:490] Chat template formatting change affects loglikelihood and multiple-choice tasks. See docs/chat-template-readme.md for details.
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_abstract_algebra_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1402.78it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_anatomy_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1715.46it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_astronomy_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1787.09it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_college_biology_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1807.89it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_college_chemistry_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1819.65it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_college_computer_science_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1673.70it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_college_mathematics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1380.39it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_college_physics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1792.44it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_computer_security_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1792.05it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_conceptual_physics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1824.40it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_electrical_engineering_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1841.22it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_elementary_mathematics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1930.63it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_biology_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1771.24it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_chemistry_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1853.43it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_computer_science_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1870.79it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_mathematics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1882.96it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_physics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1848.53it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_statistics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1819.65it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_machine_learning_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1810.23it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_business_ethics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1793.97it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_clinical_knowledge_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1803.61it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_college_medicine_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1915.64it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_global_facts_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1867.46it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_human_aging_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1913.90it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_management_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1993.96it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_marketing_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 2003.97it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_medical_genetics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 2006.36it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_miscellaneous_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 2016.01it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_nutrition_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1947.22it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_professional_accounting_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1949.03it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_professional_medicine_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1589.96it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_virology_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1650.00it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_econometrics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1899.16it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_geography_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1908.24it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_government_and_politics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1980.31it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_macroeconomics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1964.09it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_microeconomics_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1953.11it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_high_school_psychology_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1968.23it/s]
+2026-04-28:17:06:00 INFO     [api.task:311] Building contexts for mmlu_human_sexuality_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1906.94it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_professional_psychology_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1601.18it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_public_relations_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1824.80it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_security_studies_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1962.25it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_sociology_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1992.54it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_us_foreign_policy_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1959.04it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_formal_logic_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1957.21it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_high_school_european_history_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1983.59it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_high_school_us_history_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 2012.14it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_high_school_world_history_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1990.65it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_international_law_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1822.82it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_jurisprudence_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1964.55it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_logical_fallacies_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1986.41it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_moral_disputes_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1993.96it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_moral_scenarios_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1962.71it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_philosophy_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 2007.80it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_prehistory_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 2005.88it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_professional_law_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 2013.59it/s]
+2026-04-28:17:06:01 INFO     [api.task:311] Building contexts for mmlu_world_religions_generative on rank 0...
+
+  0%|          | 0/2 [00:00<?, ?it/s]
+100%|██████████| 2/2 [00:00<00:00, 1993.96it/s]
+2026-04-28:17:06:01 INFO     [evaluator:584] Running generate_until requests
+2026-04-28:17:06:01 INFO     [models.api_models:733] Tokenized requests are disabled. Context + generation length is not checked.
+
+Requesting API:   0%|          | 0/114 [00:00<?, ?it/s]2026-04-28:17:06:01 WARNING  [models.api_models:376] Cannot determine EOS string to pass to stop sequence. Manually set by passing `eos_string` to model_args.
+2026-04-28:17:06:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   1%|          | 1/114 [00:00<00:58,  1.92it/s]2026-04-28:17:06:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   2%|▏         | 2/114 [00:00<00:40,  2.79it/s]2026-04-28:17:06:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   3%|▎         | 3/114 [00:01<00:34,  3.25it/s]2026-04-28:17:06:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   4%|▎         | 4/114 [00:01<00:31,  3.54it/s]2026-04-28:17:06:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   4%|▍         | 5/114 [00:01<00:29,  3.66it/s]2026-04-28:17:06:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   5%|▌         | 6/114 [00:01<00:28,  3.77it/s]2026-04-28:17:06:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   6%|▌         | 7/114 [00:02<00:28,  3.81it/s]2026-04-28:17:06:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   7%|▋         | 8/114 [00:02<00:27,  3.83it/s]2026-04-28:17:06:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   8%|▊         | 9/114 [00:02<00:27,  3.85it/s]2026-04-28:17:06:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   9%|▉         | 10/114 [00:02<00:28,  3.60it/s]2026-04-28:17:06:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  10%|▉         | 11/114 [00:03<00:27,  3.69it/s]2026-04-28:17:06:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  11%|█         | 12/114 [00:03<00:27,  3.71it/s]2026-04-28:17:06:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  11%|█▏        | 13/114 [00:03<00:26,  3.78it/s]2026-04-28:17:06:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  12%|█▏        | 14/114 [00:03<00:25,  3.87it/s]2026-04-28:17:06:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  13%|█▎        | 15/114 [00:04<00:25,  3.86it/s]2026-04-28:17:06:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  14%|█▍        | 16/114 [00:04<00:25,  3.89it/s]2026-04-28:17:06:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  15%|█▍        | 17/114 [00:04<00:24,  3.92it/s]2026-04-28:17:06:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  16%|█▌        | 18/114 [00:04<00:24,  3.88it/s]2026-04-28:17:06:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  17%|█▋        | 19/114 [00:05<00:28,  3.38it/s]2026-04-28:17:06:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  18%|█▊        | 20/114 [00:05<00:26,  3.60it/s]2026-04-28:17:06:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  18%|█▊        | 21/114 [00:05<00:25,  3.66it/s]2026-04-28:17:06:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  19%|█▉        | 22/114 [00:06<00:24,  3.76it/s]2026-04-28:17:06:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  20%|██        | 23/114 [00:06<00:24,  3.75it/s]2026-04-28:17:06:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  21%|██        | 24/114 [00:06<00:23,  3.79it/s]2026-04-28:17:06:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  22%|██▏       | 25/114 [00:06<00:23,  3.81it/s]2026-04-28:17:06:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  23%|██▎       | 26/114 [00:07<00:22,  3.85it/s]2026-04-28:17:06:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  24%|██▎       | 27/114 [00:07<00:22,  3.86it/s]2026-04-28:17:06:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  25%|██▍       | 28/114 [00:07<00:22,  3.90it/s]2026-04-28:17:06:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  25%|██▌       | 29/114 [00:07<00:21,  3.96it/s]2026-04-28:17:06:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  26%|██▋       | 30/114 [00:08<00:21,  4.00it/s]2026-04-28:17:06:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  27%|██▋       | 31/114 [00:08<00:20,  3.96it/s]2026-04-28:17:06:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  28%|██▊       | 32/114 [00:08<00:20,  3.96it/s]2026-04-28:17:06:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  29%|██▉       | 33/114 [00:08<00:20,  3.95it/s]2026-04-28:17:06:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  30%|██▉       | 34/114 [00:09<00:20,  3.96it/s]2026-04-28:17:06:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  31%|███       | 35/114 [00:09<00:20,  3.87it/s]2026-04-28:17:06:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  32%|███▏      | 36/114 [00:09<00:20,  3.86it/s]2026-04-28:17:06:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  32%|███▏      | 37/114 [00:09<00:19,  3.87it/s]2026-04-28:17:06:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  33%|███▎      | 38/114 [00:10<00:19,  3.85it/s]2026-04-28:17:06:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  34%|███▍      | 39/114 [00:10<00:19,  3.82it/s]2026-04-28:17:06:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  35%|███▌      | 40/114 [00:10<00:19,  3.84it/s]2026-04-28:17:06:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  36%|███▌      | 41/114 [00:10<00:19,  3.84it/s]2026-04-28:17:06:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  37%|███▋      | 42/114 [00:11<00:17,  4.01it/s]2026-04-28:17:06:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  38%|███▊      | 43/114 [00:11<00:18,  3.89it/s]2026-04-28:17:06:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  39%|███▊      | 44/114 [00:11<00:17,  3.99it/s]2026-04-28:17:06:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  39%|███▉      | 45/114 [00:11<00:17,  3.98it/s]2026-04-28:17:06:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  40%|████      | 46/114 [00:12<00:17,  3.93it/s]2026-04-28:17:06:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  41%|████      | 47/114 [00:12<00:16,  3.99it/s]2026-04-28:17:06:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  42%|████▏     | 48/114 [00:12<00:16,  4.06it/s]2026-04-28:17:06:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  43%|████▎     | 49/114 [00:12<00:15,  4.08it/s]2026-04-28:17:06:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  44%|████▍     | 50/114 [00:13<00:15,  4.14it/s]2026-04-28:17:06:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  45%|████▍     | 51/114 [00:13<00:15,  4.10it/s]2026-04-28:17:06:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  46%|████▌     | 52/114 [00:13<00:15,  4.08it/s]2026-04-28:17:06:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  46%|████▋     | 53/114 [00:13<00:14,  4.09it/s]2026-04-28:17:06:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  47%|████▋     | 54/114 [00:14<00:14,  4.16it/s]2026-04-28:17:06:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  48%|████▊     | 55/114 [00:14<00:14,  4.09it/s]2026-04-28:17:06:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  49%|████▉     | 56/114 [00:14<00:14,  4.01it/s]2026-04-28:17:06:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  50%|█████     | 57/114 [00:14<00:14,  4.01it/s]2026-04-28:17:06:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  51%|█████     | 58/114 [00:15<00:14,  3.96it/s]2026-04-28:17:06:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  52%|█████▏    | 59/114 [00:15<00:14,  3.86it/s]2026-04-28:17:06:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  53%|█████▎    | 60/114 [00:15<00:14,  3.84it/s]2026-04-28:17:06:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  54%|█████▎    | 61/114 [00:15<00:14,  3.70it/s]2026-04-28:17:06:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  54%|█████▍    | 62/114 [00:16<00:14,  3.69it/s]2026-04-28:17:06:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  55%|█████▌    | 63/114 [00:16<00:13,  3.66it/s]2026-04-28:17:06:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  56%|█████▌    | 64/114 [00:16<00:13,  3.66it/s]2026-04-28:17:06:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  57%|█████▋    | 65/114 [00:17<00:13,  3.65it/s]2026-04-28:17:06:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  58%|█████▊    | 66/114 [00:17<00:12,  3.75it/s]2026-04-28:17:06:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  59%|█████▉    | 67/114 [00:17<00:12,  3.78it/s]2026-04-28:17:06:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  60%|█████▉    | 68/114 [00:17<00:11,  3.91it/s]2026-04-28:17:06:19 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  61%|██████    | 69/114 [00:18<00:11,  3.79it/s]2026-04-28:17:06:19 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  61%|██████▏   | 70/114 [00:18<00:11,  3.83it/s]2026-04-28:17:06:19 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  62%|██████▏   | 71/114 [00:18<00:14,  3.04it/s]2026-04-28:17:06:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  63%|██████▎   | 72/114 [00:19<00:16,  2.49it/s]2026-04-28:17:06:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  64%|██████▍   | 73/114 [00:19<00:14,  2.78it/s]2026-04-28:17:06:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  65%|██████▍   | 74/114 [00:19<00:13,  2.98it/s]2026-04-28:17:06:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  66%|██████▌   | 75/114 [00:20<00:12,  3.18it/s]2026-04-28:17:06:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  67%|██████▋   | 76/114 [00:20<00:10,  3.47it/s]2026-04-28:17:06:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  68%|██████▊   | 77/114 [00:20<00:10,  3.66it/s]2026-04-28:17:06:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  68%|██████▊   | 78/114 [00:20<00:09,  3.78it/s]2026-04-28:17:06:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  69%|██████▉   | 79/114 [00:21<00:09,  3.84it/s]2026-04-28:17:06:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  70%|███████   | 80/114 [00:21<00:08,  3.96it/s]2026-04-28:17:06:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  71%|███████   | 81/114 [00:21<00:08,  3.97it/s]2026-04-28:17:06:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  72%|███████▏  | 82/114 [00:22<00:09,  3.29it/s]2026-04-28:17:06:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  73%|███████▎  | 83/114 [00:22<00:08,  3.49it/s]2026-04-28:17:06:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  74%|███████▎  | 84/114 [00:22<00:09,  3.03it/s]2026-04-28:17:06:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  75%|███████▍  | 85/114 [00:22<00:08,  3.25it/s]2026-04-28:17:06:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  75%|███████▌  | 86/114 [00:23<00:08,  3.44it/s]2026-04-28:17:06:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  76%|███████▋  | 87/114 [00:23<00:07,  3.58it/s]2026-04-28:17:06:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  77%|███████▋  | 88/114 [00:23<00:07,  3.69it/s]2026-04-28:17:06:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  78%|███████▊  | 89/114 [00:24<00:10,  2.49it/s]2026-04-28:17:06:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  79%|███████▉  | 90/114 [00:24<00:08,  2.74it/s]2026-04-28:17:06:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  80%|███████▉  | 91/114 [00:25<00:09,  2.39it/s]2026-04-28:17:06:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  81%|████████  | 92/114 [00:25<00:10,  2.10it/s]2026-04-28:17:06:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  82%|████████▏ | 93/114 [00:26<00:11,  1.85it/s]2026-04-28:17:06:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  82%|████████▏ | 94/114 [00:27<00:12,  1.65it/s]2026-04-28:17:06:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  83%|████████▎ | 95/114 [00:27<00:09,  1.96it/s]2026-04-28:17:06:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  84%|████████▍ | 96/114 [00:28<00:08,  2.02it/s]2026-04-28:17:06:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  85%|████████▌ | 97/114 [00:28<00:07,  2.35it/s]2026-04-28:17:06:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  86%|████████▌ | 98/114 [00:28<00:06,  2.35it/s]2026-04-28:17:06:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  87%|████████▋ | 99/114 [00:29<00:06,  2.33it/s]2026-04-28:17:06:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  88%|████████▊ | 100/114 [00:29<00:05,  2.63it/s]2026-04-28:17:06:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  89%|████████▊ | 101/114 [00:29<00:04,  2.93it/s]2026-04-28:17:06:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  89%|████████▉ | 102/114 [00:30<00:04,  2.91it/s]2026-04-28:17:06:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  90%|█████████ | 103/114 [00:30<00:03,  3.17it/s]2026-04-28:17:06:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  91%|█████████ | 104/114 [00:30<00:02,  3.36it/s]2026-04-28:17:06:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  92%|█████████▏| 105/114 [00:30<00:02,  3.41it/s]2026-04-28:17:06:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  93%|█████████▎| 106/114 [00:31<00:02,  3.57it/s]2026-04-28:17:06:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  94%|█████████▍| 107/114 [00:31<00:01,  3.71it/s]2026-04-28:17:06:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  95%|█████████▍| 108/114 [00:31<00:01,  3.80it/s]2026-04-28:17:06:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  96%|█████████▌| 109/114 [00:31<00:01,  3.86it/s]2026-04-28:17:06:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  96%|█████████▋| 110/114 [00:32<00:01,  3.20it/s]2026-04-28:17:06:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  97%|█████████▋| 111/114 [00:32<00:00,  3.24it/s]2026-04-28:17:06:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  98%|█████████▊| 112/114 [00:32<00:00,  3.26it/s]2026-04-28:17:06:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  99%|█████████▉| 113/114 [00:33<00:00,  3.48it/s]2026-04-28:17:06:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API: 100%|██████████| 114/114 [00:33<00:00,  3.63it/s]
+Requesting API: 100%|██████████| 114/114 [00:33<00:00,  3.41it/s]
+2026-04-28:17:06:35 INFO     [loggers.evaluation_tracker:247] Saving results aggregated

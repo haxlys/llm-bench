@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+# Tasks that execute model-generated code; need explicit opt-in.
+CODE_EVAL_TASKS = {"humaneval", "humaneval_instruct", "mbpp", "mbpp_instruct", "mbpp_plus"}
 
 # We use local-chat-completions: lm-eval will POST to /v1/chat/completions and
 # apply the model's own chat template (set by mlx-lm-server / llama-server with --jinja).
@@ -35,10 +39,17 @@ def run_lmeval(
         base_url.rstrip("/") + "/chat/completions" if use_chat
         else base_url.rstrip("/") + "/completions"
     )
+    # For chat tasks: skip tokenizer (server applies chat template internally).
+    # For loglikelihood tasks: need a tokenizer to compute context lengths;
+    # use huggingface backend with the model id as tokenizer source.
+    if use_chat:
+        tok_args = "tokenizer_backend=None,"
+    else:
+        tok_args = f"tokenizer_backend=huggingface,tokenizer={model_label},"
     model_args = (
         f"base_url={base_url_full},"
         f"model={model_label},"
-        "tokenizer_backend=None,"
+        f"{tok_args}"
         "num_concurrent=1,"
         "max_retries=2"
     )
@@ -50,16 +61,23 @@ def run_lmeval(
         "--tasks", task,
         "--output_path", str(output_dir),
         "--batch_size", str(batch_size),
-        "--apply_chat_template",
     ]
+    if use_chat:
+        cmd.append("--apply_chat_template")
     if limit is not None:
         cmd.extend(["--limit", str(limit)])
     if num_fewshot is not None:
         cmd.extend(["--num_fewshot", str(num_fewshot)])
+    if task in CODE_EVAL_TASKS:
+        cmd.append("--confirm_run_unsafe_code")
     if extra_args:
         cmd.extend(extra_args)
 
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+    env = os.environ.copy()
+    if task in CODE_EVAL_TASKS:
+        env["HF_ALLOW_CODE_EVAL"] = "1"
+
+    proc = subprocess.run(cmd, capture_output=True, text=True, env=env)
     log_path = output_dir / f"{task}.log"
     log_path.write_text(
         "=== cmd ===\n" + " ".join(cmd) +

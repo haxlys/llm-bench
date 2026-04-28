@@ -97,18 +97,22 @@ report/
 
 ## Multi-dimensional evals (added v0.2)
 
-Beyond speed/memory benchmarks, this repo also runs lm-eval-harness against the
-OpenAI-compatible servers (`mlx_lm.server` / `llama-server`) for accuracy/quality
-across multiple dimensions:
+Runs lm-eval-harness against an OpenAI-compatible server (`mlx_lm.server` for
+MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 
-| Dimension | Tasks |
-|---|---|
-| Reasoning | `mmlu`, `gsm8k_cot_zeroshot`, `hellaswag` |
-| Korean | `kmmlu`, `hrm8k`, `haerae`, `kobest` |
-| Code | `humaneval_instruct`, `mbpp_instruct` |
-| Long context | `longbench` |
-| Safety | `truthfulqa`, `toxigen` |
-| Tool use | `bfcl` (external repo, optional) |
+| Dimension | Tasks (chat-compatible) | Loglikelihood-only (gguf only) |
+|---|---|---|
+| Reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag` |
+| Korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
+| Code | `humaneval_instruct`, `mbpp_instruct` | — |
+| Long context | `longbench` (21 sub-tasks, EN+ZH) | — |
+| Safety | `truthfulqa-multi_gen_en` | `toxigen` |
+| Tool use | (BFCL — external repo, optional) | — |
+
+`mlx_lm.server` does not return token logprobs in `/v1/completions`, so
+loglikelihood-based MCQ tasks (`hellaswag`, `kobest`, `haerae`, `toxigen`) only
+run on the GGUF path. Generative variants are used for the rest so both
+runtimes get apples-to-apples coverage.
 
 Setup:
 
@@ -116,20 +120,36 @@ Setup:
 uv sync --extra evals
 ```
 
-Smoke (verify wiring, ~10 min):
+Smoke (verify wiring, ~10 min, limit=2 per task):
 
 ```bash
 uv run python scripts/run_evals.py --variant 26B-MoE-mlx-8bit --suite smoke --limit 2
 ```
 
-Full overnight matrix (all 6 model variants × 12 tasks):
+Full overnight matrix (all 6 model variants × full suite):
 
 ```bash
+# Stop production launchd agents first (Metal contention will skew results):
+#   launchctl bootout gui/$(id -u)/com.haxlys.mlx-omni
+#   launchctl bootout gui/$(id -u)/com.haxlys.mlx-vlm
+#   launchctl bootout gui/$(id -u)/com.haxlys.vmlx
+#
+# Then:
 uv run python scripts/run_evals.py --all-variants --suite full
+#
+# Restore after:
+#   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.haxlys.mlx-omni.plist
+#   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.haxlys.mlx-vlm.plist
+#   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.haxlys.vmlx.plist
 ```
 
-Results: `results/eval_scores/<run_id>/<task>/results_*.json` (raw lm-eval output)
-+ `results/eval_scores/summary_*.json` (cross-variant aggregate).
+Each variant boots its own server on port 9090; tasks run sequentially per
+variant. Expect ~2–3 hours per variant for the full suite.
+
+Results:
+- `results/eval_scores/<run_id>/<task>/.../results_*.json` — raw lm-eval output
+- `results/eval_scores/summary_*.json` — flat list of {variant, task, results}
+- `results/server_logs/<run_id>.log` — model server stderr for debugging
 
 ## License
 

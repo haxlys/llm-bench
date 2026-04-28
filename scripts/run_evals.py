@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from llm_bench.evals import ModelServer, full_suite, smoke_suite  # noqa: E402
 from llm_bench.evals.bfcl import run_bfcl  # noqa: E402
 from llm_bench.evals.lmeval import run_lmeval  # noqa: E402
+from llm_bench.evals.suites import is_chat_task, supports_fmt  # noqa: E402
 
 EVAL_RESULTS_DIR = ROOT / "results" / "eval_scores"
 SERVER_LOG_DIR = ROOT / "results" / "server_logs"
@@ -94,10 +95,23 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                 click.echo(f"  server: {base_url} (booted in {time.perf_counter()-t0:.1f}s)")
                 for dim, task in tasks:
                     click.echo(f"  [{dim}] {task} ", nl=False)
+                    if not supports_fmt(task, fmt):
+                        click.echo(f"SKIP (loglikelihood-only, fmt={fmt} unsupported)")
+                        grand_summary.append({
+                            "variant": key, "model_id": model_id, "fmt": fmt,
+                            "quant": quant, "dim": dim, "task": task,
+                            "status": "skipped_logprob",
+                        })
+                        continue
                     ts0 = time.perf_counter()
+                    use_chat = is_chat_task(task)
+                    # mlx_lm.server requires the model field to be the loaded HF id;
+                    # llama-server accepts any string (label is just echoed back).
+                    api_model_label = model_path if fmt == "mlx" else key
                     res = run_lmeval(
-                        task=task, base_url=base_url, model_label=key,
+                        task=task, base_url=base_url, model_label=api_model_label,
                         output_dir=out_dir / task, limit=effective_limit,
+                        use_chat=use_chat,
                     )
                     dt = time.perf_counter() - ts0
                     if "error" in res:

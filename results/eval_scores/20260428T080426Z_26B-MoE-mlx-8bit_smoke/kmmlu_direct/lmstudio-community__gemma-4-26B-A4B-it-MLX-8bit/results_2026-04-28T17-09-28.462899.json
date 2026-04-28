@@ -1,0 +1,3559 @@
+{
+  "results": {
+    "kmmlu_direct": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": "kmmlu_direct"
+    },
+    "kmmlu_direct_applied_science": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_applied_science"
+    },
+    "kmmlu_direct_aviation_engineering_and_maintenance": {
+      "alias": "  - kmmlu_direct_aviation_engineering_and_maintenance",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_electronics_engineering": {
+      "alias": "  - kmmlu_direct_electronics_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_energy_management": {
+      "alias": "  - kmmlu_direct_energy_management",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_environmental_science": {
+      "alias": "  - kmmlu_direct_environmental_science",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_gas_technology_and_engineering": {
+      "alias": "  - kmmlu_direct_gas_technology_and_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_geomatics": {
+      "alias": "  - kmmlu_direct_geomatics",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_industrial_engineer": {
+      "alias": "  - kmmlu_direct_industrial_engineer",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_machine_design_and_manufacturing": {
+      "alias": "  - kmmlu_direct_machine_design_and_manufacturing",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_maritime_engineering": {
+      "alias": "  - kmmlu_direct_maritime_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_nondestructive_testing": {
+      "alias": "  - kmmlu_direct_nondestructive_testing",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_railway_and_automotive_engineering": {
+      "alias": "  - kmmlu_direct_railway_and_automotive_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_telecommunications_and_wireless_technology": {
+      "alias": "  - kmmlu_direct_telecommunications_and_wireless_technology",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_humss": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_humss"
+    },
+    "kmmlu_direct_accounting": {
+      "alias": "  - kmmlu_direct_accounting",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_criminal_law": {
+      "alias": "  - kmmlu_direct_criminal_law",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_economics": {
+      "alias": "  - kmmlu_direct_economics",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_education": {
+      "alias": "  - kmmlu_direct_education",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_korean_history": {
+      "alias": "  - kmmlu_direct_korean_history",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_law": {
+      "alias": "  - kmmlu_direct_law",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_management": {
+      "alias": "  - kmmlu_direct_management",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_political_science_and_sociology": {
+      "alias": "  - kmmlu_direct_political_science_and_sociology",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_psychology": {
+      "alias": "  - kmmlu_direct_psychology",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_social_welfare": {
+      "alias": "  - kmmlu_direct_social_welfare",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_taxation": {
+      "alias": "  - kmmlu_direct_taxation",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_other": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_other"
+    },
+    "kmmlu_direct_agricultural_sciences": {
+      "alias": "  - kmmlu_direct_agricultural_sciences",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_construction": {
+      "alias": "  - kmmlu_direct_construction",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_fashion": {
+      "alias": "  - kmmlu_direct_fashion",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_food_processing": {
+      "alias": "  - kmmlu_direct_food_processing",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_health": {
+      "alias": "  - kmmlu_direct_health",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_interior_architecture_and_design": {
+      "alias": "  - kmmlu_direct_interior_architecture_and_design",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_marketing": {
+      "alias": "  - kmmlu_direct_marketing",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_patent": {
+      "alias": "  - kmmlu_direct_patent",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_public_safety": {
+      "alias": "  - kmmlu_direct_public_safety",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_real_estate": {
+      "alias": "  - kmmlu_direct_real_estate",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_refrigerating_machinery": {
+      "alias": "  - kmmlu_direct_refrigerating_machinery",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_stem": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_stem"
+    },
+    "kmmlu_direct_biology": {
+      "alias": "  - kmmlu_direct_biology",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_chemical_engineering": {
+      "alias": "  - kmmlu_direct_chemical_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_chemistry": {
+      "alias": "  - kmmlu_direct_chemistry",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_civil_engineering": {
+      "alias": "  - kmmlu_direct_civil_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_computer_science": {
+      "alias": "  - kmmlu_direct_computer_science",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_ecology": {
+      "alias": "  - kmmlu_direct_ecology",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_electrical_engineering": {
+      "alias": "  - kmmlu_direct_electrical_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_information_technology": {
+      "alias": "  - kmmlu_direct_information_technology",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_materials_engineering": {
+      "alias": "  - kmmlu_direct_materials_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_math": {
+      "alias": "  - kmmlu_direct_math",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    },
+    "kmmlu_direct_mechanical_engineering": {
+      "alias": "  - kmmlu_direct_mechanical_engineering",
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0
+    }
+  },
+  "groups": {
+    "kmmlu_direct": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": "kmmlu_direct"
+    },
+    "kmmlu_direct_applied_science": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_applied_science"
+    },
+    "kmmlu_direct_humss": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_humss"
+    },
+    "kmmlu_direct_other": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_other"
+    },
+    "kmmlu_direct_stem": {
+      "exact_match,none": 0.0,
+      "exact_match_stderr,none": 0.0,
+      "alias": " - kmmlu_direct_stem"
+    }
+  },
+  "group_subtasks": {
+    "kmmlu_direct_humss": [
+      "kmmlu_direct_accounting",
+      "kmmlu_direct_criminal_law",
+      "kmmlu_direct_economics",
+      "kmmlu_direct_education",
+      "kmmlu_direct_korean_history",
+      "kmmlu_direct_law",
+      "kmmlu_direct_management",
+      "kmmlu_direct_political_science_and_sociology",
+      "kmmlu_direct_psychology",
+      "kmmlu_direct_social_welfare",
+      "kmmlu_direct_taxation"
+    ],
+    "kmmlu_direct_applied_science": [
+      "kmmlu_direct_aviation_engineering_and_maintenance",
+      "kmmlu_direct_electronics_engineering",
+      "kmmlu_direct_energy_management",
+      "kmmlu_direct_environmental_science",
+      "kmmlu_direct_gas_technology_and_engineering",
+      "kmmlu_direct_geomatics",
+      "kmmlu_direct_industrial_engineer",
+      "kmmlu_direct_machine_design_and_manufacturing",
+      "kmmlu_direct_maritime_engineering",
+      "kmmlu_direct_nondestructive_testing",
+      "kmmlu_direct_railway_and_automotive_engineering",
+      "kmmlu_direct_telecommunications_and_wireless_technology"
+    ],
+    "kmmlu_direct_other": [
+      "kmmlu_direct_agricultural_sciences",
+      "kmmlu_direct_construction",
+      "kmmlu_direct_fashion",
+      "kmmlu_direct_food_processing",
+      "kmmlu_direct_health",
+      "kmmlu_direct_interior_architecture_and_design",
+      "kmmlu_direct_marketing",
+      "kmmlu_direct_patent",
+      "kmmlu_direct_public_safety",
+      "kmmlu_direct_real_estate",
+      "kmmlu_direct_refrigerating_machinery"
+    ],
+    "kmmlu_direct_stem": [
+      "kmmlu_direct_biology",
+      "kmmlu_direct_chemical_engineering",
+      "kmmlu_direct_chemistry",
+      "kmmlu_direct_civil_engineering",
+      "kmmlu_direct_computer_science",
+      "kmmlu_direct_ecology",
+      "kmmlu_direct_electrical_engineering",
+      "kmmlu_direct_information_technology",
+      "kmmlu_direct_materials_engineering",
+      "kmmlu_direct_math",
+      "kmmlu_direct_mechanical_engineering"
+    ],
+    "kmmlu_direct": [
+      "kmmlu_direct_stem",
+      "kmmlu_direct_other",
+      "kmmlu_direct_applied_science",
+      "kmmlu_direct_humss"
+    ]
+  },
+  "configs": {
+    "kmmlu_direct_accounting": {
+      "task": "kmmlu_direct_accounting",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Accounting",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_agricultural_sciences": {
+      "task": "kmmlu_direct_agricultural_sciences",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Agricultural-Sciences",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_aviation_engineering_and_maintenance": {
+      "task": "kmmlu_direct_aviation_engineering_and_maintenance",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Aviation-Engineering-and-Maintenance",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_biology": {
+      "task": "kmmlu_direct_biology",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Biology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_chemical_engineering": {
+      "task": "kmmlu_direct_chemical_engineering",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Chemical-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_chemistry": {
+      "task": "kmmlu_direct_chemistry",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Chemistry",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_civil_engineering": {
+      "task": "kmmlu_direct_civil_engineering",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Civil-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_computer_science": {
+      "task": "kmmlu_direct_computer_science",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Computer-Science",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_construction": {
+      "task": "kmmlu_direct_construction",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Construction",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_criminal_law": {
+      "task": "kmmlu_direct_criminal_law",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Criminal-Law",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_ecology": {
+      "task": "kmmlu_direct_ecology",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Ecology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_economics": {
+      "task": "kmmlu_direct_economics",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Economics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_education": {
+      "task": "kmmlu_direct_education",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Education",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_electrical_engineering": {
+      "task": "kmmlu_direct_electrical_engineering",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Electrical-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_electronics_engineering": {
+      "task": "kmmlu_direct_electronics_engineering",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Electronics-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_energy_management": {
+      "task": "kmmlu_direct_energy_management",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Energy-Management",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_environmental_science": {
+      "task": "kmmlu_direct_environmental_science",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Environmental-Science",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_fashion": {
+      "task": "kmmlu_direct_fashion",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Fashion",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_food_processing": {
+      "task": "kmmlu_direct_food_processing",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Food-Processing",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_gas_technology_and_engineering": {
+      "task": "kmmlu_direct_gas_technology_and_engineering",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Gas-Technology-and-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_geomatics": {
+      "task": "kmmlu_direct_geomatics",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Geomatics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_health": {
+      "task": "kmmlu_direct_health",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Health",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_industrial_engineer": {
+      "task": "kmmlu_direct_industrial_engineer",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Industrial-Engineer",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_information_technology": {
+      "task": "kmmlu_direct_information_technology",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Information-Technology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_interior_architecture_and_design": {
+      "task": "kmmlu_direct_interior_architecture_and_design",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Interior-Architecture-and-Design",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_korean_history": {
+      "task": "kmmlu_direct_korean_history",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Korean-History",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_law": {
+      "task": "kmmlu_direct_law",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Law",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_machine_design_and_manufacturing": {
+      "task": "kmmlu_direct_machine_design_and_manufacturing",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Machine-Design-and-Manufacturing",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_management": {
+      "task": "kmmlu_direct_management",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Management",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_maritime_engineering": {
+      "task": "kmmlu_direct_maritime_engineering",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Maritime-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_marketing": {
+      "task": "kmmlu_direct_marketing",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Marketing",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_materials_engineering": {
+      "task": "kmmlu_direct_materials_engineering",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Materials-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_math": {
+      "task": "kmmlu_direct_math",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Math",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_mechanical_engineering": {
+      "task": "kmmlu_direct_mechanical_engineering",
+      "tag": "kmmlu_direct_stem_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Mechanical-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_nondestructive_testing": {
+      "task": "kmmlu_direct_nondestructive_testing",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Nondestructive-Testing",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_patent": {
+      "task": "kmmlu_direct_patent",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Patent",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_political_science_and_sociology": {
+      "task": "kmmlu_direct_political_science_and_sociology",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Political-Science-and-Sociology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_psychology": {
+      "task": "kmmlu_direct_psychology",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Psychology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_public_safety": {
+      "task": "kmmlu_direct_public_safety",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Public-Safety",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_railway_and_automotive_engineering": {
+      "task": "kmmlu_direct_railway_and_automotive_engineering",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Railway-and-Automotive-Engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_real_estate": {
+      "task": "kmmlu_direct_real_estate",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Real-Estate",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_refrigerating_machinery": {
+      "task": "kmmlu_direct_refrigerating_machinery",
+      "tag": "kmmlu_direct_other_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Refrigerating-Machinery",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_social_welfare": {
+      "task": "kmmlu_direct_social_welfare",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Social-Welfare",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_taxation": {
+      "task": "kmmlu_direct_taxation",
+      "tag": "kmmlu_direct_humss_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Taxation",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "kmmlu_direct_telecommunications_and_wireless_technology": {
+      "task": "kmmlu_direct_telecommunications_and_wireless_technology",
+      "tag": "kmmlu_direct_applied_science_tasks",
+      "dataset_path": "HAERAE-HUB/KMMLU",
+      "dataset_name": "Telecommunications-and-Wireless-Technology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+      "unsafe_code": false,
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\n정답：",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer-1]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true,
+          "regexes_to_ignore": [
+            " "
+          ]
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "Q:",
+          "\n\n",
+          "</s>",
+          "."
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 2.0,
+        "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    }
+  },
+  "versions": {
+    "kmmlu_direct": 2.0,
+    "kmmlu_direct_accounting": 2.0,
+    "kmmlu_direct_agricultural_sciences": 2.0,
+    "kmmlu_direct_applied_science": 2.0,
+    "kmmlu_direct_aviation_engineering_and_maintenance": 2.0,
+    "kmmlu_direct_biology": 2.0,
+    "kmmlu_direct_chemical_engineering": 2.0,
+    "kmmlu_direct_chemistry": 2.0,
+    "kmmlu_direct_civil_engineering": 2.0,
+    "kmmlu_direct_computer_science": 2.0,
+    "kmmlu_direct_construction": 2.0,
+    "kmmlu_direct_criminal_law": 2.0,
+    "kmmlu_direct_ecology": 2.0,
+    "kmmlu_direct_economics": 2.0,
+    "kmmlu_direct_education": 2.0,
+    "kmmlu_direct_electrical_engineering": 2.0,
+    "kmmlu_direct_electronics_engineering": 2.0,
+    "kmmlu_direct_energy_management": 2.0,
+    "kmmlu_direct_environmental_science": 2.0,
+    "kmmlu_direct_fashion": 2.0,
+    "kmmlu_direct_food_processing": 2.0,
+    "kmmlu_direct_gas_technology_and_engineering": 2.0,
+    "kmmlu_direct_geomatics": 2.0,
+    "kmmlu_direct_health": 2.0,
+    "kmmlu_direct_humss": 2.0,
+    "kmmlu_direct_industrial_engineer": 2.0,
+    "kmmlu_direct_information_technology": 2.0,
+    "kmmlu_direct_interior_architecture_and_design": 2.0,
+    "kmmlu_direct_korean_history": 2.0,
+    "kmmlu_direct_law": 2.0,
+    "kmmlu_direct_machine_design_and_manufacturing": 2.0,
+    "kmmlu_direct_management": 2.0,
+    "kmmlu_direct_maritime_engineering": 2.0,
+    "kmmlu_direct_marketing": 2.0,
+    "kmmlu_direct_materials_engineering": 2.0,
+    "kmmlu_direct_math": 2.0,
+    "kmmlu_direct_mechanical_engineering": 2.0,
+    "kmmlu_direct_nondestructive_testing": 2.0,
+    "kmmlu_direct_other": 2.0,
+    "kmmlu_direct_patent": 2.0,
+    "kmmlu_direct_political_science_and_sociology": 2.0,
+    "kmmlu_direct_psychology": 2.0,
+    "kmmlu_direct_public_safety": 2.0,
+    "kmmlu_direct_railway_and_automotive_engineering": 2.0,
+    "kmmlu_direct_real_estate": 2.0,
+    "kmmlu_direct_refrigerating_machinery": 2.0,
+    "kmmlu_direct_social_welfare": 2.0,
+    "kmmlu_direct_stem": 2.0,
+    "kmmlu_direct_taxation": 2.0,
+    "kmmlu_direct_telecommunications_and_wireless_technology": 2.0
+  },
+  "n-shot": {
+    "kmmlu_direct_accounting": 0,
+    "kmmlu_direct_agricultural_sciences": 0,
+    "kmmlu_direct_aviation_engineering_and_maintenance": 0,
+    "kmmlu_direct_biology": 0,
+    "kmmlu_direct_chemical_engineering": 0,
+    "kmmlu_direct_chemistry": 0,
+    "kmmlu_direct_civil_engineering": 0,
+    "kmmlu_direct_computer_science": 0,
+    "kmmlu_direct_construction": 0,
+    "kmmlu_direct_criminal_law": 0,
+    "kmmlu_direct_ecology": 0,
+    "kmmlu_direct_economics": 0,
+    "kmmlu_direct_education": 0,
+    "kmmlu_direct_electrical_engineering": 0,
+    "kmmlu_direct_electronics_engineering": 0,
+    "kmmlu_direct_energy_management": 0,
+    "kmmlu_direct_environmental_science": 0,
+    "kmmlu_direct_fashion": 0,
+    "kmmlu_direct_food_processing": 0,
+    "kmmlu_direct_gas_technology_and_engineering": 0,
+    "kmmlu_direct_geomatics": 0,
+    "kmmlu_direct_health": 0,
+    "kmmlu_direct_industrial_engineer": 0,
+    "kmmlu_direct_information_technology": 0,
+    "kmmlu_direct_interior_architecture_and_design": 0,
+    "kmmlu_direct_korean_history": 0,
+    "kmmlu_direct_law": 0,
+    "kmmlu_direct_machine_design_and_manufacturing": 0,
+    "kmmlu_direct_management": 0,
+    "kmmlu_direct_maritime_engineering": 0,
+    "kmmlu_direct_marketing": 0,
+    "kmmlu_direct_materials_engineering": 0,
+    "kmmlu_direct_math": 0,
+    "kmmlu_direct_mechanical_engineering": 0,
+    "kmmlu_direct_nondestructive_testing": 0,
+    "kmmlu_direct_patent": 0,
+    "kmmlu_direct_political_science_and_sociology": 0,
+    "kmmlu_direct_psychology": 0,
+    "kmmlu_direct_public_safety": 0,
+    "kmmlu_direct_railway_and_automotive_engineering": 0,
+    "kmmlu_direct_real_estate": 0,
+    "kmmlu_direct_refrigerating_machinery": 0,
+    "kmmlu_direct_social_welfare": 0,
+    "kmmlu_direct_taxation": 0,
+    "kmmlu_direct_telecommunications_and_wireless_technology": 0
+  },
+  "higher_is_better": {
+    "kmmlu_direct": {
+      "exact_match": true
+    },
+    "kmmlu_direct_accounting": {
+      "exact_match": true
+    },
+    "kmmlu_direct_agricultural_sciences": {
+      "exact_match": true
+    },
+    "kmmlu_direct_applied_science": {
+      "exact_match": true
+    },
+    "kmmlu_direct_aviation_engineering_and_maintenance": {
+      "exact_match": true
+    },
+    "kmmlu_direct_biology": {
+      "exact_match": true
+    },
+    "kmmlu_direct_chemical_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_chemistry": {
+      "exact_match": true
+    },
+    "kmmlu_direct_civil_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_computer_science": {
+      "exact_match": true
+    },
+    "kmmlu_direct_construction": {
+      "exact_match": true
+    },
+    "kmmlu_direct_criminal_law": {
+      "exact_match": true
+    },
+    "kmmlu_direct_ecology": {
+      "exact_match": true
+    },
+    "kmmlu_direct_economics": {
+      "exact_match": true
+    },
+    "kmmlu_direct_education": {
+      "exact_match": true
+    },
+    "kmmlu_direct_electrical_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_electronics_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_energy_management": {
+      "exact_match": true
+    },
+    "kmmlu_direct_environmental_science": {
+      "exact_match": true
+    },
+    "kmmlu_direct_fashion": {
+      "exact_match": true
+    },
+    "kmmlu_direct_food_processing": {
+      "exact_match": true
+    },
+    "kmmlu_direct_gas_technology_and_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_geomatics": {
+      "exact_match": true
+    },
+    "kmmlu_direct_health": {
+      "exact_match": true
+    },
+    "kmmlu_direct_humss": {
+      "exact_match": true
+    },
+    "kmmlu_direct_industrial_engineer": {
+      "exact_match": true
+    },
+    "kmmlu_direct_information_technology": {
+      "exact_match": true
+    },
+    "kmmlu_direct_interior_architecture_and_design": {
+      "exact_match": true
+    },
+    "kmmlu_direct_korean_history": {
+      "exact_match": true
+    },
+    "kmmlu_direct_law": {
+      "exact_match": true
+    },
+    "kmmlu_direct_machine_design_and_manufacturing": {
+      "exact_match": true
+    },
+    "kmmlu_direct_management": {
+      "exact_match": true
+    },
+    "kmmlu_direct_maritime_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_marketing": {
+      "exact_match": true
+    },
+    "kmmlu_direct_materials_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_math": {
+      "exact_match": true
+    },
+    "kmmlu_direct_mechanical_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_nondestructive_testing": {
+      "exact_match": true
+    },
+    "kmmlu_direct_other": {
+      "exact_match": true
+    },
+    "kmmlu_direct_patent": {
+      "exact_match": true
+    },
+    "kmmlu_direct_political_science_and_sociology": {
+      "exact_match": true
+    },
+    "kmmlu_direct_psychology": {
+      "exact_match": true
+    },
+    "kmmlu_direct_public_safety": {
+      "exact_match": true
+    },
+    "kmmlu_direct_railway_and_automotive_engineering": {
+      "exact_match": true
+    },
+    "kmmlu_direct_real_estate": {
+      "exact_match": true
+    },
+    "kmmlu_direct_refrigerating_machinery": {
+      "exact_match": true
+    },
+    "kmmlu_direct_social_welfare": {
+      "exact_match": true
+    },
+    "kmmlu_direct_stem": {
+      "exact_match": true
+    },
+    "kmmlu_direct_taxation": {
+      "exact_match": true
+    },
+    "kmmlu_direct_telecommunications_and_wireless_technology": {
+      "exact_match": true
+    }
+  },
+  "n-samples": {
+    "kmmlu_direct_biology": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_chemical_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_chemistry": {
+      "original": 600,
+      "effective": 2
+    },
+    "kmmlu_direct_civil_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_computer_science": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_ecology": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_electrical_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_information_technology": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_materials_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_math": {
+      "original": 300,
+      "effective": 2
+    },
+    "kmmlu_direct_mechanical_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_agricultural_sciences": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_construction": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_fashion": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_food_processing": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_health": {
+      "original": 100,
+      "effective": 2
+    },
+    "kmmlu_direct_interior_architecture_and_design": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_marketing": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_patent": {
+      "original": 100,
+      "effective": 2
+    },
+    "kmmlu_direct_public_safety": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_real_estate": {
+      "original": 200,
+      "effective": 2
+    },
+    "kmmlu_direct_refrigerating_machinery": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_aviation_engineering_and_maintenance": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_electronics_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_energy_management": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_environmental_science": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_gas_technology_and_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_geomatics": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_industrial_engineer": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_machine_design_and_manufacturing": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_maritime_engineering": {
+      "original": 600,
+      "effective": 2
+    },
+    "kmmlu_direct_nondestructive_testing": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_railway_and_automotive_engineering": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_telecommunications_and_wireless_technology": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_accounting": {
+      "original": 100,
+      "effective": 2
+    },
+    "kmmlu_direct_criminal_law": {
+      "original": 200,
+      "effective": 2
+    },
+    "kmmlu_direct_economics": {
+      "original": 130,
+      "effective": 2
+    },
+    "kmmlu_direct_education": {
+      "original": 100,
+      "effective": 2
+    },
+    "kmmlu_direct_korean_history": {
+      "original": 100,
+      "effective": 2
+    },
+    "kmmlu_direct_law": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_management": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_political_science_and_sociology": {
+      "original": 300,
+      "effective": 2
+    },
+    "kmmlu_direct_psychology": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_social_welfare": {
+      "original": 1000,
+      "effective": 2
+    },
+    "kmmlu_direct_taxation": {
+      "original": 200,
+      "effective": 2
+    }
+  },
+  "config": {
+    "model": "local-chat-completions",
+    "model_args": {
+      "base_url": "http://127.0.0.1:9090/v1/chat/completions",
+      "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+      "tokenizer_backend": null,
+      "num_concurrent": 1,
+      "max_retries": 2
+    },
+    "batch_size": "1",
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "use_cache": null,
+    "limit": 2.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": {},
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "c7ba3e3",
+  "date": 1777363609.524532,
+  "pretty_env_info": "PyTorch version: 2.11.0\nIs debug build: False\nCUDA used to build PyTorch: None\nROCM used to build PyTorch: N/A\n\nOS: macOS 26.4 (arm64)\nGCC version: Could not collect\nClang version: 21.0.0 (clang-2100.0.123.102)\nCMake version: Could not collect\nLibc version: N/A\n\nPython version: 3.13.13 (main, Apr  7 2026, 18:19:01) [Clang 21.0.0 (clang-2100.0.123.102)] (64-bit runtime)\nPython platform: macOS-26.4-arm64-arm-64bit-Mach-O\nIs CUDA available: False\nCUDA runtime version: No CUDA\nCUDA_MODULE_LOADING set to: N/A\nGPU models and configuration: No CUDA\nNvidia driver version: No CUDA\ncuDNN version: No CUDA\nIs XPU available: False\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: True\nCaching allocator config: N/A\n\nCPU:\nApple M5 Max\n\nVersions of relevant libraries:\n[pip3] Could not collect\n[conda] Could not collect",
+  "transformers_version": "5.6.2",
+  "lm_eval_version": "0.4.11",
+  "upper_git_hash": null,
+  "task_hashes": {},
+  "model_source": "local-chat-completions",
+  "model_name": "lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
+  "model_name_sanitized": "lmstudio-community__gemma-4-26B-A4B-it-MLX-8bit",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": true,
+  "chat_template": "",
+  "chat_template_sha": null,
+  "total_evaluation_time_seconds": "160.27337766700657"
+}

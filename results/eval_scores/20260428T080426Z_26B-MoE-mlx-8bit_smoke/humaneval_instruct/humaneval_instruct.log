@@ -1,0 +1,120 @@
+=== cmd ===
+/Users/haxlys/llm-bench/.venv/bin/python3 -m lm_eval --model local-chat-completions --model_args base_url=http://127.0.0.1:9090/v1/chat/completions,model=lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit,tokenizer_backend=None,num_concurrent=1,max_retries=2 --tasks humaneval_instruct --output_path /Users/haxlys/llm-bench/results/eval_scores/20260428T080426Z_26B-MoE-mlx-8bit_smoke/humaneval_instruct --batch_size 1 --apply_chat_template --limit 2
+=== stdout ===
+
+=== stderr ===
+2026-04-28:17:12:39 WARNING  [config.evaluate_config:281] --limit SHOULD ONLY BE USED FOR TESTING. REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT.
+2026-04-28:17:12:39 INFO     [config.evaluate_config:301] Using default fewshot_as_multiturn=True.
+2026-04-28:17:12:41 INFO     [_cli.run:376] Selected Tasks: ['humaneval_instruct']
+2026-04-28:17:12:41 INFO     [evaluator:211] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2026-04-28:17:12:41 INFO     [evaluator:236] Initializing local-chat-completions model, with arguments: {'base_url': 'http://127.0.0.1:9090/v1/chat/completions', 'model': 'lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit', 'tokenizer_backend': None, 'num_concurrent': 1, 'max_retries': 2}
+2026-04-28:17:12:41 INFO     [models.api_models:172] Using max length 2048 - 1
+2026-04-28:17:12:41 INFO     [models.api_models:175] Concurrent requests are disabled. To enable concurrent requests, set `num_concurrent` > 1.
+2026-04-28:17:12:41 INFO     [models.api_models:193] Using tokenizer None
+
+Downloading builder script: 0.00B [00:00, ?B/s]
+Downloading builder script: 9.18kB [00:00, 9.44MB/s]
+
+Downloading extra modules: 0.00B [00:00, ?B/s]
+Downloading extra modules: 6.10kB [00:00, 20.5MB/s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/__main__.py", line 14, in <module>
+    cli_evaluate()
+    ~~~~~~~~~~~~^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/__main__.py", line 10, in cli_evaluate
+    parser.execute(args)
+    ~~~~~~~~~~~~~~^^^^^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/_cli/harness.py", line 60, in execute
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/_cli/run.py", line 379, in _execute
+    results = simple_evaluate(
+        model=cfg.model,
+    ...<32 lines>...
+        metadata=cfg.metadata,
+    )
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/utils.py", line 498, in _wrapper
+    return fn(*args, **kwargs)
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/evaluator.py", line 292, in simple_evaluate
+    task_dict = get_task_dict(
+        tasks,
+        task_manager,
+    )
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/tasks/__init__.py", line 646, in get_task_dict
+    task_name_from_string_dict = task_manager.load_task_or_group(
+        string_task_name_list
+    )
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/tasks/__init__.py", line 428, in load_task_or_group
+    collections.ChainMap(
+    ~~~~~~~~~~~~~~~~~~~~^
+        *map(
+        ^^^^^
+    ...<2 lines>...
+        )
+        ^
+    )
+    ^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/tasks/__init__.py", line 430, in <lambda>
+    lambda task: self._load_individual_task_or_group(task),
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/tasks/__init__.py", line 327, in _load_individual_task_or_group
+    task_config = self._get_config(name_or_config)
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/tasks/__init__.py", line 235, in _get_config
+    return utils.load_yaml_config(yaml_path, mode="full")
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/utils.py", line 543, in load_yaml_config
+    yaml_config = yaml.load(file, Loader=loader)
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/yaml/__init__.py", line 81, in load
+    return loader.get_single_data()
+           ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/yaml/constructor.py", line 51, in get_single_data
+    return self.construct_document(node)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/yaml/constructor.py", line 60, in construct_document
+    for dummy in generator:
+                 ^^^^^^^^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/yaml/constructor.py", line 413, in construct_yaml_map
+    value = self.construct_mapping(node)
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/yaml/constructor.py", line 218, in construct_mapping
+    return super().construct_mapping(node, deep=deep)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/yaml/constructor.py", line 143, in construct_mapping
+    value = self.construct_object(value_node, deep=deep)
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/yaml/constructor.py", line 100, in construct_object
+    data = constructor(self, node)
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/utils.py", line 523, in import_function
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/tasks/humaneval/utils.py", line 10, in <module>
+    raise e
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/lm_eval/tasks/humaneval/utils.py", line 8, in <module>
+    results = compute_.compute(references=test_cases, predictions=candidates, k=[1])
+  File "/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/evaluate/module.py", line 467, in compute
+    output = self._compute(**inputs, **compute_kwargs)
+  File "/Users/haxlys/.cache/huggingface/modules/evaluate_modules/metrics/evaluate-metric--code_eval/78d307ea938083398db7d9815f03ed661e9c15f60d77880ce007a8a02648f176/code_eval.py", line 159, in _compute
+    raise ValueError(_WARNING)
+ValueError: 
+################################################################################
+                                  !!!WARNING!!!
+################################################################################
+The "code_eval" metric executes untrusted model-generated code in Python.
+Although it is highly unlikely that model-generated code will do something
+overtly malicious in response to this test suite, model-generated code may act
+destructively due to a lack of model capability or alignment.
+Users are strongly encouraged to sandbox this evaluation suite so that it
+does not perform destructive actions on their host or network. For more
+information on how OpenAI sandboxes its code, see the paper "Evaluating Large
+Language Models Trained on Code" (https://arxiv.org/abs/2107.03374).
+
+Once you have read this disclaimer and taken appropriate precautions,
+set the environment variable HF_ALLOW_CODE_EVAL="1". Within Python you can to this
+with:
+
+>>> import os
+>>> os.environ["HF_ALLOW_CODE_EVAL"] = "1"
+
+################################################################################

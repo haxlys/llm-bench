@@ -24,6 +24,11 @@ evals = [
     "requests>=2.32",
     "openai>=1.50",
     "datasets>=3.0",
+    # longbench scoring deps (rouge, fuzzy match, Chinese tokenizer)
+    "jieba>=0.42",
+    "fuzzywuzzy>=0.18",
+    "rouge>=1.0",
+    "python-Levenshtein>=0.25",
 ]
 
 [build-system]
