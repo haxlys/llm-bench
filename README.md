@@ -34,7 +34,7 @@ uv run python scripts/run_bench.py \
 uv run streamlit run dashboard/app.py
 
 # Output divergence (quality)
-uv install --extra quality      # pulls sentence-transformers
+uv sync --extra quality          # pulls sentence-transformers
 uv run python scripts/compare_quality.py \
   --gguf-model ~/models/gguf/gemma-4-26B-A4B-it-Q8_0.gguf
 
@@ -69,30 +69,62 @@ Per (model, format, scenario):
 
 Scenarios = prefill ∈ {256, 1024, 4096, 8192} × gen ∈ {128, 512}. 3 measured runs + 1 warmup per scenario.
 
+## Model variants
+
+Six model variants are predefined in `scripts/run_evals.py:VARIANTS`. The first
+two also drive the speed/memory `run_bench.py` matrix:
+
+| Key | Model | Format | Quant | Tier |
+|---|---|---|---|---|
+| `26B-MoE-mlx-8bit`   | gemma-4-26B-A4B-it (MoE) | MLX  | 8-bit  | 8bit |
+| `26B-MoE-gguf-q8`    | gemma-4-26B-A4B-it (MoE) | GGUF | Q8_0   | 8bit |
+| `26B-MoE-mlx-4bit`   | gemma-4-26B-A4B-it (MoE) | MLX  | 4-bit  | 4bit |
+| `26B-MoE-gguf-q4`    | gemma-4-26B-A4B-it (MoE) | GGUF | Q4_K_M | 4bit |
+| `31B-Dense-mlx-8bit` | gemma-4-31B-it (Dense)   | MLX  | 8-bit  | 8bit |
+| `31B-Dense-gguf-q8`  | gemma-4-31B-it (Dense)   | GGUF | Q8_0   | 8bit |
+
+Tier pairs `MLX-Nbit` ↔ `Q*_K_M` (or `Q8_0`) for fair MLX-vs-GGUF comparisons.
+
 ## Repository layout
 
 ```
 src/llm_bench/
-  runners/
-    base.py        # BenchResult, time-wrapped subprocess helper
-    mlx_runner.py  # invokes mlx_lm.generate
-    gguf_runner.py # invokes llama-bench
-  prompts.py       # 20 standard quality prompts (KO/EN)
-  scenarios.py     # default + smoke matrices
-  aggregate.py     # raw JSON → summary CSV
+  runners/                # speed/memory benchmark
+    base.py               # BenchResult dataclass + time-wrapped subprocess
+    mlx_runner.py         # invokes mlx_lm.generate
+    gguf_runner.py        # invokes llama-bench
+  evals/                  # multi-dimension accuracy (lm-eval-harness)
+    server.py             # ModelServer ctx mgr (mlx_lm.server | llama-server)
+    lmeval.py             # lm_eval CLI subprocess wrapper
+    suites.py             # SUITES, SMOKE_TASKS, supports_fmt()
+    aggregate.py          # results/eval_scores/* → tidy DataFrame
+    bfcl.py               # external-repo placeholder
+  prompts.py              # 20 standard quality prompts (KO/EN)
+  scenarios.py            # speed scenario matrices
+  aggregate.py            # speed raw JSON → summary CSV
 scripts/
-  download_gguf.sh
-  run_bench.py     # CLI orchestrator
-  compare_quality.py
+  download_gguf.sh        # HF download with resume
+  run_bench.py            # speed/memory CLI orchestrator
+  compare_quality.py      # cos-sim divergence (20 prompts)
+  run_evals.py            # eval CLI orchestrator (per-variant server boot)
+  run_evals_overnight.sh  # launchd stop → eval → aggregate → restore
+  aggregate_evals.py      # eval JSON → eval_summary_*.csv
 results/
-  raw/             # per-run JSON (gitignored)
-  summary.csv
-  quality_*.json   # gitignored
+  raw/                    # per-run speed JSON (gitignored)
+  summary.csv             # speed aggregated
+  quality_*.json          # quality runs (gitignored)
+  eval_scores/            # lm-eval per-variant outputs (gitignored)
+  eval_summary_full.csv   # all eval metrics (committed)
+  eval_summary_primary.csv# canonical headline per (variant, task)
+  server_logs/            # ad-hoc model server stderr (gitignored)
+  overnight_logs/         # overnight wrapper logs (gitignored)
 dashboard/
-  app.py           # Streamlit (Overview / Scaling / Quality / Raw)
+  app.py                  # Streamlit (10 pages, see below)
 report/
   _quarto.yml
-  index.qmd        # static HTML report
+  index.qmd               # static HTML report (Quarto)
+docs/
+  methodology.md          # measurement protocol + sanity checks
 ```
 
 ## Multi-dimensional evals (added v0.2)
@@ -155,19 +187,29 @@ Results:
 After the eval run, `scripts/aggregate_evals.py` rebuilds the CSVs and the
 Streamlit dashboard auto-loads them. The overnight wrapper calls this for you.
 
-### Visualization
+## Dashboard (10 pages)
 
 ```bash
 uv run streamlit run dashboard/app.py
 ```
 
-Pages added for evals:
-- **Evals Heatmap** — variant × task heatmap of primary scores
-- **Evals · MLX vs GGUF** — same model_id+tier, score delta per task
-- **Evals · Quantization** — 8bit vs 4bit accuracy hit per (model, fmt)
-- **Evals · Dimension** — bar chart by dimension (reasoning/korean/code/long/safety)
-- **Evals · LongBench Detail** — 21 sub-task breakdown
-- **Evals Raw** — full metrics table
+| Group | Page | What it shows |
+|---|---|---|
+| Speed | **Speed Overview** | TG/PP bar charts, peak memory, Pareto scatter |
+| Speed | **Speed Scaling** | Context-length sweep with format colors |
+| Speed | **Output Quality (cos sim)** | 20-prompt MLX-vs-GGUF response similarity |
+| Speed | **Speed Raw** | Per-run JSON table + CSV download |
+| Eval | **Evals Heatmap** | Variant × task primary-score grid |
+| Eval | **Evals · MLX vs GGUF** | Score delta within same model+tier |
+| Eval | **Evals · Quantization** | 8bit vs 4bit accuracy hit per (model, fmt) |
+| Eval | **Evals · Dimension** | Per-dim bar charts with stderr |
+| Eval | **Evals · LongBench Detail** | 21 sub-task breakdown |
+| Eval | **Evals Raw** | Full metrics filterable table + CSV |
+
+## Methodology
+
+See [docs/methodology.md](docs/methodology.md) for measurement protocol,
+sanity checks, scenario matrix rationale, and the chat-vs-loglikelihood split.
 
 ## License
 

@@ -69,12 +69,76 @@ After a measurement run, the dashboard shows:
 
 Quality is **not** scored absolutely. We are asking: *does the runtime change the meaning of the output?* Answer is normally "no" (≥0.95 cos_sim) since both load the same weights. Significant divergence would indicate a quantization or numerical-stability bug.
 
-## Out of scope (v0.1)
+## Multi-dimensional evals (v0.2+)
 
+Beyond speed/memory, accuracy/quality is measured across five dimensions via
+lm-eval-harness against an OpenAI-compatible server (`mlx_lm.server` for MLX,
+`llama-server` for GGUF) booted ad-hoc per variant on port 9090.
+
+### Tasks per dimension
+
+| Dim | Chat-compatible tasks (works on both fmts) | Loglikelihood-only (GGUF only) |
+|---|---|---|
+| reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag` |
+| korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
+| code | `humaneval_instruct`, `mbpp_instruct` | — |
+| long | `longbench` (21 sub-tasks) | — |
+| safety | `truthfulqa-multi_gen_en` | `toxigen` |
+
+### Why two task families?
+
+`mlx_lm.server` does not return per-token logprobs in `/v1/completions`
+responses. Tasks scored via loglikelihood (multi-choice "which continuation
+has higher log P?") therefore cannot run on MLX. We use generative variants
+(`mmlu_generative`, `kmmlu_direct`, `truthfulqa-multi_gen_en`) so both
+runtimes are evaluated on identical task definitions where possible.
+
+`run_evals.py` calls `supports_fmt(task, fmt)` and prints
+`SKIP (loglikelihood-only, fmt=mlx unsupported)` for the four GGUF-only tasks
+when the variant is MLX. This is intentional — GGUF gets MCQ coverage, MLX
+gets generative-variant coverage of the same underlying ability.
+
+### Eval protocol
+
+For each variant (model_id × fmt × quant):
+
+1. Spawn fresh inference server on port 9090, wait for `/v1/models` 200 OK.
+2. Run each task in the suite via `lm_eval` subprocess. Tasks tagged "chat"
+   use `local-chat-completions` model class with `--apply_chat_template`;
+   loglikelihood tasks use `local-completions` with HF tokenizer.
+3. For code-eval tasks, set `HF_ALLOW_CODE_EVAL=1` and pass
+   `--confirm_run_unsafe_code` (sandbox-on-trust opt-in for HumanEval/MBPP).
+4. Tear down server before next variant.
+
+Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.
+`scripts/aggregate_evals.py` walks them into two CSVs:
+
+- `eval_summary_full.csv` — every metric × subtask × variant
+- `eval_summary_primary.csv` — one row per (variant, task) with the canonical
+  headline metric (e.g. `exact_match,strict-match` for gsm8k,
+  `pass@1,create_test` for HumanEval, subtask average for hrm8k)
+
+### Variants under test
+
+Six model variants:
+`26B-MoE-mlx-8bit`, `26B-MoE-gguf-q8`, `26B-MoE-mlx-4bit`, `26B-MoE-gguf-q4`,
+`31B-Dense-mlx-8bit`, `31B-Dense-gguf-q8`.
+
+The full eval matrix is 6 variants × 12 tasks (minus 4 GGUF-only skips on
+MLX variants) ≈ 60 invocations. Wall time ≈ 12–18 hours on M5 Max with
+all production launchd agents stopped.
+
+## Out of scope (v0.2)
+
+Done in earlier phases (no longer "out"):
+- ✅ 31B Dense model (variant `31B-Dense-*`)
+- ✅ 4-bit class (Q4_K_M vs MLX-4bit, variant `*-4bit` / `*-q4`)
+
+Still out of scope:
 - Batched / concurrent inference
 - KV-cache reuse across turns
-- Tool-use / structured output
-- 31B Dense model (planned for v0.2)
-- 4bit class (Q4_K_M vs MLX-4bit)
-- Other models (Qwen, Llama)
-- Power consumption (powermetrics)
+- Tool-use / structured output (BFCL skeleton in `evals/bfcl.py`, runner TBD)
+- Other model families (Qwen, Llama)
+- Power consumption (`powermetrics`)
+- Other quantizations (Q5_K_M, Q6_K, IQ4_XS, MLX 6-bit)
+- Context lengths beyond 8K (LongBench covers up to 31K avg, but no 64K+)
