@@ -89,6 +89,11 @@ RC=${PIPESTATUS[0]}
 log
 log "==== run_evals.py exited rc=$RC ===="
 
+# --- 3. aggregate eval scores into eval_summary_*.csv for dashboard ---
+log
+log "==== Aggregating eval scores ===="
+uv run python scripts/aggregate_evals.py 2>&1 | tee -a "$RUN_LOG" || true
+
 # trap restore_agents will fire on exit
 log "=== ENDING overnight eval run ($(date +%Y%m%dT%H%M%S)) ==="
 exit "$RC"

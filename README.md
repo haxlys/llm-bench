@@ -148,7 +148,26 @@ variant. Expect ~2–3 hours per variant for the full suite.
 Results:
 - `results/eval_scores/<run_id>/<task>/.../results_*.json` — raw lm-eval output
 - `results/eval_scores/summary_*.json` — flat list of {variant, task, results}
+- `results/eval_summary_full.csv` — every metric × subtask × variant (244+ rows)
+- `results/eval_summary_primary.csv` — one row per (variant, task), canonical metric
 - `results/server_logs/<run_id>.log` — model server stderr for debugging
+
+After the eval run, `scripts/aggregate_evals.py` rebuilds the CSVs and the
+Streamlit dashboard auto-loads them. The overnight wrapper calls this for you.
+
+### Visualization
+
+```bash
+uv run streamlit run dashboard/app.py
+```
+
+Pages added for evals:
+- **Evals Heatmap** — variant × task heatmap of primary scores
+- **Evals · MLX vs GGUF** — same model_id+tier, score delta per task
+- **Evals · Quantization** — 8bit vs 4bit accuracy hit per (model, fmt)
+- **Evals · Dimension** — bar chart by dimension (reasoning/korean/code/long/safety)
+- **Evals · LongBench Detail** — 21 sub-task breakdown
+- **Evals Raw** — full metrics table
 
 ## License
 
