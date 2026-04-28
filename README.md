@@ -1,10 +1,16 @@
 # llm-bench
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/)
+[![bench_version](https://img.shields.io/badge/bench__version-0.3-green.svg)](src/llm_bench/__init__.py)
+[![tests](https://img.shields.io/badge/tests-18%20passed-brightgreen.svg)](tests/)
+[![platform](https://img.shields.io/badge/platform-macOS%20Apple%20Silicon-lightgrey.svg)](#)
+
 MLX vs GGUF inference benchmark for local LLMs on Apple Silicon (built for M5 Max 128GB).
 
-Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and **output divergence** between two formats of the same model — isolating the runtime, not the model.
+Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and **output divergence** between two formats of the same model — isolating the runtime, not the model. Multi-dimensional accuracy via `lm-eval-harness` across reasoning, Korean, code, long context, and safety dimensions.
 
-First target pair: `gemma-4-26B-A4B-it` MLX 8bit ↔ GGUF Q8_0 (Mixture-of-Experts, 4B active / 26B total).
+First target pair: `gemma-4-26B-A4B-it` MLX 8bit ↔ GGUF Q8_0 (Mixture-of-Experts, 4B active / 26B total). Six pre-configured variants in `models/registry.yaml` covering Gemma 4 26B-MoE × {MLX-8bit, MLX-4bit, Q8_0, Q4_K_M} + 31B Dense × {MLX-8bit, Q8_0}.
 
 ## Quickstart
 
