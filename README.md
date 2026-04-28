@@ -126,22 +126,21 @@ Smoke (verify wiring, ~10 min, limit=2 per task):
 uv run python scripts/run_evals.py --variant 26B-MoE-mlx-8bit --suite smoke --limit 2
 ```
 
-Full overnight matrix (all 6 model variants × full suite):
+Full overnight matrix (all 6 model variants × full suite) — wrapper script
+handles launchd bootout + run + bootstrap automatically (always restores agents
+on EXIT, even if eval fails):
 
 ```bash
-# Stop production launchd agents first (Metal contention will skew results):
-#   launchctl bootout gui/$(id -u)/com.haxlys.mlx-omni
-#   launchctl bootout gui/$(id -u)/com.haxlys.mlx-vlm
-#   launchctl bootout gui/$(id -u)/com.haxlys.vmlx
-#
-# Then:
-uv run python scripts/run_evals.py --all-variants --suite full
-#
-# Restore after:
-#   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.haxlys.mlx-omni.plist
-#   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.haxlys.mlx-vlm.plist
-#   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.haxlys.vmlx.plist
+# Foreground (watch progress):
+bash scripts/run_evals_overnight.sh
+
+# Detached overnight (recommended):
+nohup bash scripts/run_evals_overnight.sh > /tmp/llm-evals-overnight.log 2>&1 &
+disown
+tail -f /tmp/llm-evals-overnight.log
 ```
+
+Env overrides: `SUITE=smoke`, `LIMIT=10`, `VARIANTS="26B-MoE-mlx-8bit 26B-MoE-gguf-q8"`.
 
 Each variant boots its own server on port 9090; tasks run sequentially per
 variant. Expect ~2–3 hours per variant for the full suite.
