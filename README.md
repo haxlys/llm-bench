@@ -199,6 +199,14 @@ loglikelihood-based MCQ tasks (`hellaswag`, `kobest`, `haerae`, `toxigen`) only
 run on the GGUF path. Generative variants are used for the rest so both
 runtimes get apples-to-apples coverage.
 
+> **⚠️ Code-eval safety.** `humaneval_instruct` and `mbpp_instruct` execute
+> the model's generated Python directly inside the lm-eval process
+> (`HF_ALLOW_CODE_EVAL=1` + `--confirm_run_unsafe_code`). There is no
+> sandbox. Run them only against models you trust (your own fine-tunes,
+> reputable HF checkpoints) — never against an unknown third-party
+> checkpoint without first wrapping in `firejail` / `bubblewrap` /
+> `sandbox-exec`.
+
 Setup:
 
 ```bash
