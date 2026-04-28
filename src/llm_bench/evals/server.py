@@ -74,9 +74,14 @@ class ModelServer:
     def __enter__(self) -> str:
         cmd = self._build_cmd()
         log_target = open(self.log_file, "w") if self.log_file else subprocess.DEVNULL
-        self.proc = subprocess.Popen(
-            cmd, stdout=log_target, stderr=subprocess.STDOUT,
-        )
+        try:
+            self.proc = subprocess.Popen(
+                cmd, stdout=log_target, stderr=subprocess.STDOUT,
+            )
+        finally:
+            # Popen dup'd the fd; the parent's handle is no longer needed.
+            if self.log_file:
+                log_target.close()
 
         deadline = time.time() + self.boot_timeout_s
         while time.time() < deadline:
