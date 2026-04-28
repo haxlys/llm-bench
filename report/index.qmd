@@ -1,0 +1,106 @@
+---
+title: "MLX vs GGUF: Gemma 4 26B-A4B-it on M5 Max"
+author: "haxlys"
+date: today
+jupyter: python3
+---
+
+## Why this comparison
+
+Apple's MLX and ggerganov's GGUF/llama.cpp are the two dominant local-inference
+runtimes on Apple Silicon. They ship the same model in different binary formats.
+This report measures the gap on a single hardware target (M5 Max 128GB) using
+Google's `gemma-4-26B-A4B-it` — a Mixture-of-Experts model with 4B active
+parameters out of 26B total.
+
+The pair: `lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit` (8-bit MLX, 26GB) vs
+`unsloth/gemma-4-26B-A4B-it-GGUF` Q8_0 (~27GB). The quantization levels are
+intentionally matched so the comparison isolates the **runtime**, not the quantizer.
+
+## Methodology
+
+- **Hardware**: Apple M5 Max, 128GB unified memory, macOS 26.4
+- **Runners**: `mlx_lm.generate --verbose` (Python 3.13) vs `llama-bench` (llama.cpp from Homebrew)
+- **Memory**: BSD `/usr/bin/time -l` "maximum resident set size", reconciled with `mlx.metal.get_peak_memory()` for MLX
+- **Scenarios**: prefill ∈ {256, 1024, 4096, 8192} × generation ∈ {128, 512}
+- **Repetition**: 1 warmup (discarded) + 3 measured runs per scenario
+- **Determinism**: `--temp 0.0`
+- **Quality**: 20 multilingual prompts (KO/EN, reasoning/code/creative/edge), output divergence via `paraphrase-multilingual-mpnet-base-v2` embedding cosine similarity
+
+```{python}
+#| echo: false
+#| output: false
+import sys
+from pathlib import Path
+ROOT = Path("..").resolve()
+sys.path.insert(0, str(ROOT / "src"))
+from llm_bench.aggregate import aggregate_means, load_raw
+import pandas as pd
+import plotly.express as px
+
+raw = load_raw(ROOT / "results" / "raw")
+means = aggregate_means(raw) if not raw.empty else pd.DataFrame()
+```
+
+## Results
+
+::: {.callout-note}
+Charts in this section render from `results/raw/*.json`. If you see an empty plot,
+run `uv run python scripts/run_bench.py --gguf-model …` first.
+:::
+
+### Generation speed
+
+```{python}
+#| echo: false
+if not means.empty:
+    fig = px.bar(means, x="scenario", y="tg_tps_mean", color="fmt",
+                 barmode="group", error_y="tg_tps_std",
+                 color_discrete_map={"mlx": "#0a84ff", "gguf": "#34c759"},
+                 labels={"tg_tps_mean": "TG tok/s"})
+    fig.show()
+else:
+    print("(no data yet)")
+```
+
+### Prompt processing speed
+
+```{python}
+#| echo: false
+if not means.empty:
+    fig = px.bar(means, x="scenario", y="pp_tps_mean", color="fmt",
+                 barmode="group", error_y="pp_tps_std",
+                 color_discrete_map={"mlx": "#0a84ff", "gguf": "#34c759"},
+                 labels={"pp_tps_mean": "PP tok/s"})
+    fig.show()
+```
+
+### Speed vs Memory (Pareto)
+
+```{python}
+#| echo: false
+if not means.empty:
+    fig = px.scatter(means, x="peak_mem_gb_mean", y="tg_tps_mean",
+                     color="fmt", symbol="scenario",
+                     color_discrete_map={"mlx": "#0a84ff", "gguf": "#34c759"})
+    fig.show()
+```
+
+## Discussion
+
+(Fill in after measurements: which runtime wins on PP vs TG, memory headroom,
+cost per token, whether quality diverges meaningfully.)
+
+## Limitations
+
+- Single hardware target (M5 Max only)
+- Single model architecture (MoE 26B; Dense models may show different patterns)
+- Two quantization levels (8bit). 4-bit class is out of scope for v0.1.
+- Quality compared via embedding similarity, not absolute score (no LLM judge)
+- Concurrency, batched inference, KV-cache reuse not measured
+
+## References
+
+- [LLMCheck Apple Silicon LLM benchmarks](https://llmcheck.net/benchmarks)
+- [llama.cpp llama-bench](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench)
+- [mlx-lm](https://github.com/ml-explore/mlx-lm)

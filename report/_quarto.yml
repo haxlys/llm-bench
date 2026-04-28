@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "MLX vs GGUF — Gemma 4 on M5 Max"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Report
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    fig-width: 8
+    fig-height: 5
+    embed-resources: true

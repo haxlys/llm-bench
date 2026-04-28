@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.python-version.local
+.DS_Store
+
+# raw measurements (heavy, regenerable)
+results/raw/
+results/quality_*.json
+
+# editor
+.vscode/
+.idea/
+
+# uv
+uv.lock
+
+# Quarto
+report/_site/
+report/.quarto/
+report/_freeze/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Local model paths file (machine-specific)
+.env.local
