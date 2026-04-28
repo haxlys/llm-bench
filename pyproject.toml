@@ -19,6 +19,12 @@ dependencies = [
 
 [project.optional-dependencies]
 quality = ["sentence-transformers>=3.0"]
+evals = [
+    "lm-eval[api]>=0.4.5",
+    "requests>=2.32",
+    "openai>=1.50",
+    "datasets>=3.0",
+]
 
 [build-system]
 requires = ["hatchling"]

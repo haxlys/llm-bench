@@ -1,0 +1,6 @@
+2026-04-28 16:53:36,936 - INFO - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit/revision/main "HTTP/1.1 200 OK"
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 34121.37it/s]
+/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/mlx_lm/server.py:1723: UserWarning: mlx_lm.server is not recommended for production as it only implements basic security checks.
+  warnings.warn(
+2026-04-28 16:53:43,267 - INFO - Starting httpd at 127.0.0.1 on port 9090...
+127.0.0.1 - - [28/Apr/2026 16:53:45] "GET /v1/models HTTP/1.1" 200 -

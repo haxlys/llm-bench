@@ -40,17 +40,22 @@ def _gen_mlx(model_path: str, prompt: str) -> str:
 
 
 def _gen_gguf(gguf_path: str, prompt: str, n_gpu_layers: int = 999) -> str:
-    if not shutil.which("llama-cli"):
-        raise RuntimeError("llama-cli not on PATH (brew install llama.cpp)")
+    # llama-cli now defaults to conversation mode (b8950+); use llama-completion
+    # for one-shot inference. --jinja required for Gemma 4 chat template.
+    if not shutil.which("llama-completion"):
+        raise RuntimeError("llama-completion not on PATH (brew install llama.cpp)")
     cmd = [
-        "llama-cli", "-m", gguf_path, "-p", prompt,
+        "llama-completion", "-m", gguf_path, "-p", prompt,
         "-n", str(MAX_TOKENS), "-ngl", str(n_gpu_layers),
-        "--temp", "0.0", "--no-cnv", "-no-display-prompt",
+        "--temp", "0.0", "--no-display-prompt", "--jinja",
     ]
     proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
     if proc.returncode != 0:
-        raise RuntimeError(f"llama-cli failed: {proc.stderr[-1000:]}")
-    return proc.stdout.strip()
+        raise RuntimeError(f"llama-completion failed: {proc.stderr[-1000:]}")
+    out = proc.stdout.strip()
+    # llama-completion may append "> EOF by user" trailer; strip it.
+    out = out.replace("> EOF by user", "").rstrip()
+    return out
 
 
 def _surface_stats(a: str, b: str) -> dict:

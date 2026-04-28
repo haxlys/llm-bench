@@ -95,6 +95,42 @@ report/
   index.qmd        # static HTML report
 ```
 
+## Multi-dimensional evals (added v0.2)
+
+Beyond speed/memory benchmarks, this repo also runs lm-eval-harness against the
+OpenAI-compatible servers (`mlx_lm.server` / `llama-server`) for accuracy/quality
+across multiple dimensions:
+
+| Dimension | Tasks |
+|---|---|
+| Reasoning | `mmlu`, `gsm8k_cot_zeroshot`, `hellaswag` |
+| Korean | `kmmlu`, `hrm8k`, `haerae`, `kobest` |
+| Code | `humaneval_instruct`, `mbpp_instruct` |
+| Long context | `longbench` |
+| Safety | `truthfulqa`, `toxigen` |
+| Tool use | `bfcl` (external repo, optional) |
+
+Setup:
+
+```bash
+uv sync --extra evals
+```
+
+Smoke (verify wiring, ~10 min):
+
+```bash
+uv run python scripts/run_evals.py --variant 26B-MoE-mlx-8bit --suite smoke --limit 2
+```
+
+Full overnight matrix (all 6 model variants × 12 tasks):
+
+```bash
+uv run python scripts/run_evals.py --all-variants --suite full
+```
+
+Results: `results/eval_scores/<run_id>/<task>/results_*.json` (raw lm-eval output)
++ `results/eval_scores/summary_*.json` (cross-variant aggregate).
+
 ## License
 
 MIT
