@@ -131,6 +131,7 @@ def _find_latest_results(output_dir: Path, task: str) -> dict | None:
 
 def _module_exists(name: str) -> bool:
     try:
-        __import__(name); return True
+        __import__(name)
     except ImportError:
         return False
+    return True

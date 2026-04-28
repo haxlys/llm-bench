@@ -116,7 +116,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
             runnable.append((dim, task))
 
         if not runnable and not include_bfcl:
-            click.echo(f"  → all tasks already measured / unsupported, skipping server boot")
+            click.echo("  → all tasks already measured / unsupported, skipping server boot")
             continue
 
         t0 = time.perf_counter()
@@ -145,7 +145,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         "wall_s": round(dt, 1), **res,
                     })
                 if include_bfcl:
-                    click.echo(f"  [tool] bfcl ", nl=False)
+                    click.echo("  [tool] bfcl ", nl=False)
                     res = run_bfcl(base_url, v.key, out_dir / "bfcl",
                                    bfcl_dir, effective_limit)
                     click.echo(res.get("status", res.get("error", "OK")))

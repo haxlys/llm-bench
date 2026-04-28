@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_bench.registry import Registry, Variant, get_registry, load_registry
+from llm_bench.registry import Registry, get_registry, load_registry
 
 
 def _write(tmp_path: Path, body: str) -> Path:
