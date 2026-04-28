@@ -22,14 +22,10 @@ from __future__ import annotations
 import shutil
 import subprocess
 import sys
-from pathlib import Path
 
 import click
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "src"))
-
-from llm_bench.registry import Variant, get_registry  # noqa: E402
+from llm_bench.registry import Variant, get_registry
 
 
 def hf_download(variant: Variant) -> int:

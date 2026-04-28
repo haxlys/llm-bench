@@ -47,45 +47,13 @@ from llm_bench.scenarios import default_scenarios
 ROOT = Path(__file__).resolve().parent.parent.parent
 
 
-def _last_speed_ts(raw_dir: Path, variant_key: str) -> str | None:
-    """Most recent ts across raw JSONs for this variant."""
-    if not raw_dir.exists():
-        return None
-    latest = None
-    for p in raw_dir.glob("*.json"):
-        try:
-            data = json.loads(p.read_text())
-        except json.JSONDecodeError:
-            continue
-        if data.get("variant_key") == variant_key or (
-            data.get("model_id") and data.get("fmt") and data.get("quant")
-            and any(v.key == variant_key
-                    and v.model_id == data["model_id"]
-                    and v.fmt == data["fmt"]
-                    and v.quant == data["quant"]
-                    for v in get_registry().variants)
-        ):
-            ts = data.get("ts", "")
-            if ts and (latest is None or ts > latest):
-                latest = ts
-    return latest
-
-
-def _last_eval_ts(eval_dir: Path, variant_key: str) -> str | None:
-    if not eval_dir.exists():
-        return None
-    candidates = [d.name.split("_", 1)[0] for d in eval_dir.iterdir()
-                  if d.is_dir() and f"_{variant_key}_" in d.name]
-    return max(candidates) if candidates else None
-
-
 def build_index() -> dict:
     registry = get_registry()
     raw_dir = ROOT / "results" / "raw"
     eval_dir = ROOT / "results" / "eval_scores"
 
-    speed_counts = speed_manifest(raw_dir)
-    eval_pairs = eval_manifest(eval_dir)
+    speed_m = speed_manifest(raw_dir)
+    eval_m = eval_manifest(eval_dir)
     scenarios = default_scenarios()
     full_tasks = full_suite()
 
@@ -93,12 +61,10 @@ def build_index() -> dict:
     for v in registry.variants:
         s_measured = sum(
             1 for sc in scenarios
-            if speed_counts.get((v.key, sc.name, BENCH_VERSION), 0) >= 3
+            if speed_m.counts.get((v.key, sc.name, BENCH_VERSION), 0) >= 3
         )
         e_supported = [t for _, t in full_tasks if supports_fmt(t, v.fmt)]
-        e_measured_tasks = sorted(
-            {t for (k, t) in eval_pairs if k == v.key}
-        )
+        e_measured_tasks = sorted({t for (k, t) in eval_m.measured if k == v.key})
         variant_entries.append({
             "key": v.key,
             "model_id": v.model_id,
@@ -112,13 +78,13 @@ def build_index() -> dict:
             "speed": {
                 "scenarios_measured": s_measured,
                 "scenarios_total": len(scenarios),
-                "last_measured": _last_speed_ts(raw_dir, v.key),
+                "last_measured": speed_m.last_ts.get(v.key) or None,
             },
             "evals": {
                 "tasks_measured": len(e_measured_tasks),
                 "tasks_supported": len(e_supported),
                 "tasks": e_measured_tasks,
-                "last_measured": _last_eval_ts(eval_dir, v.key),
+                "last_measured": eval_m.last_ts.get(v.key) or None,
             },
         })
 

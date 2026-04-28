@@ -17,23 +17,20 @@ Examples:
 from __future__ import annotations
 
 import json
-import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 import click
 
+from llm_bench.evals import ModelServer, full_suite, smoke_suite
+from llm_bench.evals.bfcl import run_bfcl
+from llm_bench.evals.lmeval import run_lmeval
+from llm_bench.evals.suites import is_chat_task, supports_fmt
+from llm_bench.manifest import eval_is_measured, eval_manifest
+from llm_bench.registry import Variant, get_registry
+
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "src"))
-
-from llm_bench.evals import ModelServer, full_suite, smoke_suite  # noqa: E402
-from llm_bench.evals.bfcl import run_bfcl  # noqa: E402
-from llm_bench.evals.lmeval import run_lmeval  # noqa: E402
-from llm_bench.evals.suites import is_chat_task, supports_fmt  # noqa: E402
-from llm_bench.manifest import eval_is_measured, eval_manifest  # noqa: E402
-from llm_bench.registry import Variant, get_registry  # noqa: E402
-
 EVAL_RESULTS_DIR = ROOT / "results" / "eval_scores"
 SERVER_LOG_DIR = ROOT / "results" / "server_logs"
 
@@ -43,11 +40,19 @@ def now_safe() -> str:
 
 
 def _resolve_targets(variant_keys: tuple, all_variants: bool) -> list[Variant]:
+    import click
     registry = get_registry()
     if variant_keys:
         return [registry.variant(k) for k in variant_keys]
     if all_variants:
-        return [v for v in registry.variants if v.exists_locally()]
+        targets = []
+        for v in registry.variants:
+            if v.exists_locally():
+                targets.append(v)
+            else:
+                click.echo(f"  · {v.key}: not present locally, skipping. "
+                           f"Run sync_models.py --variant {v.key} first.", err=True)
+        return targets
     return []
 
 
@@ -72,7 +77,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
     tasks = smoke_suite() if suite == "smoke" else full_suite()
     effective_limit = limit if limit is not None else (3 if suite == "smoke" else None)
 
-    measured = eval_manifest(EVAL_RESULTS_DIR) if skip_existing else set()
+    measured = eval_manifest(EVAL_RESULTS_DIR).measured if skip_existing else set()
 
     click.echo(f"→ {len(targets)} variants × {len(tasks)} tasks "
                f"(suite={suite}, limit={effective_limit})")

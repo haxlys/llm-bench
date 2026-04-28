@@ -267,6 +267,16 @@ uv run streamlit run dashboard/app.py
 See [docs/methodology.md](docs/methodology.md) for measurement protocol,
 sanity checks, scenario matrix rationale, and the chat-vs-loglikelihood split.
 
+## Tests
+
+```bash
+uv run pytest tests/ -v
+```
+
+Covers registry validation (duplicate keys, invalid fmt/tier/architecture,
+default interpolation) and manifest building (legacy data rescue, warmup
+exclusion, timestamp normalization, eval-results detection).
+
 ## License
 
 MIT

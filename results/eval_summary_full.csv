@@ -243,3 +243,4 @@ variant,model_id,fmt,quant,tier,family,architecture,dim,task,run_id,ts,subtask,m
 26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,safety,truthfulqa-multi_gen_en,20260428T080426Z_26B-MoE-mlx-8bit_smoke,20260428T080426Z,truthfulqa-multi_gen_en,"bleu_acc_stderr,none",0.0,
 26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,safety,truthfulqa-multi_gen_en,20260428T080426Z_26B-MoE-mlx-8bit_smoke,20260428T080426Z,truthfulqa-multi_gen_en,"bleu_diff,none",0.0,0.0
 26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,safety,truthfulqa-multi_gen_en,20260428T080426Z_26B-MoE-mlx-8bit_smoke,20260428T080426Z,truthfulqa-multi_gen_en,"bleu_diff_stderr,none",0.0,
+26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,code,humaneval_instruct,20260428T090112Z_26B-MoE-mlx-8bit_smoke,20260428T090112Z,humaneval_instruct,"pass@1,create_test",0.0,

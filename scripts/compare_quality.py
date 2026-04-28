@@ -17,10 +17,9 @@ from pathlib import Path
 
 import click
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "src"))
+from llm_bench.prompts import QUALITY_PROMPTS
 
-from llm_bench.prompts import QUALITY_PROMPTS  # noqa: E402
+ROOT = Path(__file__).resolve().parent.parent
 
 MAX_TOKENS = 512
 

@@ -57,13 +57,29 @@ class Variant:
         return self.path
 
     def exists_locally(self) -> bool:
-        """Best-effort check: does the local artifact exist?"""
+        """Verify the local artifact is present AND complete enough to load.
+
+        For gguf: file on disk.
+        For mlx: HF cache has refs/main → snapshots/<rev>/config.json (signal
+            that at least the metadata reached disk; partial weight downloads
+            are still risky but config.json present means the snapshot dir
+            was created after the resolve step).
+        """
         if self.fmt == "gguf":
-            return Path(self.resolved_path).exists()
-        # MLX: check HF cache directory
+            p = Path(self.resolved_path)
+            return p.is_file() and p.stat().st_size > 0
         cache_dir = Path.home() / ".cache" / "huggingface" / "hub"
         slug = "models--" + self.path.replace("/", "--")
-        return (cache_dir / slug).exists()
+        repo_dir = cache_dir / slug
+        refs_main = repo_dir / "refs" / "main"
+        if not refs_main.is_file():
+            return False
+        try:
+            rev = refs_main.read_text().strip()
+        except OSError:
+            return False
+        config = repo_dir / "snapshots" / rev / "config.json"
+        return config.is_file() and config.stat().st_size > 0
 
 
 @dataclass(frozen=True)
@@ -123,14 +139,40 @@ def _interpolate(s: str, defaults: dict) -> str:
     return os.path.expanduser(out)
 
 
-def _validate_unique_keys(variants: list[Variant]) -> None:
+ALLOWED_FMTS = {"mlx", "gguf"}
+ALLOWED_TIERS = {"4bit", "5bit", "6bit", "8bit", "16bit", "fp16", "bf16"}
+ALLOWED_ARCHS = {"dense", "moe"}
+
+
+def _validate(variants: list[Variant], models: list["Model"]) -> None:
     seen: dict[str, str] = {}
     for v in variants:
         if v.key in seen:
             raise ValueError(
-                f"duplicate variant key '{v.key}' (used by both '{seen[v.key]}' and '{v.model_id}')"
+                f"duplicate variant key '{v.key}' "
+                f"(used by both '{seen[v.key]}' and '{v.model_id}')"
             )
         seen[v.key] = v.model_id
+        if v.fmt not in ALLOWED_FMTS:
+            raise ValueError(
+                f"variant '{v.key}': fmt='{v.fmt}' not in {sorted(ALLOWED_FMTS)}"
+            )
+        if v.tier not in ALLOWED_TIERS:
+            raise ValueError(
+                f"variant '{v.key}': tier='{v.tier}' not in {sorted(ALLOWED_TIERS)}"
+            )
+        if v.architecture not in ALLOWED_ARCHS:
+            raise ValueError(
+                f"variant '{v.key}': architecture='{v.architecture}' "
+                f"not in {sorted(ALLOWED_ARCHS)}"
+            )
+        # GGUF without download spec must already have an absolute path on disk
+        if v.fmt == "gguf" and v.download is None:
+            if not v.resolved_path.startswith("/"):
+                raise ValueError(
+                    f"variant '{v.key}': gguf path '{v.path}' is relative "
+                    f"and has no download: spec; provide one or use absolute path"
+                )
 
 
 def load_registry(path: Path | None = None) -> Registry:
@@ -171,7 +213,7 @@ def load_registry(path: Path | None = None) -> Registry:
         ))
 
     all_variants = [v for m in models for v in m.variants]
-    _validate_unique_keys(all_variants)
+    _validate(all_variants, models)
     return Registry(models=tuple(models), defaults=defaults)
 
 

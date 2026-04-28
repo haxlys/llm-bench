@@ -5,14 +5,12 @@ Run after a benchmark run completes. Idempotent — safe to re-run.
 
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "src"))
+from llm_bench.evals.aggregate import load_eval_results, primary_metric_view
+from llm_bench.index import write_index
 
-from llm_bench.evals.aggregate import load_eval_results, primary_metric_view  # noqa: E402
-from llm_bench.index import write_index  # noqa: E402
+ROOT = Path(__file__).resolve().parent.parent
 
 EVAL_DIR = ROOT / "results" / "eval_scores"
 OUT_FULL = ROOT / "results" / "eval_summary_full.csv"

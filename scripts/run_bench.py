@@ -23,17 +23,15 @@ from pathlib import Path
 
 import click
 
+from llm_bench import BENCH_VERSION
+from llm_bench.aggregate import write_summary
+from llm_bench.manifest import speed_is_measured, speed_manifest
+from llm_bench.registry import Variant, get_registry
+from llm_bench.runners import GGUFRunner, MLXRunner
+from llm_bench.runners.base import write_raw
+from llm_bench.scenarios import default_scenarios, smoke_scenarios
+
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "src"))
-
-from llm_bench import BENCH_VERSION  # noqa: E402
-from llm_bench.aggregate import write_summary  # noqa: E402
-from llm_bench.manifest import speed_is_measured, speed_manifest  # noqa: E402
-from llm_bench.registry import Variant, get_registry  # noqa: E402
-from llm_bench.runners import GGUFRunner, MLXRunner  # noqa: E402
-from llm_bench.runners.base import write_raw  # noqa: E402
-from llm_bench.scenarios import default_scenarios, smoke_scenarios  # noqa: E402
-
 RAW_DIR = ROOT / "results" / "raw"
 SUMMARY_CSV = ROOT / "results" / "summary.csv"
 
@@ -58,7 +56,7 @@ def _resolve_targets(variant_keys: tuple, all_pending: bool, scenarios) -> list[
             if not v.exists_locally():
                 continue
             for sc in scenarios:
-                if not speed_is_measured(manifest, v.key, sc.name, n_required=3):
+                if not speed_is_measured(manifest.counts, v.key, sc.name, n_required=3):
                     targets.append(v)
                     break
         return targets
@@ -82,7 +80,7 @@ def main(variant: tuple, all_pending: bool, runs: int, warmup: bool,
         click.echo("→ no targets. Specify --variant or --all-pending.")
         sys.exit(2)
 
-    manifest = speed_manifest(RAW_DIR) if skip_existing else {}
+    counts = speed_manifest(RAW_DIR).counts if skip_existing else {}
     click.echo(f"→ {len(targets)} variant(s), {len(scenarios)} scenarios, "
                f"bench_version={BENCH_VERSION}")
     for v in targets:
@@ -92,7 +90,7 @@ def main(variant: tuple, all_pending: bool, runs: int, warmup: bool,
         runner = _build_runner(v)
         click.echo(f"\n=== {v.key} ===")
         for sc in scenarios:
-            if skip_existing and speed_is_measured(manifest, v.key, sc.name, n_required=runs):
+            if skip_existing and speed_is_measured(counts, v.key, sc.name, n_required=runs):
                 click.echo(f"  [skip] {sc.name} (already has {runs} runs at v{BENCH_VERSION})")
                 continue
             if warmup:

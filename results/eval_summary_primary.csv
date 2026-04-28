@@ -4,3 +4,4 @@ variant,model_id,fmt,quant,tier,family,architecture,dim,task,run_id,ts,subtask,m
 26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,korean,kmmlu_direct,20260428T080426Z_26B-MoE-mlx-8bit_smoke,20260428T080426Z,kmmlu_direct,"exact_match,none",0.0,0.0
 26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,reasoning,mmlu_generative,20260428T080426Z_26B-MoE-mlx-8bit_smoke,20260428T080426Z,mmlu_generative,"exact_match,get_response",0.0,0.0
 26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,safety,truthfulqa-multi_gen_en,20260428T080426Z_26B-MoE-mlx-8bit_smoke,20260428T080426Z,truthfulqa-multi_gen_en,"bleu_max,none",0.0,0.0
+26B-MoE-mlx-8bit,gemma-4-26B-A4B-it,mlx,MLX-8bit,8bit,gemma,moe,code,humaneval_instruct,20260428T090112Z_26B-MoE-mlx-8bit_smoke,20260428T090112Z,humaneval_instruct,"pass@1,create_test",0.0,
