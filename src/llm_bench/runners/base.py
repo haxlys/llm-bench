@@ -32,6 +32,8 @@ class BenchResult:
     wall_s: float
     run_idx: int
     ts: str
+    bench_version: str = ""    # stamped from llm_bench.BENCH_VERSION
+    variant_key: str = ""      # registry key (e.g. "26B-MoE-mlx-8bit")
     raw: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:

@@ -1,16 +1,21 @@
 """Walk lm-eval-harness output and build a tidy DataFrame of all metrics.
 
+Variant metadata (model_id, fmt, quant, tier) comes from the registry — no
+hardcoded VARIANT_META map here. Adding a model = edit registry.yaml.
+
 Schema of the resulting frame (`load_eval_results`):
 
     variant     str   "26B-MoE-mlx-8bit"
-    model_id    str   "gemma-4-26B-A4B-it"
+    model_id    str   from registry
     fmt         str   "mlx" | "gguf"
-    quant       str   "MLX-8bit" | "Q8_0" | ...
-    tier        str   "8bit" | "4bit" (mapped from quant)
+    quant       str   from registry
+    tier        str   from registry ("8bit" | "4bit")
+    family      str   from registry ("gemma" | "qwen" | ...)
+    architecture str  "dense" | "moe"
     dim         str   "reasoning" | "korean" | "code" | "long" | "safety"
     task        str   top-level task in suites.SUITES
-    subtask     str   sub-result key from results JSON ("" for top-level only)
-    metric      str   metric column name from lm-eval ("acc,none", "pass@1,create_test", ...)
+    subtask     str   sub-result key from results JSON
+    metric      str   metric column name from lm-eval
     value       float
     stderr      float | NaN
     run_id      str   directory name in results/eval_scores/
@@ -29,18 +34,7 @@ from pathlib import Path
 
 import pandas as pd
 
-# Reuse VARIANTS metadata + tier map from existing modules.
-TIER_MAP = {"MLX-8bit": "8bit", "Q8_0": "8bit", "MLX-4bit": "4bit", "Q4_K_M": "4bit"}
-
-# Variant key → (model_id, fmt, quant). Mirrors VARIANTS in scripts/run_evals.py.
-VARIANT_META = {
-    "26B-MoE-mlx-8bit":   ("gemma-4-26B-A4B-it", "mlx",  "MLX-8bit"),
-    "26B-MoE-mlx-4bit":   ("gemma-4-26B-A4B-it", "mlx",  "MLX-4bit"),
-    "26B-MoE-gguf-q8":    ("gemma-4-26B-A4B-it", "gguf", "Q8_0"),
-    "26B-MoE-gguf-q4":    ("gemma-4-26B-A4B-it", "gguf", "Q4_K_M"),
-    "31B-Dense-mlx-8bit": ("gemma-4-31B-it",     "mlx",  "MLX-8bit"),
-    "31B-Dense-gguf-q8":  ("gemma-4-31B-it",     "gguf", "Q8_0"),
-}
+from llm_bench.registry import get_registry
 
 # Run-id directory name follows pattern: <ts>_<variant>_<suite>
 RUN_DIR_RE = re.compile(r"^(?P<ts>\d{8}T\d{6}Z)_(?P<variant>[\w-]+?)_(?P<suite>smoke|full)$")
@@ -118,7 +112,14 @@ def _flatten_results_json(path: Path) -> list[dict]:
 
 
 def load_eval_results(eval_dir: Path) -> pd.DataFrame:
-    """Walk eval_dir and load all results into a tidy DataFrame."""
+    """Walk eval_dir and load all results into a tidy DataFrame.
+
+    Variant metadata is looked up in the registry. If a variant key in
+    eval_dir is not in the registry (e.g. removed from yaml after measurement),
+    the row is still emitted with empty fmt/quant/tier so historical data is
+    preserved.
+    """
+    registry = get_registry()
     rows: list[dict] = []
     for run_dir in sorted(eval_dir.iterdir()):
         if not run_dir.is_dir():
@@ -126,13 +127,18 @@ def load_eval_results(eval_dir: Path) -> pd.DataFrame:
         meta = _parse_run_dir(run_dir.name)
         if not meta:
             continue
-        variant = meta["variant"]
+        variant_key = meta["variant"]
         ts = meta["ts"]
-        v_meta = VARIANT_META.get(variant)
-        if not v_meta:
-            continue
-        model_id, fmt, quant = v_meta
-        tier = TIER_MAP.get(quant, "")
+        try:
+            v = registry.variant(variant_key)
+            v_meta = {
+                "model_id": v.model_id, "fmt": v.fmt, "quant": v.quant,
+                "tier": v.tier, "family": v.family, "architecture": v.architecture,
+            }
+        except KeyError:
+            # Stale variant — keep the data but empty metadata
+            v_meta = {"model_id": "", "fmt": "", "quant": "",
+                      "tier": "", "family": "", "architecture": ""}
         for task_dir in sorted(run_dir.iterdir()):
             if not task_dir.is_dir():
                 continue
@@ -141,8 +147,7 @@ def load_eval_results(eval_dir: Path) -> pd.DataFrame:
             for results_file in task_dir.rglob("results_*.json"):
                 for r in _flatten_results_json(results_file):
                     rows.append({
-                        "variant": variant, "model_id": model_id, "fmt": fmt,
-                        "quant": quant, "tier": tier, "dim": dim, "task": task,
+                        "variant": variant_key, **v_meta, "dim": dim, "task": task,
                         "run_id": run_dir.name, "ts": ts, **r,
                     })
     return pd.DataFrame(rows)

@@ -118,15 +118,25 @@ Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.
   headline metric (e.g. `exact_match,strict-match` for gsm8k,
   `pass@1,create_test` for HumanEval, subtask average for hrm8k)
 
-### Variants under test
+### Registry-driven variants
 
-Six model variants:
-`26B-MoE-mlx-8bit`, `26B-MoE-gguf-q8`, `26B-MoE-mlx-4bit`, `26B-MoE-gguf-q4`,
-`31B-Dense-mlx-8bit`, `31B-Dense-gguf-q8`.
+The list of variants is declared in `models/registry.yaml`, not in code.
+Adding a new model = edit YAML, run `sync_models.py`, run `run_bench.py
+--all-pending` and `run_evals.py --all-variants --skip-existing`. The
+`--skip-existing` flag (default ON) skips combos already measured at the
+current `BENCH_VERSION`.
 
-The full eval matrix is 6 variants × 12 tasks (minus 4 GGUF-only skips on
-MLX variants) ≈ 60 invocations. Wall time ≈ 12–18 hours on M5 Max with
-all production launchd agents stopped.
+Currently shipped: 6 variants in the gemma-4 family (26B-A4B MoE × {MLX-8bit,
+MLX-4bit, Q8_0, Q4_K_M} + 31B Dense × {MLX-8bit, Q8_0}). The full eval
+matrix is 6 variants × 12 tasks (minus 4 GGUF-only skips on MLX variants)
+≈ 60 invocations. Wall time ≈ 12–18 hours on M5 Max with all production
+launchd agents stopped.
+
+### Bench versioning
+
+`src/llm_bench/__init__.py:BENCH_VERSION` is stamped into every BenchResult.
+Bumping it triggers full re-measurement on the next `--skip-existing` run.
+History: `0.3` is the first version with manifest-based idempotency.
 
 ## Out of scope (v0.2)
 

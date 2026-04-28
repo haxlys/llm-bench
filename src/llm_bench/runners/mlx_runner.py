@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 import sys
 
+from llm_bench import BENCH_VERSION
 from llm_bench.runners.base import BenchResult, Scenario, now_iso, run_with_time
 
 # Sample mlx_lm verbose output lines we parse:
@@ -30,10 +31,12 @@ def _filler_prompt(n_prompt: int) -> str:
 
 
 class MLXRunner:
-    def __init__(self, model_id: str, model_path: str, quant: str = "8bit"):
+    def __init__(self, model_id: str, model_path: str, quant: str = "8bit",
+                 variant_key: str = ""):
         self.model_id = model_id
         self.model_path = model_path  # HF repo id or local path
         self.quant = quant
+        self.variant_key = variant_key
 
     def run(self, scenario: Scenario, run_idx: int) -> BenchResult:
         prompt = _filler_prompt(scenario.n_prompt)
@@ -78,5 +81,7 @@ class MLXRunner:
             wall_s=round(wall, 3),
             run_idx=run_idx,
             ts=now_iso(),
+            bench_version=BENCH_VERSION,
+            variant_key=self.variant_key,
             raw={"mlx_peak_gb": mlx_peak, "rss_peak_gb": peak_mem_gb},
         )

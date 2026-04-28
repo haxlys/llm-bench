@@ -1,10 +1,19 @@
-"""Run the MLX vs GGUF benchmark matrix.
+"""Run the speed/memory benchmark matrix for one or more variants.
 
-Example:
+Variants are read from models/registry.yaml — adding a new model is a YAML
+edit, no code change. Idempotent: --skip-existing skips (variant, scenario,
+bench_version) combos that already have N runs.
+
+Examples:
+    # Two variants, full matrix, skip already-measured combos
     uv run python scripts/run_bench.py \
-        --mlx-model lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit \
-        --gguf-model ~/models/gguf/gemma-4-26B-A4B-it-Q8_0.gguf \
-        --model-id gemma-4-26B-A4B-it
+        --variant 26B-MoE-mlx-4bit --variant 26B-MoE-gguf-q4 --skip-existing
+
+    # All variants in registry that are missing data
+    uv run python scripts/run_bench.py --all-pending
+
+    # Single smoke scenario
+    uv run python scripts/run_bench.py --variant 26B-MoE-mlx-8bit --smoke
 """
 
 from __future__ import annotations
@@ -14,70 +23,91 @@ from pathlib import Path
 
 import click
 
-# allow `uv run python scripts/run_bench.py` without install
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
 
+from llm_bench import BENCH_VERSION  # noqa: E402
 from llm_bench.aggregate import write_summary  # noqa: E402
+from llm_bench.manifest import speed_is_measured, speed_manifest  # noqa: E402
+from llm_bench.registry import Variant, get_registry  # noqa: E402
 from llm_bench.runners import GGUFRunner, MLXRunner  # noqa: E402
 from llm_bench.runners.base import write_raw  # noqa: E402
 from llm_bench.scenarios import default_scenarios, smoke_scenarios  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "results" / "raw"
 SUMMARY_CSV = ROOT / "results" / "summary.csv"
 
 
+def _build_runner(variant: Variant):
+    if variant.fmt == "mlx":
+        return MLXRunner(model_id=variant.model_id, model_path=variant.resolved_path,
+                         quant=variant.quant, variant_key=variant.key)
+    return GGUFRunner(model_id=variant.model_id, model_path=variant.resolved_path,
+                      quant=variant.quant, variant_key=variant.key)
+
+
+def _resolve_targets(variant_keys: tuple, all_pending: bool, scenarios) -> list[Variant]:
+    registry = get_registry()
+    if variant_keys:
+        return [registry.variant(k) for k in variant_keys]
+    if all_pending:
+        # Variants that are present locally + missing some scenarios
+        manifest = speed_manifest(RAW_DIR)
+        targets: list[Variant] = []
+        for v in registry.variants:
+            if not v.exists_locally():
+                continue
+            for sc in scenarios:
+                if not speed_is_measured(manifest, v.key, sc.name, n_required=3):
+                    targets.append(v)
+                    break
+        return targets
+    return []
+
+
 @click.command()
-@click.option("--mlx-model", default="lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit",
-              help="MLX model: HF repo id or local path")
-@click.option("--gguf-model", required=True, type=click.Path(exists=True, dir_okay=False),
-              help="Path to .gguf file")
-@click.option("--model-id", default="gemma-4-26B-A4B-it",
-              help="Logical model id used for grouping")
-@click.option("--mlx-quant", default="MLX-8bit")
-@click.option("--gguf-quant", default="Q8_0")
-@click.option("--runs", default=3, show_default=True, help="Measured runs per scenario")
-@click.option("--warmup/--no-warmup", default=True,
-              help="Run one extra warmup run (not recorded)")
-@click.option("--smoke/--full", default=False, help="Smoke = single scenario only")
-@click.option("--only", type=click.Choice(["mlx", "gguf", "both"]), default="both")
-def main(
-    mlx_model: str,
-    gguf_model: str,
-    model_id: str,
-    mlx_quant: str,
-    gguf_quant: str,
-    runs: int,
-    warmup: bool,
-    smoke: bool,
-    only: str,
-):
+@click.option("--variant", multiple=True, help="Registry key (repeatable)")
+@click.option("--all-pending", is_flag=True,
+              help="Run every variant in registry that has missing scenarios")
+@click.option("--runs", default=3, show_default=True)
+@click.option("--warmup/--no-warmup", default=True)
+@click.option("--smoke/--full", default=False, help="Smoke = single scenario")
+@click.option("--skip-existing/--no-skip-existing", default=True,
+              help="Skip combos already measured at this bench_version")
+def main(variant: tuple, all_pending: bool, runs: int, warmup: bool,
+         smoke: bool, skip_existing: bool):
     scenarios = smoke_scenarios() if smoke else default_scenarios()
-    runners = []
-    if only in ("mlx", "both"):
-        runners.append(MLXRunner(model_id=model_id, model_path=mlx_model, quant=mlx_quant))
-    if only in ("gguf", "both"):
-        runners.append(GGUFRunner(model_id=model_id, model_path=gguf_model, quant=gguf_quant))
+    targets = _resolve_targets(variant, all_pending, scenarios)
+    if not targets:
+        click.echo("→ no targets. Specify --variant or --all-pending.")
+        sys.exit(2)
 
-    total = len(runners) * len(scenarios) * (runs + (1 if warmup else 0))
-    click.echo(f"→ {total} invocations ({len(runners)} runners × {len(scenarios)} scenarios × "
-               f"{runs} runs{' + warmup' if warmup else ''})")
+    manifest = speed_manifest(RAW_DIR) if skip_existing else {}
+    click.echo(f"→ {len(targets)} variant(s), {len(scenarios)} scenarios, "
+               f"bench_version={BENCH_VERSION}")
+    for v in targets:
+        click.echo(f"  · {v.key} ({v.fmt}, {v.quant})")
 
-    for runner in runners:
+    for v in targets:
+        runner = _build_runner(v)
+        click.echo(f"\n=== {v.key} ===")
         for sc in scenarios:
+            if skip_existing and speed_is_measured(manifest, v.key, sc.name, n_required=runs):
+                click.echo(f"  [skip] {sc.name} (already has {runs} runs at v{BENCH_VERSION})")
+                continue
             if warmup:
-                click.echo(f"  [warmup] {runner.__class__.__name__} {sc.name}")
+                click.echo(f"  [warmup] {sc.name}")
                 try:
                     runner.run(sc, run_idx=0)
                 except Exception as e:
-                    click.echo(f"    ! warmup failed: {e}", err=True)
-                    continue
+                    click.echo(f"    ! warmup failed: {e}", err=True); continue
             for i in range(1, runs + 1):
-                click.echo(f"  [run {i}] {runner.__class__.__name__} {sc.name} ", nl=False)
+                click.echo(f"  [run {i}] {sc.name} ", nl=False)
                 try:
                     res = runner.run(sc, run_idx=i)
                     write_raw(res, RAW_DIR)
-                    click.echo(f"pp={res.pp_tps:.1f} tg={res.tg_tps:.1f} mem={res.peak_mem_gb:.1f}GB")
+                    click.echo(f"pp={res.pp_tps:.1f} tg={res.tg_tps:.1f} "
+                               f"mem={res.peak_mem_gb:.1f}GB")
                 except Exception as e:
                     click.echo(f"FAILED: {e}", err=True)
 

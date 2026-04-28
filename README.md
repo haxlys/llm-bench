@@ -69,10 +69,43 @@ Per (model, format, scenario):
 
 Scenarios = prefill ∈ {256, 1024, 4096, 8192} × gen ∈ {128, 512}. 3 measured runs + 1 warmup per scenario.
 
-## Model variants
+## Model registry (`models/registry.yaml`)
 
-Six model variants are predefined in `scripts/run_evals.py:VARIANTS`. The first
-two also drive the speed/memory `run_bench.py` matrix:
+The single source of truth for what gets benchmarked. Adding a new model:
+
+```yaml
+models:
+  - id: qwen-3.6-27b
+    family: qwen
+    architecture: dense
+    params_total_b: 27
+    variants:
+      - key: qwen-27b-mlx-8bit
+        fmt: mlx
+        path: mlx-community/Qwen3.6-27B-8bit
+        quant: MLX-8bit
+        tier: 8bit
+        approx_size_gb: 27
+      - key: qwen-27b-gguf-q8
+        fmt: gguf
+        path: "{gguf_dir}/qwen-3.6-27b-Q8_0.gguf"
+        quant: Q8_0
+        tier: 8bit
+        approx_size_gb: 28
+        download:
+          repo: bartowski/qwen-3.6-27b-GGUF
+          pattern: "*Q8_0*.gguf"
+```
+
+Then:
+
+```bash
+uv run python scripts/sync_models.py --model qwen-3.6-27b
+uv run python scripts/run_bench.py --variant qwen-27b-mlx-8bit --variant qwen-27b-gguf-q8
+uv run python scripts/run_evals.py --variant qwen-27b-mlx-8bit --variant qwen-27b-gguf-q8 --suite full
+```
+
+Currently shipped (six variants, gemma-4 family):
 
 | Key | Model | Format | Quant | Tier |
 |---|---|---|---|---|
@@ -83,48 +116,64 @@ two also drive the speed/memory `run_bench.py` matrix:
 | `31B-Dense-mlx-8bit` | gemma-4-31B-it (Dense)   | MLX  | 8-bit  | 8bit |
 | `31B-Dense-gguf-q8`  | gemma-4-31B-it (Dense)   | GGUF | Q8_0   | 8bit |
 
-Tier pairs `MLX-Nbit` ↔ `Q*_K_M` (or `Q8_0`) for fair MLX-vs-GGUF comparisons.
+`tier` pairs MLX-Nbit ↔ Q*_K_M for fair runtime comparisons. The dashboard
+**Catalog** page shows registry × measurement status at a glance.
+
+## Idempotency
+
+Every measurement records the current `bench_version` (currently `0.3`).
+`run_bench.py --skip-existing` (default ON) skips combos that already have N
+runs at that version; `--all-pending` runs only what's missing across the
+registry. Bumping `BENCH_VERSION` in `src/llm_bench/__init__.py` triggers a
+full re-measurement when methodology changes.
 
 ## Repository layout
 
 ```
+models/
+  registry.yaml             # single source of truth — add a model here
 src/llm_bench/
-  runners/                # speed/memory benchmark
-    base.py               # BenchResult dataclass + time-wrapped subprocess
-    mlx_runner.py         # invokes mlx_lm.generate
-    gguf_runner.py        # invokes llama-bench
-  evals/                  # multi-dimension accuracy (lm-eval-harness)
-    server.py             # ModelServer ctx mgr (mlx_lm.server | llama-server)
-    lmeval.py             # lm_eval CLI subprocess wrapper
-    suites.py             # SUITES, SMOKE_TASKS, supports_fmt()
-    aggregate.py          # results/eval_scores/* → tidy DataFrame
-    bfcl.py               # external-repo placeholder
-  prompts.py              # 20 standard quality prompts (KO/EN)
-  scenarios.py            # speed scenario matrices
-  aggregate.py            # speed raw JSON → summary CSV
+  __init__.py               # BENCH_VERSION constant
+  registry.py               # YAML loader + Variant/Model dataclasses
+  manifest.py               # idempotency: which (variant, scenario) is measured
+  index.py                  # build results/index.json (registry × status)
+  runners/                  # speed/memory benchmark
+    base.py                 # BenchResult + /usr/bin/time -l wrapper
+    mlx_runner.py           # mlx_lm.generate subprocess
+    gguf_runner.py          # llama-bench subprocess
+  evals/                    # multi-dim accuracy (lm-eval-harness)
+    server.py               # ModelServer (mlx_lm.server | llama-server)
+    lmeval.py               # lm_eval CLI wrapper
+    suites.py               # SMOKE/FULL task lists, supports_fmt()
+    aggregate.py            # eval JSON → tidy DataFrame
+    bfcl.py                 # external-repo placeholder
+  prompts.py                # 20 quality-comparison prompts (KO/EN)
+  scenarios.py              # speed scenario matrices
+  aggregate.py              # speed raw JSON → summary CSV
 scripts/
-  download_gguf.sh        # HF download with resume
-  run_bench.py            # speed/memory CLI orchestrator
-  compare_quality.py      # cos-sim divergence (20 prompts)
-  run_evals.py            # eval CLI orchestrator (per-variant server boot)
-  run_evals_overnight.sh  # launchd stop → eval → aggregate → restore
-  aggregate_evals.py      # eval JSON → eval_summary_*.csv
+  sync_models.py            # registry-driven hf download
+  run_bench.py              # speed CLI: --variant / --all-pending
+  run_evals.py              # eval CLI: --variant / --all-variants
+  run_evals_overnight.sh    # launchd stop → run → aggregate → restore
+  compare_quality.py        # cos-sim divergence (20 prompts)
+  aggregate_evals.py        # eval JSON → CSVs + index.json
+  build_index.py            # build only the index
 results/
-  raw/                    # per-run speed JSON (gitignored)
-  summary.csv             # speed aggregated
-  quality_*.json          # quality runs (gitignored)
-  eval_scores/            # lm-eval per-variant outputs (gitignored)
-  eval_summary_full.csv   # all eval metrics (committed)
-  eval_summary_primary.csv# canonical headline per (variant, task)
-  server_logs/            # ad-hoc model server stderr (gitignored)
-  overnight_logs/         # overnight wrapper logs (gitignored)
+  raw/                      # per-run speed JSON (gitignored)
+  summary.csv               # speed aggregated (committed)
+  quality_*.json            # gitignored
+  eval_scores/              # lm-eval outputs (gitignored)
+  eval_summary_*.csv        # eval aggregated (committed)
+  index.json                # registry × measurement status (committed)
+  server_logs/              # gitignored
+  overnight_logs/           # gitignored
 dashboard/
-  app.py                  # Streamlit (10 pages, see below)
+  app.py                    # Streamlit (11 pages, Catalog first)
 report/
   _quarto.yml
-  index.qmd               # static HTML report (Quarto)
+  index.qmd                 # static HTML report (Quarto)
 docs/
-  methodology.md          # measurement protocol + sanity checks
+  methodology.md            # measurement protocol
 ```
 
 ## Multi-dimensional evals (added v0.2)
@@ -193,7 +242,7 @@ Results:
 After the eval run, `scripts/aggregate_evals.py` rebuilds the CSVs and the
 Streamlit dashboard auto-loads them. The overnight wrapper calls this for you.
 
-## Dashboard (10 pages)
+## Dashboard (11 pages)
 
 ```bash
 uv run streamlit run dashboard/app.py
@@ -201,6 +250,7 @@ uv run streamlit run dashboard/app.py
 
 | Group | Page | What it shows |
 |---|---|---|
+| Status | **Catalog** | Registry × measurement progress bars (entry point) |
 | Speed | **Speed Overview** | TG/PP bar charts, peak memory, Pareto scatter |
 | Speed | **Speed Scaling** | Context-length sweep with format colors |
 | Speed | **Output Quality (cos sim)** | 20-prompt MLX-vs-GGUF response similarity |

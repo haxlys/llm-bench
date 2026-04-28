@@ -19,6 +19,8 @@ from llm_bench.evals.aggregate import (  # noqa: E402
     load_eval_results,
     primary_metric_view,
 )
+from llm_bench.index import build_index  # noqa: E402
+from llm_bench.registry import get_registry  # noqa: E402
 
 RAW_DIR = ROOT / "results" / "raw"
 EVAL_DIR = ROOT / "results" / "eval_scores"
@@ -43,6 +45,11 @@ def load_evals() -> tuple[pd.DataFrame, pd.DataFrame]:
     full = load_eval_results(EVAL_DIR) if EVAL_DIR.exists() else pd.DataFrame()
     primary = primary_metric_view(full) if not full.empty else pd.DataFrame()
     return full, primary
+
+
+@st.cache_data(ttl=10)
+def load_index() -> dict:
+    return build_index()
 
 
 @st.cache_data(ttl=10)
@@ -333,13 +340,78 @@ def page_evals_raw(full: pd.DataFrame) -> None:
     )
 
 
+def page_catalog(index: dict) -> None:
+    """Top-level model catalog: registry × measurement status."""
+    st.header("Model Catalog")
+    st.caption(
+        f"Registry: `{index['registry_path']}` · "
+        f"bench_version: `{index['bench_version']}` · "
+        f"generated: {index['generated_at']}"
+    )
+
+    totals = index["totals"]
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Variants in registry", totals["variants"])
+    c2.metric("Speed complete", totals["speed_complete"])
+    c3.metric("Evals started", totals["evals_started"])
+    c4.metric("Speed pending", totals["variants"] - totals["speed_complete"])
+
+    rows = []
+    for v in index["variants"]:
+        s = v["speed"]; e = v["evals"]
+        speed_pct = (s["scenarios_measured"] / s["scenarios_total"]
+                     if s["scenarios_total"] else 0)
+        eval_pct = (e["tasks_measured"] / e["tasks_supported"]
+                    if e["tasks_supported"] else 0)
+        rows.append({
+            "Local": "✓" if v["exists_locally"] else "✗",
+            "Variant": v["key"],
+            "Model": v["model_id"],
+            "Fmt": v["fmt"],
+            "Tier": v["tier"],
+            "Size GB": v["approx_size_gb"],
+            "Speed": f"{s['scenarios_measured']}/{s['scenarios_total']}",
+            "Speed %": speed_pct,
+            "Speed last": (s["last_measured"] or "—")[:19],
+            "Evals": f"{e['tasks_measured']}/{e['tasks_supported']}",
+            "Evals %": eval_pct,
+            "Evals last": (e["last_measured"] or "—")[:19],
+        })
+    df = pd.DataFrame(rows)
+    st.dataframe(
+        df,
+        use_container_width=True,
+        column_config={
+            "Speed %": st.column_config.ProgressColumn(
+                "Speed %", min_value=0, max_value=1, format="%.0f%%"),
+            "Evals %": st.column_config.ProgressColumn(
+                "Evals %", min_value=0, max_value=1, format="%.0f%%"),
+        },
+        hide_index=True,
+        height=320,
+    )
+
+    st.markdown("### Add a new model")
+    st.code(
+        "# 1. Edit models/registry.yaml — add a new entry under `models:`\n"
+        "# 2. uv run python scripts/sync_models.py --all-missing\n"
+        "# 3. uv run python scripts/run_bench.py --all-pending\n"
+        "# 4. uv run python scripts/run_evals.py --all-variants --suite full --skip-existing\n"
+        "# 5. Refresh this page (R) — new variant appears with progress bars at 0%",
+        language="bash",
+    )
+
+
 def main():
-    st.title("MLX vs GGUF — Gemma 4 Benchmark")
+    st.title("llm-bench — MLX vs GGUF on Apple Silicon")
     st.caption(f"Speed dir: `{RAW_DIR}`  ·  Eval dir: `{EVAL_DIR}` (refresh with R)")
     raw, means = load_data()
     full_evals, primary_evals = load_evals()
+    index = load_index()
 
     pages = {
+        # Catalog (top-level status)
+        "Catalog": lambda: page_catalog(index),
         # Speed/memory
         "Speed Overview": lambda: page_overview(raw, means),
         "Speed Scaling": lambda: page_scaling(means),

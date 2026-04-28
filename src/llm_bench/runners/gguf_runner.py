@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import shutil
 
+from llm_bench import BENCH_VERSION
 from llm_bench.runners.base import BenchResult, Scenario, now_iso, run_with_time
 
 
@@ -16,12 +17,14 @@ class GGUFRunner:
         quant: str = "Q8_0",
         n_threads: int | None = None,
         n_gpu_layers: int = 999,
+        variant_key: str = "",
     ):
         self.model_id = model_id
         self.model_path = model_path
         self.quant = quant
         self.n_threads = n_threads
         self.n_gpu_layers = n_gpu_layers
+        self.variant_key = variant_key
         if not shutil.which("llama-bench"):
             raise RuntimeError("llama-bench not found on PATH. brew install llama.cpp")
 
@@ -75,5 +78,7 @@ class GGUFRunner:
             wall_s=round(wall, 3),
             run_idx=run_idx,
             ts=now_iso(),
+            bench_version=BENCH_VERSION,
+            variant_key=self.variant_key,
             raw={"llama_bench_entries": data},
         )

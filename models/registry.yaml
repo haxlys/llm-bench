@@ -1,0 +1,81 @@
+# Model registry — the single source of truth for what gets benchmarked.
+#
+# To add a new model variant:
+#   1. Edit this file (no code changes needed)
+#   2. Run: uv run python scripts/sync_models.py --all-missing
+#   3. Run: uv run python scripts/run_bench.py --all-pending
+#      and: uv run python scripts/run_evals.py --all-pending --suite full
+#
+# Schema: see src/llm_bench/registry.py for dataclass definitions.
+
+defaults:
+  # Where local GGUF files live. Referenced as {gguf_dir} in variant.path.
+  gguf_dir: "~/models/gguf"
+
+models:
+
+  # ─── Gemma 4 ─────────────────────────────────────────────────────────────
+  - id: gemma-4-26B-A4B-it
+    family: gemma
+    architecture: moe
+    params_total_b: 26
+    params_active_b: 4
+    notes: "Mixture-of-Experts, instruction tuned"
+    variants:
+      - key: 26B-MoE-mlx-8bit
+        fmt: mlx
+        path: lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit
+        quant: MLX-8bit
+        tier: 8bit
+        approx_size_gb: 26
+
+      - key: 26B-MoE-mlx-4bit
+        fmt: mlx
+        path: lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit
+        quant: MLX-4bit
+        tier: 4bit
+        approx_size_gb: 15
+
+      - key: 26B-MoE-gguf-q8
+        fmt: gguf
+        path: "{gguf_dir}/gemma-4-26B-A4B-it-Q8_0.gguf"
+        quant: Q8_0
+        tier: 8bit
+        approx_size_gb: 25
+        download:
+          repo: unsloth/gemma-4-26B-A4B-it-GGUF
+          pattern: "*Q8_0*.gguf"
+
+      - key: 26B-MoE-gguf-q4
+        fmt: gguf
+        path: "{gguf_dir}/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf"
+        quant: Q4_K_M
+        tier: 4bit
+        approx_size_gb: 16
+        download:
+          repo: unsloth/gemma-4-26B-A4B-it-GGUF
+          pattern: "*Q4_K_M*.gguf"
+
+  - id: gemma-4-31B-it
+    family: gemma
+    architecture: dense
+    params_total_b: 31
+    params_active_b: 31
+    notes: "Dense, instruction tuned"
+    variants:
+      - key: 31B-Dense-mlx-8bit
+        fmt: mlx
+        path: lmstudio-community/gemma-4-31B-it-MLX-8bit
+        quant: MLX-8bit
+        tier: 8bit
+        approx_size_gb: 31
+
+      - key: 31B-Dense-gguf-q8
+        fmt: gguf
+        path: "{gguf_dir}/gemma-4-31B-it-Q8_0.gguf"
+        quant: Q8_0
+        tier: 8bit
+        approx_size_gb: 30
+        download:
+          repo: unsloth/gemma-4-31B-it-GGUF
+          pattern: "*Q8_0*.gguf"

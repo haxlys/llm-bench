@@ -91,6 +91,7 @@ if [[ -n "$VARIANTS" ]]; then
 else
     ARGS+=(--all-variants)
 fi
+ARGS+=(--skip-existing)
 log "  cmd: uv run python scripts/run_evals.py ${ARGS[*]}"
 
 uv run python scripts/run_evals.py "${ARGS[@]}" 2>&1 | tee -a "$RUN_LOG"
