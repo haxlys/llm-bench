@@ -24,17 +24,15 @@ brew install --cask quarto      # optional, only for the static report
 # Python env
 uv sync
 
-# Download GGUF (~27GB). MLX side is loaded from existing HF cache.
-bash scripts/download_gguf.sh
+# Download every variant declared in models/registry.yaml (~50–100 GB total).
+# MLX variants land in the HF cache; GGUF variants in ~/models/gguf/.
+uv run python scripts/sync_models.py --all-missing
 
 # Smoke test (single scenario, ~1 min) — verifies wiring before the full matrix
-uv run python scripts/run_bench.py \
-  --gguf-model ~/models/gguf/gemma-4-26B-A4B-it-Q8_0.gguf \
-  --smoke
+uv run python scripts/run_bench.py --variant 26B-MoE-mlx-8bit --smoke
 
-# Full matrix (~15–25 min on M5 Max)
-uv run python scripts/run_bench.py \
-  --gguf-model ~/models/gguf/gemma-4-26B-A4B-it-Q8_0.gguf
+# Full matrix across every variant present locally (~15–25 min per variant on M5 Max)
+uv run python scripts/run_bench.py --all-pending
 
 # Visualize
 uv run streamlit run dashboard/app.py

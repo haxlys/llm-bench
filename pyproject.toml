@@ -1,6 +1,6 @@
 [project]
 name = "llm-bench"
-version = "0.1.0"
+version = "0.3.0"
 description = "MLX vs GGUF inference benchmark for Apple Silicon (M5 Max)"
 requires-python = ">=3.13"
 readme = "README.md"
