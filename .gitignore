@@ -5,9 +5,12 @@ __pycache__/
 .python-version.local
 .DS_Store
 
-# raw measurements (heavy, regenerable)
+# raw measurements (heavy, regenerable, machine-specific paths in logs)
 results/raw/
 results/quality_*.json
+results/eval_scores/
+results/server_logs/
+results/overnight_logs/
 
 # editor
 .vscode/

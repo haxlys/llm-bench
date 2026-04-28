@@ -15,6 +15,10 @@
 #   SUITE=full|smoke         # default: full
 #   LIMIT=<int>              # override per-task sample limit
 #   VARIANTS="key1 key2"     # space-separated variant keys; empty = --all-variants
+#   LAUNCH_AGENTS="com.you.x com.you.y"
+#                            # space-separated launchd labels to bootout before
+#                            # the run and bootstrap back on EXIT (always).
+#                            # Empty default = no launchd management.
 
 set -uo pipefail
 
@@ -30,17 +34,17 @@ SUITE="${SUITE:-full}"
 LIMIT="${LIMIT:-}"
 VARIANTS="${VARIANTS:-}"
 
+# launchd agents to stop before benchmarking (Metal contention).
+# Override via env: LAUNCH_AGENTS="com.you.foo com.you.bar"
+# Empty = no launchd management — kill GPU-using processes manually instead.
 UID_=$(id -u)
-LAUNCH_AGENTS=(
-    "com.haxlys.mlx-omni"
-    "com.haxlys.mlx-vlm"
-    "com.haxlys.vmlx"
-)
+read -ra LAUNCH_AGENTS <<< "${LAUNCH_AGENTS:-}"
 
 log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$RUN_LOG"; }
 
 # --- bootstrap agents back; called from EXIT trap ---
 restore_agents() {
+    if [[ ${#LAUNCH_AGENTS[@]} -eq 0 ]]; then return; fi
     log "==== Restoring launchd agents ===="
     for agent in "${LAUNCH_AGENTS[@]}"; do
         local plist="$HOME/Library/LaunchAgents/${agent}.plist"
@@ -51,19 +55,24 @@ restore_agents() {
             log "  (skipped: $plist not found)"
         fi
     done
-    log "==== Production agents restored ===="
+    log "==== Agents restored ===="
 }
 trap restore_agents EXIT
 
 # --- 1. stop production agents ---
 log "=== STARTING overnight eval run ($TS) ==="
 log "suite=$SUITE limit='${LIMIT}' variants='${VARIANTS:-all}'"
+log "launchd agents to manage: ${LAUNCH_AGENTS[*]:-none}"
 log
-log "==== Stopping launchd agents ===="
-for agent in "${LAUNCH_AGENTS[@]}"; do
-    log "  bootout $agent"
-    launchctl bootout "gui/$UID_/$agent" 2>>"$RUN_LOG" || true
-done
+if [[ ${#LAUNCH_AGENTS[@]} -gt 0 ]]; then
+    log "==== Stopping launchd agents ===="
+    for agent in "${LAUNCH_AGENTS[@]}"; do
+        log "  bootout $agent"
+        launchctl bootout "gui/$UID_/$agent" 2>>"$RUN_LOG" || true
+    done
+else
+    log "==== No launchd agents configured (set LAUNCH_AGENTS env var if needed) ===="
+fi
 
 # Verify nothing on the production ports
 sleep 3

@@ -159,8 +159,8 @@ uv run python scripts/run_evals.py --variant 26B-MoE-mlx-8bit --suite smoke --li
 ```
 
 Full overnight matrix (all 6 model variants × full suite) — wrapper script
-handles launchd bootout + run + bootstrap automatically (always restores agents
-on EXIT, even if eval fails):
+manages optional launchd bootout + run + bootstrap automatically (always
+restores agents on EXIT, even if eval fails):
 
 ```bash
 # Foreground (watch progress):
@@ -172,7 +172,13 @@ disown
 tail -f /tmp/llm-evals-overnight.log
 ```
 
-Env overrides: `SUITE=smoke`, `LIMIT=10`, `VARIANTS="26B-MoE-mlx-8bit 26B-MoE-gguf-q8"`.
+Env overrides:
+- `SUITE=smoke|full` (default `full`)
+- `LIMIT=N` (per-task sample cap)
+- `VARIANTS="26B-MoE-mlx-8bit 26B-MoE-gguf-q8"` (subset, default = all)
+- `LAUNCH_AGENTS="com.you.foo com.you.bar"` — launchd agent labels to stop
+  before the run and restart at the end. Default empty = no launchd
+  management; stop GPU-using processes manually instead.
 
 Each variant boots its own server on port 9090; tasks run sequentially per
 variant. Expect ~2–3 hours per variant for the full suite.
