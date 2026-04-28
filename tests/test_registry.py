@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_bench.registry import Registry, Variant, get_registry, load_registry
+from llm_bench.registry import Registry, get_registry, load_registry
 
 
 def _write(tmp_path: Path, body: str) -> Path:
@@ -132,6 +132,41 @@ models:
 """
     r = load_registry(_write(tmp_path, body))
     assert r.variant("ok").resolved_path == "/tmp/test-models/foo.gguf"
+
+
+def test_unpinned_variant_warns(tmp_path):
+    body = """
+defaults: {}
+models:
+  - id: m1
+    family: f
+    architecture: dense
+    variants:
+      - {key: unpinned, fmt: mlx, path: org/m1, quant: MLX-8bit, tier: 8bit}
+"""
+    with pytest.warns(UserWarning, match="no pinned revision"):
+        load_registry(_write(tmp_path, body))
+
+
+def test_pinned_variant_silent(tmp_path):
+    body = """
+defaults: {}
+models:
+  - id: m1
+    family: f
+    architecture: dense
+    variants:
+      - key: pinned
+        fmt: mlx
+        path: org/m1
+        quant: MLX-8bit
+        tier: 8bit
+        download: {repo: org/m1, revision: abc1234}
+"""
+    import warnings as _w
+    with _w.catch_warnings():
+        _w.simplefilter("error", UserWarning)
+        load_registry(_write(tmp_path, body))  # would raise on warn
 
 
 def test_variant_metadata_inherits_from_model(tmp_path):

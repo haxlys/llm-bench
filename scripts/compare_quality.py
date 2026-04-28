@@ -92,11 +92,13 @@ def main(mlx_model: str, gguf_model: str, limit: int | None):
         try:
             mlx_resp = _gen_mlx(mlx_model, p["prompt"])
         except Exception as e:
-            click.echo(f"MLX FAIL: {e}", err=True); continue
+            click.echo(f"MLX FAIL: {e}", err=True)
+            continue
         try:
             gguf_resp = _gen_gguf(gguf_model, p["prompt"])
         except Exception as e:
-            click.echo(f"GGUF FAIL: {e}", err=True); continue
+            click.echo(f"GGUF FAIL: {e}", err=True)
+            continue
         dt = time.perf_counter() - t0
         row = {
             "id": p["id"], "lang": p["lang"], "category": p["category"],

@@ -107,7 +107,10 @@ For each variant (model_id × fmt × quant):
    use `local-chat-completions` model class with `--apply_chat_template`;
    loglikelihood tasks use `local-completions` with HF tokenizer.
 3. For code-eval tasks, set `HF_ALLOW_CODE_EVAL=1` and pass
-   `--confirm_run_unsafe_code` (sandbox-on-trust opt-in for HumanEval/MBPP).
+   `--confirm_run_unsafe_code`. Note: lm-eval runs the model's generated
+   Python in-process — there is no sandbox. Only safe with trusted
+   checkpoints; wrap the eval call in `sandbox-exec` (macOS) or
+   `firejail` (Linux) for unknown weights.
 4. Tear down server before next variant.
 
 Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.

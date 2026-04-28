@@ -12,6 +12,11 @@ from pathlib import Path
 # Tasks that execute model-generated code; need explicit opt-in.
 CODE_EVAL_TASKS = {"humaneval", "humaneval_instruct", "mbpp", "mbpp_instruct", "mbpp_plus"}
 
+# Hard ceiling per task. LongBench is the slow one — ~3 hours wall on a 31B
+# model at no limit. 6 hours is generous but ensures overnight matrices can't
+# stall on a single task that hangs (e.g. server unresponsive after OOM).
+DEFAULT_TASK_TIMEOUT_S = 6 * 60 * 60
+
 # We use local-chat-completions: lm-eval will POST to /v1/chat/completions and
 # apply the model's own chat template (set by mlx-lm-server / llama-server with --jinja).
 # For tasks that prefer raw completions (e.g. some MCQ logprob tasks), set USE_CHAT=False.
@@ -27,8 +32,13 @@ def run_lmeval(
     num_fewshot: int | None = None,
     use_chat: bool = True,
     extra_args: list[str] | None = None,
+    timeout_s: int = DEFAULT_TASK_TIMEOUT_S,
 ) -> dict:
-    """Run a single lm-eval task. Returns parsed results dict (or {} on parse failure)."""
+    """Run a single lm-eval task. Returns parsed results dict (or {} on parse failure).
+
+    Raises subprocess.TimeoutExpired if the task exceeds timeout_s; callers in
+    run_evals.py catch this per-variant so other tasks still run.
+    """
     if not shutil.which("lm_eval") and not _module_exists("lm_eval"):
         raise RuntimeError("lm-eval not installed (uv sync --extra evals)")
 
@@ -77,7 +87,20 @@ def run_lmeval(
     if task in CODE_EVAL_TASKS:
         env["HF_ALLOW_CODE_EVAL"] = "1"
 
-    proc = subprocess.run(cmd, capture_output=True, text=True, env=env)
+    try:
+        proc = subprocess.run(
+            cmd, capture_output=True, text=True, env=env, timeout=timeout_s,
+        )
+    except subprocess.TimeoutExpired as e:
+        log_path = output_dir / f"{task}.log"
+        log_path.write_text(
+            "=== cmd ===\n" + " ".join(cmd) +
+            f"\n=== TIMEOUT after {timeout_s}s ===\n" +
+            (e.stdout or b"").decode("utf-8", errors="replace") +
+            "\n=== stderr ===\n" +
+            (e.stderr or b"").decode("utf-8", errors="replace")
+        )
+        return {"task": task, "error": f"timeout after {timeout_s}s", "log": str(log_path)}
     log_path = output_dir / f"{task}.log"
     log_path.write_text(
         "=== cmd ===\n" + " ".join(cmd) +
@@ -108,6 +131,7 @@ def _find_latest_results(output_dir: Path, task: str) -> dict | None:
 
 def _module_exists(name: str) -> bool:
     try:
-        __import__(name); return True
+        __import__(name)
     except ImportError:
         return False
+    return True

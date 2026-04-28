@@ -24,17 +24,15 @@ brew install --cask quarto      # optional, only for the static report
 # Python env
 uv sync
 
-# Download GGUF (~27GB). MLX side is loaded from existing HF cache.
-bash scripts/download_gguf.sh
+# Download every variant declared in models/registry.yaml (~50–100 GB total).
+# MLX variants land in the HF cache; GGUF variants in ~/models/gguf/.
+uv run python scripts/sync_models.py --all-missing
 
 # Smoke test (single scenario, ~1 min) — verifies wiring before the full matrix
-uv run python scripts/run_bench.py \
-  --gguf-model ~/models/gguf/gemma-4-26B-A4B-it-Q8_0.gguf \
-  --smoke
+uv run python scripts/run_bench.py --variant 26B-MoE-mlx-8bit --smoke
 
-# Full matrix (~15–25 min on M5 Max)
-uv run python scripts/run_bench.py \
-  --gguf-model ~/models/gguf/gemma-4-26B-A4B-it-Q8_0.gguf
+# Full matrix across every variant present locally (~15–25 min per variant on M5 Max)
+uv run python scripts/run_bench.py --all-pending
 
 # Visualize
 uv run streamlit run dashboard/app.py
@@ -200,6 +198,14 @@ MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 loglikelihood-based MCQ tasks (`hellaswag`, `kobest`, `haerae`, `toxigen`) only
 run on the GGUF path. Generative variants are used for the rest so both
 runtimes get apples-to-apples coverage.
+
+> **⚠️ Code-eval safety.** `humaneval_instruct` and `mbpp_instruct` execute
+> the model's generated Python directly inside the lm-eval process
+> (`HF_ALLOW_CODE_EVAL=1` + `--confirm_run_unsafe_code`). There is no
+> sandbox. Run them only against models you trust (your own fine-tunes,
+> reputable HF checkpoints) — never against an unknown third-party
+> checkpoint without first wrapping in `firejail` / `bubblewrap` /
+> `sandbox-exec`.
 
 Setup:
 

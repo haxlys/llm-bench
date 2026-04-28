@@ -20,7 +20,6 @@ from llm_bench.evals.aggregate import (  # noqa: E402
     primary_metric_view,
 )
 from llm_bench.index import build_index  # noqa: E402
-from llm_bench.registry import get_registry  # noqa: E402
 
 RAW_DIR = ROOT / "results" / "raw"
 EVAL_DIR = ROOT / "results" / "eval_scores"
@@ -222,18 +221,12 @@ def page_evals_overview(primary: pd.DataFrame) -> None:
 def page_evals_compare(primary: pd.DataFrame) -> None:
     st.header("MLX vs GGUF — accuracy delta")
     if primary.empty:
-        st.info("No eval results yet."); return
+        st.info("No eval results yet.")
+        return
 
-    # join on (model_id, tier, task)
-    df = primary.copy()
-    # Bring back model_id, fmt, tier from VARIANT_META via variant key
-    from llm_bench.evals.aggregate import VARIANT_META, TIER_MAP
-    meta = pd.DataFrame(
-        [(k, *v, TIER_MAP.get(v[2], "")) for k, v in VARIANT_META.items()],
-        columns=["variant", "model_id", "fmt", "quant", "tier"],
-    )
-    df = df.merge(meta, on="variant")
-    pivot = df.pivot_table(
+    # primary already carries model_id/fmt/quant/tier from the registry-aware
+    # loader (evals.aggregate.load_eval_results). Pivot directly.
+    pivot = primary.pivot_table(
         index=["model_id", "tier", "task"], columns="fmt", values="value",
     ).dropna(how="any").reset_index()
     if pivot.empty:
@@ -259,14 +252,9 @@ def page_evals_compare(primary: pd.DataFrame) -> None:
 def page_evals_quantization(primary: pd.DataFrame) -> None:
     st.header("Quantization — 8bit vs 4bit accuracy")
     if primary.empty:
-        st.info("No eval results yet."); return
-    from llm_bench.evals.aggregate import VARIANT_META, TIER_MAP
-    meta = pd.DataFrame(
-        [(k, *v, TIER_MAP.get(v[2], "")) for k, v in VARIANT_META.items()],
-        columns=["variant", "model_id", "fmt", "quant", "tier"],
-    )
-    df = primary.merge(meta, on="variant")
-    pivot = df.pivot_table(
+        st.info("No eval results yet.")
+        return
+    pivot = primary.pivot_table(
         index=["model_id", "fmt", "task"], columns="tier", values="value",
     ).dropna(how="any").reset_index()
     if pivot.empty:
@@ -287,7 +275,8 @@ def page_evals_quantization(primary: pd.DataFrame) -> None:
 def page_evals_dimension(full: pd.DataFrame, primary: pd.DataFrame) -> None:
     st.header("Per-dimension breakdown")
     if primary.empty:
-        st.info("No eval results yet."); return
+        st.info("No eval results yet.")
+        return
     dims = sorted(primary["dim"].unique()) if "dim" in primary.columns else []
     if not dims:
         # primary view dropped dim col when picking; reattach from full
@@ -308,10 +297,12 @@ def page_evals_dimension(full: pd.DataFrame, primary: pd.DataFrame) -> None:
 def page_evals_longbench(full: pd.DataFrame) -> None:
     st.header("LongBench — sub-task detail")
     if full.empty:
-        st.info("No eval results yet."); return
+        st.info("No eval results yet.")
+        return
     lb = full[full["task"] == "longbench"].copy()
     if lb.empty:
-        st.info("LongBench not in the current results."); return
+        st.info("LongBench not in the current results.")
+        return
     # subtask is e.g. "longbench_narrativeqa" — strip prefix for axis
     lb["subtask_short"] = lb["subtask"].str.replace("longbench_", "", regex=False)
     # filter to leaf metrics only (skip group rows where value is 0 by structure)
@@ -330,7 +321,8 @@ def page_evals_longbench(full: pd.DataFrame) -> None:
 def page_evals_raw(full: pd.DataFrame) -> None:
     st.header("Eval raw rows")
     if full.empty:
-        st.info("No eval results yet."); return
+        st.info("No eval results yet.")
+        return
     st.dataframe(full.sort_values(["task", "variant", "metric"]),
                  use_container_width=True, height=600)
     st.download_button(
@@ -358,7 +350,8 @@ def page_catalog(index: dict) -> None:
 
     rows = []
     for v in index["variants"]:
-        s = v["speed"]; e = v["evals"]
+        s = v["speed"]
+        e = v["evals"]
         speed_pct = (s["scenarios_measured"] / s["scenarios_total"]
                      if s["scenarios_total"] else 0)
         eval_pct = (e["tasks_measured"] / e["tasks_supported"]

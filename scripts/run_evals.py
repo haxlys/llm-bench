@@ -17,6 +17,7 @@ Examples:
 from __future__ import annotations
 
 import json
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -64,9 +65,12 @@ def _resolve_targets(variant_keys: tuple, all_variants: bool) -> list[Variant]:
               help="Override per-task sample limit. Smoke default = 3.")
 @click.option("--port", type=int, default=9090, show_default=True)
 @click.option("--skip-existing/--no-skip-existing", default=True)
-@click.option("--include-bfcl", is_flag=True)
+# BFCL is a placeholder (see src/llm_bench/evals/bfcl.py). Flags are kept hidden
+# so they don't appear in --help and mislead users into thinking tool-use evals
+# are wired up. Pass --include-bfcl explicitly to override.
+@click.option("--include-bfcl", is_flag=True, hidden=True)
 @click.option("--bfcl-dir", type=click.Path(exists=True, file_okay=False, path_type=Path),
-              default=None)
+              default=None, hidden=True)
 def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
          port: int, skip_existing: bool, include_bfcl: bool, bfcl_dir: Path | None):
     targets = _resolve_targets(variant, all_variants)
@@ -112,7 +116,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
             runnable.append((dim, task))
 
         if not runnable and not include_bfcl:
-            click.echo(f"  → all tasks already measured / unsupported, skipping server boot")
+            click.echo("  → all tasks already measured / unsupported, skipping server boot")
             continue
 
         t0 = time.perf_counter()
@@ -141,7 +145,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         "wall_s": round(dt, 1), **res,
                     })
                 if include_bfcl:
-                    click.echo(f"  [tool] bfcl ", nl=False)
+                    click.echo("  [tool] bfcl ", nl=False)
                     res = run_bfcl(base_url, v.key, out_dir / "bfcl",
                                    bfcl_dir, effective_limit)
                     click.echo(res.get("status", res.get("error", "OK")))

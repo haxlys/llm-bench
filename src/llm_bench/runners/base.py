@@ -47,15 +47,29 @@ def now_iso() -> str:
 _TIME_REAL_RE = re.compile(r"^\s*([\d.]+)\s+real", re.MULTILINE)
 _TIME_MAXRSS_RE = re.compile(r"^\s*(\d+)\s+maximum resident set size", re.MULTILINE)
 
+# Hard ceiling per benchmark invocation. The longest single scenario
+# (8K prefill + 512 gen on 31B GGUF) tops out around ~6 minutes; 30 minutes
+# is generous but bounded enough to keep an overnight matrix from being held
+# hostage by a single hung process.
+DEFAULT_TIMEOUT_S = 30 * 60
 
-def run_with_time(cmd: list[str], env: dict | None = None) -> tuple[str, str, float, float]:
+
+def run_with_time(
+    cmd: list[str],
+    env: dict | None = None,
+    timeout_s: int = DEFAULT_TIMEOUT_S,
+) -> tuple[str, str, float, float]:
     """Run cmd wrapped with /usr/bin/time -l. Returns (stdout, stderr, wall_s, peak_mem_gb).
 
     /usr/bin/time -l is BSD time on macOS — emits 'maximum resident set size' in bytes.
+    Raises subprocess.TimeoutExpired (parent kills the process group) if the wrapped
+    command exceeds timeout_s.
     """
     wrapped = ["/usr/bin/time", "-l", *cmd]
     t0 = time.perf_counter()
-    proc = subprocess.run(wrapped, capture_output=True, text=True, env=env)
+    proc = subprocess.run(
+        wrapped, capture_output=True, text=True, env=env, timeout=timeout_s,
+    )
     wall = time.perf_counter() - t0
     stderr = proc.stderr
     if proc.returncode != 0:

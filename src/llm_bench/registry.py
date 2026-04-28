@@ -10,6 +10,7 @@ Adding a new model variant: edit registry.yaml, no Python changes.
 from __future__ import annotations
 
 import os
+import warnings
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
@@ -146,6 +147,7 @@ ALLOWED_ARCHS = {"dense", "moe"}
 
 def _validate(variants: list[Variant], models: list["Model"]) -> None:
     seen: dict[str, str] = {}
+    unpinned: list[str] = []
     for v in variants:
         if v.key in seen:
             raise ValueError(
@@ -173,6 +175,23 @@ def _validate(variants: list[Variant], models: list["Model"]) -> None:
                     f"variant '{v.key}': gguf path '{v.path}' is relative "
                     f"and has no download: spec; provide one or use absolute path"
                 )
+        # Reproducibility: warn (don't fail) when a remote source has no pinned
+        # revision. A reproducer two months out may pick up new weights at the
+        # same key — same BENCH_VERSION, different numbers.
+        needs_pin = (
+            (v.fmt == "mlx") or (v.fmt == "gguf" and v.download is not None)
+        )
+        has_pin = v.download is not None and v.download.revision is not None
+        if needs_pin and not has_pin:
+            unpinned.append(v.key)
+    if unpinned:
+        warnings.warn(
+            f"{len(unpinned)} variant(s) have no pinned revision; weights may "
+            f"change under your feet across reproducer runs: "
+            f"{sorted(unpinned)}. Add `revision: <commit-sha>` under download.",
+            UserWarning,
+            stacklevel=3,
+        )
 
 
 def load_registry(path: Path | None = None) -> Registry:

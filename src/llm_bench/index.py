@@ -38,7 +38,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from llm_bench import BENCH_VERSION
+from llm_bench import BENCH_VERSION, N_RUNS_REQUIRED
 from llm_bench.evals.suites import full_suite, supports_fmt
 from llm_bench.manifest import eval_manifest, speed_manifest
 from llm_bench.registry import get_registry
@@ -61,7 +61,7 @@ def build_index() -> dict:
     for v in registry.variants:
         s_measured = sum(
             1 for sc in scenarios
-            if speed_m.counts.get((v.key, sc.name, BENCH_VERSION), 0) >= 3
+            if speed_m.counts.get((v.key, sc.name, BENCH_VERSION), 0) >= N_RUNS_REQUIRED
         )
         e_supported = [t for _, t in full_tasks if supports_fmt(t, v.fmt)]
         e_measured_tasks = sorted({t for (k, t) in eval_m.measured if k == v.key})

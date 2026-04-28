@@ -98,7 +98,8 @@ def main(variant: tuple, all_pending: bool, runs: int, warmup: bool,
                 try:
                     runner.run(sc, run_idx=0)
                 except Exception as e:
-                    click.echo(f"    ! warmup failed: {e}", err=True); continue
+                    click.echo(f"    ! warmup failed: {e}", err=True)
+                    continue
             for i in range(1, runs + 1):
                 click.echo(f"  [run {i}] {sc.name} ", nl=False)
                 try:
