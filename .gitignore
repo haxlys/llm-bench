@@ -16,8 +16,6 @@ results/overnight_logs/
 .vscode/
 .idea/
 
-# uv
-uv.lock
 
 # Quarto
 report/_site/
