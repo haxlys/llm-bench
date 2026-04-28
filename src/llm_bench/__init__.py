@@ -6,3 +6,8 @@ __version__ = "0.3.0"
 # warmup, changed memory accounting, etc). Stamped into every BenchResult so
 # the manifest can decide when historical data is comparable.
 BENCH_VERSION = "0.3"
+
+# Default minimum measured runs per (variant, scenario) for the catalog and
+# `--skip-existing` to consider that combo "complete". CLI --runs may override
+# upward; combos with fewer than this stay flagged as pending.
+N_RUNS_REQUIRED = 3

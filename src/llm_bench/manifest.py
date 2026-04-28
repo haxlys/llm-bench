@@ -18,7 +18,7 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
 
-from llm_bench import BENCH_VERSION
+from llm_bench import BENCH_VERSION, N_RUNS_REQUIRED
 from llm_bench.registry import get_registry
 
 
@@ -89,7 +89,7 @@ def speed_is_measured(
     counts: dict[tuple, int],
     variant_key: str,
     scenario: str,
-    n_required: int = 3,
+    n_required: int = N_RUNS_REQUIRED,
     bench_version: str = BENCH_VERSION,
 ) -> bool:
     return counts.get((variant_key, scenario, bench_version), 0) >= n_required
@@ -97,9 +97,12 @@ def speed_is_measured(
 
 # ---------- evals (run_evals.py) ----------
 
-_RUN_DIR_RE = re.compile(
+# Run-id directory name: <ts>_<variant>_<suite>. Single source of truth —
+# evals.aggregate re-imports this so a format change updates both readers.
+RUN_DIR_RE = re.compile(
     r"^(?P<ts>\d{8}T\d{6}Z)_(?P<variant>[\w-]+?)_(?P<suite>smoke|full)$"
 )
+_RUN_DIR_RE = RUN_DIR_RE  # legacy alias — keep until external code migrates
 
 
 @dataclass

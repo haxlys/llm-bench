@@ -29,15 +29,12 @@ Helper views:
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 import pandas as pd
 
+from llm_bench.manifest import RUN_DIR_RE
 from llm_bench.registry import get_registry
-
-# Run-id directory name follows pattern: <ts>_<variant>_<suite>
-RUN_DIR_RE = re.compile(r"^(?P<ts>\d{8}T\d{6}Z)_(?P<variant>[\w-]+?)_(?P<suite>smoke|full)$")
 
 # Top-level task → dim mapping (mirrors suites.SUITES).
 TASK_DIM = {
