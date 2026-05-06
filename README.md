@@ -47,6 +47,56 @@ quarto render report/
 open report/_site/index.html
 ```
 
+## Public benchmark website
+
+The public website lives in `site/`. It is a TanStack Start app built with the
+Cloudflare Vite plugin, deployed to Cloudflare Workers with Static Assets, and
+prerendered by TanStack Start during `vite build`.
+
+Regenerate the typed data export before reviewing or publishing site changes:
+
+```bash
+uv run python scripts/export_site_data.py --out site/src/data/benchmarks.json
+cp site/src/data/benchmarks.json site/public/data/benchmarks.json
+```
+
+Install frontend dependencies once:
+
+```bash
+cd site
+npm install
+```
+
+Run the site locally during development:
+
+```bash
+cd site
+npm run dev
+```
+
+Build and preview the production output:
+
+```bash
+cd site
+npm run build
+npm run preview
+```
+
+Deploy to Cloudflare Workers:
+
+```bash
+cd site
+npm run deploy
+```
+
+The Cloudflare Workers configuration sets `main` to `@tanstack/react-start/server-entry` with
+`nodejs_compat`. The Cloudflare Vite plugin emits the Workers Static Assets configuration into the
+generated output, so `wrangler.jsonc` intentionally does not hard-code an `assets.directory`.
+
+TTFT and ITL columns are present in the speed report, but they display `not
+measured` until the benchmark runner records those latency fields. Until then,
+use TG tok/s, wall time, and peak memory for speed comparisons.
+
 ## Important: stop other GPU/Metal workloads first
 
 Inference benchmarks are extremely sensitive to Metal contention. Before running:

@@ -6,10 +6,10 @@
     "dev": "vite --host 127.0.0.1",
     "prebuild": "cd .. && uv run python scripts/export_site_data.py --out site/src/data/benchmarks.json",
     "build": "vite build",
-    "preview": "wrangler dev",
+    "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --exclude e2e/**",
     "test:e2e": "playwright test",
     "cf-typegen": "wrangler types"
   },
