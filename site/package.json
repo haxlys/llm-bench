@@ -1,0 +1,37 @@
+{
+  "name": "llm-bench-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "prebuild": "cd .. && uv run python scripts/export_site_data.py --out site/src/data/benchmarks.json",
+    "build": "vite build",
+    "preview": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@cloudflare/vite-plugin": "1.36.0",
+    "@tanstack/react-router": "1.169.2",
+    "@tanstack/react-start": "1.167.64",
+    "@vitejs/plugin-react": "6.0.1",
+    "lucide-react": "1.14.0",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "recharts": "3.8.1",
+    "vite": "8.0.10"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.59.1",
+    "@testing-library/react": "16.3.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "jsdom": "29.1.1",
+    "typescript": "6.0.3",
+    "vitest": "4.1.5",
+    "wrangler": "4.88.0"
+  }
+}
