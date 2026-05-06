@@ -56,8 +56,7 @@ prerendered by TanStack Start during `vite build`.
 Regenerate the typed data export before reviewing or publishing site changes:
 
 ```bash
-uv run python scripts/export_site_data.py --out site/src/data/benchmarks.json
-cp site/src/data/benchmarks.json site/public/data/benchmarks.json
+uv run python scripts/export_site_public_data.py
 ```
 
 Install frontend dependencies once:

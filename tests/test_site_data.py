@@ -1,12 +1,23 @@
 from __future__ import annotations
 
 import csv
+import importlib.util
 import json
 from pathlib import Path
 
 import pytest
 
 from llm_bench.site_data import SiteDataError, build_site_data, parse_scenario, write_site_data
+
+
+def _load_export_site_public_data_module():
+    script_path = Path(__file__).resolve().parents[1] / "scripts" / "export_site_public_data.py"
+    spec = importlib.util.spec_from_file_location("export_site_public_data", script_path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _write_csv(path: Path, rows: list[dict[str, object]]) -> None:
@@ -500,3 +511,31 @@ def test_write_site_data_outputs_stable_json(tmp_path: Path) -> None:
     parsed = json.loads(out.read_text())
     assert parsed["generatedAt"] == "2026-05-06T12:00:00+00:00"
     assert parsed["variants"][0]["key"] == "test-variant"
+
+
+def test_sync_site_public_data_copies_json_and_downloads(tmp_path: Path) -> None:
+    _write_site_inputs(tmp_path)
+    module = _load_export_site_public_data_module()
+
+    copied = module.sync_site_public_data(tmp_path, generated_at="2026-05-06T12:00:00+00:00")
+
+    src_json = tmp_path / "site" / "src" / "data" / "benchmarks.json"
+    public_json = tmp_path / "site" / "public" / "data" / "benchmarks.json"
+    public_dir = tmp_path / "site" / "public" / "data"
+    assert src_json.read_bytes() == public_json.read_bytes()
+    assert (public_dir / "summary.csv").read_bytes() == (
+        tmp_path / "results" / "summary.csv"
+    ).read_bytes()
+    assert (public_dir / "eval_summary_primary.csv").read_bytes() == (
+        tmp_path / "results" / "eval_summary_primary.csv"
+    ).read_bytes()
+    assert (public_dir / "mtplx_speedups.csv").read_bytes() == (
+        tmp_path / "results" / "mtplx_speedups.csv"
+    ).read_bytes()
+    assert copied == [
+        src_json,
+        public_json,
+        public_dir / "summary.csv",
+        public_dir / "eval_summary_primary.csv",
+        public_dir / "mtplx_speedups.csv",
+    ]

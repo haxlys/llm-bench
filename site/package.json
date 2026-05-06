@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "prebuild": "cd .. && uv run python scripts/export_site_data.py --out site/src/data/benchmarks.json",
+    "prebuild": "cd .. && uv run python scripts/export_site_public_data.py",
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",

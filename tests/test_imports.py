@@ -28,6 +28,7 @@ SCRIPTS = [
     "scripts/compare_quality.py",
     "scripts/aggregate_evals.py",
     "scripts/build_index.py",
+    "scripts/export_site_public_data.py",
 ]
 DASHBOARD = "dashboard/app.py"
 
