@@ -201,6 +201,123 @@ a {
   gap: 16px;
 }
 
+.summary-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 16px;
+  align-items: start;
+}
+
+.summary-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+  margin: 0;
+}
+
+.summary-meta dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.summary-meta dd {
+  margin: 4px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.finding-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.finding-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.caveat-callout {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  border-color: #fcd34d;
+  background: #fffbeb;
+}
+
+.caveat-callout svg {
+  flex: 0 0 auto;
+  color: var(--warning);
+}
+
+.caveat-callout h2 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.caveat-callout p {
+  margin: 0;
+  color: #7c2d12;
+  line-height: 1.5;
+}
+
+.summary-data-grid h2 {
+  margin: 2px 0 0;
+  font-size: 20px;
+}
+
+.table-panel {
+  overflow: hidden;
+}
+
+.speed-bars {
+  display: grid;
+  gap: 15px;
+}
+
+.speed-row-label,
+.speed-row-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.speed-row-label {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.speed-row-label strong {
+  overflow-wrap: anywhere;
+  color: var(--text);
+}
+
+.speed-row-meta {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.bar-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-muted);
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
 @media (max-width: 900px) {
   .site-header {
     align-items: flex-start;
@@ -217,12 +334,30 @@ a {
   }
 
   .card-grid,
+  .summary-hero,
   .two-column {
     grid-template-columns: 1fr;
+  }
+
+  .summary-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .data-table {
     display: block;
     overflow-x: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .summary-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header,
+  .speed-row-label,
+  .speed-row-meta {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
