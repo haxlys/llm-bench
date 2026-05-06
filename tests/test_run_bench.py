@@ -6,6 +6,8 @@ import importlib.util
 import json
 from pathlib import Path
 
+import click
+
 from llm_bench.runners.base import Scenario
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -122,3 +124,25 @@ def test_build_runner_supports_mtplx_backend():
 
     assert runner.generation_mode == "mtp"
     assert runner.model_path == "Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed"
+
+
+def test_select_scenarios_filters_default_matrix():
+    run_bench = _load_run_bench()
+
+    scenarios = run_bench._select_scenarios(
+        smoke=False,
+        scenario_names=("p256_g128", "p8192_g128"),
+    )
+
+    assert [s.name for s in scenarios] == ["p256_g128", "p8192_g128"]
+
+
+def test_select_scenarios_rejects_unknown_name():
+    run_bench = _load_run_bench()
+
+    try:
+        run_bench._select_scenarios(smoke=False, scenario_names=("p999_g999",))
+    except click.BadParameter as exc:
+        assert "Unknown scenario" in str(exc)
+    else:
+        raise AssertionError("unknown scenario should fail")

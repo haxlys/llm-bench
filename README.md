@@ -129,6 +129,7 @@ uv run mtplx pull Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
 uv run python scripts/run_bench.py --smoke --runs 1 --no-warmup \
   --variant qwen-3.6-27b-mtplx-speed-mtplx-mtp \
   --variant qwen-3.6-27b-mtplx-speed-mtplx-ar
+uv run python scripts/compare_mtplx.py
 ```
 
 Set `MTPLX_MAX=1` to request MTPLX's fan-max path when the local ThermalForge

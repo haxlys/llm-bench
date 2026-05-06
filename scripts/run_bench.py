@@ -105,6 +105,20 @@ def _resolve_targets(
     return []
 
 
+def _select_scenarios(smoke: bool, scenario_names: tuple[str, ...]):
+    scenarios = smoke_scenarios() if smoke else default_scenarios()
+    if not scenario_names:
+        return scenarios
+    by_name = {s.name: s for s in scenarios}
+    unknown = [name for name in scenario_names if name not in by_name]
+    if unknown:
+        raise click.BadParameter(
+            f"Unknown scenario(s): {', '.join(unknown)}. "
+            f"Known: {', '.join(sorted(by_name))}"
+        )
+    return [by_name[name] for name in scenario_names]
+
+
 @click.command()
 @click.option("--variant", multiple=True, help="Registry key (repeatable)")
 @click.option("--all-pending", is_flag=True,
@@ -112,11 +126,13 @@ def _resolve_targets(
 @click.option("--runs", default=3, show_default=True)
 @click.option("--warmup/--no-warmup", default=True)
 @click.option("--smoke/--full", default=False, help="Smoke = single scenario")
+@click.option("--scenario", "scenario_names", multiple=True,
+              help="Scenario name to run from the default matrix (repeatable)")
 @click.option("--skip-existing/--no-skip-existing", default=True,
               help="Skip combos already measured at this bench_version")
 def main(variant: tuple, all_pending: bool, runs: int, warmup: bool,
-         smoke: bool, skip_existing: bool):
-    scenarios = smoke_scenarios() if smoke else default_scenarios()
+         smoke: bool, scenario_names: tuple[str, ...], skip_existing: bool):
+    scenarios = _select_scenarios(smoke, scenario_names)
     targets = _resolve_targets(variant, all_pending, scenarios, n_required=runs)
     if not targets:
         click.echo("→ no targets. Specify --variant or --all-pending.")

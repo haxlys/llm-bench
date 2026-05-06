@@ -1,0 +1,6 @@
+pair_key,scenario,mtp_variant,ar_variant,mtp_runs,ar_runs,mtp_tg_tps_mean,ar_tg_tps_mean,speedup,mtp_peak_mem_gb_mean,ar_peak_mem_gb_mean,verify_ms_per_call_mean,accept_d1_mean,accept_d2_mean,accept_d3_mean
+qwen-3.6-27b-mtplx-optimized-mtplx,p256_g128,qwen-3.6-27b-mtplx-optimized-mtplx-mtp,qwen-3.6-27b-mtplx-optimized-mtplx-ar,1,1,38.999,23.448,1.663,19.012,19.005,54.089,0.800,0.675,0.425
+qwen-3.6-27b-mtplx-speed-mtplx,p1024_g128,qwen-3.6-27b-mtplx-speed-mtplx-mtp,qwen-3.6-27b-mtplx-speed-mtplx-ar,3,3,28.113,19.100,1.472,15.179,15.157,53.289,0.767,0.488,0.302
+qwen-3.6-27b-mtplx-speed-mtplx,p256_g128,qwen-3.6-27b-mtplx-speed-mtplx-mtp,qwen-3.6-27b-mtplx-speed-mtplx-ar,4,4,40.834,25.178,1.622,15.168,15.181,50.965,0.857,0.571,0.405
+qwen-3.6-27b-mtplx-speed-mtplx,p4096_g128,qwen-3.6-27b-mtplx-speed-mtplx-mtp,qwen-3.6-27b-mtplx-speed-mtplx-ar,3,3,14.974,7.603,1.970,15.159,15.137,61.501,0.810,0.619,0.548
+qwen-3.6-27b-mtplx-speed-mtplx,p8192_g128,qwen-3.6-27b-mtplx-speed-mtplx-mtp,qwen-3.6-27b-mtplx-speed-mtplx-ar,3,3,7.084,4.844,1.463,15.140,15.159,86.086,0.844,0.568,0.455
