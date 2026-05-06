@@ -150,9 +150,11 @@ a {
 }
 
 .data-table {
+  min-width: 760px;
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  table-layout: fixed;
 }
 
 .data-table th,
@@ -167,6 +169,66 @@ a {
   color: var(--muted);
   font-size: 12px;
   text-transform: uppercase;
+}
+
+.data-table td {
+  overflow-wrap: anywhere;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table-scroll:focus {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+.accuracy-table {
+  min-width: 980px;
+}
+
+.accuracy-col-model {
+  width: 22%;
+}
+
+.accuracy-col-task {
+  width: 19%;
+}
+
+.accuracy-col-metric {
+  width: 17%;
+}
+
+.accuracy-col-score {
+  width: 10%;
+}
+
+.accuracy-col-status {
+  width: 16%;
+}
+
+.accuracy-col-run {
+  width: 16%;
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.run-id,
+.caveat-list {
+  font-size: 12px;
+}
+
+.run-id {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+.empty-cell {
+  color: var(--muted);
+  text-align: center;
 }
 
 .badge {
@@ -272,6 +334,60 @@ a {
   font-size: 20px;
 }
 
+.explorer-header {
+  align-items: start;
+}
+
+.explorer-header .lead {
+  margin-bottom: 0;
+}
+
+.filter-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin-top: 18px;
+}
+
+.filter-field {
+  display: grid;
+  min-width: min(280px, 100%);
+  gap: 6px;
+}
+
+.filter-field span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.filter-field select {
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  padding: 7px 32px 7px 10px;
+}
+
+.row-count {
+  min-width: 150px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 10px 12px;
+  text-align: right;
+}
+
+.row-count strong {
+  display: block;
+  font-size: 24px;
+  line-height: 1;
+}
+
 .table-panel {
   overflow: hidden;
 }
@@ -343,9 +459,12 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .data-table {
-    display: block;
-    overflow-x: auto;
+  .explorer-header {
+    align-items: stretch;
+  }
+
+  .row-count {
+    text-align: left;
   }
 }
 
