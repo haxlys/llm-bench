@@ -3,10 +3,11 @@ import react from "@vitejs/plugin-react";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { defineConfig } from "vitest/config";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
-    cloudflare({ viteEnvironment: { name: "ssr" } }),
+    ...(mode === "test" ? [] : [cloudflare({ viteEnvironment: { name: "ssr" } })]),
     tanstackStart({
+      srcDirectory: "app",
       prerender: {
         enabled: true,
       },
@@ -17,4 +18,4 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
   },
-});
+}));
