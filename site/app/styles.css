@@ -188,6 +188,10 @@ a {
   min-width: 980px;
 }
 
+.speed-table {
+  min-width: 1120px;
+}
+
 .accuracy-col-model {
   width: 22%;
 }
@@ -210,6 +214,22 @@ a {
 
 .accuracy-col-run {
   width: 16%;
+}
+
+.speed-col-model {
+  width: 22%;
+}
+
+.speed-col-scenario {
+  width: 15%;
+}
+
+.speed-col-metric {
+  width: 9%;
+}
+
+.speed-col-status {
+  width: 12%;
 }
 
 .numeric {
@@ -434,6 +454,68 @@ a {
   background: var(--accent);
 }
 
+.speed-overview-grid .caveat-callout {
+  margin-top: 0;
+}
+
+.mtplx-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mtplx-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mtplx-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mtplx-card h3 {
+  margin: 4px 0 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.mtplx-models {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.compact-dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.compact-dl div {
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+  padding: 8px;
+}
+
+.compact-dl dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.compact-dl dd {
+  margin: 2px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
 @media (max-width: 900px) {
   .site-header {
     align-items: flex-start;
@@ -457,6 +539,10 @@ a {
 
   .summary-meta {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mtplx-grid {
+    grid-template-columns: 1fr;
   }
 
   .explorer-header {
