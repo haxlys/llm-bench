@@ -1,5 +1,5 @@
 import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
-import { Gauge, LineChart, ListChecks } from "lucide-react";
+import { BookOpen, Database, Gauge, LineChart, ListChecks } from "lucide-react";
 
 import "../styles.css";
 
@@ -7,6 +7,8 @@ const navItems = [
   { to: "/", label: "Summary", icon: LineChart },
   { to: "/accuracy", label: "Accuracy", icon: ListChecks },
   { to: "/speed", label: "Speed", icon: Gauge },
+  { to: "/methodology", label: "Methodology", icon: BookOpen },
+  { to: "/data", label: "Data", icon: Database },
 ] as const;
 
 export const Route = createRootRoute({

@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SpeedRouteImport } from './routes/speed'
+import { Route as MethodologyRouteImport } from './routes/methodology'
+import { Route as DataRouteImport } from './routes/data'
 import { Route as AccuracyRouteImport } from './routes/accuracy'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SpeedRoute = SpeedRouteImport.update({
   id: '/speed',
   path: '/speed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataRoute = DataRouteImport.update({
+  id: '/data',
+  path: '/data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccuracyRoute = AccuracyRouteImport.update({
@@ -32,30 +44,38 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accuracy': typeof AccuracyRoute
+  '/data': typeof DataRoute
+  '/methodology': typeof MethodologyRoute
   '/speed': typeof SpeedRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accuracy': typeof AccuracyRoute
+  '/data': typeof DataRoute
+  '/methodology': typeof MethodologyRoute
   '/speed': typeof SpeedRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accuracy': typeof AccuracyRoute
+  '/data': typeof DataRoute
+  '/methodology': typeof MethodologyRoute
   '/speed': typeof SpeedRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/accuracy' | '/speed'
+  fullPaths: '/' | '/accuracy' | '/data' | '/methodology' | '/speed'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accuracy' | '/speed'
-  id: '__root__' | '/' | '/accuracy' | '/speed'
+  to: '/' | '/accuracy' | '/data' | '/methodology' | '/speed'
+  id: '__root__' | '/' | '/accuracy' | '/data' | '/methodology' | '/speed'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccuracyRoute: typeof AccuracyRoute
+  DataRoute: typeof DataRoute
+  MethodologyRoute: typeof MethodologyRoute
   SpeedRoute: typeof SpeedRoute
 }
 
@@ -66,6 +86,20 @@ declare module '@tanstack/react-router' {
       path: '/speed'
       fullPath: '/speed'
       preLoaderRoute: typeof SpeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data': {
+      id: '/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof DataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accuracy': {
@@ -88,6 +122,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccuracyRoute: AccuracyRoute,
+  DataRoute: DataRoute,
+  MethodologyRoute: MethodologyRoute,
   SpeedRoute: SpeedRoute,
 }
 export const routeTree = rootRouteImport
