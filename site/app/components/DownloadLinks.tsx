@@ -1,35 +1,14 @@
 import { Download } from "lucide-react";
 
-type DownloadArtifact = {
-  description: string;
-  href: string;
-  label: string;
+import { defaultLocale, messages, type Locale } from "../lib/i18n";
+
+type DownloadLinksProps = {
+  locale?: Locale;
 };
 
-const artifacts: DownloadArtifact[] = [
-  {
-    description: "Typed site export used by the report pages.",
-    href: "/data/benchmarks.json",
-    label: "benchmarks.json",
-  },
-  {
-    description: "Combined benchmark speed summary.",
-    href: "/data/summary.csv",
-    label: "summary.csv",
-  },
-  {
-    description: "Primary evaluation score summary.",
-    href: "/data/eval_summary_primary.csv",
-    label: "eval_summary_primary.csv",
-  },
-  {
-    description: "MTPLX speculative decoding speedup rows.",
-    href: "/data/mtplx_speedups.csv",
-    label: "mtplx_speedups.csv",
-  },
-];
+export function DownloadLinks({ locale = defaultLocale }: DownloadLinksProps) {
+  const artifacts = messages[locale].downloads;
 
-export function DownloadLinks() {
   return (
     <div className="download-grid">
       {artifacts.map((artifact) => (

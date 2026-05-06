@@ -1,14 +1,29 @@
-import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRoute,
+  useLocation,
+} from "@tanstack/react-router";
 import { BookOpen, Database, Gauge, LineChart, ListChecks } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
+import {
+  localeFromPathname,
+  localizedPath,
+  messages,
+  switchLocalePath,
+  type BasePagePath,
+  type NavKey,
+} from "../lib/i18n";
 import "../styles.css";
 
 const navItems = [
-  { to: "/", label: "Summary", icon: LineChart },
-  { to: "/accuracy", label: "Accuracy", icon: ListChecks },
-  { to: "/speed", label: "Speed", icon: Gauge },
-  { to: "/methodology", label: "Methodology", icon: BookOpen },
-  { to: "/data", label: "Data", icon: Database },
+  { key: "summary", to: "/", icon: LineChart },
+  { key: "accuracy", to: "/accuracy", icon: ListChecks },
+  { key: "speed", to: "/speed", icon: Gauge },
+  { key: "methodology", to: "/methodology", icon: BookOpen },
+  { key: "data", to: "/data", icon: Database },
 ] as const;
 
 export const Route = createRootRoute({
@@ -23,45 +38,90 @@ export const Route = createRootRoute({
 });
 
 function RootLayout() {
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const locale = localeFromPathname(pathname);
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <HeadContent />
       </head>
       <body>
-        <AppShell />
+        <AppShell locale={locale} pathname={pathname} />
         <Scripts />
       </body>
     </html>
   );
 }
 
-function AppShell() {
+type AppShellProps = {
+  locale: "en" | "ko";
+  pathname: string;
+};
+
+function AppShell({ locale, pathname }: AppShellProps) {
+  const t = messages[locale];
+  const activeBasePath = switchLocalePath(pathname, "en");
+
   return (
     <div className="app-shell">
       <header className="site-header">
-        <a href="/" className="brand" aria-label="llm-bench summary">
+        <a href={localizedPath("/", locale)} className="brand" aria-label={t.root.brandAria}>
           <span className="brand-mark">lb</span>
           <span>
             <strong>llm-bench</strong>
-            <small>Apple Silicon local model benchmarks</small>
+            <small>{t.root.brandSubtitle}</small>
           </span>
         </a>
-        <nav className="site-nav" aria-label="Primary navigation">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <a key={item.to} href={item.to} className="nav-link">
-                <Icon size={16} aria-hidden="true" />
-                <span>{item.label}</span>
+        <div className="header-actions">
+          <nav className="site-nav" aria-label={t.root.navAria}>
+            {navItems.map((item) => (
+              <NavLink
+                active={activeBasePath === item.to}
+                icon={item.icon}
+                key={item.to}
+                label={t.root.nav[item.key as NavKey]}
+                to={localizedPath(item.to as BasePagePath, locale)}
+              />
+            ))}
+          </nav>
+          <nav className="language-switcher" aria-label={t.root.languageAria}>
+            {(["en", "ko"] as const).map((targetLocale) => (
+              <a
+                aria-current={locale === targetLocale ? "page" : undefined}
+                className={locale === targetLocale ? "language-link active" : "language-link"}
+                href={switchLocalePath(pathname, targetLocale)}
+                key={targetLocale}
+              >
+                {messages[locale].root.languageLabels[targetLocale]}
               </a>
-            );
-          })}
-        </nav>
+            ))}
+          </nav>
+        </div>
       </header>
       <main className="site-main">
         <Outlet />
       </main>
     </div>
+  );
+}
+
+type NavLinkProps = {
+  active: boolean;
+  icon: LucideIcon;
+  label: string;
+  to: string;
+};
+
+function NavLink({ active, icon: Icon, label, to }: NavLinkProps) {
+  return (
+    <a
+      aria-current={active ? "page" : undefined}
+      className={active ? "nav-link active" : "nav-link"}
+      href={to}
+    >
+      <Icon size={16} aria-hidden="true" />
+      <span>{label}</span>
+    </a>
   );
 }

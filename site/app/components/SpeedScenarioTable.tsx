@@ -1,8 +1,10 @@
 import type { SpeedRow, Variant } from "../lib/benchmark-data";
 import { formatMetricValue } from "../lib/format";
+import { caveatText, defaultLocale, messages, type Locale } from "../lib/i18n";
 import { Badge } from "./Badge";
 
 type SpeedScenarioTableProps = {
+  locale?: Locale;
   rows: SpeedRow[];
   variants: Map<string, Variant>;
 };
@@ -14,16 +16,18 @@ function variantLabel(row: SpeedRow, variant: Variant | undefined): string {
   return `${variant.modelId} ${variant.quant}`;
 }
 
-function formatPp(row: SpeedRow): string {
+function formatPp(row: SpeedRow, locale: Locale): string {
   if (row.backend === "mtplx" && row.ppTpsMean === 0) {
-    return "not measured";
+    return formatMetricValue(null, "tokensPerSecond", locale);
   }
-  return formatMetricValue(row.ppTpsMean, "tokensPerSecond");
+  return formatMetricValue(row.ppTpsMean, "tokensPerSecond", locale);
 }
 
-export function SpeedScenarioTable({ rows, variants }: SpeedScenarioTableProps) {
+export function SpeedScenarioTable({ locale = defaultLocale, rows, variants }: SpeedScenarioTableProps) {
+  const t = messages[locale];
+
   return (
-    <div className="table-scroll" role="region" aria-label="Speed scenario results" tabIndex={0}>
+    <div className="table-scroll" role="region" aria-label={t.tables.speed.aria} tabIndex={0}>
       <table className="data-table speed-table">
         <colgroup>
           <col className="speed-col-model" />
@@ -38,22 +42,22 @@ export function SpeedScenarioTable({ rows, variants }: SpeedScenarioTableProps) 
         </colgroup>
         <thead>
           <tr>
-            <th>Model</th>
-            <th>Scenario</th>
-            <th>PP</th>
-            <th>TG</th>
-            <th>Memory</th>
-            <th>Wall</th>
-            <th>TTFT</th>
-            <th>ITL</th>
-            <th>Status</th>
+            <th>{t.tables.speed.headers.model}</th>
+            <th>{t.tables.speed.headers.scenario}</th>
+            <th>{t.tables.speed.headers.pp}</th>
+            <th>{t.tables.speed.headers.tg}</th>
+            <th>{t.tables.speed.headers.memory}</th>
+            <th>{t.tables.speed.headers.wall}</th>
+            <th>{t.tables.speed.headers.ttft}</th>
+            <th>{t.tables.speed.headers.itl}</th>
+            <th>{t.tables.speed.headers.status}</th>
           </tr>
         </thead>
         <tbody>
           {rows.length === 0 ? (
             <tr>
               <td colSpan={9} className="empty-cell">
-                No speed rows match the current scenario.
+                {t.tables.speed.empty}
               </td>
             </tr>
           ) : (
@@ -68,19 +72,27 @@ export function SpeedScenarioTable({ rows, variants }: SpeedScenarioTableProps) 
                   <td>
                     <strong>{row.scenario}</strong>
                     <div className="muted">
-                      {row.promptTokens} prompt / {row.generationTokens} gen
+                      {row.promptTokens} {t.common.prompt} / {row.generationTokens} {t.common.gen}
                     </div>
                   </td>
-                  <td className="numeric">{formatPp(row)}</td>
-                  <td className="numeric">{formatMetricValue(row.tgTpsMean, "tokensPerSecond")}</td>
-                  <td className="numeric">{formatMetricValue(row.peakMemGbMean, "memoryGb")}</td>
-                  <td className="numeric">{formatMetricValue(row.wallSecondsMean, "number")}s</td>
-                  <td className="numeric">{formatMetricValue(row.ttftMs, "number")}</td>
-                  <td className="numeric">{formatMetricValue(row.itlMs, "number")}</td>
+                  <td className="numeric">{formatPp(row, locale)}</td>
+                  <td className="numeric">
+                    {formatMetricValue(row.tgTpsMean, "tokensPerSecond", locale)}
+                  </td>
+                  <td className="numeric">
+                    {formatMetricValue(row.peakMemGbMean, "memoryGb", locale)}
+                  </td>
+                  <td className="numeric">
+                    {formatMetricValue(row.wallSecondsMean, "number", locale)}s
+                  </td>
+                  <td className="numeric">{formatMetricValue(row.ttftMs, "number", locale)}</td>
+                  <td className="numeric">{formatMetricValue(row.itlMs, "number", locale)}</td>
                   <td>
-                    <Badge status={row.confidence} />
+                    <Badge status={row.confidence} locale={locale} />
                     {row.caveats.length > 0 ? (
-                      <div className="muted caveat-list">{row.caveats.join(", ")}</div>
+                      <div className="muted caveat-list">
+                        {row.caveats.map((caveat) => caveatText(caveat, locale)).join(", ")}
+                      </div>
                     ) : null}
                   </td>
                 </tr>

@@ -14,6 +14,11 @@ import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as DataRouteImport } from './routes/data'
 import { Route as AccuracyRouteImport } from './routes/accuracy'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KoIndexRouteImport } from './routes/ko/index'
+import { Route as KoSpeedRouteImport } from './routes/ko/speed'
+import { Route as KoMethodologyRouteImport } from './routes/ko/methodology'
+import { Route as KoDataRouteImport } from './routes/ko/data'
+import { Route as KoAccuracyRouteImport } from './routes/ko/accuracy'
 
 const SpeedRoute = SpeedRouteImport.update({
   id: '/speed',
@@ -40,6 +45,31 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KoIndexRoute = KoIndexRouteImport.update({
+  id: '/ko/',
+  path: '/ko/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoSpeedRoute = KoSpeedRouteImport.update({
+  id: '/ko/speed',
+  path: '/ko/speed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoMethodologyRoute = KoMethodologyRouteImport.update({
+  id: '/ko/methodology',
+  path: '/ko/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoDataRoute = KoDataRouteImport.update({
+  id: '/ko/data',
+  path: '/ko/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoAccuracyRoute = KoAccuracyRouteImport.update({
+  id: '/ko/accuracy',
+  path: '/ko/accuracy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +77,11 @@ export interface FileRoutesByFullPath {
   '/data': typeof DataRoute
   '/methodology': typeof MethodologyRoute
   '/speed': typeof SpeedRoute
+  '/ko/accuracy': typeof KoAccuracyRoute
+  '/ko/data': typeof KoDataRoute
+  '/ko/methodology': typeof KoMethodologyRoute
+  '/ko/speed': typeof KoSpeedRoute
+  '/ko/': typeof KoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +89,11 @@ export interface FileRoutesByTo {
   '/data': typeof DataRoute
   '/methodology': typeof MethodologyRoute
   '/speed': typeof SpeedRoute
+  '/ko/accuracy': typeof KoAccuracyRoute
+  '/ko/data': typeof KoDataRoute
+  '/ko/methodology': typeof KoMethodologyRoute
+  '/ko/speed': typeof KoSpeedRoute
+  '/ko': typeof KoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +102,49 @@ export interface FileRoutesById {
   '/data': typeof DataRoute
   '/methodology': typeof MethodologyRoute
   '/speed': typeof SpeedRoute
+  '/ko/accuracy': typeof KoAccuracyRoute
+  '/ko/data': typeof KoDataRoute
+  '/ko/methodology': typeof KoMethodologyRoute
+  '/ko/speed': typeof KoSpeedRoute
+  '/ko/': typeof KoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/accuracy' | '/data' | '/methodology' | '/speed'
+  fullPaths:
+    | '/'
+    | '/accuracy'
+    | '/data'
+    | '/methodology'
+    | '/speed'
+    | '/ko/accuracy'
+    | '/ko/data'
+    | '/ko/methodology'
+    | '/ko/speed'
+    | '/ko/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accuracy' | '/data' | '/methodology' | '/speed'
-  id: '__root__' | '/' | '/accuracy' | '/data' | '/methodology' | '/speed'
+  to:
+    | '/'
+    | '/accuracy'
+    | '/data'
+    | '/methodology'
+    | '/speed'
+    | '/ko/accuracy'
+    | '/ko/data'
+    | '/ko/methodology'
+    | '/ko/speed'
+    | '/ko'
+  id:
+    | '__root__'
+    | '/'
+    | '/accuracy'
+    | '/data'
+    | '/methodology'
+    | '/speed'
+    | '/ko/accuracy'
+    | '/ko/data'
+    | '/ko/methodology'
+    | '/ko/speed'
+    | '/ko/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +153,11 @@ export interface RootRouteChildren {
   DataRoute: typeof DataRoute
   MethodologyRoute: typeof MethodologyRoute
   SpeedRoute: typeof SpeedRoute
+  KoAccuracyRoute: typeof KoAccuracyRoute
+  KoDataRoute: typeof KoDataRoute
+  KoMethodologyRoute: typeof KoMethodologyRoute
+  KoSpeedRoute: typeof KoSpeedRoute
+  KoIndexRoute: typeof KoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +197,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ko/': {
+      id: '/ko/'
+      path: '/ko'
+      fullPath: '/ko/'
+      preLoaderRoute: typeof KoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ko/speed': {
+      id: '/ko/speed'
+      path: '/ko/speed'
+      fullPath: '/ko/speed'
+      preLoaderRoute: typeof KoSpeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ko/methodology': {
+      id: '/ko/methodology'
+      path: '/ko/methodology'
+      fullPath: '/ko/methodology'
+      preLoaderRoute: typeof KoMethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ko/data': {
+      id: '/ko/data'
+      path: '/ko/data'
+      fullPath: '/ko/data'
+      preLoaderRoute: typeof KoDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ko/accuracy': {
+      id: '/ko/accuracy'
+      path: '/ko/accuracy'
+      fullPath: '/ko/accuracy'
+      preLoaderRoute: typeof KoAccuracyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +241,11 @@ const rootRouteChildren: RootRouteChildren = {
   DataRoute: DataRoute,
   MethodologyRoute: MethodologyRoute,
   SpeedRoute: SpeedRoute,
+  KoAccuracyRoute: KoAccuracyRoute,
+  KoDataRoute: KoDataRoute,
+  KoMethodologyRoute: KoMethodologyRoute,
+  KoSpeedRoute: KoSpeedRoute,
+  KoIndexRoute: KoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

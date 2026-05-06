@@ -1,8 +1,10 @@
 import type { AccuracyRow, Variant } from "../lib/benchmark-data";
 import { formatMetricValue } from "../lib/format";
+import { caveatText, defaultLocale, messages, type Locale } from "../lib/i18n";
 import { Badge } from "./Badge";
 
 type AccuracyTableProps = {
+  locale?: Locale;
   rows: AccuracyRow[];
   variants: Map<string, Variant>;
 };
@@ -14,9 +16,11 @@ function variantLabel(row: AccuracyRow, variant: Variant | undefined): string {
   return `${variant.modelId} ${variant.quant}`;
 }
 
-export function AccuracyTable({ rows, variants }: AccuracyTableProps) {
+export function AccuracyTable({ locale = defaultLocale, rows, variants }: AccuracyTableProps) {
+  const t = messages[locale];
+
   return (
-    <div className="table-scroll" role="region" aria-label="Accuracy results" tabIndex={0}>
+    <div className="table-scroll" role="region" aria-label={t.tables.accuracy.aria} tabIndex={0}>
       <table className="data-table accuracy-table">
         <colgroup>
           <col className="accuracy-col-model" />
@@ -28,19 +32,19 @@ export function AccuracyTable({ rows, variants }: AccuracyTableProps) {
         </colgroup>
         <thead>
           <tr>
-            <th>Model</th>
-            <th>Task / dim</th>
-            <th>Metric</th>
-            <th>Score</th>
-            <th>Status / caveats</th>
-            <th>Run ID</th>
+            <th>{t.tables.accuracy.headers.model}</th>
+            <th>{t.tables.accuracy.headers.taskDim}</th>
+            <th>{t.tables.accuracy.headers.metric}</th>
+            <th>{t.tables.accuracy.headers.score}</th>
+            <th>{t.tables.accuracy.headers.caveats}</th>
+            <th>{t.tables.accuracy.headers.runId}</th>
           </tr>
         </thead>
         <tbody>
           {rows.length === 0 ? (
             <tr>
               <td colSpan={6} className="empty-cell">
-                No accuracy rows match the current filters.
+                {t.tables.accuracy.empty}
               </td>
             </tr>
           ) : (
@@ -60,11 +64,13 @@ export function AccuracyTable({ rows, variants }: AccuracyTableProps) {
                     </div>
                   </td>
                   <td>{row.metric}</td>
-                  <td className="numeric">{formatMetricValue(row.value, "percent")}</td>
+                  <td className="numeric">{formatMetricValue(row.value, "percent", locale)}</td>
                   <td>
-                    <Badge status={row.confidence} />
+                    <Badge status={row.confidence} locale={locale} />
                     {row.caveats.length > 0 ? (
-                      <div className="muted caveat-list">{row.caveats.join(", ")}</div>
+                      <div className="muted caveat-list">
+                        {row.caveats.map((caveat) => caveatText(caveat, locale)).join(", ")}
+                      </div>
                     ) : null}
                   </td>
                   <td className="run-id">{row.runId}</td>
