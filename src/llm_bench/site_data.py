@@ -145,12 +145,20 @@ def _accuracy_entries(
         variant_key = _required(row, "variant")
         if variant_key not in variants:
             raise SiteDataError(f"accuracy row references unknown variant: {variant_key}")
+        variant = variants[variant_key]
+        csv_model_id = row.get("model_id", "")
+        if csv_model_id and csv_model_id != variant.model_id:
+            raise SiteDataError(
+                "accuracy row model_id does not match registry variant: "
+                f"variant={variant_key}, csv_model_id={csv_model_id}, "
+                f"registry_model_id={variant.model_id}"
+            )
         task = _required(row, "task")
         metric = _required(row, "metric")
         entries.append(
             {
                 "variant": variant_key,
-                "modelId": _required(row, "model_id"),
+                "modelId": variant.model_id,
                 "dim": _required(row, "dim"),
                 "task": task,
                 "subtask": _required(row, "subtask"),
