@@ -4,7 +4,9 @@ import csv
 import json
 from pathlib import Path
 
-from llm_bench.site_data import build_site_data, parse_scenario, write_site_data
+import pytest
+
+from llm_bench.site_data import SiteDataError, build_site_data, parse_scenario, write_site_data
 
 
 def _write_csv(path: Path, rows: list[dict[str, object]]) -> None:
@@ -279,6 +281,12 @@ def test_build_site_data_uses_bench_version_from_most_recent_speed_row(
     )
 
     assert data["benchVersion"] == "0.10"
+    assert data["speed"][0]["benchVersion"] == "0.10"
+
+
+def test_build_site_data_wraps_missing_registry_as_site_data_error(tmp_path: Path) -> None:
+    with pytest.raises(SiteDataError):
+        build_site_data(repo_root=tmp_path)
 
 
 def test_write_site_data_outputs_stable_json(tmp_path: Path) -> None:

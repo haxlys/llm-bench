@@ -43,7 +43,7 @@ def build_site_data(
     source_commit: str | None = None,
 ) -> dict[str, Any]:
     root = Path(repo_root)
-    registry = load_registry(root / "models" / "registry.yaml")
+    registry = _load_registry(root)
     variants = {variant.key: variant for variant in registry.variants}
 
     speed_rows = _read_csv(root / "results" / "summary.csv")
@@ -83,6 +83,13 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
         raise SiteDataError(f"required input file is missing: {path}")
     with path.open(newline="") as f:
         return list(csv.DictReader(f))
+
+
+def _load_registry(repo_root: Path) -> Registry:
+    path = repo_root / "models" / "registry.yaml"
+    if not path.is_file():
+        raise SiteDataError(f"required input file is missing: {path}")
+    return load_registry(path)
 
 
 def _source_commit(repo_root: Path) -> str:
@@ -187,10 +194,7 @@ def _speed_entries(rows: Iterable[dict[str, str]], registry: Registry) -> list[d
                 "runIndices": [_required_int(row, "run_idx") for row in group],
                 "firstMeasuredAt": min(timestamps),
                 "lastMeasuredAt": max(timestamps),
-                "benchVersion": max(
-                    (_required(row, "bench_version") for row in group if row.get("bench_version")),
-                    default="",
-                ),
+                "benchVersion": _bench_version(group),
                 "backend": variant.backend,
                 "fmt": variant.fmt,
                 "quant": variant.quant,
