@@ -1,5 +1,5 @@
 import type { MtplxRow, Variant } from "../lib/benchmark-data";
-import { formatMetricValue, formatNumber } from "../lib/format";
+import { formatMetricValue, formatNumber, formatPercent } from "../lib/format";
 import { Badge } from "./Badge";
 
 type MtplxSpeedupPanelProps = {
@@ -46,15 +46,15 @@ export function MtplxSpeedupPanel({ rows, variants }: MtplxSpeedupPanelProps) {
               </div>
               <div>
                 <dt>Accept d1</dt>
-                <dd>{formatNumber(row.acceptance.d1)}</dd>
+                <dd>{formatPercent(row.acceptance.d1)}</dd>
               </div>
               <div>
                 <dt>Accept d2</dt>
-                <dd>{formatNumber(row.acceptance.d2)}</dd>
+                <dd>{formatPercent(row.acceptance.d2)}</dd>
               </div>
               <div>
                 <dt>Accept d3</dt>
-                <dd>{formatNumber(row.acceptance.d3)}</dd>
+                <dd>{formatPercent(row.acceptance.d3)}</dd>
               </div>
               <div>
                 <dt>Verify</dt>

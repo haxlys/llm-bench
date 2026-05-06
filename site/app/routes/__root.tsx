@@ -1,5 +1,5 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
-import { Database, Gauge, LineChart, ListChecks, Microscope } from "lucide-react";
+import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import { Gauge, LineChart, ListChecks } from "lucide-react";
 
 import "../styles.css";
 
@@ -7,15 +7,34 @@ const navItems = [
   { to: "/", label: "Summary", icon: LineChart },
   { to: "/accuracy", label: "Accuracy", icon: ListChecks },
   { to: "/speed", label: "Speed", icon: Gauge },
-  { to: "/methodology", label: "Methodology", icon: Microscope },
-  { to: "/data", label: "Data", icon: Database },
 ] as const;
 
 export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "llm-bench" },
+    ],
+  }),
   component: RootLayout,
 });
 
 function RootLayout() {
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <AppShell />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+function AppShell() {
   return (
     <div className="app-shell">
       <header className="site-header">

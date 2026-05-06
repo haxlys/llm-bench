@@ -14,6 +14,13 @@ function variantLabel(row: SpeedRow, variant: Variant | undefined): string {
   return `${variant.modelId} ${variant.quant}`;
 }
 
+function formatPp(row: SpeedRow): string {
+  if (row.backend === "mtplx" && row.ppTpsMean === 0) {
+    return "not measured";
+  }
+  return formatMetricValue(row.ppTpsMean, "tokensPerSecond");
+}
+
 export function SpeedScenarioTable({ rows, variants }: SpeedScenarioTableProps) {
   return (
     <div className="table-scroll" role="region" aria-label="Speed scenario results" tabIndex={0}>
@@ -64,7 +71,7 @@ export function SpeedScenarioTable({ rows, variants }: SpeedScenarioTableProps) 
                       {row.promptTokens} prompt / {row.generationTokens} gen
                     </div>
                   </td>
-                  <td className="numeric">{formatMetricValue(row.ppTpsMean, "tokensPerSecond")}</td>
+                  <td className="numeric">{formatPp(row)}</td>
                   <td className="numeric">{formatMetricValue(row.tgTpsMean, "tokensPerSecond")}</td>
                   <td className="numeric">{formatMetricValue(row.peakMemGbMean, "memoryGb")}</td>
                   <td className="numeric">{formatMetricValue(row.wallSecondsMean, "number")}s</td>
