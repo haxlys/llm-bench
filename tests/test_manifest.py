@@ -93,6 +93,19 @@ def test_eval_manifest_recognises_runs(tmp_path):
     assert eval_is_measured(em.measured, "26B-MoE-mlx-8bit", "mmlu_generative")
 
 
+def test_eval_manifest_recognises_dotted_variant_keys(tmp_path):
+    eval_dir = tmp_path / "eval_scores"
+    run_dir = eval_dir / "20260101T000000Z_qwen-3.5-4b-gguf-q8_smoke"
+    task_dir = run_dir / "gsm8k_cot_zeroshot" / "snapshot"
+    task_dir.mkdir(parents=True)
+    payload = json.dumps({"results": {"gsm8k_cot_zeroshot": {"exact_match,none": 1.0}}})
+    (task_dir / "results_2026-01-01.json").write_text(payload + " " * 200)
+
+    em = eval_manifest(eval_dir)
+
+    assert ("qwen-3.5-4b-gguf-q8", "gsm8k_cot_zeroshot") in em.measured
+
+
 def test_eval_manifest_normalises_timestamp(tmp_path):
     eval_dir = tmp_path / "eval_scores"
     run_dir = eval_dir / "20260428T080426Z_26B-MoE-mlx-8bit_smoke"

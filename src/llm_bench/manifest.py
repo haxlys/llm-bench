@@ -100,7 +100,7 @@ def speed_is_measured(
 # Run-id directory name: <ts>_<variant>_<suite>. Single source of truth —
 # evals.aggregate re-imports this so a format change updates both readers.
 RUN_DIR_RE = re.compile(
-    r"^(?P<ts>\d{8}T\d{6}Z)_(?P<variant>[\w-]+?)_(?P<suite>smoke|full)$"
+    r"^(?P<ts>\d{8}T\d{6}Z)_(?P<variant>[\w.-]+?)_(?P<suite>smoke|full)$"
 )
 _RUN_DIR_RE = RUN_DIR_RE  # legacy alias — keep until external code migrates
 

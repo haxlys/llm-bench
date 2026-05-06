@@ -1,0 +1,116 @@
+=== cmd ===
+/Users/haxlys/llm-bench/.venv/bin/python3 -m lm_eval --model local-chat-completions --model_args base_url=http://127.0.0.1:9091/v1/chat/completions,model=lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit,tokenizer_backend=None,num_concurrent=1,max_retries=2 --tasks longbench --output_path /Users/haxlys/llm-bench/results/preflight/26B-MoE-mlx-4bit/longbench --batch_size 1 --log_samples --apply_chat_template --limit 2 --gen_kwargs max_gen_toks=8192
+=== TIMEOUT after 600s ===
+
+=== stderr ===
+2026-04-29:16:22:41 WARNING  [config.evaluate_config:281] --limit SHOULD ONLY BE USED FOR TESTING. REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT.
+2026-04-29:16:22:41 INFO     [config.evaluate_config:301] Using default fewshot_as_multiturn=True.
+2026-04-29:16:22:43 INFO     [_cli.run:376] Selected Tasks: ['longbench']
+2026-04-29:16:22:43 INFO     [evaluator:211] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2026-04-29:16:22:43 WARNING  [evaluator:223] generation_kwargs: {'max_gen_toks': 8192} specified through cli, these settings will update set parameters in yaml tasks. Ensure 'do_sample=True' for non-greedy decoding!
+2026-04-29:16:22:43 INFO     [evaluator:236] Initializing local-chat-completions model, with arguments: {'base_url': 'http://127.0.0.1:9091/v1/chat/completions', 'model': 'lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit', 'tokenizer_backend': None, 'num_concurrent': 1, 'max_retries': 2}
+2026-04-29:16:22:43 INFO     [models.api_models:172] Using max length 2048 - 1
+2026-04-29:16:22:43 INFO     [models.api_models:175] Concurrent requests are disabled. To enable concurrent requests, set `num_concurrent` > 1.
+2026-04-29:16:22:43 INFO     [models.api_models:193] Using tokenizer None
+/Users/haxlys/llm-bench/.venv/lib/python3.13/site-packages/jieba/_compat.py:18: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+2026-04-29:16:23:22 INFO     [tasks:700] Selected tasks:
+2026-04-29:16:23:22 INFO     [tasks:703] Group: longbench
+2026-04-29:16:23:22 INFO     [tasks:711]   Subgroup: longbench_code
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_lcc (longbench/lcc.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_repobench-p (longbench/repobench-p.yaml)
+2026-04-29:16:23:22 INFO     [tasks:711]   Subgroup: longbench_fewshot
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_trec (longbench/trec.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_triviaqa (longbench/triviaqa.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_samsum (longbench/samsum.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_lsht (longbench/lsht.yaml)
+2026-04-29:16:23:22 INFO     [tasks:711]   Subgroup: longbench_multi
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_hotpotqa (longbench/hotpotqa.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_2wikimqa (longbench/2wikimqa.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_musique (longbench/musique.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_dureader (longbench/dureader.yaml)
+2026-04-29:16:23:22 INFO     [tasks:711]   Subgroup: longbench_single
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_narrativeqa (longbench/narrativeqa.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_qasper (longbench/qasper.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_multifieldqa_en (longbench/multifieldqa_en.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_multifieldqa_zh (longbench/multifieldqa_zh.yaml)
+2026-04-29:16:23:22 INFO     [tasks:711]   Subgroup: longbench_summarization
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_gov_report (longbench/gov_report.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_qmsum (longbench/qmsum.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_multi_news (longbench/multi_news.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_vcsum (longbench/vcsum.yaml)
+2026-04-29:16:23:22 INFO     [tasks:711]   Subgroup: longbench_synthetic
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_passage_count (longbench/passage_count.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_passage_retrieval_en (longbench/passage_retrieval_en.yaml)
+2026-04-29:16:23:22 INFO     [tasks:691]     Task: longbench_passage_retrieval_zh (longbench/passage_retrieval_zh.yaml)
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_lcc: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_repobench-p: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_trec: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': ['\n']}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_triviaqa: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': ['\n']}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_samsum: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': ['\n']}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_lsht: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': ['\n']}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_hotpotqa: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_2wikimqa: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_musique: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_dureader: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_narrativeqa: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_qasper: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_multifieldqa_en: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_multifieldqa_zh: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_gov_report: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_qmsum: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_multi_news: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_vcsum: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_passage_count: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_passage_retrieval_en: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 INFO     [evaluator:314] longbench_passage_retrieval_zh: Using gen_kwargs: {'max_gen_toks': 8192, 'temperature': 1.0, 'do_sample': False, 'until': []}
+2026-04-29:16:23:22 WARNING  [evaluator:490] Chat template formatting change affects loglikelihood and multiple-choice tasks. See docs/chat-template-readme.md for details.
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_lcc on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 1982.19it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_repobench-p on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 1725.70it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_trec on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2215.11it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_triviaqa on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 1303.79it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_samsum on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2344.50it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_lsht on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2720.92it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_hotpotqa on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 1877.91it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_2wikimqa on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2378.40it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_musique on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 1643.54it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_dureader on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2765.78it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_narrativeqa on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 1242.94it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_qasper on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2567.68it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_multifieldqa_en on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2497.35it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_multifieldqa_zh on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 3081.78it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_gov_report on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 1890.18it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_qmsum on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2355.69it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_multi_news on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 3332.78it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_vcsum on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 3412.78it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_passage_count on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2059.56it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_passage_retrieval_en on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 2049.50it/s]
+2026-04-29:16:23:22 INFO     [api.task:311] Building contexts for longbench_passage_retrieval_zh on rank 0...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 3289.65it/s]
+2026-04-29:16:23:22 INFO     [evaluator:584] Running generate_until requests
+2026-04-29:16:23:22 INFO     [models.api_models:733] Tokenized requests are disabled. Context + generation length is not checked.
+Requesting API:   0%|          | 0/42 [00:00<?, ?it/s]2026-04-29:16:23:22 WARNING  [models.api_models:376] Cannot determine EOS string to pass to stop sequence. Manually set by passing `eos_string` to model_args.
+Requesting API:   2%|▏         | 1/42 [01:30<1:01:50, 90.50s/it]2026-04-29:16:26:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+Requesting API:   5%|▍         | 2/42 [02:54<57:40, 86.51s/it]  Requesting API:   7%|▋         | 3/42 [04:10<53:13, 81.88s/it]2026-04-29:16:29:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+Requesting API:  10%|▉         | 4/42 [06:04<59:51, 94.51s/it]Requesting API:  12%|█▏        | 5/42 [06:26<42:10, 68.38s/it]Requesting API:  14%|█▍        | 6/42 [06:50<31:52, 53.12s/it]Requesting API:  17%|█▋        | 7/42 [06:57<22:13, 38.09s/it]2026-04-29:16:31:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+Requesting API:  19%|█▉        | 8/42 [08:30<31:34, 55.71s/it]

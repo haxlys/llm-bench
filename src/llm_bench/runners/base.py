@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import signal
 import subprocess
 import time
 from dataclasses import asdict, dataclass, field
@@ -34,6 +36,8 @@ class BenchResult:
     ts: str
     bench_version: str = ""    # stamped from llm_bench.BENCH_VERSION
     variant_key: str = ""      # registry key (e.g. "26B-MoE-mlx-8bit")
+    backend: str = ""
+    artifact_type: str = ""
     raw: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
@@ -67,11 +71,31 @@ def run_with_time(
     """
     wrapped = ["/usr/bin/time", "-l", *cmd]
     t0 = time.perf_counter()
-    proc = subprocess.run(
-        wrapped, capture_output=True, text=True, env=env, timeout=timeout_s,
+    proc = subprocess.Popen(
+        wrapped,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        env=env,
+        start_new_session=True,
     )
+    try:
+        stdout, stderr = proc.communicate(timeout=timeout_s)
+    except subprocess.TimeoutExpired as e:
+        # Kill the whole process group. `/usr/bin/time` is only the wrapper;
+        # the actual model process is its child and can otherwise survive.
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        stdout, stderr = proc.communicate()
+        raise subprocess.TimeoutExpired(
+            cmd=wrapped,
+            timeout=timeout_s,
+            output=stdout,
+            stderr=stderr,
+        ) from e
     wall = time.perf_counter() - t0
-    stderr = proc.stderr
     if proc.returncode != 0:
         raise RuntimeError(
             f"Command failed (rc={proc.returncode}): {' '.join(cmd[:3])}...\n"
@@ -83,7 +107,7 @@ def run_with_time(
         wall = float(real_match.group(1))
     rss_match = _TIME_MAXRSS_RE.search(stderr)
     peak_mem_gb = (int(rss_match.group(1)) / (1024 ** 3)) if rss_match else 0.0
-    return proc.stdout, stderr, wall, peak_mem_gb
+    return stdout, stderr, wall, peak_mem_gb
 
 
 def write_raw(result: BenchResult, raw_dir: Path) -> Path:

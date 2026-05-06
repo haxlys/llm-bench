@@ -80,5 +80,7 @@ class GGUFRunner:
             ts=now_iso(),
             bench_version=BENCH_VERSION,
             variant_key=self.variant_key,
+            backend="gguf",
+            artifact_type="gguf_file",
             raw={"llama_bench_entries": data},
         )

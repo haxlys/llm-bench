@@ -19,6 +19,8 @@
 #                            # space-separated launchd labels to bootout before
 #                            # the run and bootstrap back on EXIT (always).
 #                            # Empty default = no launchd management.
+#   SKIP_PREFLIGHT=1         # skip pre-flight sanity check (not recommended)
+#   PREFLIGHT_VARIANT=<key>  # variant to use for preflight (default: smallest local)
 
 set -uo pipefail
 
@@ -80,6 +82,29 @@ if lsof -nP -iTCP:8080 -iTCP:8081 -iTCP:8082 -sTCP:LISTEN >/dev/null 2>&1; then
     log "WARNING: ports 8080/8081/8082 still listening — Metal contention possible"
 fi
 log "free memory: $(vm_stat | awk '/Pages free/ {printf "%.1fGB", $3*16384/1024/1024/1024}')"
+
+# --- 1.5 pre-flight sanity check ---
+# Catches all-zero score patterns from extract-filter / chat-template /
+# generation-truncation misconfigurations BEFORE we burn 8h on a matrix.
+if [[ "${SKIP_PREFLIGHT:-0}" != "1" ]]; then
+    log
+    log "==== Pre-flight sanity check ===="
+    # Build args array with `set -u`-safe expansion: a bare "${arr[@]}" on an
+    # empty array trips the unbound-variable trap, so use the +alt-value form.
+    PREFLIGHT_ARGS=()
+    if [[ -n "${PREFLIGHT_VARIANT:-}" ]]; then
+        PREFLIGHT_ARGS+=(--variant "$PREFLIGHT_VARIANT")
+    fi
+    if uv run python scripts/preflight.py ${PREFLIGHT_ARGS[@]+"${PREFLIGHT_ARGS[@]}"} 2>&1 | tee -a "$RUN_LOG"; then
+        log "==== Pre-flight passed ===="
+    else
+        log "==== Pre-flight FAILED — aborting matrix run ===="
+        log "Set SKIP_PREFLIGHT=1 to bypass (not recommended)."
+        exit 1
+    fi
+else
+    log "==== Pre-flight skipped (SKIP_PREFLIGHT=1) ===="
+fi
 
 # --- 2. run the full matrix ---
 log

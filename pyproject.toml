@@ -1,7 +1,7 @@
 [project]
 name = "llm-bench"
 version = "0.3.0"
-description = "MLX vs GGUF inference benchmark for Apple Silicon (M5 Max)"
+description = "Registry-driven LLM speed and evaluation benchmark"
 requires-python = ">=3.13"
 readme = "README.md"
 license = { text = "MIT" }
@@ -24,13 +24,26 @@ evals = [
     "lm-eval[api]>=0.4.5",
     "requests>=2.32",
     "openai>=1.50",
-    "datasets>=3.0",
+    "datasets>=3.2,<4",
     # longbench scoring deps (rouge, fuzzy match, Chinese tokenizer)
     "jieba>=0.42",
     "fuzzywuzzy>=0.18",
     "rouge>=1.0",
     "python-Levenshtein>=0.25",
+    # leaderboard_ifeval runtime deps (lazy-imported in lm_eval.tasks.ifeval)
+    "langdetect>=1.0",
+    "immutabledict>=4.0",
+    "nltk>=3.8",
 ]
+# Frontier evals — opt-in. Both packages pull heavy transitive deps and
+# conflict with `evalplus` in the dev group, so we ship NEITHER as a
+# pyproject extra. Install manually when you want to run them:
+#
+#     uv pip install bfcl-eval
+#     uv pip install git+https://github.com/LiveCodeBench/LiveCodeBench.git
+#
+# The `livecodebench_runner.py` and `bfcl.py` modules detect missing
+# packages at run time and surface a clear error.
 
 [build-system]
 requires = ["hatchling"]
@@ -40,7 +53,11 @@ build-backend = "hatchling.build"
 packages = ["src/llm_bench"]
 
 [dependency-groups]
-dev = ["ruff>=0.6", "pytest>=8"]
+dev = [
+    "ruff>=0.6",
+    "pytest>=8",
+    "evalplus>=0.3.1",
+]
 
 [tool.ruff]
 line-length = 100

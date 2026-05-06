@@ -187,3 +187,124 @@ models:
     assert v.architecture == "moe"
     assert v.params_total_b == 26
     assert v.params_active_b == 4
+
+
+def test_variant_can_define_tokenizer_repo(tmp_path):
+    body = """
+defaults: {}
+models:
+  - id: m1
+    family: qwen
+    architecture: dense
+    variants:
+      - key: v1
+        fmt: gguf
+        path: /tmp/model.gguf
+        quant: Q8_0
+        tier: 8bit
+        tokenizer: Qwen/Qwen3.5-4B
+"""
+    r = load_registry(_write(tmp_path, body))
+
+    assert r.variant("v1").tokenizer == "Qwen/Qwen3.5-4B"
+
+
+def test_variant_defaults_backend_artifact_and_capabilities_from_fmt(tmp_path):
+    body = """
+defaults:
+  gguf_dir: /tmp/test-models
+models:
+  - id: m1
+    family: f
+    architecture: dense
+    variants:
+      - key: mlx-v
+        fmt: mlx
+        path: org/m1
+        quant: MLX-8bit
+        tier: 8bit
+        download: {repo: org/m1, revision: abc123}
+      - key: gguf-v
+        fmt: gguf
+        path: "{gguf_dir}/m1.gguf"
+        quant: Q8_0
+        tier: 8bit
+        download: {repo: org/m1-gguf, revision: def456}
+"""
+    r = load_registry(_write(tmp_path, body))
+
+    mlx = r.variant("mlx-v")
+    assert mlx.backend == "mlx"
+    assert mlx.artifact_type == "hf_repo"
+    assert "chat" in mlx.capabilities
+    assert "logprobs" not in mlx.capabilities
+
+    gguf = r.variant("gguf-v")
+    assert gguf.backend == "gguf"
+    assert gguf.artifact_type == "gguf_file"
+    assert "chat" in gguf.capabilities
+    assert "logprobs" not in gguf.capabilities
+
+
+def test_generic_endpoint_variant_can_be_declared_without_local_artifact(tmp_path):
+    body = """
+defaults: {}
+models:
+  - id: hosted-model
+    family: hosted
+    architecture: dense
+    variants:
+      - key: hosted-api
+        fmt: api
+        backend: openai-compatible
+        artifact_type: endpoint
+        path: https://example.invalid/v1
+        api_model: provider/model-name
+        api_key_env: PROVIDER_API_KEY
+        quant: hosted
+        tier: hosted
+        capabilities: [chat, completions, logprobs, tool_calls]
+"""
+    r = load_registry(_write(tmp_path, body))
+    v = r.variant("hosted-api")
+
+    assert v.backend == "openai-compatible"
+    assert v.artifact_type == "endpoint"
+    assert v.requires_local_artifact is False
+    assert v.exists_locally() is True
+    assert r.variants_by_backend("openai-compatible") == [v]
+    assert "tool_calls" in v.capabilities
+    assert v.api_model == "provider/model-name"
+    assert v.api_model_label == "provider/model-name"
+    assert v.api_key_env == "PROVIDER_API_KEY"
+
+
+def test_mlx_exists_locally_requires_weight_file(tmp_path, monkeypatch):
+    """A cached config.json alone is not enough for a benchmarkable MLX model."""
+    from llm_bench.registry import Variant
+    import llm_bench.registry as registry_mod
+
+    monkeypatch.setattr(registry_mod.Path, "home", lambda: tmp_path)
+
+    repo_dir = tmp_path / ".cache" / "huggingface" / "hub" / "models--org--m"
+    snapshot = repo_dir / "snapshots" / "abc123"
+    (repo_dir / "refs").mkdir(parents=True)
+    (repo_dir / "refs" / "main").write_text("abc123")
+    snapshot.mkdir(parents=True)
+    (snapshot / "config.json").write_text("{}")
+
+    variant = Variant(
+        key="v1",
+        model_id="m1",
+        family="f",
+        architecture="dense",
+        fmt="mlx",
+        path="org/m",
+        quant="MLX-8bit",
+        tier="8bit",
+    )
+
+    assert variant.exists_locally() is False
+
+    (snapshot / "model-00001-of-00002.safetensors").write_text("weights")
+    assert variant.exists_locally() is True

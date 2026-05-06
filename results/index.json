@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-28T09:17:15+00:00",
+  "generated_at": "2026-05-05T20:18:46+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -7,6 +7,12 @@
       "key": "26B-MoE-mlx-8bit",
       "model_id": "gemma-4-26B-A4B-it",
       "fmt": "mlx",
+      "backend": "mlx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
       "quant": "MLX-8bit",
       "tier": "8bit",
       "family": "gemma",
@@ -19,23 +25,33 @@
         "last_measured": "2026-04-28T04:00:09+00:00"
       },
       "evals": {
-        "tasks_measured": 6,
-        "tasks_supported": 8,
+        "tasks_measured": 3,
+        "tasks_supported": 4,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
+          "leaderboard_ifeval"
+        ],
+        "extra_tasks": [
           "humaneval_instruct",
           "kmmlu_direct",
+          "longbench",
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-04-28T09:01:12Z"
+        "last_measured": "2026-05-01T06:09:30Z"
       }
     },
     {
       "key": "26B-MoE-mlx-4bit",
       "model_id": "gemma-4-26B-A4B-it",
       "fmt": "mlx",
+      "backend": "mlx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
       "quant": "MLX-4bit",
       "tier": "4bit",
       "family": "gemma",
@@ -48,16 +64,27 @@
         "last_measured": "2026-04-28T06:28:03+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
-        "tasks_supported": 8,
-        "tasks": [],
-        "last_measured": null
+        "tasks_measured": 1,
+        "tasks_supported": 4,
+        "tasks": [
+          "gsm8k_cot_zeroshot"
+        ],
+        "extra_tasks": [],
+        "last_measured": "2026-04-29T21:52:11Z"
       }
     },
     {
       "key": "26B-MoE-gguf-q8",
       "model_id": "gemma-4-26B-A4B-it",
       "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
       "quant": "Q8_0",
       "tier": "8bit",
       "family": "gemma",
@@ -70,16 +97,33 @@
         "last_measured": "2026-04-28T04:04:32+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
-        "tasks_supported": 12,
-        "tasks": [],
-        "last_measured": null
+        "tasks_measured": 3,
+        "tasks_supported": 7,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "leaderboard_ifeval"
+        ],
+        "extra_tasks": [
+          "kmmlu_direct",
+          "mmlu_generative",
+          "truthfulqa-multi_gen_en"
+        ],
+        "last_measured": "2026-05-01T06:55:07Z"
       }
     },
     {
       "key": "26B-MoE-gguf-q4",
       "model_id": "gemma-4-26B-A4B-it",
       "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
       "quant": "Q4_K_M",
       "tier": "4bit",
       "family": "gemma",
@@ -93,8 +137,9 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 12,
+        "tasks_supported": 7,
         "tasks": [],
+        "extra_tasks": [],
         "last_measured": null
       }
     },
@@ -102,6 +147,12 @@
       "key": "31B-Dense-mlx-8bit",
       "model_id": "gemma-4-31B-it",
       "fmt": "mlx",
+      "backend": "mlx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
       "quant": "MLX-8bit",
       "tier": "8bit",
       "family": "gemma",
@@ -115,8 +166,9 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 8,
+        "tasks_supported": 4,
         "tasks": [],
+        "extra_tasks": [],
         "last_measured": null
       }
     },
@@ -124,6 +176,14 @@
       "key": "31B-Dense-gguf-q8",
       "model_id": "gemma-4-31B-it",
       "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
       "quant": "Q8_0",
       "tier": "8bit",
       "family": "gemma",
@@ -137,15 +197,204 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 12,
+        "tasks_supported": 7,
         "tasks": [],
+        "extra_tasks": [],
         "last_measured": null
+      }
+    },
+    {
+      "key": "gemma-4-E4B-gguf-q8",
+      "model_id": "gemma-4-E4B-it",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q8_0",
+      "tier": "8bit",
+      "family": "gemma",
+      "architecture": "dense",
+      "approx_size_gb": 8.2,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 8,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-04T01:56:58+00:00"
+      },
+      "evals": {
+        "tasks_measured": 5,
+        "tasks_supported": 7,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
+        "extra_tasks": [],
+        "last_measured": "2026-05-05T16:36:42Z"
+      }
+    },
+    {
+      "key": "qwen-3.5-4b-gguf-q8",
+      "model_id": "qwen-3.5-4B",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q8_0",
+      "tier": "8bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 4.5,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 8,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-04T02:01:09+00:00"
+      },
+      "evals": {
+        "tasks_measured": 5,
+        "tasks_supported": 7,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
+        "extra_tasks": [
+          "kmmlu_direct",
+          "mmlu_generative",
+          "truthfulqa-multi_gen_en"
+        ],
+        "last_measured": "2026-05-05T17:55:03Z"
+      }
+    },
+    {
+      "key": "qwen-3.5-9b-gguf-q8",
+      "model_id": "qwen-3.5-9B",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q8_0",
+      "tier": "8bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 9.5,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 8,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-04T02:08:15+00:00"
+      },
+      "evals": {
+        "tasks_measured": 4,
+        "tasks_supported": 7,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
+        "extra_tasks": [],
+        "last_measured": "2026-05-04T13:10:35Z"
+      }
+    },
+    {
+      "key": "qwen-3.6-35b-a3b-gguf-q4",
+      "model_id": "qwen-3.6-35B-A3B",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "moe",
+      "approx_size_gb": 22.1,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 8,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-04T02:12:49+00:00"
+      },
+      "evals": {
+        "tasks_measured": 5,
+        "tasks_supported": 7,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
+        "extra_tasks": [],
+        "last_measured": "2026-05-04T14:19:03Z"
+      }
+    },
+    {
+      "key": "qwen-3-coder-next-gguf-q4",
+      "model_id": "qwen-3-coder-next",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "moe",
+      "approx_size_gb": 48.5,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 8,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-04T02:18:49+00:00"
+      },
+      "evals": {
+        "tasks_measured": 5,
+        "tasks_supported": 7,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
+        "extra_tasks": [],
+        "last_measured": "2026-05-05T19:45:06Z"
       }
     }
   ],
   "totals": {
-    "variants": 6,
-    "speed_complete": 6,
-    "evals_started": 1
+    "variants": 11,
+    "speed_complete": 11,
+    "evals_started": 8
   }
 }

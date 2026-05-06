@@ -4,9 +4,26 @@
 #   1. Edit this file (no code changes needed)
 #   2. Run: uv run python scripts/sync_models.py --all-missing
 #   3. Run: uv run python scripts/run_bench.py --all-pending
-#      and: uv run python scripts/run_evals.py --all-pending --suite full
+#      and: uv run python scripts/run_evals.py --all-variants --suite full
 #
 # Schema: see src/llm_bench/registry.py for dataclass definitions.
+#
+# Hosted OpenAI-compatible endpoints can be declared without local artifacts:
+#
+#   - id: provider-model
+#     family: hosted
+#     architecture: dense
+#     variants:
+#       - key: provider-model-api
+#         fmt: api
+#         backend: openai-compatible
+#         artifact_type: endpoint
+#         path: https://provider.example/v1
+#         api_model: provider/model
+#         api_key_env: PROVIDER_API_KEY
+#         quant: hosted
+#         tier: hosted
+#         capabilities: [chat, completions, logprobs, code_eval_chat, tool_use_eval]
 
 defaults:
   # Where local GGUF files live. Referenced as {gguf_dir} in variant.path.
@@ -28,6 +45,9 @@ models:
         quant: MLX-8bit
         tier: 8bit
         approx_size_gb: 26
+        download:
+          repo: lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit
+          revision: 669237cd8dad363224c976432475b81dd5db5a89
 
       - key: 26B-MoE-mlx-4bit
         fmt: mlx
@@ -35,6 +55,9 @@ models:
         quant: MLX-4bit
         tier: 4bit
         approx_size_gb: 15
+        download:
+          repo: lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit
+          revision: 3af5252ed1e675e6bba9be8cc3087bc00920799c
 
       - key: 26B-MoE-gguf-q8
         fmt: gguf
@@ -45,6 +68,7 @@ models:
         download:
           repo: unsloth/gemma-4-26B-A4B-it-GGUF
           pattern: "*Q8_0*.gguf"
+          revision: b68961b3c96e42475123a39fe3f8aa149163cf8b
 
       - key: 26B-MoE-gguf-q4
         fmt: gguf
@@ -55,6 +79,7 @@ models:
         download:
           repo: unsloth/gemma-4-26B-A4B-it-GGUF
           pattern: "*Q4_K_M*.gguf"
+          revision: b68961b3c96e42475123a39fe3f8aa149163cf8b
 
   - id: gemma-4-31B-it
     family: gemma
@@ -69,6 +94,9 @@ models:
         quant: MLX-8bit
         tier: 8bit
         approx_size_gb: 31
+        download:
+          repo: lmstudio-community/gemma-4-31B-it-MLX-8bit
+          revision: 244e29d3b19e7b50e3ddddc33fcc882f24a19399
 
       - key: 31B-Dense-gguf-q8
         fmt: gguf
@@ -79,3 +107,99 @@ models:
         download:
           repo: unsloth/gemma-4-31B-it-GGUF
           pattern: "*Q8_0*.gguf"
+          revision: 43e80d41a220ac7c83023daacd6a0d1fd8559251
+
+  - id: gemma-4-E4B-it
+    family: gemma
+    architecture: dense
+    params_total_b: 4
+    params_active_b: 4
+    notes: "Small popular Gemma 4 instruction-tuned baseline selected from HF downloads"
+    variants:
+      - key: gemma-4-E4B-gguf-q8
+        fmt: gguf
+        path: "{gguf_dir}/gemma-4-E4B-it-Q8_0.gguf"
+        quant: Q8_0
+        tokenizer: google/gemma-4-E4B-it
+        tier: 8bit
+        approx_size_gb: 8.2
+        download:
+          repo: unsloth/gemma-4-E4B-it-GGUF
+          pattern: "gemma-4-E4B-it-Q8_0.gguf"
+          revision: ce152932ac27bc40bc9c727386760424d50bb456
+
+  # ─── Qwen 3.x ───────────────────────────────────────────────────────────
+  - id: qwen-3.5-4B
+    family: qwen
+    architecture: dense
+    params_total_b: 4
+    params_active_b: 4
+    notes: "Fast Qwen dense baseline selected from HF popularity"
+    variants:
+      - key: qwen-3.5-4b-gguf-q8
+        fmt: gguf
+        path: "{gguf_dir}/Qwen3.5-4B-Q8_0.gguf"
+        quant: Q8_0
+        tokenizer: Qwen/Qwen3.5-4B
+        tier: 8bit
+        approx_size_gb: 4.5
+        download:
+          repo: unsloth/Qwen3.5-4B-GGUF
+          pattern: "Qwen3.5-4B-Q8_0.gguf"
+          revision: e87f176479d0855a907a41277aca2f8ee7a09523
+
+  - id: qwen-3.5-9B
+    family: qwen
+    architecture: dense
+    params_total_b: 9
+    params_active_b: 9
+    notes: "Mid-size Qwen dense baseline selected from HF downloads and likes"
+    variants:
+      - key: qwen-3.5-9b-gguf-q8
+        fmt: gguf
+        path: "{gguf_dir}/Qwen3.5-9B-Q8_0.gguf"
+        quant: Q8_0
+        tokenizer: Qwen/Qwen3.5-9B
+        tier: 8bit
+        approx_size_gb: 9.5
+        download:
+          repo: unsloth/Qwen3.5-9B-GGUF
+          pattern: "Qwen3.5-9B-Q8_0.gguf"
+          revision: 3885219b6810b007914f3a7950a8d1b469d598a5
+
+  - id: qwen-3.6-35B-A3B
+    family: qwen
+    architecture: moe
+    params_total_b: 35
+    params_active_b: 3
+    notes: "Popular Qwen MoE selected from HF downloads/likes"
+    variants:
+      - key: qwen-3.6-35b-a3b-gguf-q4
+        fmt: gguf
+        path: "{gguf_dir}/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
+        quant: Q4_K_M
+        tokenizer: Qwen/Qwen3.6-35B-A3B
+        tier: 4bit
+        approx_size_gb: 22.1
+        download:
+          repo: unsloth/Qwen3.6-35B-A3B-GGUF
+          pattern: "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
+          revision: a483e9e6cbd595906af30beda3187c2663a1118c
+
+  - id: qwen-3-coder-next
+    family: qwen
+    architecture: moe
+    params_total_b: 79.7
+    notes: "Coding-focused MoE selected from llmfit top recommendations"
+    variants:
+      - key: qwen-3-coder-next-gguf-q4
+        fmt: gguf
+        path: "{gguf_dir}/Qwen3-Coder-Next-Q4_K_M.gguf"
+        quant: Q4_K_M
+        tokenizer: Qwen/Qwen3-Coder-Next
+        tier: 4bit
+        approx_size_gb: 48.5
+        download:
+          repo: unsloth/Qwen3-Coder-Next-GGUF
+          pattern: "Qwen3-Coder-Next-Q4_K_M.gguf"
+          revision: ce09c67b53bc8739eef83fe67b2f5d293c270632

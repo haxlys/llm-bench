@@ -1,0 +1,133 @@
+{
+  "results": {
+    "mbpp_instruct": {
+      "alias": "mbpp_instruct",
+      "pass_at_1,extract_code": 0.0,
+      "pass_at_1_stderr,extract_code": 0.0
+    }
+  },
+  "group_subtasks": {
+    "mbpp_instruct": []
+  },
+  "configs": {
+    "mbpp_instruct": {
+      "task": "mbpp_instruct",
+      "dataset_path": "google-research-datasets/mbpp",
+      "dataset_name": "full",
+      "test_split": "test",
+      "doc_to_text": "You are an expert Python programmer, and here is your task:\n{{text}}\nYour code should pass these tests:\n{{test_list[0]}}\n{{test_list[1]}}\n{{test_list[2]}}",
+      "doc_to_target": "{% if is_fewshot is defined %}{{code}}\n```{% else %}{{test_list[0]}}\n{{test_list[1]}}\n{{test_list[2]}}{% endif %}",
+      "unsafe_code": true,
+      "description": "",
+      "target_delimiter": "",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": null,
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": "<function list_fewshot_samples at 0x117101260>",
+        "doc_to_text": "You are an expert Python programmer, and here is your task:\n{{text}}\nYour code should pass these tests:\n{{test_list[0]}}\n{{test_list[1]}}\n{{test_list[2]}}",
+        "doc_to_choice": null,
+        "doc_to_target": "{% if is_fewshot is defined %}{{code}}\n```{% else %}{{test_list[0]}}\n{{test_list[1]}}\n{{test_list[2]}}{% endif %}",
+        "gen_prefix": "\n```python\n",
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": ""
+      },
+      "num_fewshot": 3,
+      "metric_list": [
+        {
+          "metric": "def pass_at_1(\n    references: Union[str, list[str]], predictions: Union[str, list[list[str]]]\n) -> float:\n    if isinstance(references, str):\n        references = [references]\n    if isinstance(predictions[0], str):\n        predictions = [[p] for p in predictions]\n    return pass_at_k.compute(\n        references=references,\n        predictions=predictions,\n        k=[1],\n    )[0][\"pass@1\"]\n",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "max_gen_toks": 8192,
+        "until": [],
+        "do_sample": false
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "extract_code",
+          "filter": [
+            {
+              "function": "custom",
+              "filter_fn": "<function build_predictions at 0x11715e700>"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "gen_prefix": "\n```python\n",
+      "metadata": {
+        "version": 1.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    }
+  },
+  "versions": {
+    "mbpp_instruct": 1.0
+  },
+  "n-shot": {
+    "mbpp_instruct": 3
+  },
+  "higher_is_better": {
+    "mbpp_instruct": {
+      "pass_at_1": true
+    }
+  },
+  "n-samples": {
+    "mbpp_instruct": {
+      "original": 500,
+      "effective": 2
+    }
+  },
+  "config": {
+    "model": "local-chat-completions",
+    "model_args": {
+      "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+      "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+      "tokenizer_backend": null,
+      "num_concurrent": 1,
+      "max_retries": 2
+    },
+    "batch_size": "1",
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "use_cache": null,
+    "limit": 2.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": {
+      "max_gen_toks": 8192
+    },
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "67be574",
+  "date": 1777447309.55216,
+  "pretty_env_info": "N/A (torch not installed)",
+  "transformers_version": "5.6.2",
+  "lm_eval_version": "0.4.11",
+  "upper_git_hash": null,
+  "task_hashes": {
+    "mbpp_instruct": "9ebdf6f758bf06560ff1c9fac228e8a16c6e9669828cbc5fe69bebdb7ad28e4f"
+  },
+  "model_source": "local-chat-completions",
+  "model_name": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+  "model_name_sanitized": "lmstudio-community__gemma-4-26B-A4B-it-MLX-4bit",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": true,
+  "chat_template": "",
+  "chat_template_sha": null,
+  "total_evaluation_time_seconds": "52.82863062500837"
+}

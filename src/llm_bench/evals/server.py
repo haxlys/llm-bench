@@ -1,4 +1,4 @@
-"""Spawn a per-model OpenAI-compatible inference server (mlx_lm or llama.cpp)."""
+"""OpenAI-compatible eval server lifecycle adapters."""
 
 from __future__ import annotations
 
@@ -10,49 +10,76 @@ from pathlib import Path
 
 import requests
 
+# mlx_lm.server defaults --max-tokens to 512, which is too low for our eval
+# matrix: when generation hits that ceiling without emitting EOS, the
+# response comes back with finish_reason="length" and content="" because the
+# chat-template terminator never appeared. Setting a high default here lets
+# typical task outputs (gsm8k CoT, MBPP code) finish naturally with
+# finish_reason="stop" so content is preserved. Reproducer 2026-04-29.
+MLX_DEFAULT_MAX_TOKENS = 8192
+
 
 class ModelServer:
-    """Context manager: boots model server, waits ready, terminates on exit.
+    """Context manager for local model servers or existing endpoints.
 
     Usage:
         with ModelServer(fmt='mlx', model_path='lmstudio-community/...') as base_url:
             # base_url = 'http://127.0.0.1:9090/v1'
             ...
+
+        with ModelServer(fmt='api', backend='openai-compatible',
+                         artifact_type='endpoint',
+                         model_path='https://host/v1') as base_url:
+            # base_url = 'https://host/v1' and no subprocess is spawned
+            ...
     """
 
     def __init__(
         self,
-        fmt: str,                     # "mlx" | "gguf"
+        fmt: str,                     # legacy label: "mlx" | "gguf" | "api"
         model_path: str,              # HF id or local file
+        backend: str | None = None,
+        artifact_type: str | None = None,
         port: int = 9090,
         host: str = "127.0.0.1",
         n_gpu_layers: int = 999,
+        context_size: int = 16384,
         boot_timeout_s: int = 240,
         log_file: Path | None = None,
     ):
-        if fmt not in ("mlx", "gguf"):
-            raise ValueError(f"unknown fmt: {fmt}")
         self.fmt = fmt
+        self.backend = backend or fmt
+        self.artifact_type = artifact_type or _default_artifact_type(fmt)
+        if self.backend not in ("mlx", "gguf", "openai-compatible"):
+            raise ValueError(f"unknown backend: {self.backend}")
         self.model_path = model_path
         self.port = port
         self.host = host
         self.n_gpu_layers = n_gpu_layers
+        self.context_size = context_size
         self.boot_timeout_s = boot_timeout_s
         self.log_file = log_file
         self.proc: subprocess.Popen | None = None
 
     @property
     def base_url(self) -> str:
+        if self.artifact_type == "endpoint":
+            return _normalize_endpoint_base_url(self.model_path)
         return f"http://{self.host}:{self.port}/v1"
 
     def _build_cmd(self) -> list[str]:
-        if self.fmt == "mlx":
+        if self.backend == "mlx":
             return [
                 sys.executable, "-m", "mlx_lm", "server",
                 "--model", self.model_path,
                 "--host", self.host, "--port", str(self.port),
                 "--temp", "0.0",
+                "--max-tokens", str(MLX_DEFAULT_MAX_TOKENS),
             ]
+        if self.backend != "gguf":
+            raise RuntimeError(
+                f"backend '{self.backend}' does not have a local server command"
+            )
         if not shutil.which("llama-server"):
             raise RuntimeError("llama-server not found (brew install llama.cpp)")
         return [
@@ -61,7 +88,7 @@ class ModelServer:
             "--host", self.host, "--port", str(self.port),
             "-ngl", str(self.n_gpu_layers),
             "--jinja",                        # required for Gemma 4 chat template
-            "-c", "16384",                    # context size; raise for long evals
+            "-c", str(self.context_size),
         ]
 
     def _is_ready(self) -> bool:
@@ -72,6 +99,8 @@ class ModelServer:
             return False
 
     def __enter__(self) -> str:
+        if self.artifact_type == "endpoint":
+            return self.base_url
         cmd = self._build_cmd()
         log_target = open(self.log_file, "w") if self.log_file else subprocess.DEVNULL
         try:
@@ -109,3 +138,18 @@ class ModelServer:
             self.proc.kill()
             self.proc.wait(timeout=5)
         self.proc = None
+
+
+def _default_artifact_type(fmt: str) -> str:
+    if fmt == "api":
+        return "endpoint"
+    if fmt == "gguf":
+        return "gguf_file"
+    return "hf_repo"
+
+
+def _normalize_endpoint_base_url(url: str) -> str:
+    base = url.rstrip("/")
+    if base.endswith("/v1"):
+        return base
+    return f"{base}/v1"

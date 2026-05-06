@@ -1,0 +1,1054 @@
+=== cmd ===
+/Users/haxlys/llm-bench/.venv/bin/python3 -m lm_eval --model local-chat-completions --model_args base_url=http://127.0.0.1:9090/v1/chat/completions,model=lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit,tokenizer_backend=None,num_concurrent=1,max_retries=2 --tasks mbpp_instruct --output_path /Users/haxlys/llm-bench/results/eval_scores/20260428T153739Z_26B-MoE-mlx-8bit_full/mbpp_instruct --batch_size 1 --apply_chat_template --confirm_run_unsafe_code
+=== stdout ===
+local-chat-completions ({'base_url': 'http://127.0.0.1:9090/v1/chat/completions', 'model': 'lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit', 'tokenizer_backend': None, 'num_concurrent': 1, 'max_retries': 2}), gen_kwargs: ({}), limit: None, num_fewshot: None, batch_size: 1
+|    Tasks    |Version|   Filter   |n-shot| Metric  |   |Value|   |Stderr|
+|-------------|------:|------------|-----:|---------|---|----:|---|-----:|
+|mbpp_instruct|      1|extract_code|     3|pass_at_1|↑  |    0|±  |     0|
+
+
+=== stderr ===
+2026-04-29:00:37:42 INFO     [config.evaluate_config:301] Using default fewshot_as_multiturn=True.
+2026-04-29:00:37:57 INFO     [_cli.run:376] Selected Tasks: ['mbpp_instruct']
+2026-04-29:00:37:57 INFO     [evaluator:211] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2026-04-29:00:37:57 INFO     [evaluator:236] Initializing local-chat-completions model, with arguments: {'base_url': 'http://127.0.0.1:9090/v1/chat/completions', 'model': 'lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit', 'tokenizer_backend': None, 'num_concurrent': 1, 'max_retries': 2}
+2026-04-29:00:37:57 INFO     [models.api_models:172] Using max length 2048 - 1
+2026-04-29:00:37:57 INFO     [models.api_models:175] Concurrent requests are disabled. To enable concurrent requests, set `num_concurrent` > 1.
+2026-04-29:00:37:57 INFO     [models.api_models:193] Using tokenizer None
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+
+Generating train split:   0%|          | 0/374 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 374/374 [00:00<00:00, 17844.45 examples/s]
+
+Generating test split:   0%|          | 0/500 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 500/500 [00:00<00:00, 337000.16 examples/s]
+
+Generating validation split:   0%|          | 0/90 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 90/90 [00:00<00:00, 80419.12 examples/s]
+
+Generating prompt split:   0%|          | 0/10 [00:00<?, ? examples/s]
+Generating prompt split: 100%|██████████| 10/10 [00:00<00:00, 12267.63 examples/s]
+2026-04-29:00:38:28 INFO     [tasks:700] Selected tasks:
+2026-04-29:00:38:28 INFO     [tasks:691] Task: mbpp_instruct (mbpp/mbpp_instruct.yaml)
+2026-04-29:00:38:28 INFO     [evaluator:314] mbpp_instruct: Using gen_kwargs: {'max_gen_toks': 256, 'until': [], 'do_sample': False}
+2026-04-29:00:38:28 WARNING  [evaluator:490] Chat template formatting change affects loglikelihood and multiple-choice tasks. See docs/chat-template-readme.md for details.
+2026-04-29:00:38:28 INFO     [api.task:311] Building contexts for mbpp_instruct on rank 0...
+
+  0%|          | 0/500 [00:00<?, ?it/s]
+  8%|▊         | 42/500 [00:00<00:01, 414.75it/s]
+ 17%|█▋        | 87/500 [00:00<00:00, 431.20it/s]
+ 26%|██▋       | 132/500 [00:00<00:00, 438.61it/s]
+ 35%|███▌      | 177/500 [00:00<00:00, 442.79it/s]
+ 44%|████▍     | 222/500 [00:00<00:00, 443.66it/s]
+ 53%|█████▎    | 267/500 [00:00<00:00, 444.48it/s]
+ 62%|██████▏   | 312/500 [00:00<00:00, 446.07it/s]
+ 71%|███████▏  | 357/500 [00:00<00:00, 444.75it/s]
+ 80%|████████  | 402/500 [00:00<00:00, 445.23it/s]
+ 90%|████████▉ | 448/500 [00:01<00:00, 446.84it/s]
+ 99%|█████████▊| 493/500 [00:01<00:00, 446.24it/s]
+100%|██████████| 500/500 [00:01<00:00, 443.44it/s]
+2026-04-29:00:38:30 INFO     [evaluator:584] Running generate_until requests
+2026-04-29:00:38:30 INFO     [models.api_models:733] Tokenized requests are disabled. Context + generation length is not checked.
+
+Requesting API:   0%|          | 0/500 [00:00<?, ?it/s]2026-04-29:00:38:30 WARNING  [models.api_models:376] Cannot determine EOS string to pass to stop sequence. Manually set by passing `eos_string` to model_args.
+2026-04-29:00:38:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   0%|          | 1/500 [00:03<29:25,  3.54s/it]2026-04-29:00:38:36 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   0%|          | 2/500 [00:06<27:38,  3.33s/it]2026-04-29:00:38:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   1%|          | 3/500 [00:10<27:29,  3.32s/it]2026-04-29:00:38:43 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   1%|          | 4/500 [00:13<26:52,  3.25s/it]2026-04-29:00:38:46 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   1%|          | 5/500 [00:16<26:50,  3.25s/it]2026-04-29:00:38:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   1%|          | 6/500 [00:19<26:47,  3.25s/it]2026-04-29:00:38:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   1%|▏         | 7/500 [00:22<26:22,  3.21s/it]2026-04-29:00:38:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   2%|▏         | 8/500 [00:25<26:08,  3.19s/it]2026-04-29:00:38:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   2%|▏         | 9/500 [00:29<26:01,  3.18s/it]2026-04-29:00:39:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   2%|▏         | 10/500 [00:32<25:53,  3.17s/it]2026-04-29:00:39:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   2%|▏         | 11/500 [00:35<25:43,  3.16s/it]2026-04-29:00:39:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   2%|▏         | 12/500 [00:38<25:38,  3.15s/it]2026-04-29:00:39:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   3%|▎         | 13/500 [00:41<25:33,  3.15s/it]2026-04-29:00:39:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   3%|▎         | 14/500 [00:44<25:27,  3.14s/it]2026-04-29:00:39:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   3%|▎         | 15/500 [00:48<25:40,  3.18s/it]2026-04-29:00:39:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   3%|▎         | 16/500 [00:51<25:31,  3.16s/it]2026-04-29:00:39:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   3%|▎         | 17/500 [00:54<25:44,  3.20s/it]2026-04-29:00:39:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   4%|▎         | 18/500 [00:57<25:50,  3.22s/it]2026-04-29:00:39:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   4%|▍         | 19/500 [01:01<25:56,  3.24s/it]2026-04-29:00:39:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   4%|▍         | 20/500 [01:04<25:42,  3.21s/it]2026-04-29:00:39:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   4%|▍         | 21/500 [01:07<25:58,  3.25s/it]2026-04-29:00:39:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   4%|▍         | 22/500 [01:10<26:03,  3.27s/it]2026-04-29:00:39:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   5%|▍         | 23/500 [01:13<25:45,  3.24s/it]2026-04-29:00:39:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   5%|▍         | 24/500 [01:17<25:33,  3.22s/it]2026-04-29:00:39:50 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   5%|▌         | 25/500 [01:20<25:41,  3.25s/it]2026-04-29:00:39:53 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   5%|▌         | 26/500 [01:23<25:30,  3.23s/it]2026-04-29:00:39:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   5%|▌         | 27/500 [01:26<25:25,  3.22s/it]2026-04-29:00:40:00 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   6%|▌         | 28/500 [01:30<25:14,  3.21s/it]2026-04-29:00:40:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   6%|▌         | 29/500 [01:33<25:07,  3.20s/it]2026-04-29:00:40:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   6%|▌         | 30/500 [01:36<25:06,  3.21s/it]2026-04-29:00:40:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   6%|▌         | 31/500 [01:39<24:59,  3.20s/it]2026-04-29:00:40:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   6%|▋         | 32/500 [01:42<24:51,  3.19s/it]2026-04-29:00:40:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   7%|▋         | 33/500 [01:45<24:44,  3.18s/it]2026-04-29:00:40:19 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   7%|▋         | 34/500 [01:49<24:37,  3.17s/it]2026-04-29:00:40:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   7%|▋         | 35/500 [01:52<24:33,  3.17s/it]2026-04-29:00:40:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   7%|▋         | 36/500 [01:55<24:28,  3.17s/it]2026-04-29:00:40:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   7%|▋         | 37/500 [01:58<24:38,  3.19s/it]2026-04-29:00:40:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   8%|▊         | 38/500 [02:01<24:28,  3.18s/it]2026-04-29:00:40:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   8%|▊         | 39/500 [02:05<24:44,  3.22s/it]2026-04-29:00:40:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   8%|▊         | 40/500 [02:08<24:40,  3.22s/it]2026-04-29:00:40:41 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   8%|▊         | 41/500 [02:11<24:30,  3.20s/it]2026-04-29:00:40:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   8%|▊         | 42/500 [02:14<24:22,  3.19s/it]2026-04-29:00:40:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   9%|▊         | 43/500 [02:17<24:16,  3.19s/it]2026-04-29:00:40:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   9%|▉         | 44/500 [02:21<24:13,  3.19s/it]2026-04-29:00:40:54 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   9%|▉         | 45/500 [02:24<24:07,  3.18s/it]2026-04-29:00:40:57 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   9%|▉         | 46/500 [02:27<24:01,  3.18s/it]2026-04-29:00:41:00 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:   9%|▉         | 47/500 [02:30<24:00,  3.18s/it]2026-04-29:00:41:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  10%|▉         | 48/500 [02:33<24:07,  3.20s/it]2026-04-29:00:41:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  10%|▉         | 49/500 [02:37<24:17,  3.23s/it]2026-04-29:00:41:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  10%|█         | 50/500 [02:40<24:01,  3.20s/it]2026-04-29:00:41:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  10%|█         | 51/500 [02:43<23:51,  3.19s/it]2026-04-29:00:41:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  10%|█         | 52/500 [02:46<24:06,  3.23s/it]2026-04-29:00:41:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  11%|█         | 53/500 [02:50<24:18,  3.26s/it]2026-04-29:00:41:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  11%|█         | 54/500 [02:53<24:29,  3.30s/it]2026-04-29:00:41:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  11%|█         | 55/500 [02:56<24:11,  3.26s/it]2026-04-29:00:41:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  11%|█         | 56/500 [02:59<23:57,  3.24s/it]2026-04-29:00:41:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  11%|█▏        | 57/500 [03:03<23:47,  3.22s/it]2026-04-29:00:41:36 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  12%|█▏        | 58/500 [03:06<23:41,  3.22s/it]2026-04-29:00:41:39 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  12%|█▏        | 59/500 [03:09<23:36,  3.21s/it]2026-04-29:00:41:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  12%|█▏        | 60/500 [03:12<23:53,  3.26s/it]2026-04-29:00:41:46 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  12%|█▏        | 61/500 [03:16<24:08,  3.30s/it]2026-04-29:00:41:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  12%|█▏        | 62/500 [03:19<23:55,  3.28s/it]2026-04-29:00:41:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  13%|█▎        | 63/500 [03:22<24:07,  3.31s/it]2026-04-29:00:41:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  13%|█▎        | 64/500 [03:26<24:14,  3.34s/it]2026-04-29:00:41:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  13%|█▎        | 65/500 [03:29<24:21,  3.36s/it]2026-04-29:00:42:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  13%|█▎        | 66/500 [03:32<24:01,  3.32s/it]2026-04-29:00:42:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  13%|█▎        | 67/500 [03:36<23:48,  3.30s/it]2026-04-29:00:42:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  14%|█▎        | 68/500 [03:39<23:37,  3.28s/it]2026-04-29:00:42:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  14%|█▍        | 69/500 [03:42<23:30,  3.27s/it]2026-04-29:00:42:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  14%|█▍        | 70/500 [03:45<23:43,  3.31s/it]2026-04-29:00:42:19 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  14%|█▍        | 71/500 [03:49<23:38,  3.31s/it]2026-04-29:00:42:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  14%|█▍        | 72/500 [03:52<23:30,  3.29s/it]2026-04-29:00:42:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  15%|█▍        | 73/500 [03:55<23:22,  3.29s/it]2026-04-29:00:42:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  15%|█▍        | 74/500 [03:59<23:15,  3.28s/it]2026-04-29:00:42:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  15%|█▌        | 75/500 [04:02<23:13,  3.28s/it]2026-04-29:00:42:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  15%|█▌        | 76/500 [04:05<23:08,  3.28s/it]2026-04-29:00:42:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  15%|█▌        | 77/500 [04:08<23:13,  3.29s/it]2026-04-29:00:42:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  16%|█▌        | 78/500 [04:12<23:14,  3.30s/it]
+Requesting API:  16%|█▌        | 79/500 [04:15<23:08,  3.30s/it]2026-04-29:00:42:48 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  16%|█▌        | 80/500 [04:18<23:02,  3.29s/it]2026-04-29:00:42:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  16%|█▌        | 81/500 [04:22<22:59,  3.29s/it]2026-04-29:00:42:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  16%|█▋        | 82/500 [04:25<23:12,  3.33s/it]2026-04-29:00:42:58 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  17%|█▋        | 83/500 [04:28<23:04,  3.32s/it]2026-04-29:00:43:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  17%|█▋        | 84/500 [04:32<23:00,  3.32s/it]2026-04-29:00:43:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  17%|█▋        | 85/500 [04:35<22:52,  3.31s/it]2026-04-29:00:43:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  17%|█▋        | 86/500 [04:38<22:45,  3.30s/it]2026-04-29:00:43:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  17%|█▋        | 87/500 [04:42<22:54,  3.33s/it]2026-04-29:00:43:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  18%|█▊        | 88/500 [04:45<22:45,  3.31s/it]2026-04-29:00:43:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  18%|█▊        | 89/500 [04:48<22:41,  3.31s/it]2026-04-29:00:43:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  18%|█▊        | 90/500 [04:52<22:55,  3.35s/it]2026-04-29:00:43:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  18%|█▊        | 91/500 [04:55<22:45,  3.34s/it]2026-04-29:00:43:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  18%|█▊        | 92/500 [04:58<22:38,  3.33s/it]2026-04-29:00:43:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  19%|█▊        | 93/500 [05:02<22:31,  3.32s/it]2026-04-29:00:43:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  19%|█▉        | 94/500 [05:05<22:31,  3.33s/it]2026-04-29:00:43:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  19%|█▉        | 95/500 [05:08<22:26,  3.32s/it]2026-04-29:00:43:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  19%|█▉        | 96/500 [05:12<22:24,  3.33s/it]2026-04-29:00:43:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  19%|█▉        | 97/500 [05:15<22:20,  3.33s/it]2026-04-29:00:43:48 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  20%|█▉        | 98/500 [05:18<22:28,  3.36s/it]2026-04-29:00:43:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  20%|█▉        | 99/500 [05:22<22:20,  3.34s/it]2026-04-29:00:43:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  20%|██        | 100/500 [05:25<22:23,  3.36s/it]2026-04-29:00:43:58 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  20%|██        | 101/500 [05:28<22:20,  3.36s/it]2026-04-29:00:44:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  20%|██        | 102/500 [05:32<22:13,  3.35s/it]2026-04-29:00:44:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  21%|██        | 103/500 [05:35<22:07,  3.34s/it]2026-04-29:00:44:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  21%|██        | 104/500 [05:38<22:09,  3.36s/it]2026-04-29:00:44:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  21%|██        | 105/500 [05:42<22:02,  3.35s/it]2026-04-29:00:44:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  21%|██        | 106/500 [05:45<21:57,  3.34s/it]2026-04-29:00:44:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  21%|██▏       | 107/500 [05:48<21:59,  3.36s/it]2026-04-29:00:44:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  22%|██▏       | 108/500 [05:52<21:53,  3.35s/it]2026-04-29:00:44:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  22%|██▏       | 109/500 [05:55<21:49,  3.35s/it]2026-04-29:00:44:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  22%|██▏       | 110/500 [05:59<22:03,  3.39s/it]2026-04-29:00:44:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  22%|██▏       | 111/500 [06:02<22:12,  3.42s/it]2026-04-29:00:44:36 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  22%|██▏       | 112/500 [06:06<22:16,  3.44s/it]2026-04-29:00:44:39 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  23%|██▎       | 113/500 [06:09<22:00,  3.41s/it]2026-04-29:00:44:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  23%|██▎       | 114/500 [06:12<21:48,  3.39s/it]2026-04-29:00:44:46 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  23%|██▎       | 115/500 [06:16<21:59,  3.43s/it]2026-04-29:00:44:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  23%|██▎       | 116/500 [06:19<22:02,  3.44s/it]2026-04-29:00:44:53 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  23%|██▎       | 117/500 [06:23<21:47,  3.41s/it]2026-04-29:00:44:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  24%|██▎       | 118/500 [06:26<21:37,  3.40s/it]2026-04-29:00:44:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  24%|██▍       | 119/500 [06:29<21:20,  3.36s/it]2026-04-29:00:45:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  24%|██▍       | 120/500 [06:33<21:34,  3.41s/it]2026-04-29:00:45:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  24%|██▍       | 121/500 [06:36<21:24,  3.39s/it]2026-04-29:00:45:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  24%|██▍       | 122/500 [06:40<21:15,  3.38s/it]2026-04-29:00:45:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  25%|██▍       | 123/500 [06:43<21:28,  3.42s/it]2026-04-29:00:45:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  25%|██▍       | 124/500 [06:46<21:18,  3.40s/it]2026-04-29:00:45:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  25%|██▌       | 125/500 [06:50<21:25,  3.43s/it]2026-04-29:00:45:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  25%|██▌       | 126/500 [06:53<21:30,  3.45s/it]2026-04-29:00:45:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  25%|██▌       | 127/500 [06:57<21:08,  3.40s/it]2026-04-29:00:45:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  26%|██▌       | 128/500 [07:00<21:16,  3.43s/it]2026-04-29:00:45:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  26%|██▌       | 129/500 [07:03<20:55,  3.38s/it]2026-04-29:00:45:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  26%|██▌       | 130/500 [07:07<20:50,  3.38s/it]2026-04-29:00:45:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  26%|██▌       | 131/500 [07:10<20:46,  3.38s/it]2026-04-29:00:45:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  26%|██▋       | 132/500 [07:14<20:44,  3.38s/it]2026-04-29:00:45:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  27%|██▋       | 133/500 [07:17<20:39,  3.38s/it]2026-04-29:00:45:50 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  27%|██▋       | 134/500 [07:20<20:51,  3.42s/it]2026-04-29:00:45:54 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  27%|██▋       | 135/500 [07:24<20:58,  3.45s/it]2026-04-29:00:45:57 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  27%|██▋       | 136/500 [07:27<21:01,  3.47s/it]2026-04-29:00:46:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  27%|██▋       | 137/500 [07:31<20:48,  3.44s/it]2026-04-29:00:46:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  28%|██▊       | 138/500 [07:34<20:35,  3.41s/it]2026-04-29:00:46:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  28%|██▊       | 139/500 [07:38<20:29,  3.41s/it]2026-04-29:00:46:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  28%|██▊       | 140/500 [07:41<20:36,  3.44s/it]2026-04-29:00:46:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  28%|██▊       | 141/500 [07:44<20:24,  3.41s/it]2026-04-29:00:46:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  28%|██▊       | 142/500 [07:48<20:19,  3.41s/it]2026-04-29:00:46:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  29%|██▊       | 143/500 [07:51<20:03,  3.37s/it]2026-04-29:00:46:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  29%|██▉       | 144/500 [07:55<19:59,  3.37s/it]2026-04-29:00:46:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  29%|██▉       | 145/500 [07:58<19:56,  3.37s/it]2026-04-29:00:46:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  29%|██▉       | 146/500 [08:01<19:54,  3.37s/it]2026-04-29:00:46:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  29%|██▉       | 147/500 [08:05<19:55,  3.39s/it]2026-04-29:00:46:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  30%|██▉       | 148/500 [08:08<19:51,  3.38s/it]2026-04-29:00:46:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  30%|██▉       | 149/500 [08:12<20:01,  3.42s/it]2026-04-29:00:46:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  30%|███       | 150/500 [08:15<20:08,  3.45s/it]2026-04-29:00:46:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  30%|███       | 151/500 [08:19<20:00,  3.44s/it]2026-04-29:00:46:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  30%|███       | 152/500 [08:22<19:49,  3.42s/it]2026-04-29:00:46:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  31%|███       | 153/500 [08:25<19:41,  3.41s/it]2026-04-29:00:46:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  31%|███       | 154/500 [08:29<19:34,  3.40s/it]2026-04-29:00:47:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  31%|███       | 155/500 [08:32<19:28,  3.39s/it]2026-04-29:00:47:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  31%|███       | 156/500 [08:35<19:23,  3.38s/it]2026-04-29:00:47:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  31%|███▏      | 157/500 [08:39<19:34,  3.43s/it]2026-04-29:00:47:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  32%|███▏      | 158/500 [08:42<19:25,  3.41s/it]2026-04-29:00:47:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  32%|███▏      | 159/500 [08:46<19:18,  3.40s/it]2026-04-29:00:47:19 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  32%|███▏      | 160/500 [08:49<19:31,  3.45s/it]2026-04-29:00:47:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  32%|███▏      | 161/500 [08:53<19:35,  3.47s/it]2026-04-29:00:47:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  32%|███▏      | 162/500 [08:56<19:22,  3.44s/it]2026-04-29:00:47:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  33%|███▎      | 163/500 [08:59<19:13,  3.42s/it]2026-04-29:00:47:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  33%|███▎      | 164/500 [09:03<19:08,  3.42s/it]2026-04-29:00:47:36 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  33%|███▎      | 165/500 [09:06<19:00,  3.40s/it]2026-04-29:00:47:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  33%|███▎      | 166/500 [09:10<18:54,  3.40s/it]2026-04-29:00:47:43 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  33%|███▎      | 167/500 [09:13<18:40,  3.36s/it]2026-04-29:00:47:46 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  34%|███▎      | 168/500 [09:16<18:36,  3.36s/it]2026-04-29:00:47:50 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  34%|███▍      | 169/500 [09:20<18:34,  3.37s/it]2026-04-29:00:47:53 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  34%|███▍      | 170/500 [09:23<18:29,  3.36s/it]2026-04-29:00:47:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  34%|███▍      | 171/500 [09:26<18:27,  3.37s/it]2026-04-29:00:48:00 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  34%|███▍      | 172/500 [09:30<18:27,  3.38s/it]2026-04-29:00:48:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  35%|███▍      | 173/500 [09:33<18:23,  3.37s/it]2026-04-29:00:48:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  35%|███▍      | 174/500 [09:37<18:20,  3.38s/it]2026-04-29:00:48:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  35%|███▌      | 175/500 [09:40<18:17,  3.38s/it]2026-04-29:00:48:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  35%|███▌      | 176/500 [09:43<18:13,  3.37s/it]2026-04-29:00:48:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  35%|███▌      | 177/500 [09:47<18:27,  3.43s/it]2026-04-29:00:48:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  36%|███▌      | 178/500 [09:50<18:18,  3.41s/it]2026-04-29:00:48:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  36%|███▌      | 179/500 [09:54<18:10,  3.40s/it]2026-04-29:00:48:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  36%|███▌      | 180/500 [09:57<18:05,  3.39s/it]2026-04-29:00:48:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  36%|███▌      | 181/500 [10:00<18:15,  3.44s/it]2026-04-29:00:48:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  36%|███▋      | 182/500 [10:04<18:03,  3.41s/it]2026-04-29:00:48:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  37%|███▋      | 183/500 [10:07<17:59,  3.41s/it]2026-04-29:00:48:41 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  37%|███▋      | 184/500 [10:11<17:52,  3.40s/it]2026-04-29:00:48:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  37%|███▋      | 185/500 [10:14<18:03,  3.44s/it]2026-04-29:00:48:48 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  37%|███▋      | 186/500 [10:18<18:15,  3.49s/it]2026-04-29:00:48:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  37%|███▋      | 187/500 [10:21<18:05,  3.47s/it]2026-04-29:00:48:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  38%|███▊      | 188/500 [10:25<17:54,  3.45s/it]2026-04-29:00:48:58 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  38%|███▊      | 189/500 [10:28<18:00,  3.47s/it]2026-04-29:00:49:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  38%|███▊      | 190/500 [10:32<18:06,  3.50s/it]2026-04-29:00:49:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  38%|███▊      | 191/500 [10:35<17:50,  3.46s/it]2026-04-29:00:49:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  38%|███▊      | 192/500 [10:39<17:53,  3.49s/it]2026-04-29:00:49:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  39%|███▊      | 193/500 [10:42<17:56,  3.51s/it]2026-04-29:00:49:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  39%|███▉      | 194/500 [10:45<17:33,  3.44s/it]2026-04-29:00:49:19 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  39%|███▉      | 195/500 [10:49<17:40,  3.48s/it]2026-04-29:00:49:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  39%|███▉      | 196/500 [10:53<17:47,  3.51s/it]2026-04-29:00:49:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  39%|███▉      | 197/500 [10:56<17:32,  3.47s/it]2026-04-29:00:49:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  40%|███▉      | 198/500 [10:59<17:20,  3.45s/it]2026-04-29:00:49:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  40%|███▉      | 199/500 [11:03<17:16,  3.44s/it]2026-04-29:00:49:36 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  40%|████      | 200/500 [11:06<17:08,  3.43s/it]2026-04-29:00:49:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  40%|████      | 201/500 [11:10<17:00,  3.41s/it]2026-04-29:00:49:43 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  40%|████      | 202/500 [11:13<16:55,  3.41s/it]2026-04-29:00:49:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  41%|████      | 203/500 [11:17<17:07,  3.46s/it]2026-04-29:00:49:50 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  41%|████      | 204/500 [11:20<16:57,  3.44s/it]2026-04-29:00:49:53 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  41%|████      | 205/500 [11:23<16:54,  3.44s/it]2026-04-29:00:49:57 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  41%|████      | 206/500 [11:27<16:49,  3.43s/it]2026-04-29:00:50:00 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  41%|████▏     | 207/500 [11:30<16:40,  3.41s/it]2026-04-29:00:50:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  42%|████▏     | 208/500 [11:34<16:34,  3.40s/it]2026-04-29:00:50:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  42%|████▏     | 209/500 [11:37<16:46,  3.46s/it]2026-04-29:00:50:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  42%|████▏     | 210/500 [11:41<16:52,  3.49s/it]2026-04-29:00:50:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  42%|████▏     | 211/500 [11:44<16:40,  3.46s/it]2026-04-29:00:50:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  42%|████▏     | 212/500 [11:48<16:45,  3.49s/it]2026-04-29:00:50:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  43%|████▎     | 213/500 [11:51<16:48,  3.52s/it]2026-04-29:00:50:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  43%|████▎     | 214/500 [11:55<16:34,  3.48s/it]2026-04-29:00:50:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  43%|████▎     | 215/500 [11:58<16:23,  3.45s/it]2026-04-29:00:50:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  43%|████▎     | 216/500 [12:01<16:14,  3.43s/it]2026-04-29:00:50:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  43%|████▎     | 217/500 [12:05<16:22,  3.47s/it]2026-04-29:00:50:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  44%|████▎     | 218/500 [12:08<16:11,  3.45s/it]2026-04-29:00:50:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  44%|████▍     | 219/500 [12:12<16:07,  3.44s/it]2026-04-29:00:50:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  44%|████▍     | 220/500 [12:15<16:14,  3.48s/it]2026-04-29:00:50:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  44%|████▍     | 221/500 [12:19<16:04,  3.46s/it]2026-04-29:00:50:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  44%|████▍     | 222/500 [12:22<15:58,  3.45s/it]2026-04-29:00:50:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  45%|████▍     | 223/500 [12:26<16:07,  3.49s/it]2026-04-29:00:50:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  45%|████▍     | 224/500 [12:29<16:08,  3.51s/it]2026-04-29:00:51:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  45%|████▌     | 225/500 [12:33<15:55,  3.47s/it]2026-04-29:00:51:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  45%|████▌     | 226/500 [12:36<15:46,  3.45s/it]2026-04-29:00:51:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  45%|████▌     | 227/500 [12:40<15:42,  3.45s/it]2026-04-29:00:51:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  46%|████▌     | 228/500 [12:43<15:33,  3.43s/it]2026-04-29:00:51:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  46%|████▌     | 229/500 [12:46<15:28,  3.42s/it]2026-04-29:00:51:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  46%|████▌     | 230/500 [12:50<15:23,  3.42s/it]2026-04-29:00:51:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  46%|████▌     | 231/500 [12:53<15:22,  3.43s/it]
+Requesting API:  46%|████▋     | 232/500 [12:57<15:16,  3.42s/it]2026-04-29:00:51:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  47%|████▋     | 233/500 [13:00<15:13,  3.42s/it]2026-04-29:00:51:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  47%|████▋     | 234/500 [13:03<15:07,  3.41s/it]2026-04-29:00:51:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  47%|████▋     | 235/500 [13:07<15:19,  3.47s/it]2026-04-29:00:51:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  47%|████▋     | 236/500 [13:10<15:10,  3.45s/it]2026-04-29:00:51:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  47%|████▋     | 237/500 [13:14<15:16,  3.48s/it]2026-04-29:00:51:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  48%|████▊     | 238/500 [13:17<15:06,  3.46s/it]2026-04-29:00:51:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  48%|████▊     | 239/500 [13:21<14:58,  3.44s/it]2026-04-29:00:51:54 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  48%|████▊     | 240/500 [13:24<14:53,  3.44s/it]2026-04-29:00:51:58 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  48%|████▊     | 241/500 [13:28<14:48,  3.43s/it]2026-04-29:00:52:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  48%|████▊     | 242/500 [13:31<14:41,  3.42s/it]2026-04-29:00:52:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  49%|████▊     | 243/500 [13:35<14:49,  3.46s/it]2026-04-29:00:52:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  49%|████▉     | 244/500 [13:38<14:40,  3.44s/it]2026-04-29:00:52:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  49%|████▉     | 245/500 [13:41<14:36,  3.44s/it]2026-04-29:00:52:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  49%|████▉     | 246/500 [13:45<14:42,  3.47s/it]2026-04-29:00:52:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  49%|████▉     | 247/500 [13:48<14:33,  3.45s/it]2026-04-29:00:52:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  50%|████▉     | 248/500 [13:52<14:26,  3.44s/it]2026-04-29:00:52:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  50%|████▉     | 249/500 [13:55<14:23,  3.44s/it]2026-04-29:00:52:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  50%|█████     | 250/500 [13:59<14:16,  3.43s/it]2026-04-29:00:52:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  50%|█████     | 251/500 [14:02<14:12,  3.42s/it]2026-04-29:00:52:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  50%|█████     | 252/500 [14:05<14:08,  3.42s/it]2026-04-29:00:52:39 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  51%|█████     | 253/500 [14:09<14:05,  3.42s/it]2026-04-29:00:52:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  51%|█████     | 254/500 [14:12<13:59,  3.41s/it]2026-04-29:00:52:46 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  51%|█████     | 255/500 [14:16<14:12,  3.48s/it]2026-04-29:00:52:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  51%|█████     | 256/500 [14:19<14:02,  3.45s/it]2026-04-29:00:52:53 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  51%|█████▏    | 257/500 [14:23<13:55,  3.44s/it]2026-04-29:00:52:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  52%|█████▏    | 258/500 [14:26<13:48,  3.42s/it]2026-04-29:00:52:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  52%|█████▏    | 259/500 [14:29<13:43,  3.42s/it]2026-04-29:00:53:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  52%|█████▏    | 260/500 [14:33<13:40,  3.42s/it]2026-04-29:00:53:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  52%|█████▏    | 261/500 [14:36<13:34,  3.41s/it]2026-04-29:00:53:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  52%|█████▏    | 262/500 [14:40<13:32,  3.41s/it]2026-04-29:00:53:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  53%|█████▎    | 263/500 [14:43<13:29,  3.42s/it]2026-04-29:00:53:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  53%|█████▎    | 264/500 [14:47<13:24,  3.41s/it]2026-04-29:00:53:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  53%|█████▎    | 265/500 [14:50<13:21,  3.41s/it]2026-04-29:00:53:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  53%|█████▎    | 266/500 [14:53<13:17,  3.41s/it]2026-04-29:00:53:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  53%|█████▎    | 267/500 [14:57<13:16,  3.42s/it]2026-04-29:00:53:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  54%|█████▎    | 268/500 [15:00<13:12,  3.42s/it]2026-04-29:00:53:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  54%|█████▍    | 269/500 [15:04<13:08,  3.42s/it]2026-04-29:00:53:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  54%|█████▍    | 270/500 [15:07<13:05,  3.42s/it]2026-04-29:00:53:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  54%|█████▍    | 271/500 [15:10<13:00,  3.41s/it]2026-04-29:00:53:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  54%|█████▍    | 272/500 [15:14<12:58,  3.41s/it]2026-04-29:00:53:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  55%|█████▍    | 273/500 [15:17<12:53,  3.41s/it]2026-04-29:00:53:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  55%|█████▍    | 274/500 [15:21<12:49,  3.41s/it]2026-04-29:00:53:54 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  55%|█████▌    | 275/500 [15:24<12:46,  3.41s/it]2026-04-29:00:53:57 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  55%|█████▌    | 276/500 [15:27<12:43,  3.41s/it]2026-04-29:00:54:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  55%|█████▌    | 277/500 [15:31<12:39,  3.41s/it]2026-04-29:00:54:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  56%|█████▌    | 278/500 [15:34<12:36,  3.41s/it]2026-04-29:00:54:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  56%|█████▌    | 279/500 [15:38<12:32,  3.40s/it]2026-04-29:00:54:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  56%|█████▌    | 280/500 [15:41<12:42,  3.46s/it]2026-04-29:00:54:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  56%|█████▌    | 281/500 [15:45<12:47,  3.51s/it]2026-04-29:00:54:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  56%|█████▋    | 282/500 [15:48<12:36,  3.47s/it]2026-04-29:00:54:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  57%|█████▋    | 283/500 [15:52<12:40,  3.51s/it]2026-04-29:00:54:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  57%|█████▋    | 284/500 [15:55<12:43,  3.53s/it]2026-04-29:00:54:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  57%|█████▋    | 285/500 [15:59<12:41,  3.54s/it]2026-04-29:00:54:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  57%|█████▋    | 286/500 [16:02<12:29,  3.50s/it]2026-04-29:00:54:36 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  57%|█████▋    | 287/500 [16:06<12:23,  3.49s/it]2026-04-29:00:54:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  58%|█████▊    | 288/500 [16:10<12:29,  3.53s/it]2026-04-29:00:54:43 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  58%|█████▊    | 289/500 [16:13<12:19,  3.51s/it]2026-04-29:00:54:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  58%|█████▊    | 290/500 [16:17<12:21,  3.53s/it]2026-04-29:00:54:50 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  58%|█████▊    | 291/500 [16:20<12:10,  3.49s/it]2026-04-29:00:54:53 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  58%|█████▊    | 292/500 [16:23<12:01,  3.47s/it]2026-04-29:00:54:57 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  59%|█████▊    | 293/500 [16:27<11:53,  3.44s/it]2026-04-29:00:55:00 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  59%|█████▉    | 294/500 [16:30<11:46,  3.43s/it]2026-04-29:00:55:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  59%|█████▉    | 295/500 [16:34<11:41,  3.42s/it]2026-04-29:00:55:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  59%|█████▉    | 296/500 [16:37<11:39,  3.43s/it]2026-04-29:00:55:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  59%|█████▉    | 297/500 [16:40<11:35,  3.42s/it]2026-04-29:00:55:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  60%|█████▉    | 298/500 [16:44<11:32,  3.43s/it]2026-04-29:00:55:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  60%|█████▉    | 299/500 [16:47<11:28,  3.42s/it]2026-04-29:00:55:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  60%|██████    | 300/500 [16:51<11:23,  3.42s/it]2026-04-29:00:55:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  60%|██████    | 301/500 [16:54<11:19,  3.41s/it]2026-04-29:00:55:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  60%|██████    | 302/500 [16:58<11:27,  3.47s/it]2026-04-29:00:55:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  61%|██████    | 303/500 [17:01<11:18,  3.45s/it]2026-04-29:00:55:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  61%|██████    | 304/500 [17:05<11:24,  3.49s/it]2026-04-29:00:55:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  61%|██████    | 305/500 [17:08<11:15,  3.47s/it]2026-04-29:00:55:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  61%|██████    | 306/500 [17:12<11:21,  3.51s/it]2026-04-29:00:55:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  61%|██████▏   | 307/500 [17:15<11:22,  3.54s/it]2026-04-29:00:55:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  62%|██████▏   | 308/500 [17:19<11:11,  3.50s/it]2026-04-29:00:55:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  62%|██████▏   | 309/500 [17:22<11:13,  3.53s/it]2026-04-29:00:55:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  62%|██████▏   | 310/500 [17:26<11:02,  3.49s/it]2026-04-29:00:55:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  62%|██████▏   | 311/500 [17:29<11:05,  3.52s/it]2026-04-29:00:56:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  62%|██████▏   | 312/500 [17:33<10:56,  3.49s/it]2026-04-29:00:56:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  63%|██████▎   | 313/500 [17:36<10:49,  3.48s/it]2026-04-29:00:56:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  63%|██████▎   | 314/500 [17:40<10:42,  3.46s/it]2026-04-29:00:56:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  63%|██████▎   | 315/500 [17:43<10:35,  3.44s/it]2026-04-29:00:56:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  63%|██████▎   | 316/500 [17:46<10:31,  3.43s/it]2026-04-29:00:56:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  63%|██████▎   | 317/500 [17:50<10:26,  3.42s/it]2026-04-29:00:56:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  64%|██████▎   | 318/500 [17:53<10:25,  3.43s/it]2026-04-29:00:56:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  64%|██████▍   | 319/500 [17:57<10:19,  3.42s/it]2026-04-29:00:56:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  64%|██████▍   | 320/500 [18:00<10:25,  3.47s/it]2026-04-29:00:56:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  64%|██████▍   | 321/500 [18:04<10:18,  3.46s/it]2026-04-29:00:56:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  64%|██████▍   | 322/500 [18:07<10:13,  3.44s/it]2026-04-29:00:56:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  65%|██████▍   | 323/500 [18:10<10:09,  3.44s/it]2026-04-29:00:56:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  65%|██████▍   | 324/500 [18:14<10:04,  3.44s/it]2026-04-29:00:56:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  65%|██████▌   | 325/500 [18:17<10:08,  3.48s/it]2026-04-29:00:56:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  65%|██████▌   | 326/500 [18:21<10:01,  3.45s/it]2026-04-29:00:56:54 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  65%|██████▌   | 327/500 [18:24<09:55,  3.44s/it]2026-04-29:00:56:58 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  66%|██████▌   | 328/500 [18:28<09:50,  3.43s/it]2026-04-29:00:57:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  66%|██████▌   | 329/500 [18:31<09:45,  3.42s/it]2026-04-29:00:57:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  66%|██████▌   | 330/500 [18:35<09:41,  3.42s/it]2026-04-29:00:57:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  66%|██████▌   | 331/500 [18:38<09:37,  3.42s/it]2026-04-29:00:57:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  66%|██████▋   | 332/500 [18:41<09:36,  3.43s/it]2026-04-29:00:57:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  67%|██████▋   | 333/500 [18:45<09:31,  3.42s/it]2026-04-29:00:57:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  67%|██████▋   | 334/500 [18:48<09:26,  3.41s/it]2026-04-29:00:57:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  67%|██████▋   | 335/500 [18:52<09:24,  3.42s/it]2026-04-29:00:57:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  67%|██████▋   | 336/500 [18:55<09:29,  3.47s/it]2026-04-29:00:57:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  67%|██████▋   | 337/500 [18:59<09:22,  3.45s/it]2026-04-29:00:57:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  68%|██████▊   | 338/500 [19:02<09:16,  3.44s/it]2026-04-29:00:57:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  68%|██████▊   | 339/500 [19:05<09:11,  3.43s/it]2026-04-29:00:57:39 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  68%|██████▊   | 340/500 [19:09<09:06,  3.42s/it]2026-04-29:00:57:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  68%|██████▊   | 341/500 [19:12<09:02,  3.41s/it]2026-04-29:00:57:46 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  68%|██████▊   | 342/500 [19:16<08:59,  3.41s/it]2026-04-29:00:57:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  69%|██████▊   | 343/500 [19:19<08:56,  3.42s/it]2026-04-29:00:57:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  69%|██████▉   | 344/500 [19:22<08:52,  3.41s/it]2026-04-29:00:57:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  69%|██████▉   | 345/500 [19:26<08:48,  3.41s/it]2026-04-29:00:57:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  69%|██████▉   | 346/500 [19:29<08:45,  3.41s/it]2026-04-29:00:58:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  69%|██████▉   | 347/500 [19:33<08:41,  3.41s/it]2026-04-29:00:58:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  70%|██████▉   | 348/500 [19:36<08:38,  3.41s/it]2026-04-29:00:58:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  70%|██████▉   | 349/500 [19:40<08:34,  3.41s/it]2026-04-29:00:58:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  70%|███████   | 350/500 [19:43<08:30,  3.41s/it]2026-04-29:00:58:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  70%|███████   | 351/500 [19:47<08:36,  3.47s/it]2026-04-29:00:58:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  70%|███████   | 352/500 [19:50<08:30,  3.45s/it]2026-04-29:00:58:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  71%|███████   | 353/500 [19:53<08:27,  3.45s/it]2026-04-29:00:58:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  71%|███████   | 354/500 [19:57<08:22,  3.44s/it]2026-04-29:00:58:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  71%|███████   | 355/500 [20:00<08:17,  3.43s/it]2026-04-29:00:58:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  71%|███████   | 356/500 [20:04<08:20,  3.48s/it]2026-04-29:00:58:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  71%|███████▏  | 357/500 [20:07<08:13,  3.45s/it]2026-04-29:00:58:41 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  72%|███████▏  | 358/500 [20:11<08:08,  3.44s/it]2026-04-29:00:58:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  72%|███████▏  | 359/500 [20:14<08:03,  3.43s/it]2026-04-29:00:58:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  72%|███████▏  | 360/500 [20:17<08:01,  3.44s/it]2026-04-29:00:58:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  72%|███████▏  | 361/500 [20:21<07:56,  3.43s/it]2026-04-29:00:58:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  72%|███████▏  | 362/500 [20:25<08:02,  3.49s/it]2026-04-29:00:58:58 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  73%|███████▎  | 363/500 [20:28<07:54,  3.47s/it]2026-04-29:00:59:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  73%|███████▎  | 364/500 [20:31<07:49,  3.45s/it]2026-04-29:00:59:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  73%|███████▎  | 365/500 [20:35<07:44,  3.44s/it]2026-04-29:00:59:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  73%|███████▎  | 366/500 [20:38<07:41,  3.45s/it]2026-04-29:00:59:12 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  73%|███████▎  | 367/500 [20:42<07:36,  3.43s/it]2026-04-29:00:59:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  74%|███████▎  | 368/500 [20:45<07:32,  3.42s/it]2026-04-29:00:59:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  74%|███████▍  | 369/500 [20:48<07:28,  3.42s/it]2026-04-29:00:59:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  74%|███████▍  | 370/500 [20:52<07:32,  3.48s/it]2026-04-29:00:59:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  74%|███████▍  | 371/500 [20:56<07:36,  3.54s/it]2026-04-29:00:59:29 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  74%|███████▍  | 372/500 [20:59<07:28,  3.50s/it]2026-04-29:00:59:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  75%|███████▍  | 373/500 [21:03<07:21,  3.47s/it]2026-04-29:00:59:36 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  75%|███████▍  | 374/500 [21:06<07:15,  3.46s/it]2026-04-29:00:59:39 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  75%|███████▌  | 375/500 [21:09<07:10,  3.44s/it]2026-04-29:00:59:43 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  75%|███████▌  | 376/500 [21:13<07:05,  3.43s/it]2026-04-29:00:59:46 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  75%|███████▌  | 377/500 [21:16<07:01,  3.43s/it]2026-04-29:00:59:50 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  76%|███████▌  | 378/500 [21:20<07:04,  3.48s/it]2026-04-29:00:59:53 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  76%|███████▌  | 379/500 [21:23<06:58,  3.46s/it]2026-04-29:00:59:57 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  76%|███████▌  | 380/500 [21:27<06:53,  3.45s/it]2026-04-29:01:00:00 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  76%|███████▌  | 381/500 [21:30<06:51,  3.46s/it]2026-04-29:01:00:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  76%|███████▋  | 382/500 [21:34<06:46,  3.45s/it]2026-04-29:01:00:07 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  77%|███████▋  | 383/500 [21:37<06:42,  3.44s/it]2026-04-29:01:00:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  77%|███████▋  | 384/500 [21:40<06:38,  3.43s/it]2026-04-29:01:00:14 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  77%|███████▋  | 385/500 [21:44<06:33,  3.43s/it]2026-04-29:01:00:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  77%|███████▋  | 386/500 [21:47<06:36,  3.47s/it]2026-04-29:01:00:21 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  77%|███████▋  | 387/500 [21:51<06:30,  3.46s/it]2026-04-29:01:00:24 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  78%|███████▊  | 388/500 [21:54<06:25,  3.44s/it]2026-04-29:01:00:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  78%|███████▊  | 389/500 [21:58<06:22,  3.44s/it]2026-04-29:01:00:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  78%|███████▊  | 390/500 [22:01<06:18,  3.44s/it]2026-04-29:01:00:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  78%|███████▊  | 391/500 [22:05<06:22,  3.51s/it]2026-04-29:01:00:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  78%|███████▊  | 392/500 [22:08<06:22,  3.54s/it]2026-04-29:01:00:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  79%|███████▊  | 393/500 [22:12<06:20,  3.55s/it]2026-04-29:01:00:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  79%|███████▉  | 394/500 [22:15<06:12,  3.51s/it]2026-04-29:01:00:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  79%|███████▉  | 395/500 [22:19<06:06,  3.49s/it]2026-04-29:01:00:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  79%|███████▉  | 396/500 [22:22<06:00,  3.47s/it]2026-04-29:01:00:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  79%|███████▉  | 397/500 [22:26<05:55,  3.45s/it]2026-04-29:01:00:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  80%|███████▉  | 398/500 [22:29<05:51,  3.45s/it]2026-04-29:01:01:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  80%|███████▉  | 399/500 [22:33<05:53,  3.50s/it]2026-04-29:01:01:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  80%|████████  | 400/500 [22:36<05:52,  3.53s/it]2026-04-29:01:01:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  80%|████████  | 401/500 [22:40<05:45,  3.49s/it]2026-04-29:01:01:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  80%|████████  | 402/500 [22:43<05:39,  3.47s/it]2026-04-29:01:01:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  81%|████████  | 403/500 [22:47<05:36,  3.47s/it]2026-04-29:01:01:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  81%|████████  | 404/500 [22:50<05:31,  3.46s/it]2026-04-29:01:01:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  81%|████████  | 405/500 [22:53<05:27,  3.45s/it]2026-04-29:01:01:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  81%|████████  | 406/500 [22:57<05:28,  3.49s/it]2026-04-29:01:01:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  81%|████████▏ | 407/500 [23:00<05:23,  3.48s/it]2026-04-29:01:01:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  82%|████████▏ | 408/500 [23:04<05:23,  3.51s/it]2026-04-29:01:01:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  82%|████████▏ | 409/500 [23:08<05:17,  3.49s/it]2026-04-29:01:01:41 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  82%|████████▏ | 410/500 [23:11<05:16,  3.52s/it]2026-04-29:01:01:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  82%|████████▏ | 411/500 [23:15<05:10,  3.49s/it]2026-04-29:01:01:48 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  82%|████████▏ | 412/500 [23:18<05:05,  3.47s/it]2026-04-29:01:01:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  83%|████████▎ | 413/500 [23:21<05:00,  3.46s/it]2026-04-29:01:01:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  83%|████████▎ | 414/500 [23:25<04:56,  3.45s/it]2026-04-29:01:01:58 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  83%|████████▎ | 415/500 [23:28<04:52,  3.44s/it]2026-04-29:01:02:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  83%|████████▎ | 416/500 [23:32<04:48,  3.44s/it]2026-04-29:01:02:05 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  83%|████████▎ | 417/500 [23:35<04:49,  3.49s/it]2026-04-29:01:02:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  84%|████████▎ | 418/500 [23:39<04:50,  3.54s/it]2026-04-29:01:02:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  84%|████████▍ | 419/500 [23:43<04:49,  3.57s/it]2026-04-29:01:02:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  84%|████████▍ | 420/500 [23:46<04:46,  3.58s/it]2026-04-29:01:02:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  84%|████████▍ | 421/500 [23:50<04:39,  3.53s/it]2026-04-29:01:02:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  84%|████████▍ | 422/500 [23:53<04:33,  3.50s/it]2026-04-29:01:02:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  85%|████████▍ | 423/500 [23:56<04:28,  3.48s/it]2026-04-29:01:02:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  85%|████████▍ | 424/500 [24:00<04:27,  3.52s/it]2026-04-29:01:02:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  85%|████████▌ | 425/500 [24:03<04:21,  3.49s/it]2026-04-29:01:02:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  85%|████████▌ | 426/500 [24:07<04:16,  3.47s/it]2026-04-29:01:02:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  85%|████████▌ | 427/500 [24:10<04:11,  3.45s/it]2026-04-29:01:02:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  86%|████████▌ | 428/500 [24:14<04:08,  3.45s/it]2026-04-29:01:02:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  86%|████████▌ | 429/500 [24:17<04:04,  3.44s/it]2026-04-29:01:02:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  86%|████████▌ | 430/500 [24:21<04:00,  3.44s/it]2026-04-29:01:02:54 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  86%|████████▌ | 431/500 [24:24<03:56,  3.43s/it]2026-04-29:01:02:57 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  86%|████████▋ | 432/500 [24:27<03:53,  3.44s/it]2026-04-29:01:03:01 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  87%|████████▋ | 433/500 [24:31<03:49,  3.43s/it]2026-04-29:01:03:04 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  87%|████████▋ | 434/500 [24:34<03:47,  3.45s/it]2026-04-29:01:03:08 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  87%|████████▋ | 435/500 [24:38<03:44,  3.46s/it]2026-04-29:01:03:11 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  87%|████████▋ | 436/500 [24:41<03:40,  3.45s/it]2026-04-29:01:03:15 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  87%|████████▋ | 437/500 [24:45<03:37,  3.45s/it]2026-04-29:01:03:18 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  88%|████████▊ | 438/500 [24:48<03:33,  3.44s/it]2026-04-29:01:03:22 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  88%|████████▊ | 439/500 [24:52<03:29,  3.43s/it]2026-04-29:01:03:25 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  88%|████████▊ | 440/500 [24:55<03:25,  3.43s/it]2026-04-29:01:03:28 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  88%|████████▊ | 441/500 [24:58<03:22,  3.43s/it]2026-04-29:01:03:32 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  88%|████████▊ | 442/500 [25:02<03:18,  3.42s/it]2026-04-29:01:03:35 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  89%|████████▊ | 443/500 [25:05<03:14,  3.42s/it]2026-04-29:01:03:39 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  89%|████████▉ | 444/500 [25:09<03:11,  3.42s/it]2026-04-29:01:03:42 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  89%|████████▉ | 445/500 [25:12<03:07,  3.42s/it]2026-04-29:01:03:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  89%|████████▉ | 446/500 [25:15<03:04,  3.42s/it]2026-04-29:01:03:49 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  89%|████████▉ | 447/500 [25:19<03:01,  3.42s/it]2026-04-29:01:03:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  90%|████████▉ | 448/500 [25:22<02:57,  3.42s/it]2026-04-29:01:03:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  90%|████████▉ | 449/500 [25:26<02:54,  3.42s/it]2026-04-29:01:03:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  90%|█████████ | 450/500 [25:29<02:51,  3.42s/it]2026-04-29:01:04:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  90%|█████████ | 451/500 [25:33<02:47,  3.42s/it]2026-04-29:01:04:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  90%|█████████ | 452/500 [25:36<02:47,  3.50s/it]2026-04-29:01:04:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  91%|█████████ | 453/500 [25:40<02:43,  3.47s/it]2026-04-29:01:04:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  91%|█████████ | 454/500 [25:43<02:39,  3.47s/it]2026-04-29:01:04:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  91%|█████████ | 455/500 [25:47<02:35,  3.46s/it]2026-04-29:01:04:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  91%|█████████ | 456/500 [25:50<02:31,  3.45s/it]2026-04-29:01:04:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  91%|█████████▏| 457/500 [25:53<02:27,  3.44s/it]2026-04-29:01:04:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  92%|█████████▏| 458/500 [25:57<02:26,  3.50s/it]2026-04-29:01:04:31 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  92%|█████████▏| 459/500 [26:01<02:24,  3.54s/it]2026-04-29:01:04:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  92%|█████████▏| 460/500 [26:04<02:22,  3.56s/it]2026-04-29:01:04:38 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  92%|█████████▏| 461/500 [26:08<02:17,  3.52s/it]2026-04-29:01:04:41 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  92%|█████████▏| 462/500 [26:11<02:12,  3.49s/it]2026-04-29:01:04:45 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  93%|█████████▎| 463/500 [26:15<02:11,  3.54s/it]2026-04-29:01:04:48 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  93%|█████████▎| 464/500 [26:18<02:08,  3.56s/it]2026-04-29:01:04:52 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  93%|█████████▎| 465/500 [26:22<02:03,  3.53s/it]2026-04-29:01:04:55 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  93%|█████████▎| 466/500 [26:25<02:00,  3.55s/it]
+Requesting API:  93%|█████████▎| 467/500 [26:29<01:55,  3.51s/it]2026-04-29:01:05:02 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  94%|█████████▎| 468/500 [26:32<01:51,  3.48s/it]2026-04-29:01:05:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  94%|█████████▍| 469/500 [26:36<01:47,  3.46s/it]2026-04-29:01:05:09 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  94%|█████████▍| 470/500 [26:39<01:43,  3.45s/it]2026-04-29:01:05:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  94%|█████████▍| 471/500 [26:43<01:40,  3.45s/it]2026-04-29:01:05:16 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  94%|█████████▍| 472/500 [26:46<01:37,  3.50s/it]2026-04-29:01:05:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  95%|█████████▍| 473/500 [26:50<01:33,  3.48s/it]2026-04-29:01:05:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  95%|█████████▍| 474/500 [26:53<01:30,  3.47s/it]2026-04-29:01:05:26 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  95%|█████████▌| 475/500 [26:56<01:26,  3.46s/it]2026-04-29:01:05:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  95%|█████████▌| 476/500 [27:00<01:22,  3.45s/it]2026-04-29:01:05:33 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  95%|█████████▌| 477/500 [27:03<01:19,  3.45s/it]2026-04-29:01:05:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  96%|█████████▌| 478/500 [27:07<01:17,  3.50s/it]2026-04-29:01:05:40 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  96%|█████████▌| 479/500 [27:10<01:13,  3.50s/it]2026-04-29:01:05:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  96%|█████████▌| 480/500 [27:14<01:09,  3.49s/it]2026-04-29:01:05:48 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  96%|█████████▌| 481/500 [27:18<01:06,  3.53s/it]2026-04-29:01:05:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  96%|█████████▋| 482/500 [27:21<01:02,  3.50s/it]2026-04-29:01:05:56 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  97%|█████████▋| 483/500 [27:26<01:05,  3.87s/it]2026-04-29:01:05:59 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  97%|█████████▋| 484/500 [27:29<00:59,  3.75s/it]2026-04-29:01:06:03 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  97%|█████████▋| 485/500 [27:33<00:54,  3.65s/it]2026-04-29:01:06:06 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  97%|█████████▋| 486/500 [27:36<00:50,  3.60s/it]2026-04-29:01:06:10 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  97%|█████████▋| 487/500 [27:40<00:46,  3.55s/it]2026-04-29:01:06:13 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  98%|█████████▊| 488/500 [27:43<00:42,  3.56s/it]2026-04-29:01:06:17 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  98%|█████████▊| 489/500 [27:47<00:38,  3.52s/it]2026-04-29:01:06:20 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  98%|█████████▊| 490/500 [27:50<00:34,  3.50s/it]2026-04-29:01:06:23 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  98%|█████████▊| 491/500 [27:53<00:31,  3.47s/it]2026-04-29:01:06:27 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  98%|█████████▊| 492/500 [27:57<00:27,  3.46s/it]2026-04-29:01:06:30 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  99%|█████████▊| 493/500 [28:00<00:24,  3.46s/it]2026-04-29:01:06:34 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  99%|█████████▉| 494/500 [28:04<00:20,  3.45s/it]2026-04-29:01:06:37 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  99%|█████████▉| 495/500 [28:07<00:17,  3.46s/it]2026-04-29:01:06:41 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  99%|█████████▉| 496/500 [28:11<00:13,  3.45s/it]2026-04-29:01:06:44 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API:  99%|█████████▉| 497/500 [28:14<00:10,  3.44s/it]2026-04-29:01:06:47 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API: 100%|█████████▉| 498/500 [28:17<00:06,  3.44s/it]2026-04-29:01:06:51 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API: 100%|█████████▉| 499/500 [28:21<00:03,  3.44s/it]2026-04-29:01:06:54 WARNING  [models.openai_completions:224] Could not parse generations: 'content'
+
+Requesting API: 100%|██████████| 500/500 [28:24<00:00,  3.44s/it]
+Requesting API: 100%|██████████| 500/500 [28:24<00:00,  3.41s/it]
+2026-04-29:01:07:32 INFO     [loggers.evaluation_tracker:247] Saving results aggregated

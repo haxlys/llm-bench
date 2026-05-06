@@ -20,10 +20,11 @@ Schema:
         "bench_versions":     ["0.3"]
       },
       "evals": {
-        "tasks_measured":      5,
-        "tasks_supported":     12,
+        "tasks_measured":      5,  # supported measured tasks only
+        "tasks_supported":     12, # full default suite + non-optional external tasks
         "last_measured":       "2026-04-28T08:13:00Z",
-        "tasks":               ["mmlu_generative", "gsm8k_cot_zeroshot", ...]
+        "tasks":               ["mmlu_generative", "gsm8k_cot_zeroshot", ...],
+        "extra_tasks":          ["older_smoke_task"]
       }
     },
     ...
@@ -39,7 +40,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from llm_bench import BENCH_VERSION, N_RUNS_REQUIRED
-from llm_bench.evals.suites import full_suite, supports_fmt
+from llm_bench.evals.suites import (
+    capabilities_for_backend,
+    external_suite,
+    external_supports_capabilities,
+    full_suite,
+    supports_capabilities,
+)
 from llm_bench.manifest import eval_manifest, speed_manifest
 from llm_bench.registry import get_registry
 from llm_bench.scenarios import default_scenarios
@@ -59,16 +66,30 @@ def build_index() -> dict:
 
     variant_entries = []
     for v in registry.variants:
+        caps = getattr(
+            v,
+            "capabilities",
+            capabilities_for_backend(getattr(v, "backend", v.fmt)),
+        )
         s_measured = sum(
             1 for sc in scenarios
             if speed_m.counts.get((v.key, sc.name, BENCH_VERSION), 0) >= N_RUNS_REQUIRED
         )
-        e_supported = [t for _, t in full_tasks if supports_fmt(t, v.fmt)]
-        e_measured_tasks = sorted({t for (k, t) in eval_m.measured if k == v.key})
+        e_supported = {t for _, t in full_tasks if supports_capabilities(t, caps)}
+        e_supported.update(
+            t for _, t, runner in external_suite()
+            if runner != "bfcl" and external_supports_capabilities(t, runner, caps)
+        )
+        e_measured_all = {t for (k, t) in eval_m.measured if k == v.key}
+        e_measured_tasks = sorted(e_measured_all & e_supported)
+        e_extra_tasks = sorted(e_measured_all - e_supported)
         variant_entries.append({
             "key": v.key,
             "model_id": v.model_id,
             "fmt": v.fmt,
+            "backend": getattr(v, "backend", v.fmt),
+            "artifact_type": getattr(v, "artifact_type", ""),
+            "capabilities": sorted(caps),
             "quant": v.quant,
             "tier": v.tier,
             "family": v.family,
@@ -84,6 +105,7 @@ def build_index() -> dict:
                 "tasks_measured": len(e_measured_tasks),
                 "tasks_supported": len(e_supported),
                 "tasks": e_measured_tasks,
+                "extra_tasks": e_extra_tasks,
                 "last_measured": eval_m.last_ts.get(v.key) or None,
             },
         })

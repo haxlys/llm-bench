@@ -1,0 +1,5443 @@
+{
+  "results": {
+    "mmlu_generative": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": "mmlu (generative)"
+    },
+    "humanities": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - humanities"
+    },
+    "mmlu_formal_logic_generative": {
+      "alias": "  - formal_logic",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_european_history_generative": {
+      "alias": "  - high_school_european_history",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_us_history_generative": {
+      "alias": "  - high_school_us_history",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_world_history_generative": {
+      "alias": "  - high_school_world_history",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_international_law_generative": {
+      "alias": "  - international_law",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_jurisprudence_generative": {
+      "alias": "  - jurisprudence",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_logical_fallacies_generative": {
+      "alias": "  - logical_fallacies",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_moral_disputes_generative": {
+      "alias": "  - moral_disputes",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_moral_scenarios_generative": {
+      "alias": "  - moral_scenarios",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_philosophy_generative": {
+      "alias": "  - philosophy",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_prehistory_generative": {
+      "alias": "  - prehistory",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_professional_law_generative": {
+      "alias": "  - professional_law",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_world_religions_generative": {
+      "alias": "  - world_religions",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "other": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - other"
+    },
+    "mmlu_business_ethics_generative": {
+      "alias": "  - business_ethics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_clinical_knowledge_generative": {
+      "alias": "  - clinical_knowledge",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_college_medicine_generative": {
+      "alias": "  - college_medicine",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_global_facts_generative": {
+      "alias": "  - global_facts",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_human_aging_generative": {
+      "alias": "  - human_aging",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_management_generative": {
+      "alias": "  - management",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_marketing_generative": {
+      "alias": "  - marketing",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_medical_genetics_generative": {
+      "alias": "  - medical_genetics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_miscellaneous_generative": {
+      "alias": "  - miscellaneous",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_nutrition_generative": {
+      "alias": "  - nutrition",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_professional_accounting_generative": {
+      "alias": "  - professional_accounting",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_professional_medicine_generative": {
+      "alias": "  - professional_medicine",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_virology_generative": {
+      "alias": "  - virology",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "social sciences": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - social sciences"
+    },
+    "mmlu_econometrics_generative": {
+      "alias": "  - econometrics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_geography_generative": {
+      "alias": "  - high_school_geography",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_government_and_politics_generative": {
+      "alias": "  - high_school_government_and_politics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_macroeconomics_generative": {
+      "alias": "  - high_school_macroeconomics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_microeconomics_generative": {
+      "alias": "  - high_school_microeconomics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_psychology_generative": {
+      "alias": "  - high_school_psychology",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_human_sexuality_generative": {
+      "alias": "  - human_sexuality",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_professional_psychology_generative": {
+      "alias": "  - professional_psychology",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_public_relations_generative": {
+      "alias": "  - public_relations",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_security_studies_generative": {
+      "alias": "  - security_studies",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_sociology_generative": {
+      "alias": "  - sociology",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_us_foreign_policy_generative": {
+      "alias": "  - us_foreign_policy",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "stem": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - stem"
+    },
+    "mmlu_abstract_algebra_generative": {
+      "alias": "  - abstract_algebra",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_anatomy_generative": {
+      "alias": "  - anatomy",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_astronomy_generative": {
+      "alias": "  - astronomy",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_college_biology_generative": {
+      "alias": "  - college_biology",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_college_chemistry_generative": {
+      "alias": "  - college_chemistry",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_college_computer_science_generative": {
+      "alias": "  - college_computer_science",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_college_mathematics_generative": {
+      "alias": "  - college_mathematics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_college_physics_generative": {
+      "alias": "  - college_physics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_computer_security_generative": {
+      "alias": "  - computer_security",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_conceptual_physics_generative": {
+      "alias": "  - conceptual_physics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_electrical_engineering_generative": {
+      "alias": "  - electrical_engineering",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_elementary_mathematics_generative": {
+      "alias": "  - elementary_mathematics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_biology_generative": {
+      "alias": "  - high_school_biology",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_chemistry_generative": {
+      "alias": "  - high_school_chemistry",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_computer_science_generative": {
+      "alias": "  - high_school_computer_science",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_mathematics_generative": {
+      "alias": "  - high_school_mathematics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_physics_generative": {
+      "alias": "  - high_school_physics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_high_school_statistics_generative": {
+      "alias": "  - high_school_statistics",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    },
+    "mmlu_machine_learning_generative": {
+      "alias": "  - machine_learning",
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0
+    }
+  },
+  "groups": {
+    "mmlu_generative": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": "mmlu (generative)"
+    },
+    "humanities": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - humanities"
+    },
+    "other": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - other"
+    },
+    "social sciences": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - social sciences"
+    },
+    "stem": {
+      "exact_match,get_response": 0.0,
+      "exact_match_stderr,get_response": 0.0,
+      "alias": " - stem"
+    }
+  },
+  "group_subtasks": {
+    "humanities": [
+      "mmlu_formal_logic_generative",
+      "mmlu_high_school_european_history_generative",
+      "mmlu_high_school_us_history_generative",
+      "mmlu_high_school_world_history_generative",
+      "mmlu_international_law_generative",
+      "mmlu_jurisprudence_generative",
+      "mmlu_logical_fallacies_generative",
+      "mmlu_moral_disputes_generative",
+      "mmlu_moral_scenarios_generative",
+      "mmlu_philosophy_generative",
+      "mmlu_prehistory_generative",
+      "mmlu_professional_law_generative",
+      "mmlu_world_religions_generative"
+    ],
+    "social sciences": [
+      "mmlu_econometrics_generative",
+      "mmlu_high_school_geography_generative",
+      "mmlu_high_school_government_and_politics_generative",
+      "mmlu_high_school_macroeconomics_generative",
+      "mmlu_high_school_microeconomics_generative",
+      "mmlu_high_school_psychology_generative",
+      "mmlu_human_sexuality_generative",
+      "mmlu_professional_psychology_generative",
+      "mmlu_public_relations_generative",
+      "mmlu_security_studies_generative",
+      "mmlu_sociology_generative",
+      "mmlu_us_foreign_policy_generative"
+    ],
+    "other": [
+      "mmlu_business_ethics_generative",
+      "mmlu_clinical_knowledge_generative",
+      "mmlu_college_medicine_generative",
+      "mmlu_global_facts_generative",
+      "mmlu_human_aging_generative",
+      "mmlu_management_generative",
+      "mmlu_marketing_generative",
+      "mmlu_medical_genetics_generative",
+      "mmlu_miscellaneous_generative",
+      "mmlu_nutrition_generative",
+      "mmlu_professional_accounting_generative",
+      "mmlu_professional_medicine_generative",
+      "mmlu_virology_generative"
+    ],
+    "stem": [
+      "mmlu_abstract_algebra_generative",
+      "mmlu_anatomy_generative",
+      "mmlu_astronomy_generative",
+      "mmlu_college_biology_generative",
+      "mmlu_college_chemistry_generative",
+      "mmlu_college_computer_science_generative",
+      "mmlu_college_mathematics_generative",
+      "mmlu_college_physics_generative",
+      "mmlu_computer_security_generative",
+      "mmlu_conceptual_physics_generative",
+      "mmlu_electrical_engineering_generative",
+      "mmlu_elementary_mathematics_generative",
+      "mmlu_high_school_biology_generative",
+      "mmlu_high_school_chemistry_generative",
+      "mmlu_high_school_computer_science_generative",
+      "mmlu_high_school_mathematics_generative",
+      "mmlu_high_school_physics_generative",
+      "mmlu_high_school_statistics_generative",
+      "mmlu_machine_learning_generative"
+    ],
+    "mmlu_generative": [
+      "stem",
+      "other",
+      "social sciences",
+      "humanities"
+    ]
+  },
+  "configs": {
+    "mmlu_abstract_algebra_generative": {
+      "task": "mmlu_abstract_algebra_generative",
+      "task_alias": "abstract_algebra",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "abstract_algebra",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about abstract algebra.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_anatomy_generative": {
+      "task": "mmlu_anatomy_generative",
+      "task_alias": "anatomy",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "anatomy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about anatomy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_astronomy_generative": {
+      "task": "mmlu_astronomy_generative",
+      "task_alias": "astronomy",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "astronomy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about astronomy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_business_ethics_generative": {
+      "task": "mmlu_business_ethics_generative",
+      "task_alias": "business_ethics",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "business_ethics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about business ethics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_clinical_knowledge_generative": {
+      "task": "mmlu_clinical_knowledge_generative",
+      "task_alias": "clinical_knowledge",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "clinical_knowledge",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about clinical knowledge.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_college_biology_generative": {
+      "task": "mmlu_college_biology_generative",
+      "task_alias": "college_biology",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_biology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about college biology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_college_chemistry_generative": {
+      "task": "mmlu_college_chemistry_generative",
+      "task_alias": "college_chemistry",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_chemistry",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about college chemistry.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_college_computer_science_generative": {
+      "task": "mmlu_college_computer_science_generative",
+      "task_alias": "college_computer_science",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_computer_science",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about college computer science.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_college_mathematics_generative": {
+      "task": "mmlu_college_mathematics_generative",
+      "task_alias": "college_mathematics",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_mathematics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about college mathematics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_college_medicine_generative": {
+      "task": "mmlu_college_medicine_generative",
+      "task_alias": "college_medicine",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_medicine",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about college medicine.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_college_physics_generative": {
+      "task": "mmlu_college_physics_generative",
+      "task_alias": "college_physics",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_physics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about college physics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_computer_security_generative": {
+      "task": "mmlu_computer_security_generative",
+      "task_alias": "computer_security",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "computer_security",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about computer security.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_conceptual_physics_generative": {
+      "task": "mmlu_conceptual_physics_generative",
+      "task_alias": "conceptual_physics",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "conceptual_physics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about conceptual physics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_econometrics_generative": {
+      "task": "mmlu_econometrics_generative",
+      "task_alias": "econometrics",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "econometrics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about econometrics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_electrical_engineering_generative": {
+      "task": "mmlu_electrical_engineering_generative",
+      "task_alias": "electrical_engineering",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "electrical_engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about electrical engineering.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_elementary_mathematics_generative": {
+      "task": "mmlu_elementary_mathematics_generative",
+      "task_alias": "elementary_mathematics",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "elementary_mathematics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about elementary mathematics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_formal_logic_generative": {
+      "task": "mmlu_formal_logic_generative",
+      "task_alias": "formal_logic",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "formal_logic",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about formal logic.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_global_facts_generative": {
+      "task": "mmlu_global_facts_generative",
+      "task_alias": "global_facts",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "global_facts",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about global facts.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_biology_generative": {
+      "task": "mmlu_high_school_biology_generative",
+      "task_alias": "high_school_biology",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_biology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school biology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_chemistry_generative": {
+      "task": "mmlu_high_school_chemistry_generative",
+      "task_alias": "high_school_chemistry",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_chemistry",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school chemistry.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_computer_science_generative": {
+      "task": "mmlu_high_school_computer_science_generative",
+      "task_alias": "high_school_computer_science",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_computer_science",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school computer science.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_european_history_generative": {
+      "task": "mmlu_high_school_european_history_generative",
+      "task_alias": "high_school_european_history",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_european_history",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school european history.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_geography_generative": {
+      "task": "mmlu_high_school_geography_generative",
+      "task_alias": "high_school_geography",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_geography",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school geography.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_government_and_politics_generative": {
+      "task": "mmlu_high_school_government_and_politics_generative",
+      "task_alias": "high_school_government_and_politics",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_government_and_politics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school government and politics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_macroeconomics_generative": {
+      "task": "mmlu_high_school_macroeconomics_generative",
+      "task_alias": "high_school_macroeconomics",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_macroeconomics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school macroeconomics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_mathematics_generative": {
+      "task": "mmlu_high_school_mathematics_generative",
+      "task_alias": "high_school_mathematics",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_mathematics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school mathematics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_microeconomics_generative": {
+      "task": "mmlu_high_school_microeconomics_generative",
+      "task_alias": "high_school_microeconomics",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_microeconomics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school microeconomics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_physics_generative": {
+      "task": "mmlu_high_school_physics_generative",
+      "task_alias": "high_school_physics",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_physics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school physics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_psychology_generative": {
+      "task": "mmlu_high_school_psychology_generative",
+      "task_alias": "high_school_psychology",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_psychology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school psychology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_statistics_generative": {
+      "task": "mmlu_high_school_statistics_generative",
+      "task_alias": "high_school_statistics",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_statistics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school statistics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_us_history_generative": {
+      "task": "mmlu_high_school_us_history_generative",
+      "task_alias": "high_school_us_history",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_us_history",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school us history.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_high_school_world_history_generative": {
+      "task": "mmlu_high_school_world_history_generative",
+      "task_alias": "high_school_world_history",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_world_history",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about high school world history.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_human_aging_generative": {
+      "task": "mmlu_human_aging_generative",
+      "task_alias": "human_aging",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "human_aging",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about human aging.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_human_sexuality_generative": {
+      "task": "mmlu_human_sexuality_generative",
+      "task_alias": "human_sexuality",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "human_sexuality",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about human sexuality.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_international_law_generative": {
+      "task": "mmlu_international_law_generative",
+      "task_alias": "international_law",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "international_law",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about international law.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_jurisprudence_generative": {
+      "task": "mmlu_jurisprudence_generative",
+      "task_alias": "jurisprudence",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "jurisprudence",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about jurisprudence.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_logical_fallacies_generative": {
+      "task": "mmlu_logical_fallacies_generative",
+      "task_alias": "logical_fallacies",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "logical_fallacies",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about logical fallacies.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_machine_learning_generative": {
+      "task": "mmlu_machine_learning_generative",
+      "task_alias": "machine_learning",
+      "tag": "mmlu_stem_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "machine_learning",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about machine learning.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_management_generative": {
+      "task": "mmlu_management_generative",
+      "task_alias": "management",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "management",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about management.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_marketing_generative": {
+      "task": "mmlu_marketing_generative",
+      "task_alias": "marketing",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "marketing",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about marketing.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_medical_genetics_generative": {
+      "task": "mmlu_medical_genetics_generative",
+      "task_alias": "medical_genetics",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "medical_genetics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about medical genetics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_miscellaneous_generative": {
+      "task": "mmlu_miscellaneous_generative",
+      "task_alias": "miscellaneous",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "miscellaneous",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about miscellaneous.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_moral_disputes_generative": {
+      "task": "mmlu_moral_disputes_generative",
+      "task_alias": "moral_disputes",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "moral_disputes",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about moral disputes.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_moral_scenarios_generative": {
+      "task": "mmlu_moral_scenarios_generative",
+      "task_alias": "moral_scenarios",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "moral_scenarios",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about moral scenarios.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_nutrition_generative": {
+      "task": "mmlu_nutrition_generative",
+      "task_alias": "nutrition",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "nutrition",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about nutrition.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_philosophy_generative": {
+      "task": "mmlu_philosophy_generative",
+      "task_alias": "philosophy",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "philosophy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about philosophy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_prehistory_generative": {
+      "task": "mmlu_prehistory_generative",
+      "task_alias": "prehistory",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "prehistory",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about prehistory.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_professional_accounting_generative": {
+      "task": "mmlu_professional_accounting_generative",
+      "task_alias": "professional_accounting",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_accounting",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about professional accounting.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_professional_law_generative": {
+      "task": "mmlu_professional_law_generative",
+      "task_alias": "professional_law",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_law",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about professional law.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_professional_medicine_generative": {
+      "task": "mmlu_professional_medicine_generative",
+      "task_alias": "professional_medicine",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_medicine",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about professional medicine.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_professional_psychology_generative": {
+      "task": "mmlu_professional_psychology_generative",
+      "task_alias": "professional_psychology",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_psychology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about professional psychology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_public_relations_generative": {
+      "task": "mmlu_public_relations_generative",
+      "task_alias": "public_relations",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "public_relations",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about public relations.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_security_studies_generative": {
+      "task": "mmlu_security_studies_generative",
+      "task_alias": "security_studies",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "security_studies",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about security studies.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_sociology_generative": {
+      "task": "mmlu_sociology_generative",
+      "task_alias": "sociology",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "sociology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about sociology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_us_foreign_policy_generative": {
+      "task": "mmlu_us_foreign_policy_generative",
+      "task_alias": "us_foreign_policy",
+      "tag": "mmlu_social_sciences_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "us_foreign_policy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about us foreign policy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_virology_generative": {
+      "task": "mmlu_virology_generative",
+      "task_alias": "virology",
+      "tag": "mmlu_other_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "virology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about virology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    },
+    "mmlu_world_religions_generative": {
+      "task": "mmlu_world_religions_generative",
+      "task_alias": "world_religions",
+      "tag": "mmlu_humanities_generative",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "world_religions",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+      "unsafe_code": false,
+      "description": "The following are multiple choice questions (with answers) about world religions.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": null,
+        "doc_to_target": "{{['A', 'B', 'C', 'D'][answer]}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_punctuation": true,
+          "ignore_case": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "</s>",
+          "\n"
+        ],
+        "max_gen_toks": 8192
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "get_response",
+          "filter": [
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)(?=\\n|$)"
+            },
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "regex",
+              "regex_pattern": "^(.*?)\\s*$"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    }
+  },
+  "versions": {
+    "humanities": null,
+    "mmlu_abstract_algebra_generative": 3.0,
+    "mmlu_anatomy_generative": 3.0,
+    "mmlu_astronomy_generative": 3.0,
+    "mmlu_business_ethics_generative": 3.0,
+    "mmlu_clinical_knowledge_generative": 3.0,
+    "mmlu_college_biology_generative": 3.0,
+    "mmlu_college_chemistry_generative": 3.0,
+    "mmlu_college_computer_science_generative": 3.0,
+    "mmlu_college_mathematics_generative": 3.0,
+    "mmlu_college_medicine_generative": 3.0,
+    "mmlu_college_physics_generative": 3.0,
+    "mmlu_computer_security_generative": 3.0,
+    "mmlu_conceptual_physics_generative": 3.0,
+    "mmlu_econometrics_generative": 3.0,
+    "mmlu_electrical_engineering_generative": 3.0,
+    "mmlu_elementary_mathematics_generative": 3.0,
+    "mmlu_formal_logic_generative": 3.0,
+    "mmlu_generative": 3,
+    "mmlu_global_facts_generative": 3.0,
+    "mmlu_high_school_biology_generative": 3.0,
+    "mmlu_high_school_chemistry_generative": 3.0,
+    "mmlu_high_school_computer_science_generative": 3.0,
+    "mmlu_high_school_european_history_generative": 3.0,
+    "mmlu_high_school_geography_generative": 3.0,
+    "mmlu_high_school_government_and_politics_generative": 3.0,
+    "mmlu_high_school_macroeconomics_generative": 3.0,
+    "mmlu_high_school_mathematics_generative": 3.0,
+    "mmlu_high_school_microeconomics_generative": 3.0,
+    "mmlu_high_school_physics_generative": 3.0,
+    "mmlu_high_school_psychology_generative": 3.0,
+    "mmlu_high_school_statistics_generative": 3.0,
+    "mmlu_high_school_us_history_generative": 3.0,
+    "mmlu_high_school_world_history_generative": 3.0,
+    "mmlu_human_aging_generative": 3.0,
+    "mmlu_human_sexuality_generative": 3.0,
+    "mmlu_international_law_generative": 3.0,
+    "mmlu_jurisprudence_generative": 3.0,
+    "mmlu_logical_fallacies_generative": 3.0,
+    "mmlu_machine_learning_generative": 3.0,
+    "mmlu_management_generative": 3.0,
+    "mmlu_marketing_generative": 3.0,
+    "mmlu_medical_genetics_generative": 3.0,
+    "mmlu_miscellaneous_generative": 3.0,
+    "mmlu_moral_disputes_generative": 3.0,
+    "mmlu_moral_scenarios_generative": 3.0,
+    "mmlu_nutrition_generative": 3.0,
+    "mmlu_philosophy_generative": 3.0,
+    "mmlu_prehistory_generative": 3.0,
+    "mmlu_professional_accounting_generative": 3.0,
+    "mmlu_professional_law_generative": 3.0,
+    "mmlu_professional_medicine_generative": 3.0,
+    "mmlu_professional_psychology_generative": 3.0,
+    "mmlu_public_relations_generative": 3.0,
+    "mmlu_security_studies_generative": 3.0,
+    "mmlu_sociology_generative": 3.0,
+    "mmlu_us_foreign_policy_generative": 3.0,
+    "mmlu_virology_generative": 3.0,
+    "mmlu_world_religions_generative": 3.0,
+    "other": null,
+    "social sciences": null,
+    "stem": null
+  },
+  "n-shot": {
+    "mmlu_abstract_algebra_generative": 0,
+    "mmlu_anatomy_generative": 0,
+    "mmlu_astronomy_generative": 0,
+    "mmlu_business_ethics_generative": 0,
+    "mmlu_clinical_knowledge_generative": 0,
+    "mmlu_college_biology_generative": 0,
+    "mmlu_college_chemistry_generative": 0,
+    "mmlu_college_computer_science_generative": 0,
+    "mmlu_college_mathematics_generative": 0,
+    "mmlu_college_medicine_generative": 0,
+    "mmlu_college_physics_generative": 0,
+    "mmlu_computer_security_generative": 0,
+    "mmlu_conceptual_physics_generative": 0,
+    "mmlu_econometrics_generative": 0,
+    "mmlu_electrical_engineering_generative": 0,
+    "mmlu_elementary_mathematics_generative": 0,
+    "mmlu_formal_logic_generative": 0,
+    "mmlu_global_facts_generative": 0,
+    "mmlu_high_school_biology_generative": 0,
+    "mmlu_high_school_chemistry_generative": 0,
+    "mmlu_high_school_computer_science_generative": 0,
+    "mmlu_high_school_european_history_generative": 0,
+    "mmlu_high_school_geography_generative": 0,
+    "mmlu_high_school_government_and_politics_generative": 0,
+    "mmlu_high_school_macroeconomics_generative": 0,
+    "mmlu_high_school_mathematics_generative": 0,
+    "mmlu_high_school_microeconomics_generative": 0,
+    "mmlu_high_school_physics_generative": 0,
+    "mmlu_high_school_psychology_generative": 0,
+    "mmlu_high_school_statistics_generative": 0,
+    "mmlu_high_school_us_history_generative": 0,
+    "mmlu_high_school_world_history_generative": 0,
+    "mmlu_human_aging_generative": 0,
+    "mmlu_human_sexuality_generative": 0,
+    "mmlu_international_law_generative": 0,
+    "mmlu_jurisprudence_generative": 0,
+    "mmlu_logical_fallacies_generative": 0,
+    "mmlu_machine_learning_generative": 0,
+    "mmlu_management_generative": 0,
+    "mmlu_marketing_generative": 0,
+    "mmlu_medical_genetics_generative": 0,
+    "mmlu_miscellaneous_generative": 0,
+    "mmlu_moral_disputes_generative": 0,
+    "mmlu_moral_scenarios_generative": 0,
+    "mmlu_nutrition_generative": 0,
+    "mmlu_philosophy_generative": 0,
+    "mmlu_prehistory_generative": 0,
+    "mmlu_professional_accounting_generative": 0,
+    "mmlu_professional_law_generative": 0,
+    "mmlu_professional_medicine_generative": 0,
+    "mmlu_professional_psychology_generative": 0,
+    "mmlu_public_relations_generative": 0,
+    "mmlu_security_studies_generative": 0,
+    "mmlu_sociology_generative": 0,
+    "mmlu_us_foreign_policy_generative": 0,
+    "mmlu_virology_generative": 0,
+    "mmlu_world_religions_generative": 0
+  },
+  "higher_is_better": {
+    "humanities": {
+      "exact_match": true
+    },
+    "mmlu_abstract_algebra_generative": {
+      "exact_match": true
+    },
+    "mmlu_anatomy_generative": {
+      "exact_match": true
+    },
+    "mmlu_astronomy_generative": {
+      "exact_match": true
+    },
+    "mmlu_business_ethics_generative": {
+      "exact_match": true
+    },
+    "mmlu_clinical_knowledge_generative": {
+      "exact_match": true
+    },
+    "mmlu_college_biology_generative": {
+      "exact_match": true
+    },
+    "mmlu_college_chemistry_generative": {
+      "exact_match": true
+    },
+    "mmlu_college_computer_science_generative": {
+      "exact_match": true
+    },
+    "mmlu_college_mathematics_generative": {
+      "exact_match": true
+    },
+    "mmlu_college_medicine_generative": {
+      "exact_match": true
+    },
+    "mmlu_college_physics_generative": {
+      "exact_match": true
+    },
+    "mmlu_computer_security_generative": {
+      "exact_match": true
+    },
+    "mmlu_conceptual_physics_generative": {
+      "exact_match": true
+    },
+    "mmlu_econometrics_generative": {
+      "exact_match": true
+    },
+    "mmlu_electrical_engineering_generative": {
+      "exact_match": true
+    },
+    "mmlu_elementary_mathematics_generative": {
+      "exact_match": true
+    },
+    "mmlu_formal_logic_generative": {
+      "exact_match": true
+    },
+    "mmlu_generative": {
+      "exact_match": true
+    },
+    "mmlu_global_facts_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_biology_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_chemistry_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_computer_science_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_european_history_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_geography_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_government_and_politics_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_macroeconomics_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_mathematics_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_microeconomics_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_physics_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_psychology_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_statistics_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_us_history_generative": {
+      "exact_match": true
+    },
+    "mmlu_high_school_world_history_generative": {
+      "exact_match": true
+    },
+    "mmlu_human_aging_generative": {
+      "exact_match": true
+    },
+    "mmlu_human_sexuality_generative": {
+      "exact_match": true
+    },
+    "mmlu_international_law_generative": {
+      "exact_match": true
+    },
+    "mmlu_jurisprudence_generative": {
+      "exact_match": true
+    },
+    "mmlu_logical_fallacies_generative": {
+      "exact_match": true
+    },
+    "mmlu_machine_learning_generative": {
+      "exact_match": true
+    },
+    "mmlu_management_generative": {
+      "exact_match": true
+    },
+    "mmlu_marketing_generative": {
+      "exact_match": true
+    },
+    "mmlu_medical_genetics_generative": {
+      "exact_match": true
+    },
+    "mmlu_miscellaneous_generative": {
+      "exact_match": true
+    },
+    "mmlu_moral_disputes_generative": {
+      "exact_match": true
+    },
+    "mmlu_moral_scenarios_generative": {
+      "exact_match": true
+    },
+    "mmlu_nutrition_generative": {
+      "exact_match": true
+    },
+    "mmlu_philosophy_generative": {
+      "exact_match": true
+    },
+    "mmlu_prehistory_generative": {
+      "exact_match": true
+    },
+    "mmlu_professional_accounting_generative": {
+      "exact_match": true
+    },
+    "mmlu_professional_law_generative": {
+      "exact_match": true
+    },
+    "mmlu_professional_medicine_generative": {
+      "exact_match": true
+    },
+    "mmlu_professional_psychology_generative": {
+      "exact_match": true
+    },
+    "mmlu_public_relations_generative": {
+      "exact_match": true
+    },
+    "mmlu_security_studies_generative": {
+      "exact_match": true
+    },
+    "mmlu_sociology_generative": {
+      "exact_match": true
+    },
+    "mmlu_us_foreign_policy_generative": {
+      "exact_match": true
+    },
+    "mmlu_virology_generative": {
+      "exact_match": true
+    },
+    "mmlu_world_religions_generative": {
+      "exact_match": true
+    },
+    "other": {
+      "exact_match": true
+    },
+    "social sciences": {
+      "exact_match": true
+    },
+    "stem": {
+      "exact_match": true
+    }
+  },
+  "n-samples": {
+    "mmlu_abstract_algebra_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_anatomy_generative": {
+      "original": 135,
+      "effective": 2
+    },
+    "mmlu_astronomy_generative": {
+      "original": 152,
+      "effective": 2
+    },
+    "mmlu_college_biology_generative": {
+      "original": 144,
+      "effective": 2
+    },
+    "mmlu_college_chemistry_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_college_computer_science_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_college_mathematics_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_college_physics_generative": {
+      "original": 102,
+      "effective": 2
+    },
+    "mmlu_computer_security_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_conceptual_physics_generative": {
+      "original": 235,
+      "effective": 2
+    },
+    "mmlu_electrical_engineering_generative": {
+      "original": 145,
+      "effective": 2
+    },
+    "mmlu_elementary_mathematics_generative": {
+      "original": 378,
+      "effective": 2
+    },
+    "mmlu_high_school_biology_generative": {
+      "original": 310,
+      "effective": 2
+    },
+    "mmlu_high_school_chemistry_generative": {
+      "original": 203,
+      "effective": 2
+    },
+    "mmlu_high_school_computer_science_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_high_school_mathematics_generative": {
+      "original": 270,
+      "effective": 2
+    },
+    "mmlu_high_school_physics_generative": {
+      "original": 151,
+      "effective": 2
+    },
+    "mmlu_high_school_statistics_generative": {
+      "original": 216,
+      "effective": 2
+    },
+    "mmlu_machine_learning_generative": {
+      "original": 112,
+      "effective": 2
+    },
+    "mmlu_business_ethics_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_clinical_knowledge_generative": {
+      "original": 265,
+      "effective": 2
+    },
+    "mmlu_college_medicine_generative": {
+      "original": 173,
+      "effective": 2
+    },
+    "mmlu_global_facts_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_human_aging_generative": {
+      "original": 223,
+      "effective": 2
+    },
+    "mmlu_management_generative": {
+      "original": 103,
+      "effective": 2
+    },
+    "mmlu_marketing_generative": {
+      "original": 234,
+      "effective": 2
+    },
+    "mmlu_medical_genetics_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_miscellaneous_generative": {
+      "original": 783,
+      "effective": 2
+    },
+    "mmlu_nutrition_generative": {
+      "original": 306,
+      "effective": 2
+    },
+    "mmlu_professional_accounting_generative": {
+      "original": 282,
+      "effective": 2
+    },
+    "mmlu_professional_medicine_generative": {
+      "original": 272,
+      "effective": 2
+    },
+    "mmlu_virology_generative": {
+      "original": 166,
+      "effective": 2
+    },
+    "mmlu_econometrics_generative": {
+      "original": 114,
+      "effective": 2
+    },
+    "mmlu_high_school_geography_generative": {
+      "original": 198,
+      "effective": 2
+    },
+    "mmlu_high_school_government_and_politics_generative": {
+      "original": 193,
+      "effective": 2
+    },
+    "mmlu_high_school_macroeconomics_generative": {
+      "original": 390,
+      "effective": 2
+    },
+    "mmlu_high_school_microeconomics_generative": {
+      "original": 238,
+      "effective": 2
+    },
+    "mmlu_high_school_psychology_generative": {
+      "original": 545,
+      "effective": 2
+    },
+    "mmlu_human_sexuality_generative": {
+      "original": 131,
+      "effective": 2
+    },
+    "mmlu_professional_psychology_generative": {
+      "original": 612,
+      "effective": 2
+    },
+    "mmlu_public_relations_generative": {
+      "original": 110,
+      "effective": 2
+    },
+    "mmlu_security_studies_generative": {
+      "original": 245,
+      "effective": 2
+    },
+    "mmlu_sociology_generative": {
+      "original": 201,
+      "effective": 2
+    },
+    "mmlu_us_foreign_policy_generative": {
+      "original": 100,
+      "effective": 2
+    },
+    "mmlu_formal_logic_generative": {
+      "original": 126,
+      "effective": 2
+    },
+    "mmlu_high_school_european_history_generative": {
+      "original": 165,
+      "effective": 2
+    },
+    "mmlu_high_school_us_history_generative": {
+      "original": 204,
+      "effective": 2
+    },
+    "mmlu_high_school_world_history_generative": {
+      "original": 237,
+      "effective": 2
+    },
+    "mmlu_international_law_generative": {
+      "original": 121,
+      "effective": 2
+    },
+    "mmlu_jurisprudence_generative": {
+      "original": 108,
+      "effective": 2
+    },
+    "mmlu_logical_fallacies_generative": {
+      "original": 163,
+      "effective": 2
+    },
+    "mmlu_moral_disputes_generative": {
+      "original": 346,
+      "effective": 2
+    },
+    "mmlu_moral_scenarios_generative": {
+      "original": 895,
+      "effective": 2
+    },
+    "mmlu_philosophy_generative": {
+      "original": 311,
+      "effective": 2
+    },
+    "mmlu_prehistory_generative": {
+      "original": 324,
+      "effective": 2
+    },
+    "mmlu_professional_law_generative": {
+      "original": 1534,
+      "effective": 2
+    },
+    "mmlu_world_religions_generative": {
+      "original": 171,
+      "effective": 2
+    }
+  },
+  "config": {
+    "model": "local-chat-completions",
+    "model_args": {
+      "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+      "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+      "tokenizer_backend": null,
+      "num_concurrent": 1,
+      "max_retries": 2
+    },
+    "batch_size": "1",
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "use_cache": null,
+    "limit": 2.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": {
+      "max_gen_toks": 8192
+    },
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "67be574",
+  "date": 1777446661.698126,
+  "pretty_env_info": "N/A (torch not installed)",
+  "transformers_version": "5.6.2",
+  "lm_eval_version": "0.4.11",
+  "upper_git_hash": null,
+  "task_hashes": {
+    "mmlu_abstract_algebra_generative": "8a2ad761be3d4a78b87ea474fefb54e335a7c2504b6da5bdec57cd1e9cc0e8dc",
+    "mmlu_anatomy_generative": "2778597b6435ec1028ad0db23ceca8eb5aebedfbafd697a3c7857bffbed8dd7e",
+    "mmlu_astronomy_generative": "78b076705ea2aface0336f49f3265f2e695096c8500d0a6f16f2dcd79d3c73cc",
+    "mmlu_college_biology_generative": "5b48b6ec884bb1844aaa370f4977c9ec4fede19bde28109f79a1b748a32148df",
+    "mmlu_college_chemistry_generative": "38c419237a45dd142839e8a5c8f1ec4d1049e97719603610a333adbc27b87f73",
+    "mmlu_college_computer_science_generative": "59b096fe72b0bd6b2aab111b8d5b0592cbc7c6b4e819aa75bda2b5013166b4e2",
+    "mmlu_college_mathematics_generative": "fbd3af0dd9a627aadda60035c447934b0bc1707e66fb0840508df0dc2d0a4112",
+    "mmlu_college_physics_generative": "ddf0f05fd88bc2da6a270e7c7db20de5279daa425d3daeafb26d037ecff2ede7",
+    "mmlu_computer_security_generative": "950c9201aaa8a0e8ebbb7e53c5d0151bcd8c1008378a4bbc8a71726e05fbf42c",
+    "mmlu_conceptual_physics_generative": "e1a7ab29454130aa9ad96b17fe1631fbd9ae3cdc2549b6f99be53b05a1ef67a3",
+    "mmlu_electrical_engineering_generative": "83563370f5f3ecd10b59b787bb0d6b4c0b4d7a479360e8f612efc36043c4ecdd",
+    "mmlu_elementary_mathematics_generative": "1657b2efd524a5cde7b6168d8286d9a1b57c9211854743cac49814294244e5f7",
+    "mmlu_high_school_biology_generative": "36881728c05a7eb464e82e3b3db561dfba420e9294570db77c18411a4e4f5b04",
+    "mmlu_high_school_chemistry_generative": "36bee3e63aeeb75773a2bae8bf667efd5a212f40b975723d87cf07e4b3bff393",
+    "mmlu_high_school_computer_science_generative": "7538c9f1fd0f8a8f215b7bc1f8c439a4c627c1ff3920f472fb4c4ad4cf3a6511",
+    "mmlu_high_school_mathematics_generative": "7fe175047184f9984b4971888d0e11163a73e19327c1bbdb786d94f18df70f97",
+    "mmlu_high_school_physics_generative": "a1fafe1d13368b4efe91a122c258061966eb523c3f98957865537dcd7bc192b2",
+    "mmlu_high_school_statistics_generative": "08f725423157470378d681527984666a1a2552c26fd04cced5a377d58ae3d576",
+    "mmlu_machine_learning_generative": "cb6114828568e283a3523b52cb058ba57151cd370f3b783cb1f835b4bf83431b",
+    "mmlu_business_ethics_generative": "ce55baf4a52be352ae3da928375b0bdf04161024cc60b2749a781329f6b2948c",
+    "mmlu_clinical_knowledge_generative": "3cca4ebc3bf9e69088cb7c5c06117aca48acae810f37f9750d3aab738d7b07be",
+    "mmlu_college_medicine_generative": "5aa3f1249570e59049be8882807ab05b483775eae1411d0911feee7ee4037314",
+    "mmlu_global_facts_generative": "5c6d7856591eded6f622e01f9e24a5caa45141bd917bd0d81712cd28c0798603",
+    "mmlu_human_aging_generative": "1e772cdfc078ebab539b9cafc439a1dd423bb24f2c9edf2d738c65a1c48b5c84",
+    "mmlu_management_generative": "bbef460c6a27918b4450b0dd89e9748f759abd43a2103d1c3576e909ab4919b6",
+    "mmlu_marketing_generative": "0b2bd94d184b75b9bd6631290f8ae743c5971e0d28d58046004b684401d0ca19",
+    "mmlu_medical_genetics_generative": "f8cb3a3bc48184c2b0d5b62488d64c115335cb17a07aca09b32b320230b3f4cf",
+    "mmlu_miscellaneous_generative": "8f69da2db12ad36eb8dc83acc7f02276ec871f924aef068bc42d0ef7f186defb",
+    "mmlu_nutrition_generative": "977a34e02a76bb65f56c02a915ed8927a4a66c0fbca26d033e88343c662a2000",
+    "mmlu_professional_accounting_generative": "31d068a6c96dd759540a84ba3836300481cdcddb03ea7fd244ef992aa89b5d8c",
+    "mmlu_professional_medicine_generative": "a6a802d52be40d59ba2113f524b167c278c7c46a7d10da2dd186b3b3b5e4272e",
+    "mmlu_virology_generative": "0c0423f13ee526b7415460ee5050c1626e5cdd48c7fa0a4aa0fd807fd18170d9",
+    "mmlu_econometrics_generative": "19524fe0b1314faa2656a1d14fcc9cac039f3aa9084ace746e7a2189dde04d8d",
+    "mmlu_high_school_geography_generative": "927279f31fb853dbf34325cc42ea78424da120d6d3aac26ad80acdda94d8ccf5",
+    "mmlu_high_school_government_and_politics_generative": "334a177119b9bd8eb59ad8c182191eaae9edf6e9c1468cfa697c2886fdc17f77",
+    "mmlu_high_school_macroeconomics_generative": "7d5362f4bc80b27f07b43d80684a0bdadf9ce30aabab4bfbf374ea0caf205b11",
+    "mmlu_high_school_microeconomics_generative": "377fdfb8d2c114e9f6f226fa14e8a2b4a7ce5c1e90337ea0f84c9f6e2c6cc0a1",
+    "mmlu_high_school_psychology_generative": "90b914127b78fac72dceefa8e13ca7a08f5546ae2cf3f484ad7ce443ac783fe1",
+    "mmlu_human_sexuality_generative": "9b4c9874571f41df21f796e4e59491f5e975a32140f8c429c9929be6fb35bed2",
+    "mmlu_professional_psychology_generative": "0a89fe43b510660b28542572e620fbe6b1b0405a745dbf73d6e1f923ff1665ad",
+    "mmlu_public_relations_generative": "0ae8935b11016c5380e7d11e498580248c88a15a040ed36965225d49701d92e0",
+    "mmlu_security_studies_generative": "35c0304fafa45d48aaac7e63a103a2d1d229f77d8bce10996bae5e00e79d6f60",
+    "mmlu_sociology_generative": "890c45121b7816a9e8226b4a2db10fd1d34483cbb63a0654cdcdce1afe29d30a",
+    "mmlu_us_foreign_policy_generative": "ebeb65a9d113011d477c170f5a2071af1887bab5e8bf9acbdc0c448123a74316",
+    "mmlu_formal_logic_generative": "02d860cf5095f2443c86150904eb0cecc6f16dbe86564e89a6e91f925e891b5b",
+    "mmlu_high_school_european_history_generative": "e3c9a91d72dba9459d8d9efdf9e0ff9a2b637aeafcc3fb5d6ac895992ce14112",
+    "mmlu_high_school_us_history_generative": "88fb16f83a02342074bd2618cd6183586c0ffa80f1a1e413157a0885fecb25ac",
+    "mmlu_high_school_world_history_generative": "0dcb4ffe0bf410b576706d0df584f6b19827e68ccb75305df18be4cbd4f3a493",
+    "mmlu_international_law_generative": "f220f1e712149bde714c45c6be756bcb3930bcb35add4b76bfdac0fbabe6da09",
+    "mmlu_jurisprudence_generative": "0881ce45d8490de82e2e8b628c550af05d0db92dd6cc0db6ad58139b84c4b8e2",
+    "mmlu_logical_fallacies_generative": "1a57613d82246e632c282b499c1bdaa70198c29f1a3f2c8df680e8cf55e580df",
+    "mmlu_moral_disputes_generative": "7f2147d90d7669f4390f8a445ba3ddea601831d5e65b320eead39667f4538735",
+    "mmlu_moral_scenarios_generative": "48e1df8f62b91a6852bff86e672e15c7fce9f6d4997d32429d718dc5f913b05e",
+    "mmlu_philosophy_generative": "02f600d67d97edec7f574484a8dfa21631d560ec961cbbe96580c3bcedac5c45",
+    "mmlu_prehistory_generative": "683b31c2eb883d450fd803740a8cb3d9608f8e1350337b95e4cf62d5bafe9657",
+    "mmlu_professional_law_generative": "f5e21a64165a11423d1b210fcc2263fec67e156090eebda768ed870f93a469a3",
+    "mmlu_world_religions_generative": "8796664f4c548e61f3600ed96f59c593fee2b8f4f9f52b667963cae897a86d42"
+  },
+  "model_source": "local-chat-completions",
+  "model_name": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+  "model_name_sanitized": "lmstudio-community__gemma-4-26B-A4B-it-MLX-4bit",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": true,
+  "chat_template": "",
+  "chat_template_sha": null,
+  "total_evaluation_time_seconds": "116.07553687499603"
+}

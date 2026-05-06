@@ -1,0 +1,188 @@
+[
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "reasoning",
+    "task": "mmlu_generative",
+    "status": "skipped_already_measured"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "reasoning",
+    "task": "gsm8k_cot_zeroshot",
+    "status": "skipped_already_measured"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "reasoning",
+    "task": "hellaswag",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "korean",
+    "task": "kmmlu_direct",
+    "status": "skipped_already_measured"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "korean",
+    "task": "hrm8k",
+    "status": "skipped_already_measured"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "korean",
+    "task": "haerae",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "korean",
+    "task": "kobest",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "code",
+    "task": "humaneval_instruct",
+    "status": "skipped_already_measured"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "safety",
+    "task": "truthfulqa-multi_gen_en",
+    "status": "skipped_already_measured"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "safety",
+    "task": "toxigen",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-8bit",
+    "fatal": "lm-eval not installed (uv sync --extra evals)"
+  },
+  {
+    "variant": "26B-MoE-mlx-4bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-4bit",
+    "dim": "reasoning",
+    "task": "hellaswag",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-4bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-4bit",
+    "dim": "korean",
+    "task": "haerae",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-4bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-4bit",
+    "dim": "korean",
+    "task": "kobest",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-4bit",
+    "model_id": "gemma-4-26B-A4B-it",
+    "fmt": "mlx",
+    "quant": "MLX-4bit",
+    "dim": "safety",
+    "task": "toxigen",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "26B-MoE-mlx-4bit",
+    "fatal": "lm-eval not installed (uv sync --extra evals)"
+  },
+  {
+    "variant": "26B-MoE-gguf-q8",
+    "fatal": "lm-eval not installed (uv sync --extra evals)"
+  },
+  {
+    "variant": "26B-MoE-gguf-q4",
+    "fatal": "lm-eval not installed (uv sync --extra evals)"
+  },
+  {
+    "variant": "31B-Dense-mlx-8bit",
+    "model_id": "gemma-4-31B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "reasoning",
+    "task": "hellaswag",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "31B-Dense-mlx-8bit",
+    "model_id": "gemma-4-31B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "korean",
+    "task": "haerae",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "31B-Dense-mlx-8bit",
+    "model_id": "gemma-4-31B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "korean",
+    "task": "kobest",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "31B-Dense-mlx-8bit",
+    "model_id": "gemma-4-31B-it",
+    "fmt": "mlx",
+    "quant": "MLX-8bit",
+    "dim": "safety",
+    "task": "toxigen",
+    "status": "skipped_logprob"
+  },
+  {
+    "variant": "31B-Dense-mlx-8bit",
+    "fatal": "lm-eval not installed (uv sync --extra evals)"
+  },
+  {
+    "variant": "31B-Dense-gguf-q8",
+    "fatal": "lm-eval not installed (uv sync --extra evals)"
+  }
+]

@@ -1,18 +1,21 @@
 """Walk lm-eval-harness output and build a tidy DataFrame of all metrics.
 
-Variant metadata (model_id, fmt, quant, tier) comes from the registry — no
+Variant metadata (model_id, fmt, backend, artifact_type, quant, tier) comes from the registry — no
 hardcoded VARIANT_META map here. Adding a model = edit registry.yaml.
 
 Schema of the resulting frame (`load_eval_results`):
 
     variant     str   "26B-MoE-mlx-8bit"
     model_id    str   from registry
-    fmt         str   "mlx" | "gguf"
+    fmt         str   legacy label ("mlx" | "gguf" | "api")
+    backend     str   runtime adapter ("mlx" | "gguf" | "openai-compatible")
+    artifact_type str "hf_repo" | "gguf_file" | "endpoint" | ...
     quant       str   from registry
     tier        str   from registry ("8bit" | "4bit")
     family      str   from registry ("gemma" | "qwen" | ...)
     architecture str  "dense" | "moe"
-    dim         str   "reasoning" | "korean" | "code" | "long" | "safety"
+    dim         str   "reasoning" | "korean" | "code" | "instruction" |
+                      "long" | "tool" | "safety"
     task        str   top-level task in suites.SUITES
     subtask     str   sub-result key from results JSON
     metric      str   metric column name from lm-eval
@@ -36,31 +39,52 @@ import pandas as pd
 from llm_bench.manifest import RUN_DIR_RE
 from llm_bench.registry import get_registry
 
-# Top-level task → dim mapping (mirrors suites.SUITES).
+# Top-level task → dim mapping (mirrors suites.SUITES + EXTERNAL_SUITES).
 TASK_DIM = {
     "mmlu_generative": "reasoning",
     "gsm8k_cot_zeroshot": "reasoning",
     "hellaswag": "reasoning",
+    "leaderboard_mmlu_pro": "reasoning",
+    "leaderboard_gpqa_diamond": "reasoning",
     "kmmlu_direct": "korean",
     "hrm8k": "korean",
     "haerae": "korean",
     "kobest": "korean",
     "humaneval_instruct": "code",
     "mbpp_instruct": "code",
+    "humaneval": "code",        # evalplus runner output dir
+    "mbpp": "code",             # evalplus runner output dir
+    "livecodebench": "code",
+    "leaderboard_ifeval": "instruction",
     "longbench": "long",
+    "bfcl": "tool",
+    "sourceqa": "source_grounding",
     "truthfulqa-multi_gen_en": "safety",
     "toxigen": "safety",
 }
 
 # Heuristic: which metric is the headline number for each task.
 # Order matters — first match wins.
+#
+# flexible-extract before strict-match: strict-match requires the model to
+# emit exactly "The answer is X." which most chat-tuned models don't, so it
+# under-reports raw capability. Flexible-extract pulls any number from the
+# response and reflects what the model actually got right.
 PRIMARY_METRICS = [
-    "exact_match,strict-match",
     "exact_match,flexible-extract",
+    "exact_match,strict-match",
     "exact_match,get_response",
     "exact_match,none",
+    "pass_at_1,extract_code",
+    "pass_at_1,base",            # evalplus base metric
     "pass@1,create_test",
     "pass@1,none",
+    # IFEval headline (HF Open LLM Leaderboard v2 reports prompt-level strict).
+    "prompt_level_strict_acc,none",
+    "prompt_level_loose_acc,none",
+    "inst_level_strict_acc,none",
+    # BFCL (`bfcl_eval` overall accuracy across categories).
+    "overall_accuracy,none",
     "acc,none",
     "acc_norm,none",
     "score,none",
@@ -95,7 +119,11 @@ def _flatten_results_json(path: Path) -> list[dict]:
         for k, v in metrics.items():
             if k == "alias" or not isinstance(v, (int, float)):
                 continue
-            if k.endswith("_stderr"):  # paired with non-stderr below
+            # Stderr keys take two shapes in lm-eval output:
+            #   "<metric>_stderr"           (no filter, e.g. older tasks)
+            #   "<metric>_stderr,<filter>"  (HF leaderboard_* tasks)
+            metric_name = k.split(",")[0] if "," in k else k
+            if metric_name.endswith("_stderr"):  # paired below, skip standalone
                 continue
             stderr_key = k.split(",")[0] + "_stderr," + k.split(",", 1)[1] if "," in k else None
             stderr = metrics.get(stderr_key) if stderr_key else None
@@ -129,13 +157,27 @@ def load_eval_results(eval_dir: Path) -> pd.DataFrame:
         try:
             v = registry.variant(variant_key)
             v_meta = {
-                "model_id": v.model_id, "fmt": v.fmt, "quant": v.quant,
-                "tier": v.tier, "family": v.family, "architecture": v.architecture,
+                "model_id": v.model_id,
+                "fmt": v.fmt,
+                "backend": getattr(v, "backend", v.fmt),
+                "artifact_type": getattr(v, "artifact_type", ""),
+                "quant": v.quant,
+                "tier": v.tier,
+                "family": v.family,
+                "architecture": v.architecture,
             }
         except KeyError:
             # Stale variant — keep the data but empty metadata
-            v_meta = {"model_id": "", "fmt": "", "quant": "",
-                      "tier": "", "family": "", "architecture": ""}
+            v_meta = {
+                "model_id": "",
+                "fmt": "",
+                "backend": "",
+                "artifact_type": "",
+                "quant": "",
+                "tier": "",
+                "family": "",
+                "architecture": "",
+            }
         for task_dir in sorted(run_dir.iterdir()):
             if not task_dir.is_dir():
                 continue
@@ -163,6 +205,9 @@ def primary_metric_view(df: pd.DataFrame) -> pd.DataFrame:
 
     out_rows: list[pd.Series] = []
     for (variant, task), group in df.groupby(["variant", "task"], sort=False):
+        if "ts" in group.columns and group["ts"].notna().any():
+            latest_ts = group["ts"].max()
+            group = group[group["ts"] == latest_ts]
         top = group[group["subtask"] == task]
         if top.empty:
             # average across subtasks for each metric
@@ -172,10 +217,20 @@ def primary_metric_view(df: pd.DataFrame) -> pd.DataFrame:
             agg["task"] = task
             agg["model_id"] = group["model_id"].iloc[0]
             agg["fmt"] = group["fmt"].iloc[0]
+            agg["backend"] = group["backend"].iloc[0] if "backend" in group.columns else ""
+            agg["artifact_type"] = (
+                group["artifact_type"].iloc[0] if "artifact_type" in group.columns else ""
+            )
             agg["quant"] = group["quant"].iloc[0]
             agg["tier"] = group["tier"].iloc[0]
+            agg["family"] = group["family"].iloc[0] if "family" in group.columns else ""
+            agg["architecture"] = (
+                group["architecture"].iloc[0] if "architecture" in group.columns else ""
+            )
             agg["dim"] = group["dim"].iloc[0]
             agg["subtask"] = "<aggregated>"
+            agg["run_id"] = group["run_id"].iloc[0] if "run_id" in group.columns else ""
+            agg["ts"] = group["ts"].iloc[0] if "ts" in group.columns else ""
             top = agg
 
         chosen = None

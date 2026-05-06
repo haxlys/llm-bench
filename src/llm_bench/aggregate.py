@@ -10,11 +10,11 @@ from pathlib import Path
 
 import pandas as pd
 
-from llm_bench.registry import get_registry
+from llm_bench.registry import default_artifact_type, get_registry
 
 
 SUMMARY_COLS = [
-    "ts", "model_id", "fmt", "quant", "scenario",
+    "ts", "model_id", "fmt", "backend", "artifact_type", "quant", "scenario",
     "n_prompt", "n_gen", "pp_tps", "tg_tps",
     "peak_mem_gb", "wall_s", "run_idx", "bench_version", "variant_key",
 ]
@@ -36,6 +36,10 @@ def load_raw(raw_dir: Path) -> pd.DataFrame:
         except json.JSONDecodeError:
             continue
         row = {k: data.get(k) for k in SUMMARY_COLS}
+        if not row.get("backend"):
+            row["backend"] = row.get("fmt", "")
+        if not row.get("artifact_type"):
+            row["artifact_type"] = default_artifact_type(row.get("fmt", ""))
         row["tier"] = _quant_to_tier(row.get("quant", ""))
         rows.append(row)
     cols = SUMMARY_COLS + ["tier"]
@@ -56,7 +60,10 @@ def aggregate_means(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return df
     real = df[df["run_idx"] >= 1].copy()
-    group_cols = ["model_id", "fmt", "quant", "scenario", "n_prompt", "n_gen"]
+    group_cols = [
+        "model_id", "fmt", "backend", "artifact_type", "quant",
+        "scenario", "n_prompt", "n_gen",
+    ]
     grouped = real.groupby(group_cols, as_index=False).agg(
         pp_tps_mean=("pp_tps", "mean"),
         pp_tps_std=("pp_tps", "std"),

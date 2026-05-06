@@ -19,6 +19,7 @@ Examples:
 from __future__ import annotations
 
 import sys
+import os
 from pathlib import Path
 
 import click
@@ -27,7 +28,7 @@ from llm_bench import BENCH_VERSION
 from llm_bench.aggregate import write_summary
 from llm_bench.manifest import speed_is_measured, speed_manifest
 from llm_bench.registry import Variant, get_registry
-from llm_bench.runners import GGUFRunner, MLXRunner
+from llm_bench.runners import GGUFRunner, MLXRunner, OpenAICompatibleRunner
 from llm_bench.runners.base import write_raw
 from llm_bench.scenarios import default_scenarios, smoke_scenarios
 
@@ -37,14 +38,42 @@ SUMMARY_CSV = ROOT / "results" / "summary.csv"
 
 
 def _build_runner(variant: Variant):
-    if variant.fmt == "mlx":
+    backend = getattr(variant, "backend", variant.fmt)
+    if backend == "mlx":
         return MLXRunner(model_id=variant.model_id, model_path=variant.resolved_path,
                          quant=variant.quant, variant_key=variant.key)
-    return GGUFRunner(model_id=variant.model_id, model_path=variant.resolved_path,
-                      quant=variant.quant, variant_key=variant.key)
+    if backend == "gguf":
+        return GGUFRunner(model_id=variant.model_id, model_path=variant.resolved_path,
+                          quant=variant.quant, variant_key=variant.key)
+    if backend == "openai-compatible" and getattr(variant, "artifact_type", "") == "endpoint":
+        return OpenAICompatibleRunner(
+            model_id=variant.model_id,
+            model_label=getattr(variant, "api_model_label", variant.model_id),
+            base_url=variant.resolved_path,
+            quant=variant.quant,
+            variant_key=variant.key,
+            api_key=_api_key(variant),
+            fmt=variant.fmt,
+            backend=backend,
+            artifact_type=getattr(variant, "artifact_type", "endpoint"),
+        )
+    raise ValueError(
+        f"No speed runner adapter for backend '{backend}' "
+        f"(variant {variant.key}, fmt={variant.fmt})"
+    )
 
 
-def _resolve_targets(variant_keys: tuple, all_pending: bool, scenarios) -> list[Variant]:
+def _api_key(variant: Variant) -> str | None:
+    env_name = getattr(variant, "api_key_env", "") or "OPENAI_API_KEY"
+    return os.environ.get(env_name)
+
+
+def _resolve_targets(
+    variant_keys: tuple,
+    all_pending: bool,
+    scenarios,
+    n_required: int,
+) -> list[Variant]:
     registry = get_registry()
     if variant_keys:
         return [registry.variant(k) for k in variant_keys]
@@ -56,7 +85,12 @@ def _resolve_targets(variant_keys: tuple, all_pending: bool, scenarios) -> list[
             if not v.exists_locally():
                 continue
             for sc in scenarios:
-                if not speed_is_measured(manifest.counts, v.key, sc.name, n_required=3):
+                if not speed_is_measured(
+                    manifest.counts,
+                    v.key,
+                    sc.name,
+                    n_required=n_required,
+                ):
                     targets.append(v)
                     break
         return targets
@@ -75,7 +109,7 @@ def _resolve_targets(variant_keys: tuple, all_pending: bool, scenarios) -> list[
 def main(variant: tuple, all_pending: bool, runs: int, warmup: bool,
          smoke: bool, skip_existing: bool):
     scenarios = smoke_scenarios() if smoke else default_scenarios()
-    targets = _resolve_targets(variant, all_pending, scenarios)
+    targets = _resolve_targets(variant, all_pending, scenarios, n_required=runs)
     if not targets:
         click.echo("→ no targets. Specify --variant or --all-pending.")
         sys.exit(2)

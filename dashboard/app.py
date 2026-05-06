@@ -1,4 +1,4 @@
-"""Streamlit dashboard for MLX vs GGUF benchmark results."""
+"""Streamlit dashboard for llm-bench results."""
 
 from __future__ import annotations
 
@@ -20,6 +20,7 @@ from llm_bench.evals.aggregate import (  # noqa: E402
     primary_metric_view,
 )
 from llm_bench.index import build_index  # noqa: E402
+from llm_bench.reporting import ordered_variants, runtime_column  # noqa: E402
 
 RAW_DIR = ROOT / "results" / "raw"
 EVAL_DIR = ROOT / "results" / "eval_scores"
@@ -27,9 +28,13 @@ SUMMARY_CSV = ROOT / "results" / "summary.csv"
 QUALITY_GLOB = "quality_*.json"
 
 
-st.set_page_config(page_title="MLX vs GGUF — Gemma 4 Bench", layout="wide")
+st.set_page_config(page_title="llm-bench", layout="wide")
 
-FORMAT_COLORS = {"mlx": "#0a84ff", "gguf": "#34c759"}
+RUNTIME_COLORS = {
+    "mlx": "#0a84ff",
+    "gguf": "#34c759",
+    "openai-compatible": "#ff9f0a",
+}
 
 
 @st.cache_data(ttl=10)
@@ -75,34 +80,35 @@ def page_overview(raw: pd.DataFrame, means: pd.DataFrame) -> None:
     models = sorted(means["model_id"].unique().tolist())
     sel_model = st.selectbox("Model", models, index=0)
     df = means[means["model_id"] == sel_model].copy()
+    runtime = runtime_column(df)
 
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Generation speed (tok/s)")
         fig = px.bar(
-            df, x="scenario", y="tg_tps_mean", color="fmt", barmode="group",
+            df, x="scenario", y="tg_tps_mean", color=runtime, barmode="group",
             error_y="tg_tps_std",
-            color_discrete_map=FORMAT_COLORS,
+            color_discrete_map=RUNTIME_COLORS,
             labels={"tg_tps_mean": "TG tok/s", "scenario": "scenario"},
         )
-        fig.update_layout(height=400, legend_title_text="format")
+        fig.update_layout(height=400, legend_title_text=runtime)
         st.plotly_chart(fig, use_container_width=True)
     with col2:
         st.subheader("Prompt processing speed (tok/s)")
         fig = px.bar(
-            df, x="scenario", y="pp_tps_mean", color="fmt", barmode="group",
+            df, x="scenario", y="pp_tps_mean", color=runtime, barmode="group",
             error_y="pp_tps_std",
-            color_discrete_map=FORMAT_COLORS,
+            color_discrete_map=RUNTIME_COLORS,
             labels={"pp_tps_mean": "PP tok/s"},
         )
-        fig.update_layout(height=400, legend_title_text="format")
+        fig.update_layout(height=400, legend_title_text=runtime)
         st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("Speed vs Memory (Pareto view)")
     fig = px.scatter(
-        df, x="peak_mem_gb_mean", y="tg_tps_mean", color="fmt",
+        df, x="peak_mem_gb_mean", y="tg_tps_mean", color=runtime,
         symbol="scenario", size_max=20, size=[12]*len(df),
-        color_discrete_map=FORMAT_COLORS,
+        color_discrete_map=RUNTIME_COLORS,
         hover_data=["scenario", "pp_tps_mean", "tg_tps_mean"],
         labels={"peak_mem_gb_mean": "peak memory (GB)", "tg_tps_mean": "TG tok/s"},
     )
@@ -111,7 +117,7 @@ def page_overview(raw: pd.DataFrame, means: pd.DataFrame) -> None:
 
     st.subheader("Headline numbers")
     head = df.pivot_table(
-        index="scenario", columns="fmt",
+        index="scenario", columns=runtime,
         values=["pp_tps_mean", "tg_tps_mean", "peak_mem_gb_mean"],
     ).round(1)
     st.dataframe(head, use_container_width=True)
@@ -126,12 +132,13 @@ def page_scaling(means: pd.DataFrame) -> None:
     metric_col = "tg_tps_mean" if sel_metric == "TG tok/s" else "pp_tps_mean"
 
     df = means.copy()
+    runtime = runtime_column(df)
     df["x_label"] = df["scenario"]
     fig = px.line(
         df.sort_values("n_prompt"),
-        x="n_prompt", y=metric_col, color="fmt",
+        x="n_prompt", y=metric_col, color=runtime,
         line_dash="n_gen", markers=True,
-        color_discrete_map=FORMAT_COLORS,
+        color_discrete_map=RUNTIME_COLORS,
         labels={"n_prompt": "prefill length (tokens)", metric_col: sel_metric},
     )
     fig.update_xaxes(type="log")
@@ -148,7 +155,7 @@ def page_quality() -> None:
     qdf = pd.DataFrame(rows)
 
     if "cos_sim" in qdf.columns:
-        st.subheader("Embedding cosine similarity (MLX response vs GGUF response)")
+        st.subheader("Embedding cosine similarity")
         fig = go.Figure()
         fig.add_trace(go.Box(y=qdf["cos_sim"], name="all", boxpoints="all"))
         fig.update_layout(yaxis_title="cosine similarity", height=380)
@@ -160,11 +167,11 @@ def page_quality() -> None:
         with st.expander(f"[{r.get('id','?')}] {r.get('prompt','')[:80]}…"):
             c1, c2 = st.columns(2)
             with c1:
-                st.markdown("**MLX**")
-                st.code(r.get("mlx_response", ""))
+                st.markdown(f"**{r.get('left_label', 'A')}**")
+                st.code(r.get("left_response", r.get("mlx_response", "")))
             with c2:
-                st.markdown("**GGUF**")
-                st.code(r.get("gguf_response", ""))
+                st.markdown(f"**{r.get('right_label', 'B')}**")
+                st.code(r.get("right_response", r.get("gguf_response", "")))
             if "cos_sim" in r:
                 st.metric("cos similarity", f"{r['cos_sim']:.3f}")
 
@@ -184,13 +191,6 @@ def page_raw(raw: pd.DataFrame) -> None:
 
 # ---------------- Eval pages ----------------
 
-VARIANT_ORDER = [
-    "26B-MoE-mlx-8bit", "26B-MoE-gguf-q8",
-    "26B-MoE-mlx-4bit", "26B-MoE-gguf-q4",
-    "31B-Dense-mlx-8bit", "31B-Dense-gguf-q8",
-]
-
-
 def page_evals_overview(primary: pd.DataFrame) -> None:
     st.header("Eval scores — overview heatmap")
     if primary.empty:
@@ -198,9 +198,8 @@ def page_evals_overview(primary: pd.DataFrame) -> None:
         return
 
     pivot = primary.pivot_table(index="task", columns="variant", values="value")
-    # Reorder columns to a friendly variant ordering
-    cols = [c for c in VARIANT_ORDER if c in pivot.columns] + \
-           [c for c in pivot.columns if c not in VARIANT_ORDER]
+    cols = [c for c in ordered_variants(primary) if c in pivot.columns]
+    cols += [c for c in pivot.columns if c not in cols]
     pivot = pivot[cols]
 
     fig = px.imshow(
@@ -219,33 +218,51 @@ def page_evals_overview(primary: pd.DataFrame) -> None:
 
 
 def page_evals_compare(primary: pd.DataFrame) -> None:
-    st.header("MLX vs GGUF — accuracy delta")
+    st.header("Runtime accuracy delta")
     if primary.empty:
         st.info("No eval results yet.")
         return
 
-    # primary already carries model_id/fmt/quant/tier from the registry-aware
-    # loader (evals.aggregate.load_eval_results). Pivot directly.
-    pivot = primary.pivot_table(
-        index=["model_id", "tier", "task"], columns="fmt", values="value",
-    ).dropna(how="any").reset_index()
-    if pivot.empty:
-        st.info("Need both MLX and GGUF runs for the same model_id+tier.")
+    group_options = [c for c in ["backend", "fmt", "artifact_type"] if c in primary.columns]
+    group_col = st.selectbox("Compare by", group_options, index=0) if group_options else "fmt"
+    groups = sorted(g for g in primary[group_col].dropna().unique().tolist() if g)
+    if len(groups) < 2:
+        st.info(f"Need at least two {group_col} groups for the same model_id+tier.")
         return
-    pivot["delta_mlx_minus_gguf"] = pivot["mlx"] - pivot["gguf"]
-    pivot["pct_delta"] = (pivot["delta_mlx_minus_gguf"] / pivot["gguf"]).round(3)
+    c1, c2 = st.columns(2)
+    with c1:
+        baseline = st.selectbox("Baseline", groups, index=0)
+    with c2:
+        challenger = st.selectbox("Challenger", groups, index=min(1, len(groups) - 1))
+    if baseline == challenger:
+        st.info("Choose two different groups.")
+        return
+
+    pivot = primary.pivot_table(
+        index=["model_id", "tier", "task"], columns=group_col, values="value",
+    ).reset_index()
+    if pivot.empty or baseline not in pivot.columns or challenger not in pivot.columns:
+        st.info(f"Need both {baseline} and {challenger} runs for the same model_id+tier.")
+        return
+    pivot = pivot.dropna(subset=[baseline, challenger])
+    if pivot.empty:
+        st.info(f"Need both {baseline} and {challenger} runs for the same model_id+tier.")
+        return
+    delta_col = f"delta_{challenger}_minus_{baseline}"
+    pivot[delta_col] = pivot[challenger] - pivot[baseline]
+    pivot["pct_delta"] = (pivot[delta_col] / pivot[baseline]).round(3)
 
     sel_tier = st.radio("Tier", sorted(pivot["tier"].unique()), horizontal=True)
-    view = pivot[pivot["tier"] == sel_tier].sort_values("delta_mlx_minus_gguf")
+    view = pivot[pivot["tier"] == sel_tier].sort_values(delta_col)
     fig = px.bar(
-        view, x="delta_mlx_minus_gguf", y="task", color="model_id",
-        orientation="h", text="delta_mlx_minus_gguf",
-        labels={"delta_mlx_minus_gguf": "MLX − GGUF score"},
+        view, x=delta_col, y="task", color="model_id",
+        orientation="h", text=delta_col,
+        labels={delta_col: f"{challenger} − {baseline} score"},
     )
     fig.update_traces(texttemplate="%{text:.3f}", textposition="outside")
     fig.update_layout(height=400 + 30 * len(view))
     st.plotly_chart(fig, use_container_width=True)
-    st.caption("Positive = MLX wins, negative = GGUF wins. Same model + same tier.")
+    st.caption(f"Positive = {challenger} wins, negative = {baseline} wins. Same model + tier.")
     st.dataframe(view, use_container_width=True)
 
 
@@ -254,16 +271,17 @@ def page_evals_quantization(primary: pd.DataFrame) -> None:
     if primary.empty:
         st.info("No eval results yet.")
         return
+    runtime = runtime_column(primary)
     pivot = primary.pivot_table(
-        index=["model_id", "fmt", "task"], columns="tier", values="value",
+        index=["model_id", runtime, "task"], columns="tier", values="value",
     ).dropna(how="any").reset_index()
     if pivot.empty:
-        st.info("Need both 8bit and 4bit runs for the same model_id+fmt.")
+        st.info(f"Need both 8bit and 4bit runs for the same model_id+{runtime}.")
         return
     pivot["delta_4bit_minus_8bit"] = pivot["4bit"] - pivot["8bit"]
     fig = px.bar(
         pivot.sort_values("delta_4bit_minus_8bit"),
-        x="delta_4bit_minus_8bit", y="task", color="fmt", facet_col="model_id",
+        x="delta_4bit_minus_8bit", y="task", color=runtime, facet_col="model_id",
         orientation="h", labels={"delta_4bit_minus_8bit": "4bit − 8bit score"},
     )
     fig.update_layout(height=600)
@@ -361,7 +379,10 @@ def page_catalog(index: dict) -> None:
             "Variant": v["key"],
             "Model": v["model_id"],
             "Fmt": v["fmt"],
+            "Backend": v.get("backend", v["fmt"]),
+            "Artifact": v.get("artifact_type", ""),
             "Tier": v["tier"],
+            "Capabilities": ", ".join(v.get("capabilities", [])),
             "Size GB": v["approx_size_gb"],
             "Speed": f"{s['scenarios_measured']}/{s['scenarios_total']}",
             "Speed %": speed_pct,
@@ -396,7 +417,7 @@ def page_catalog(index: dict) -> None:
 
 
 def main():
-    st.title("llm-bench — MLX vs GGUF on Apple Silicon")
+    st.title("llm-bench")
     st.caption(f"Speed dir: `{RAW_DIR}`  ·  Eval dir: `{EVAL_DIR}` (refresh with R)")
     raw, means = load_data()
     full_evals, primary_evals = load_evals()
@@ -412,7 +433,7 @@ def main():
         "Speed Raw": lambda: page_raw(raw),
         # Evals
         "Evals Heatmap": lambda: page_evals_overview(primary_evals),
-        "Evals · MLX vs GGUF": lambda: page_evals_compare(primary_evals),
+        "Evals · Runtime Compare": lambda: page_evals_compare(primary_evals),
         "Evals · Quantization": lambda: page_evals_quantization(primary_evals),
         "Evals · Dimension": lambda: page_evals_dimension(full_evals, primary_evals),
         "Evals · LongBench Detail": lambda: page_evals_longbench(full_evals),

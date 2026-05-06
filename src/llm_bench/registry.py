@@ -35,25 +35,59 @@ class Variant:
     model_id: str                 # logical model id ("gemma-4-26B-A4B-it")
     family: str                   # "gemma", "qwen", "llama"
     architecture: Literal["dense", "moe"]
-    fmt: Literal["mlx", "gguf"]
+    fmt: str                      # legacy artifact/runtime label ("mlx", "gguf", "api", ...)
     path: str                     # HF repo id (mlx) OR local file path (gguf)
     quant: str                    # "MLX-8bit", "Q8_0", "Q4_K_M", ...
     tier: str                     # "8bit", "4bit" — used to pair MLX↔GGUF
+    backend: str = ""             # runtime adapter key; defaults to fmt
+    artifact_type: str = ""       # e.g. hf_repo, gguf_file, endpoint
+    capabilities: frozenset[str] = field(default_factory=frozenset)
+    api_model: str = ""           # model id sent to OpenAI-compatible APIs
+    tokenizer: str = ""           # HF tokenizer repo/path for completion evals
+    api_key_env: str = ""         # env var copied to Authorization/OpenAI_API_KEY
     params_total_b: float | None = None
     params_active_b: float | None = None
     approx_size_gb: float | None = None
     download: Download | None = None
     notes: str = ""
 
+    def __post_init__(self) -> None:
+        if not self.backend:
+            object.__setattr__(self, "backend", self.fmt)
+        if not self.artifact_type:
+            object.__setattr__(self, "artifact_type", default_artifact_type(self.fmt))
+        if not self.capabilities:
+            object.__setattr__(
+                self,
+                "capabilities",
+                default_capabilities(self.backend, self.fmt),
+            )
+
     @property
     def is_local_file(self) -> bool:
-        """True if path points to an on-disk file (gguf), False if HF repo id (mlx)."""
-        return self.fmt == "gguf"
+        """True if path points to an on-disk model artifact."""
+        return self.artifact_type in {"gguf_file", "file"}
+
+    @property
+    def requires_local_artifact(self) -> bool:
+        """False for hosted endpoints that have no local download/check step."""
+        return self.artifact_type != "endpoint"
+
+    @property
+    def api_model_label(self) -> str:
+        """Model label to send to OpenAI-compatible eval clients."""
+        if self.api_model:
+            return self.api_model
+        if self.backend == "openai-compatible":
+            return self.model_id
+        if self.backend == "mlx":
+            return self.path
+        return self.key
 
     @property
     def resolved_path(self) -> str:
-        """For gguf: expanded absolute path. For mlx: HF id passthrough."""
-        if self.fmt == "gguf":
+        """Expand local paths; keep repo ids/endpoints as-is."""
+        if self.is_local_file:
             return os.path.expanduser(self.path)
         return self.path
 
@@ -66,9 +100,13 @@ class Variant:
             are still risky but config.json present means the snapshot dir
             was created after the resolve step).
         """
-        if self.fmt == "gguf":
+        if not self.requires_local_artifact:
+            return True
+        if self.is_local_file:
             p = Path(self.resolved_path)
             return p.is_file() and p.stat().st_size > 0
+        if self.artifact_type != "hf_repo":
+            return False
         cache_dir = Path.home() / ".cache" / "huggingface" / "hub"
         slug = "models--" + self.path.replace("/", "--")
         repo_dir = cache_dir / slug
@@ -80,7 +118,15 @@ class Variant:
         except OSError:
             return False
         config = repo_dir / "snapshots" / rev / "config.json"
-        return config.is_file() and config.stat().st_size > 0
+        if not config.is_file() or config.stat().st_size <= 0:
+            return False
+        snapshot = config.parent
+        weight_globs = ("*.safetensors", "*.bin", "*.gguf")
+        return any(
+            p.is_file() and p.stat().st_size > 0
+            for pattern in weight_globs
+            for p in snapshot.glob(pattern)
+        )
 
 
 @dataclass(frozen=True)
@@ -120,6 +166,9 @@ class Registry:
     def variants_by_fmt(self, fmt: str) -> list[Variant]:
         return [v for v in self.variants if v.fmt == fmt]
 
+    def variants_by_backend(self, backend: str) -> list[Variant]:
+        return [v for v in self.variants if v.backend == backend]
+
     def model(self, model_id: str) -> Model:
         for m in self.models:
             if m.id == model_id:
@@ -140,9 +189,30 @@ def _interpolate(s: str, defaults: dict) -> str:
     return os.path.expanduser(out)
 
 
-ALLOWED_FMTS = {"mlx", "gguf"}
-ALLOWED_TIERS = {"4bit", "5bit", "6bit", "8bit", "16bit", "fp16", "bf16"}
+ALLOWED_FMTS = {"mlx", "gguf", "api"}
+ALLOWED_TIERS = {"4bit", "5bit", "6bit", "8bit", "16bit", "fp16", "bf16", "hosted"}
 ALLOWED_ARCHS = {"dense", "moe"}
+
+
+def default_artifact_type(fmt: str) -> str:
+    if fmt == "gguf":
+        return "gguf_file"
+    if fmt == "mlx":
+        return "hf_repo"
+    if fmt == "api":
+        return "endpoint"
+    return "artifact"
+
+
+def default_capabilities(backend: str, fmt: str) -> frozenset[str]:
+    key = backend or fmt
+    if key == "gguf":
+        return frozenset({"chat", "completions", "code_eval_chat", "tool_use_eval"})
+    if key == "mlx":
+        return frozenset({"chat", "completions"})
+    if key == "openai-compatible":
+        return frozenset({"chat", "completions"})
+    return frozenset()
 
 
 def _validate(variants: list[Variant], models: list["Model"]) -> None:
@@ -168,18 +238,18 @@ def _validate(variants: list[Variant], models: list["Model"]) -> None:
                 f"variant '{v.key}': architecture='{v.architecture}' "
                 f"not in {sorted(ALLOWED_ARCHS)}"
             )
-        # GGUF without download spec must already have an absolute path on disk
-        if v.fmt == "gguf" and v.download is None:
+        # Local files without download spec must already have an absolute path on disk.
+        if v.is_local_file and v.download is None:
             if not v.resolved_path.startswith("/"):
                 raise ValueError(
-                    f"variant '{v.key}': gguf path '{v.path}' is relative "
+                    f"variant '{v.key}': local artifact path '{v.path}' is relative "
                     f"and has no download: spec; provide one or use absolute path"
                 )
         # Reproducibility: warn (don't fail) when a remote source has no pinned
         # revision. A reproducer two months out may pick up new weights at the
         # same key — same BENCH_VERSION, different numbers.
-        needs_pin = (
-            (v.fmt == "mlx") or (v.fmt == "gguf" and v.download is not None)
+        needs_pin = v.artifact_type == "hf_repo" or (
+            v.is_local_file and v.download is not None
         )
         has_pin = v.download is not None and v.download.revision is not None
         if needs_pin and not has_pin:
@@ -206,15 +276,30 @@ def load_registry(path: Path | None = None) -> Registry:
         for v_raw in m_raw.get("variants", []):
             dl_raw = v_raw.get("download")
             dl = Download(**dl_raw) if dl_raw else None
+            fmt = v_raw["fmt"]
+            backend = v_raw.get("backend") or fmt
+            artifact_type = v_raw.get("artifact_type") or default_artifact_type(fmt)
+            caps_raw = v_raw.get("capabilities")
+            capabilities = (
+                frozenset(str(c) for c in caps_raw)
+                if caps_raw is not None
+                else default_capabilities(backend, fmt)
+            )
             v_objs.append(Variant(
                 key=v_raw["key"],
                 model_id=m_raw["id"],
                 family=m_raw["family"],
                 architecture=m_raw["architecture"],
-                fmt=v_raw["fmt"],
+                fmt=fmt,
                 path=_interpolate(v_raw["path"], defaults),
                 quant=v_raw["quant"],
                 tier=v_raw["tier"],
+                backend=backend,
+                artifact_type=artifact_type,
+                capabilities=capabilities,
+                api_model=v_raw.get("api_model", ""),
+                tokenizer=v_raw.get("tokenizer", ""),
+                api_key_env=v_raw.get("api_key_env", ""),
                 params_total_b=m_raw.get("params_total_b") or v_raw.get("params_total_b"),
                 params_active_b=m_raw.get("params_active_b") or v_raw.get("params_active_b"),
                 approx_size_gb=v_raw.get("approx_size_gb"),

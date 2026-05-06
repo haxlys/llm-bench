@@ -71,9 +71,11 @@ Quality is **not** scored absolutely. We are asking: *does the runtime change th
 
 ## Multi-dimensional evals (v0.2+)
 
-Beyond speed/memory, accuracy/quality is measured across five dimensions via
-lm-eval-harness against an OpenAI-compatible server (`mlx_lm.server` for MLX,
-`llama-server` for GGUF) booted ad-hoc per variant on port 9090.
+Beyond speed/memory, accuracy/quality is measured across multiple dimensions
+via lm-eval-harness and lightweight external runners against an
+OpenAI-compatible server (`mlx_lm.server` for MLX, `llama-server` for GGUF)
+booted ad-hoc per local variant on port 9090. Hosted endpoint variants reuse
+their configured `/v1` endpoint directly and do not spawn a subprocess.
 
 ### Tasks per dimension
 
@@ -83,6 +85,7 @@ lm-eval-harness against an OpenAI-compatible server (`mlx_lm.server` for MLX,
 | korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
 | code | `humaneval_instruct`, `mbpp_instruct` | — |
 | long | `longbench` (21 sub-tasks) | — |
+| source grounding | `sourceqa` pinned-repo evidence QA | — |
 | safety | `truthfulqa-multi_gen_en` | `toxigen` |
 
 ### Why two task families?
@@ -93,16 +96,15 @@ has higher log P?") therefore cannot run on MLX. We use generative variants
 (`mmlu_generative`, `kmmlu_direct`, `truthfulqa-multi_gen_en`) so both
 runtimes are evaluated on identical task definitions where possible.
 
-`run_evals.py` calls `supports_fmt(task, fmt)` and prints
-`SKIP (loglikelihood-only, fmt=mlx unsupported)` for the four GGUF-only tasks
-when the variant is MLX. This is intentional — GGUF gets MCQ coverage, MLX
-gets generative-variant coverage of the same underlying ability.
+`run_evals.py` gates tasks through declared variant capabilities. For example,
+tasks that require logprobs are skipped for backends that only declare chat and
+completion support.
 
 ### Eval protocol
 
 For each variant (model_id × fmt × quant):
 
-1. Spawn fresh inference server on port 9090, wait for `/v1/models` 200 OK.
+1. Spawn a fresh local inference server on port 9090, or reuse a configured endpoint.
 2. Run each task in the suite via `lm_eval` subprocess. Tasks tagged "chat"
    use `local-chat-completions` model class with `--apply_chat_template`;
    loglikelihood tasks use `local-completions` with HF tokenizer.
@@ -121,6 +123,23 @@ Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.
   headline metric (e.g. `exact_match,strict-match` for gsm8k,
   `pass@1,create_test` for HumanEval, subtask average for hrm8k)
 
+External runners also emit aggregate-compatible synthetic `results_*.json`
+files. For example, EvalPlus keeps its native `*_eval_results.json` beside the
+samples, then writes a compact `results_*.json` with `pass_at_1,base` and
+`pass_at_1,plus` so the same CSV/index path can consume it.
+
+`sourceqa` is the source-grounding dimension. Each task declares a pinned repo,
+commit, question, `required_any` signals, `forbidden` phrases, and exact
+`evidence_paths`. The runner clones the pinned commit, injects only the curated
+evidence files into the prompt, and scores the answer deterministically via
+required-signal recall, evidence-path recall, and forbidden-phrase violations.
+Optional judge metadata can be requested, but it is recorded separately and does
+not change the primary `acc,none` metric.
+
+Every eval task execution also appends one row to
+`results/eval_traces/<run_id>.jsonl` with variant, task, runner, status, wall
+time, result artifact path, optional sample path, log path, and error text.
+
 ### Registry-driven variants
 
 The list of variants is declared in `models/registry.yaml`, not in code.
@@ -129,11 +148,26 @@ Adding a new model = edit YAML, run `sync_models.py`, run `run_bench.py
 `--skip-existing` flag (default ON) skips combos already measured at the
 current `BENCH_VERSION`.
 
+Registry variants now distinguish the legacy `fmt` label from the more general
+runtime `backend`, `artifact_type`, `capabilities`, `api_model`, and
+`api_key_env`. Existing MLX/GGUF
+entries infer these fields automatically (`mlx` → `hf_repo` without logprobs,
+`gguf` → `gguf_file` with logprobs). Hosted or remote models can be described
+with `fmt: api`, `backend: openai-compatible`, `artifact_type: endpoint`, and
+explicit capabilities such as `chat`, `completions`, `logprobs`, or
+`tool_use_eval`. Speed runners cover MLX, GGUF, and OpenAI-compatible
+endpoints; endpoint speed uses wall-clock effective token rates because hosted
+APIs generally do not expose separate prefill/generation timings. Unsupported
+backends fail explicitly instead of being treated as GGUF. Eval runners can use
+`openai-compatible` endpoint variants directly; those variants reuse the
+configured endpoint instead of booting a local subprocess.
+
 Currently shipped: 6 variants in the gemma-4 family (26B-A4B MoE × {MLX-8bit,
 MLX-4bit, Q8_0, Q4_K_M} + 31B Dense × {MLX-8bit, Q8_0}). The full eval
-matrix is 6 variants × 12 tasks (minus 4 GGUF-only skips on MLX variants)
-≈ 60 invocations. Wall time ≈ 12–18 hours on M5 Max with all production
-launchd agents stopped.
+matrix size depends on enabled external runners and format support; GGUF gets
+additional loglikelihood tasks while MLX gets only chat-compatible tasks.
+Wall time is driven mostly by long-context and code/tool runners, so run those
+only when their dimensions are the explicit goal.
 
 ### Bench versioning
 

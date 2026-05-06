@@ -1,0 +1,21 @@
+tasks:
+  - id: grep-bench-runtime-flow
+    repo: https://github.com/davis7dotsh/grep-bench
+    commit: 1beddd2be0e48f6e4d0c9820764d5b80bfc6b37e
+    question: >
+      Using only the grep-bench source evidence, explain what tools are exposed
+      to benchmark agents and how answers are scored. Cite the exact file paths
+      used.
+    required_any:
+      - ["read"]
+      - ["bash"]
+      - ["council", "judge"]
+      - ["requiredAny", "expected facts"]
+      - ["src/bench.ts"]
+    forbidden:
+      - "web browsing is enabled"
+      - "browser tool"
+    evidence_paths:
+      - README.md
+      - src/bench.ts
+    max_evidence_chars: 60000

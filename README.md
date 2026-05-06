@@ -6,11 +6,11 @@
 [![tests](https://img.shields.io/badge/tests-18%20passed-brightgreen.svg)](tests/)
 [![platform](https://img.shields.io/badge/platform-macOS%20Apple%20Silicon-lightgrey.svg)](#)
 
-MLX vs GGUF inference benchmark for local LLMs on Apple Silicon (built for M5 Max 128GB).
+Registry-driven LLM benchmark for local runtimes and OpenAI-compatible endpoints.
 
-Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and **output divergence** between two formats of the same model — isolating the runtime, not the model. Multi-dimensional accuracy via `lm-eval-harness` across reasoning, Korean, code, long context, and safety dimensions.
+Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BFCL, SourceQA) across reasoning, Korean, code, instruction-following, long context, tool use, source grounding, and safety dimensions.
 
-First target pair: `gemma-4-26B-A4B-it` MLX 8bit ↔ GGUF Q8_0 (Mixture-of-Experts, 4B active / 26B total). Six pre-configured variants in `models/registry.yaml` covering Gemma 4 26B-MoE × {MLX-8bit, MLX-4bit, Q8_0, Q4_K_M} + 31B Dense × {MLX-8bit, Q8_0}.
+The shipped registry still includes the original Gemma 4 MLX/GGUF matrix, but the schema now also supports hosted `openai-compatible` endpoint variants.
 
 ## Quickstart
 
@@ -123,6 +123,25 @@ Currently shipped (six variants, gemma-4 family):
 `tier` pairs MLX-Nbit ↔ Q*_K_M for fair runtime comparisons. The dashboard
 **Catalog** page shows registry × measurement status at a glance.
 
+For generic benchmark use, each variant may also declare:
+
+```yaml
+backend: openai-compatible     # runtime adapter; defaults to fmt
+artifact_type: endpoint        # hf_repo, gguf_file, endpoint, ...
+capabilities: [chat, completions, logprobs]
+api_model: provider/model-id   # optional model= label for endpoint APIs
+api_key_env: PROVIDER_API_KEY  # optional env var copied to Authorization/OpenAI_API_KEY
+```
+
+Existing `mlx` and `gguf` variants infer these fields automatically. Speed
+benchmark adapters cover MLX, GGUF, and OpenAI-compatible endpoints.
+Unsupported backends are rejected explicitly so new adapters can be added
+without silently misrouting results. Endpoint speed uses wall-clock effective
+token rates because hosted APIs generally do not expose separate
+prefill/generation timings.
+Eval runs can use `openai-compatible` endpoint variants directly; the endpoint
+is treated as an existing `/v1` server and no local subprocess is spawned.
+
 ## Idempotency
 
 Every measurement records the current `bench_version` (currently `0.3`).
@@ -148,7 +167,7 @@ src/llm_bench/
   evals/                    # multi-dim accuracy (lm-eval-harness)
     server.py               # ModelServer (mlx_lm.server | llama-server)
     lmeval.py               # lm_eval CLI wrapper
-    suites.py               # SMOKE/FULL task lists, supports_fmt()
+    suites.py               # SMOKE/FULL task lists, capability gating
     aggregate.py            # eval JSON → tidy DataFrame
     bfcl.py                 # external-repo placeholder
   prompts.py                # 20 quality-comparison prompts (KO/EN)
@@ -187,17 +206,25 @@ MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 
 | Dimension | Tasks (chat-compatible) | Loglikelihood-only (gguf only) |
 |---|---|---|
-| Reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag` |
+| Reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag`, `leaderboard_mmlu_pro`, `leaderboard_gpqa_diamond` |
 | Korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
-| Code | `humaneval_instruct`, `mbpp_instruct` | — |
+| Code | `humaneval` / `mbpp` (EvalPlus), `livecodebench` | — |
+| Instruction | `leaderboard_ifeval` | — |
 | Long context | `longbench` (21 sub-tasks, EN+ZH) | — |
 | Safety | `truthfulqa-multi_gen_en` | `toxigen` |
-| Tool use | (BFCL — external repo, optional) | — |
+| Tool use | `bfcl` (BFCL v4, opt-in via `--include-bfcl`) | — |
+| Source grounding | `sourceqa` (pinned-repo evidence QA, deterministic checker) | — |
+
+The reasoning + instruction additions mirror HF Open LLM Leaderboard v2
+(MMLU-Pro / GPQA-Diamond / IFEval). LiveCodeBench complements EvalPlus
+with contamination-free contest problems. BFCL fills the previously-
+empty tool-use dim.
 
 `mlx_lm.server` does not return token logprobs in `/v1/completions`, so
-loglikelihood-based MCQ tasks (`hellaswag`, `kobest`, `haerae`, `toxigen`) only
-run on the GGUF path. Generative variants are used for the rest so both
-runtimes get apples-to-apples coverage.
+loglikelihood-based MCQ tasks (`hellaswag`, `kobest`, `haerae`, `toxigen`,
+`leaderboard_mmlu_pro`, `leaderboard_gpqa_diamond`) only run on the GGUF
+path. Generative variants are used for the rest so both runtimes get
+apples-to-apples coverage.
 
 > **⚠️ Code-eval safety.** `humaneval_instruct` and `mbpp_instruct` execute
 > the model's generated Python directly inside the lm-eval process
@@ -211,6 +238,10 @@ Setup:
 
 ```bash
 uv sync --extra evals
+
+# Optional, for the frontier external runners:
+uv pip install bfcl-eval                                                       # BFCL v4 (tool use)
+uv pip install git+https://github.com/LiveCodeBench/LiveCodeBench.git          # LiveCodeBench (contamination-free code)
 ```
 
 Smoke (verify wiring, ~10 min, limit=2 per task):
@@ -237,6 +268,9 @@ Env overrides:
 - `SUITE=smoke|full` (default `full`)
 - `LIMIT=N` (per-task sample cap)
 - `VARIANTS="26B-MoE-mlx-8bit 26B-MoE-gguf-q8"` (subset, default = all)
+- `LIVE_CODE_BENCH_REPO=/path/to/LiveCodeBench` — run source checkout version
+- `LIVE_CODE_BENCH_START_DATE=YYYY-MM-DD`, `LIVE_CODE_BENCH_END_DATE=YYYY-MM-DD`,
+  `LIVE_CODE_BENCH_MAX_TOKENS=N` — run a reproducible release window
 - `LAUNCH_AGENTS="com.you.foo com.you.bar"` — launchd agent labels to stop
   before the run and restart at the end. Default empty = no launchd
   management; stop GPU-using processes manually instead.
@@ -244,9 +278,17 @@ Env overrides:
 Each variant boots its own server on port 9090; tasks run sequentially per
 variant. Expect ~2–3 hours per variant for the full suite.
 
+`sourceqa` is a lightweight external runner inspired by repo-search benchmarks:
+it clones pinned source repositories, injects curated evidence files into a
+chat prompt, and writes deterministic `acc,none` / recall metrics to the same
+`results_*.json` shape as lm-eval. Optional judge metadata can be recorded with
+`--sourceqa-judge-model`, but it does not affect the primary score.
+
 Results:
 - `results/eval_scores/<run_id>/<task>/.../results_*.json` — raw lm-eval output
 - `results/eval_scores/summary_*.json` — flat list of {variant, task, results}
+- `results/eval_traces/<run_id>.jsonl` — per-task execution ledger with status,
+  wall time, artifacts, and errors
 - `results/eval_summary_full.csv` — every metric × subtask × variant (244+ rows)
 - `results/eval_summary_primary.csv` — one row per (variant, task), canonical metric
 - `results/server_logs/<run_id>.log` — model server stderr for debugging
@@ -264,12 +306,12 @@ uv run streamlit run dashboard/app.py
 |---|---|---|
 | Status | **Catalog** | Registry × measurement progress bars (entry point) |
 | Speed | **Speed Overview** | TG/PP bar charts, peak memory, Pareto scatter |
-| Speed | **Speed Scaling** | Context-length sweep with format colors |
-| Speed | **Output Quality (cos sim)** | 20-prompt MLX-vs-GGUF response similarity |
+| Speed | **Speed Scaling** | Context-length sweep by runtime |
+| Speed | **Output Quality (cos sim)** | Optional paired response similarity |
 | Speed | **Speed Raw** | Per-run JSON table + CSV download |
 | Eval | **Evals Heatmap** | Variant × task primary-score grid |
-| Eval | **Evals · MLX vs GGUF** | Score delta within same model+tier |
-| Eval | **Evals · Quantization** | 8bit vs 4bit accuracy hit per (model, fmt) |
+| Eval | **Evals · Runtime Compare** | Score delta within same model+tier across backend/fmt/artifact groups |
+| Eval | **Evals · Quantization** | 8bit vs 4bit accuracy hit per model/runtime |
 | Eval | **Evals · Dimension** | Per-dim bar charts with stderr |
 | Eval | **Evals · LongBench Detail** | 21 sub-task breakdown |
 | Eval | **Evals Raw** | Full metrics filterable table + CSV |
@@ -278,6 +320,8 @@ uv run streamlit run dashboard/app.py
 
 See [docs/methodology.md](docs/methodology.md) for measurement protocol,
 sanity checks, scenario matrix rationale, and the chat-vs-loglikelihood split.
+See [docs/model_policy.md](docs/model_policy.md) for the current local model
+selection policy and headline eval scores.
 
 ## Tests
 
