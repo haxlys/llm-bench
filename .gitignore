@@ -26,5 +26,14 @@ report/_freeze/
 # Streamlit
 .streamlit/secrets.toml
 
+# Website frontend outputs
+site/node_modules/
+site/.vinxi/
+site/.output/
+site/.wrangler/
+site/dist/
+site/playwright-report/
+site/test-results/
+
 # Local model paths file (machine-specific)
 .env.local
