@@ -748,7 +748,7 @@
       "status": "directional"
     }
   ],
-  "generatedAt": "2026-05-06T03:23:09.692672+00:00",
+  "generatedAt": "2026-05-06T03:30:54.741670+00:00",
   "hardware": {
     "machine": "Apple M5 Max",
     "memoryGb": 128,
@@ -861,7 +861,7 @@
       "verifyMsPerCallMean": 86.086
     }
   ],
-  "sourceCommit": "10e33cb",
+  "sourceCommit": "d8dc3b3",
   "speed": [
     {
       "backend": "gguf",

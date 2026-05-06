@@ -100,8 +100,14 @@ def _source_commit(repo_root: Path) -> str:
 
 
 def _bench_version(rows: Iterable[dict[str, str]]) -> str:
-    versions = [row.get("bench_version", "") for row in rows if row.get("bench_version", "")]
-    return max(versions, default="")
+    candidates = [
+        (row.get("ts", ""), index, row["bench_version"])
+        for index, row in enumerate(rows)
+        if row.get("bench_version", "")
+    ]
+    if not candidates:
+        return ""
+    return max(candidates, key=lambda item: (item[0], item[1]))[2]
 
 
 def _variant_entry(variant: Variant) -> dict[str, Any]:

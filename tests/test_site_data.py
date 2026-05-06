@@ -85,6 +85,26 @@ def test_build_site_data_preserves_zero_and_marks_unmeasured_latency(tmp_path: P
                 "bench_version": "0.3",
                 "variant_key": "test-variant",
                 "tier": "8bit",
+            },
+            {
+                "ts": "2026-05-06T00:05:00+00:00",
+                "model_id": "test-model",
+                "fmt": "gguf",
+                "backend": "gguf",
+                "artifact_type": "gguf_file",
+                "quant": "Q8_0",
+                "scenario": "p256_g128",
+                "generation_mode": "ar",
+                "n_prompt": 256,
+                "n_gen": 128,
+                "pp_tps": 120.0,
+                "tg_tps": 70.0,
+                "peak_mem_gb": 5.5,
+                "wall_s": 4.0,
+                "run_idx": 2,
+                "bench_version": "0.3",
+                "variant_key": "test-variant",
+                "tier": "8bit",
             }
         ],
     )
@@ -145,11 +165,120 @@ def test_build_site_data_preserves_zero_and_marks_unmeasured_latency(tmp_path: P
     assert data["sourceCommit"] == "abc1234"
     assert data["accuracy"][0]["value"] == 0.0
     assert data["accuracy"][0]["confidence"] == "directional"
-    assert data["speed"][0]["ppTpsMean"] == 100.0
-    assert data["speed"][0]["tgTpsMean"] == 50.0
+    assert data["speed"][0]["ppTpsMean"] == 110.0
+    assert data["speed"][0]["tgTpsMean"] == 60.0
+    assert data["speed"][0]["peakMemGbMean"] == 5.0
+    assert data["speed"][0]["wallSecondsMean"] == 3.0
+    assert data["speed"][0]["runs"] == 2
+    assert data["speed"][0]["runIndices"] == [1, 2]
     assert data["speed"][0]["ttftMs"] is None
     assert data["speed"][0]["itlMs"] is None
     assert data["mtplx"][0]["speedup"] == 1.6
+
+
+def test_build_site_data_uses_bench_version_from_most_recent_speed_row(
+    tmp_path: Path,
+) -> None:
+    _write_registry(tmp_path / "models" / "registry.yaml")
+    _write_csv(
+        tmp_path / "results" / "summary.csv",
+        [
+            {
+                "ts": "2026-05-05T00:00:00+00:00",
+                "model_id": "test-model",
+                "fmt": "gguf",
+                "backend": "gguf",
+                "artifact_type": "gguf_file",
+                "quant": "Q8_0",
+                "scenario": "p256_g128",
+                "generation_mode": "ar",
+                "n_prompt": 256,
+                "n_gen": 128,
+                "pp_tps": 100.0,
+                "tg_tps": 50.0,
+                "peak_mem_gb": 4.5,
+                "wall_s": 2.0,
+                "run_idx": 1,
+                "bench_version": "0.9",
+                "variant_key": "test-variant",
+                "tier": "8bit",
+            },
+            {
+                "ts": "2026-05-06T00:00:00+00:00",
+                "model_id": "test-model",
+                "fmt": "gguf",
+                "backend": "gguf",
+                "artifact_type": "gguf_file",
+                "quant": "Q8_0",
+                "scenario": "p256_g128",
+                "generation_mode": "ar",
+                "n_prompt": 256,
+                "n_gen": 128,
+                "pp_tps": 100.0,
+                "tg_tps": 50.0,
+                "peak_mem_gb": 4.5,
+                "wall_s": 2.0,
+                "run_idx": 2,
+                "bench_version": "0.10",
+                "variant_key": "test-variant",
+                "tier": "8bit",
+            },
+        ],
+    )
+    _write_csv(
+        tmp_path / "results" / "eval_summary_primary.csv",
+        [
+            {
+                "variant": "test-variant",
+                "model_id": "test-model",
+                "fmt": "gguf",
+                "backend": "gguf",
+                "artifact_type": "gguf_file",
+                "quant": "Q8_0",
+                "tier": "8bit",
+                "family": "qwen",
+                "architecture": "dense",
+                "dim": "source_grounding",
+                "task": "sourceqa",
+                "run_id": "run-1",
+                "ts": "20260506T000000Z",
+                "subtask": "sourceqa",
+                "metric": "acc,none",
+                "value": 1.0,
+                "stderr": "",
+            }
+        ],
+    )
+    _write_csv(
+        tmp_path / "results" / "mtplx_speedups.csv",
+        [
+            {
+                "pair_key": "mtplx-pair",
+                "scenario": "p256_g128",
+                "mtp_variant": "mtplx-mtp",
+                "ar_variant": "mtplx-ar",
+                "mtp_runs": 1,
+                "ar_runs": 1,
+                "mtp_tg_tps_mean": 40.0,
+                "ar_tg_tps_mean": 25.0,
+                "speedup": 1.6,
+                "mtp_peak_mem_gb_mean": 15.0,
+                "ar_peak_mem_gb_mean": 15.1,
+                "verify_ms_per_call_mean": 51.0,
+                "accept_d1_mean": 0.8,
+                "accept_d2_mean": 0.6,
+                "accept_d3_mean": 0.4,
+            }
+        ],
+    )
+
+    data = build_site_data(
+        repo_root=tmp_path,
+        generated_at="2026-05-06T12:00:00+00:00",
+        source_commit="abc1234",
+    )
+
+    assert data["benchVersion"] == "0.10"
 
 
 def test_write_site_data_outputs_stable_json(tmp_path: Path) -> None:
