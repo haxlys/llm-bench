@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => ({
     tanstackStart({
       srcDirectory: "app",
       prerender: {
+        crawlLinks: false,
         enabled: true,
       },
     }),

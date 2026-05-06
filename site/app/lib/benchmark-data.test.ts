@@ -2,8 +2,11 @@ import { describe, expect, it } from "vitest";
 
 import {
   type BenchmarkData,
+  benchmarkData,
   bestAccuracyRows,
   fastestSpeedRows,
+  scenarios,
+  tasks,
   variantByKey,
 } from "./benchmark-data";
 
@@ -145,5 +148,23 @@ describe("benchmark data helpers", () => {
 
   it("returns fastest speed rows for a scenario", () => {
     expect(fastestSpeedRows(fixture, "p256_g128", 1)[0].variant).toBe("b");
+  });
+
+  it("loads the generated benchmark dataset with compatible helpers", () => {
+    expect(benchmarkData.benchVersion).toBeTruthy();
+    expect(benchmarkData.generatedAt).toBeTruthy();
+    expect(benchmarkData.hardware.machine).toBeTruthy();
+    expect(benchmarkData.variants.length).toBeGreaterThan(0);
+    expect(benchmarkData.accuracy.length).toBeGreaterThan(0);
+    expect(benchmarkData.speed.length).toBeGreaterThan(0);
+    expect(benchmarkData.mtplx.length).toBeGreaterThan(0);
+
+    const firstVariant = benchmarkData.variants[0];
+    const firstTask = tasks(benchmarkData)[0];
+    const firstScenario = scenarios(benchmarkData)[0];
+
+    expect(variantByKey(benchmarkData).get(firstVariant.key)).toEqual(firstVariant);
+    expect(bestAccuracyRows(benchmarkData, firstTask, 1)[0].task).toBe(firstTask);
+    expect(fastestSpeedRows(benchmarkData, firstScenario, 1)[0].scenario).toBe(firstScenario);
   });
 });
