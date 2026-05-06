@@ -119,6 +119,7 @@ function assertBenchmarkData(input: unknown): asserts input is BenchmarkData {
   assertArray(input.speed, "speed");
   assertArray(input.mtplx, "mtplx");
   assertArray(input.variants, "variants");
+  assertArray(input.caveats, "caveats");
   assertString(input.benchVersion, "benchVersion");
   assertString(input.generatedAt, "generatedAt");
   assertString(input.sourceCommit, "sourceCommit");
@@ -130,6 +131,13 @@ function assertBenchmarkData(input: unknown): asserts input is BenchmarkData {
   input.speed.forEach(assertSpeedRow);
   input.mtplx.forEach(assertMtplxRow);
   input.variants.forEach(assertVariant);
+  input.caveats.forEach(assertCaveat);
+}
+
+function assertCaveat(input: unknown): asserts input is BenchmarkData["caveats"][number] {
+  assertRecord(input, "caveat");
+  assertString(input.id, "caveat id");
+  assertMetricStatus(input.status, "caveat status");
 }
 
 function assertAccuracyRow(input: unknown): asserts input is AccuracyRow {

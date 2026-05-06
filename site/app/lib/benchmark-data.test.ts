@@ -158,13 +158,17 @@ describe("benchmark data helpers", () => {
     expect(benchmarkData.accuracy.length).toBeGreaterThan(0);
     expect(benchmarkData.speed.length).toBeGreaterThan(0);
     expect(benchmarkData.mtplx.length).toBeGreaterThan(0);
+    expect(benchmarkData.caveats.length).toBeGreaterThan(0);
 
     const firstVariant = benchmarkData.variants[0];
     const firstTask = tasks(benchmarkData)[0];
     const firstScenario = scenarios(benchmarkData)[0];
+    const firstCaveat = benchmarkData.caveats[0];
 
     expect(variantByKey(benchmarkData).get(firstVariant.key)).toEqual(firstVariant);
     expect(bestAccuracyRows(benchmarkData, firstTask, 1)[0].task).toBe(firstTask);
     expect(fastestSpeedRows(benchmarkData, firstScenario, 1)[0].scenario).toBe(firstScenario);
+    expect(firstCaveat.id).toBeTruthy();
+    expect(["directional", "measured", "unavailable"]).toContain(firstCaveat.status);
   });
 });
