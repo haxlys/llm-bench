@@ -85,5 +85,6 @@ class MLXRunner:
             variant_key=self.variant_key,
             backend="mlx",
             artifact_type="hf_repo",
+            generation_mode="ar",
             raw={"mlx_peak_gb": mlx_peak, "rss_peak_gb": peak_mem_gb},
         )

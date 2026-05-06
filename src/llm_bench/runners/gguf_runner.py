@@ -82,5 +82,6 @@ class GGUFRunner:
             variant_key=self.variant_key,
             backend="gguf",
             artifact_type="gguf_file",
+            generation_mode="ar",
             raw={"llama_bench_entries": data},
         )

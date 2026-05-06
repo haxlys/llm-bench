@@ -38,6 +38,7 @@ class BenchResult:
     variant_key: str = ""      # registry key (e.g. "26B-MoE-mlx-8bit")
     backend: str = ""
     artifact_type: str = ""
+    generation_mode: str = ""
     raw: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
@@ -62,6 +63,7 @@ def run_with_time(
     cmd: list[str],
     env: dict | None = None,
     timeout_s: int = DEFAULT_TIMEOUT_S,
+    check: bool = True,
 ) -> tuple[str, str, float, float]:
     """Run cmd wrapped with /usr/bin/time -l. Returns (stdout, stderr, wall_s, peak_mem_gb).
 
@@ -96,9 +98,10 @@ def run_with_time(
             stderr=stderr,
         ) from e
     wall = time.perf_counter() - t0
-    if proc.returncode != 0:
+    if proc.returncode != 0 and check:
         raise RuntimeError(
             f"Command failed (rc={proc.returncode}): {' '.join(cmd[:3])}...\n"
+            f"stdout tail:\n{stdout[-2000:]}\n"
             f"stderr tail:\n{stderr[-2000:]}"
         )
 

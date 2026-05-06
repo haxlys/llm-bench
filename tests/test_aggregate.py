@@ -29,3 +29,4 @@ def test_load_raw_fills_generic_backend_metadata_for_legacy_rows(tmp_path):
 
     assert df.iloc[0]["backend"] == "mlx"
     assert df.iloc[0]["artifact_type"] == "hf_repo"
+    assert df.iloc[0]["generation_mode"] == "ar"

@@ -103,3 +103,22 @@ def test_build_runner_supports_openai_compatible_endpoint(monkeypatch):
     assert runner.model_label == "actual/model"
     assert runner.base_url == "https://models.example.test/v1"
     assert runner.api_key == "secret-token"
+
+
+def test_build_runner_supports_mtplx_backend():
+    run_bench = _load_run_bench()
+
+    class MtplxVariant:
+        key = "mtplx-mtp"
+        backend = "mtplx"
+        artifact_type = "hf_repo"
+        fmt = "mlx"
+        quant = "MLX-4bit"
+        model_id = "qwen-3.6-27B-MTPLX"
+        resolved_path = "Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed"
+        notes = "generation_mode=mtp"
+
+    runner = run_bench._build_runner(MtplxVariant())
+
+    assert runner.generation_mode == "mtp"
+    assert runner.model_path == "Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed"

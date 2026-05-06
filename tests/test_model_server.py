@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import subprocess
+import json
 
 import llm_bench.evals.server as server_mod
 from llm_bench.evals.server import ModelServer
@@ -48,3 +49,29 @@ def test_gguf_model_server_uses_configured_context_size(monkeypatch):
     cmd = server._build_cmd()
 
     assert cmd[cmd.index("-c") + 1] == "65536"
+
+
+def test_mlx_model_server_disables_thinking_by_default():
+    server = ModelServer(fmt="mlx", model_path="org/model")
+
+    cmd = server._build_cmd()
+
+    assert "--chat-template-args" in cmd
+    raw_args = cmd[cmd.index("--chat-template-args") + 1]
+    assert json.loads(raw_args) == {"enable_thinking": False}
+
+
+def test_mlx_model_server_accepts_custom_chat_template_args():
+    server = ModelServer(
+        fmt="mlx",
+        model_path="org/model",
+        chat_template_args={"enable_thinking": True, "preserve_thinking": True},
+    )
+
+    cmd = server._build_cmd()
+
+    raw_args = cmd[cmd.index("--chat-template-args") + 1]
+    assert json.loads(raw_args) == {
+        "enable_thinking": True,
+        "preserve_thinking": True,
+    }

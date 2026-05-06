@@ -23,6 +23,10 @@ def test_real_registry_loads():
     keys = {v.key for v in r.variants}
     assert "26B-MoE-mlx-8bit" in keys
     assert "31B-Dense-gguf-q8" in keys
+    assert "qwen-3.6-27b-mtplx-speed-mlx-4bit" in keys
+    assert "qwen-3.6-27b-mtplx-optimized-mlx-mixed4" in keys
+    assert "qwen-3.6-27b-mtplx-speed-mtplx-mtp" in keys
+    assert "qwen-3.6-27b-mtplx-speed-mtplx-ar" in keys
 
 
 def test_variant_lookup_by_model_and_tier():

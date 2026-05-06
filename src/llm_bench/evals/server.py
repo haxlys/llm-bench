@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import json
 import shutil
 import subprocess
 import sys
 import time
 from pathlib import Path
+from typing import Any
 
 import requests
 
@@ -46,6 +48,7 @@ class ModelServer:
         context_size: int = 16384,
         boot_timeout_s: int = 240,
         log_file: Path | None = None,
+        chat_template_args: dict[str, Any] | None = None,
     ):
         self.fmt = fmt
         self.backend = backend or fmt
@@ -59,6 +62,7 @@ class ModelServer:
         self.context_size = context_size
         self.boot_timeout_s = boot_timeout_s
         self.log_file = log_file
+        self.chat_template_args = chat_template_args
         self.proc: subprocess.Popen | None = None
 
     @property
@@ -69,13 +73,28 @@ class ModelServer:
 
     def _build_cmd(self) -> list[str]:
         if self.backend == "mlx":
-            return [
+            cmd = [
                 sys.executable, "-m", "mlx_lm", "server",
                 "--model", self.model_path,
                 "--host", self.host, "--port", str(self.port),
                 "--temp", "0.0",
                 "--max-tokens", str(MLX_DEFAULT_MAX_TOKENS),
             ]
+            # Qwen thinking templates can otherwise put the answer in the
+            # OpenAI `reasoning` field and leave `content` empty/truncated.
+            # Passing this as a server default keeps deterministic eval
+            # extraction stable while callers may still override it.
+            chat_template_args = (
+                {"enable_thinking": False}
+                if self.chat_template_args is None
+                else self.chat_template_args
+            )
+            if chat_template_args:
+                cmd.extend([
+                    "--chat-template-args",
+                    json.dumps(chat_template_args, separators=(",", ":")),
+                ])
+            return cmd
         if self.backend != "gguf":
             raise RuntimeError(
                 f"backend '{self.backend}' does not have a local server command"

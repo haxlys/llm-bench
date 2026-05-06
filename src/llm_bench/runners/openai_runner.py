@@ -96,6 +96,7 @@ class OpenAICompatibleRunner:
             variant_key=self.variant_key,
             backend=self.backend,
             artifact_type=self.artifact_type,
+            generation_mode="api",
             raw={
                 "measurement": "wall_clock_effective",
                 "usage": usage,

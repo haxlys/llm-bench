@@ -15,7 +15,7 @@ from llm_bench.registry import default_artifact_type, get_registry
 
 SUMMARY_COLS = [
     "ts", "model_id", "fmt", "backend", "artifact_type", "quant", "scenario",
-    "n_prompt", "n_gen", "pp_tps", "tg_tps",
+    "generation_mode", "n_prompt", "n_gen", "pp_tps", "tg_tps",
     "peak_mem_gb", "wall_s", "run_idx", "bench_version", "variant_key",
 ]
 
@@ -40,6 +40,8 @@ def load_raw(raw_dir: Path) -> pd.DataFrame:
             row["backend"] = row.get("fmt", "")
         if not row.get("artifact_type"):
             row["artifact_type"] = default_artifact_type(row.get("fmt", ""))
+        if not row.get("generation_mode") and row.get("backend") in {"mlx", "gguf"}:
+            row["generation_mode"] = "ar"
         row["tier"] = _quant_to_tier(row.get("quant", ""))
         rows.append(row)
     cols = SUMMARY_COLS + ["tier"]
@@ -62,7 +64,7 @@ def aggregate_means(df: pd.DataFrame) -> pd.DataFrame:
     real = df[df["run_idx"] >= 1].copy()
     group_cols = [
         "model_id", "fmt", "backend", "artifact_type", "quant",
-        "scenario", "n_prompt", "n_gen",
+        "generation_mode", "scenario", "n_prompt", "n_gen",
     ]
     grouped = real.groupby(group_cols, as_index=False).agg(
         pp_tps_mean=("pp_tps", "mean"),

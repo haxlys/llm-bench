@@ -45,6 +45,7 @@ class Variant:
     api_model: str = ""           # model id sent to OpenAI-compatible APIs
     tokenizer: str = ""           # HF tokenizer repo/path for completion evals
     api_key_env: str = ""         # env var copied to Authorization/OpenAI_API_KEY
+    generation_mode: str = ""     # "mtp" / "ar" for MTPLX comparison variants
     params_total_b: float | None = None
     params_active_b: float | None = None
     approx_size_gb: float | None = None
@@ -212,6 +213,8 @@ def default_capabilities(backend: str, fmt: str) -> frozenset[str]:
         return frozenset({"chat", "completions"})
     if key == "openai-compatible":
         return frozenset({"chat", "completions"})
+    if key == "mtplx":
+        return frozenset({"chat", "completions"})
     return frozenset()
 
 
@@ -237,6 +240,11 @@ def _validate(variants: list[Variant], models: list["Model"]) -> None:
             raise ValueError(
                 f"variant '{v.key}': architecture='{v.architecture}' "
                 f"not in {sorted(ALLOWED_ARCHS)}"
+            )
+        if v.backend == "mtplx" and v.generation_mode not in {"mtp", "ar"}:
+            raise ValueError(
+                f"variant '{v.key}': mtplx backend requires "
+                "generation_mode='mtp' or 'ar'"
             )
         # Local files without download spec must already have an absolute path on disk.
         if v.is_local_file and v.download is None:
@@ -300,6 +308,7 @@ def load_registry(path: Path | None = None) -> Registry:
                 api_model=v_raw.get("api_model", ""),
                 tokenizer=v_raw.get("tokenizer", ""),
                 api_key_env=v_raw.get("api_key_env", ""),
+                generation_mode=v_raw.get("generation_mode", ""),
                 params_total_b=m_raw.get("params_total_b") or v_raw.get("params_total_b"),
                 params_active_b=m_raw.get("params_active_b") or v_raw.get("params_active_b"),
                 approx_size_gb=v_raw.get("approx_size_gb"),

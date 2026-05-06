@@ -186,6 +186,87 @@ models:
           pattern: "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
           revision: a483e9e6cbd595906af30beda3187c2663a1118c
 
+  - id: qwen-3.6-27B-MTPLX
+    family: qwen
+    architecture: dense
+    params_total_b: 26.896
+    params_active_b: 26.896
+    notes: "MTPLX-ready Qwen3.6 27B checkpoints with MLX trunk weights and MTP sidecars"
+    variants:
+      - key: qwen-3.6-27b-mtplx-speed-mlx-4bit
+        fmt: mlx
+        path: Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
+        quant: MLX-4bit
+        tier: 4bit
+        approx_size_gb: 15
+        notes: "Flat 4-bit speed lane; standard MLX runner ignores the MTP sidecar"
+        download:
+          repo: Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
+          revision: ce011316c6a23387800e825657c9c4df7b9f9435
+
+      - key: qwen-3.6-27b-mtplx-speed-mtplx-mtp
+        fmt: mlx
+        backend: mtplx
+        generation_mode: mtp
+        path: Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
+        quant: MLX-4bit
+        tier: 4bit
+        approx_size_gb: 15
+        notes: "MTPLX native-MTP path for verifying MTP-on speedup claims"
+        download:
+          repo: Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
+          revision: ce011316c6a23387800e825657c9c4df7b9f9435
+
+      - key: qwen-3.6-27b-mtplx-speed-mtplx-ar
+        fmt: mlx
+        backend: mtplx
+        generation_mode: ar
+        path: Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
+        quant: MLX-4bit
+        tier: 4bit
+        approx_size_gb: 15
+        notes: "MTPLX target-only AR baseline paired with the native-MTP variant"
+        download:
+          repo: Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
+          revision: ce011316c6a23387800e825657c9c4df7b9f9435
+
+      - key: qwen-3.6-27b-mtplx-optimized-mlx-mixed4
+        fmt: mlx
+        path: Youssofal/Qwen3.6-27B-MTPLX-Optimized
+        quant: MLX-mixed-4bit
+        tier: 4bit
+        approx_size_gb: 19
+        notes: "GDN8-Speed4 mixed-precision trunk plus INT4 MTP sidecar; standard MLX runner ignores the sidecar"
+        download:
+          repo: Youssofal/Qwen3.6-27B-MTPLX-Optimized
+          revision: 1327e07ea76b237cea82e3b5d68f559fbf284d63
+
+      - key: qwen-3.6-27b-mtplx-optimized-mtplx-mtp
+        fmt: mlx
+        backend: mtplx
+        generation_mode: mtp
+        path: Youssofal/Qwen3.6-27B-MTPLX-Optimized
+        quant: MLX-mixed-4bit
+        tier: 4bit
+        approx_size_gb: 19
+        notes: "MTPLX native-MTP path for the mixed-precision optimized variant"
+        download:
+          repo: Youssofal/Qwen3.6-27B-MTPLX-Optimized
+          revision: 1327e07ea76b237cea82e3b5d68f559fbf284d63
+
+      - key: qwen-3.6-27b-mtplx-optimized-mtplx-ar
+        fmt: mlx
+        backend: mtplx
+        generation_mode: ar
+        path: Youssofal/Qwen3.6-27B-MTPLX-Optimized
+        quant: MLX-mixed-4bit
+        tier: 4bit
+        approx_size_gb: 19
+        notes: "MTPLX target-only AR baseline paired with the optimized native-MTP variant"
+        download:
+          repo: Youssofal/Qwen3.6-27B-MTPLX-Optimized
+          revision: 1327e07ea76b237cea82e3b5d68f559fbf284d63
+
   - id: qwen-3-coder-next
     family: qwen
     architecture: moe

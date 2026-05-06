@@ -1,0 +1,138 @@
+{
+  "draft_lm_head": {
+    "draft_only": {
+      "bits": 3,
+      "group_size": 64,
+      "mode": "affine",
+      "scales_shape": [
+        248320,
+        80
+      ],
+      "weight_shape": [
+        248320,
+        480
+      ]
+    },
+    "elapsed_s": 0.14528420800343156,
+    "original": {
+      "bits": 4,
+      "group_size": 64,
+      "mode": "affine",
+      "scales_shape": [
+        248320,
+        80
+      ],
+      "weight_shape": [
+        248320,
+        640
+      ]
+    }
+  },
+  "draft_sampler": {
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.95
+  },
+  "model": {
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "compatibility": {
+      "arch_id": "qwen3-next-mtp",
+      "can_run": true,
+      "exit_code": 0,
+      "message": "Verified MTPLX runtime contract found.",
+      "recognized": true,
+      "runtime_compatibility": "native",
+      "support_level": "verified-native",
+      "support_notes": "Product-verified default backend; this remains the only promoted shipping runtime.",
+      "supported": true,
+      "tier": "verified",
+      "unsafe_force_required": false,
+      "unverified_model": false
+    },
+    "model_dir": "/Users/haxlys/.mtplx/models/Youssofal--Qwen3.6-27B-MTPLX-Optimized-Speed",
+    "model_type": "qwen3_5_text",
+    "mtp_arch": "qwen3-next-mtp",
+    "mtp_supported": "yes",
+    "recommended_backend": "qwen3_next",
+    "recommended_profile": "performance-cold",
+    "runtime_compatibility": "native",
+    "runtime_contract_path": "/Users/haxlys/.mtplx/models/Youssofal--Qwen3.6-27B-MTPLX-Optimized-Speed/mtplx_runtime.json",
+    "source": "local"
+  },
+  "profile": {
+    "benchmark_ids": [
+      "mtp-depth-d3-gdn8-speed4-cyankiwi-mtp-draftlmhead4b-gs64-linear-gdn-from-conv-tape-mlx-qmv-unroll4-clean-preflight-batchedtargetarrays-lazymtphistory-dropevents-skipsnapshot-v4-20260429-143701"
+    ],
+    "caveats": [
+      "Best no-fan burst throughput; may decay on long-context generation.",
+      "Requires the MLX-MTPLX fork for the native QMV/QMM fast path."
+    ],
+    "clock_anchor_allowed": false,
+    "draft_lm_head": {
+      "bits": 4,
+      "group_size": 64,
+      "mode": "affine"
+    },
+    "draft_sampler": null,
+    "env": {
+      "MTPLX_BATCH_TARGET_ARRAYS": "1",
+      "MTPLX_DROP_EVENTS": "1",
+      "MTPLX_LAZY_MTP_HISTORY_APPEND": "1",
+      "MTPLX_LAZY_VERIFY_LOGITS": "1",
+      "MTPLX_SKIP_VERIFY_SNAPSHOT": "1"
+    },
+    "fan_control_allowed": false,
+    "model_id": "Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed",
+    "name": "performance-cold",
+    "product_claim_eligible": true,
+    "qa_only": false,
+    "required_mlx_fork_commit": "2377a99f",
+    "required_mlx_fork_fragment": "mlx-mtplx-0.31.2-qmm",
+    "runtime_profile": "native_mtp_60_cold",
+    "sampler": {
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "summary": "Medium Mode: native-MTP speed path; about 2.2x burst over the same Optimized-Speed model with MTP off, but not sustained without fan control."
+  },
+  "stats": {
+    "accepted_by_depth": [
+      46,
+      25,
+      9
+    ],
+    "context_cap_applied": false,
+    "context_window": 262144,
+    "draft_time_s": 0.4653915564995259,
+    "drafted_by_depth": [
+      61,
+      61,
+      61
+    ],
+    "generated_tokens": 141,
+    "generation_mode": "mtp",
+    "max_tokens": 192,
+    "mtp_depth": 3,
+    "reasoning": "off",
+    "remaining_context_tokens": 262104,
+    "request_max_tokens": 192,
+    "tok_s": 32.762035015123026,
+    "verify_calls": 61,
+    "verify_ms_per_call": 56.67752250990846,
+    "verify_time_s": 3.457328873104416
+  },
+  "text": "Running local language models requires balancing three competing factors: speed, memory usage, and accuracy. Larger models generally provide higher accuracy and better reasoning capabilities but demand significantly more system memory and process requests more slowly. Conversely, smaller models run quickly and fit within limited memory constraints, often on consumer hardware, but may lack the depth and precision of their larger counterparts. To optimize this tradeoff, users can employ quantization techniques, which reduce the memory footprint and increase inference speed by compressing the model\u2019s data, though this comes with a slight, often acceptable, decrease in output quality. Ultimately, the best choice depends on your specific hardware limits and whether your priority is rapid response times or high-fidelity results.",
+  "validations": [
+    {
+      "detail": "",
+      "name": "no_degenerate_loop",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "balanced_delimiters",
+      "passed": true
+    }
+  ]
+}

@@ -109,7 +109,32 @@ uv run python scripts/run_bench.py --variant qwen-27b-mlx-8bit --variant qwen-27
 uv run python scripts/run_evals.py --variant qwen-27b-mlx-8bit --variant qwen-27b-gguf-q8 --suite full
 ```
 
-Currently shipped (six variants, gemma-4 family):
+MTPLX-ready MLX checkpoints can be benchmarked through the normal MLX runner
+for apples-to-apples autoregressive speed/eval numbers:
+
+```bash
+uv run python scripts/run_bench.py \
+  --variant qwen-3.6-27b-mtplx-speed-mlx-4bit \
+  --variant qwen-3.6-27b-mtplx-optimized-mlx-mixed4
+```
+
+To measure MTPLX speculative decoding itself inside the same speed pipeline,
+use the paired `mtplx-mtp` and `mtplx-ar` variants. The `mtplx-mtp` rows run
+native MTP speculative decoding; the `mtplx-ar` rows run the same MTPLX runtime
+with MTP disabled as the target-only baseline.
+
+```bash
+uv sync --extra mtplx
+uv run mtplx pull Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed
+uv run python scripts/run_bench.py --smoke --runs 1 --no-warmup \
+  --variant qwen-3.6-27b-mtplx-speed-mtplx-mtp \
+  --variant qwen-3.6-27b-mtplx-speed-mtplx-ar
+```
+
+Set `MTPLX_MAX=1` to request MTPLX's fan-max path when the local ThermalForge
+setup is available. Without it, results represent the normal no-fan runtime.
+
+Currently shipped:
 
 | Key | Model | Format | Quant | Tier |
 |---|---|---|---|---|
@@ -119,6 +144,12 @@ Currently shipped (six variants, gemma-4 family):
 | `26B-MoE-gguf-q4`    | gemma-4-26B-A4B-it (MoE) | GGUF | Q4_K_M | 4bit |
 | `31B-Dense-mlx-8bit` | gemma-4-31B-it (Dense)   | MLX  | 8-bit  | 8bit |
 | `31B-Dense-gguf-q8`  | gemma-4-31B-it (Dense)   | GGUF | Q8_0   | 8bit |
+| `qwen-3.6-27b-mtplx-speed-mlx-4bit` | qwen-3.6-27B-MTPLX | MLX | 4-bit | 4bit |
+| `qwen-3.6-27b-mtplx-speed-mtplx-mtp` | qwen-3.6-27B-MTPLX | MTPLX | 4-bit MTP-on | 4bit |
+| `qwen-3.6-27b-mtplx-speed-mtplx-ar` | qwen-3.6-27B-MTPLX | MTPLX | 4-bit MTP-off | 4bit |
+| `qwen-3.6-27b-mtplx-optimized-mlx-mixed4` | qwen-3.6-27B-MTPLX | MLX | mixed 4/8-bit | 4bit |
+| `qwen-3.6-27b-mtplx-optimized-mtplx-mtp` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-on | 4bit |
+| `qwen-3.6-27b-mtplx-optimized-mtplx-ar` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-off | 4bit |
 
 `tier` pairs MLX-Nbit ↔ Q*_K_M for fair runtime comparisons. The dashboard
 **Catalog** page shows registry × measurement status at a glance.
