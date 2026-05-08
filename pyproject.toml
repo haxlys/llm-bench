@@ -21,6 +21,7 @@ dependencies = [
 [project.optional-dependencies]
 quality = ["sentence-transformers>=3.0"]
 mtplx = ["mtplx>=0.1.4"]
+programbench = ["programbench>=1.0.1"]
 evals = [
     "lm-eval[api]>=0.4.5",
     "requests>=2.32",

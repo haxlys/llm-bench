@@ -9,6 +9,7 @@ import {
   tasks,
   variantByKey,
 } from "./benchmark-data";
+import { caveatText } from "./i18n";
 
 const fixture: BenchmarkData = {
   accuracy: [
@@ -148,6 +149,11 @@ describe("benchmark data helpers", () => {
 
   it("returns fastest speed rows for a scenario", () => {
     expect(fastestSpeedRows(fixture, "p256_g128", 1)[0].variant).toBe("b");
+  });
+
+  it("labels the ProgramBench caveat", () => {
+    expect(caveatText("agentic-scaffold-dependent")).toContain("agent scaffold");
+    expect(caveatText("agentic-scaffold-dependent", "ko")).toContain("agent scaffold");
   });
 
   it("loads the generated benchmark dataset with compatible helpers", () => {

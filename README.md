@@ -8,7 +8,7 @@
 
 Registry-driven LLM benchmark for local runtimes and OpenAI-compatible endpoints.
 
-Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BFCL, SourceQA) across reasoning, Korean, code, instruction-following, long context, tool use, source grounding, and safety dimensions.
+Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BFCL, SourceQA, ProgramBench eval/import) across reasoning, Korean, code, agentic code, instruction-following, long context, tool use, source grounding, and safety dimensions.
 
 The shipped registry still includes the original Gemma 4 MLX/GGUF matrix, but the schema now also supports hosted `openai-compatible` endpoint variants.
 
@@ -295,6 +295,7 @@ MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 | Safety | `truthfulqa-multi_gen_en` | `toxigen` |
 | Tool use | `bfcl` (BFCL v4, opt-in via `--include-bfcl`) | — |
 | Source grounding | `sourceqa` (pinned-repo evidence QA, deterministic checker) | — |
+| Agentic code | `programbench` (ProgramBench eval + result import) | — |
 
 The reasoning + instruction additions mirror HF Open LLM Leaderboard v2
 (MMLU-Pro / GPQA-Diamond / IFEval). LiveCodeBench complements EvalPlus
@@ -330,6 +331,39 @@ Smoke (verify wiring, ~10 min, limit=2 per task):
 ```bash
 uv run python scripts/run_evals.py --variant 26B-MoE-mlx-8bit --suite smoke --limit 2
 ```
+
+ProgramBench is agentic: the model/agent must first produce a complete
+`<instance_id>/submission.tar.gz` codebase, then ProgramBench evaluates it in
+Docker. llm-bench wraps the evaluation and import step:
+
+```bash
+uv sync --extra programbench
+uv run python scripts/run_programbench.py \
+  --variant 26B-MoE-gguf-q8 \
+  --source-dir /path/to/programbench/submission-run \
+  --tasks-dir /path/to/ProgramBench/src/programbench/data/tasks \
+  --workers 4 \
+  --branch-workers 2 \
+  --docker-cpus 8 \
+  --limit 5
+uv run python scripts/aggregate_evals.py
+```
+
+If the ProgramBench eval JSON files were produced elsewhere, import them
+directly:
+
+```bash
+uv run python scripts/import_programbench.py \
+  --variant 26B-MoE-gguf-q8 \
+  --source-dir /path/to/programbench/evaluated-run \
+  --tasks-dir /path/to/ProgramBench/src/programbench/data/tasks
+```
+
+The headline ProgramBench metric is `resolved_rate,none` (fully solved
+program-rebuild tasks). `almost_resolved_rate,none` and
+`avg_test_pass_rate,none` are supporting diagnostics, not the primary ranker.
+Pass `--tasks-dir` when available so ignored ProgramBench branches/tests are
+excluded the same way as `programbench info`.
 
 Full overnight matrix (all 6 model variants × full suite) — wrapper script
 manages optional launchd bootout + run + bootstrap automatically (always

@@ -29,6 +29,8 @@ SCRIPTS = [
     "scripts/aggregate_evals.py",
     "scripts/build_index.py",
     "scripts/export_site_public_data.py",
+    "scripts/import_programbench.py",
+    "scripts/run_programbench.py",
 ]
 DASHBOARD = "dashboard/app.py"
 

@@ -401,6 +401,27 @@ def test_build_site_data_rejects_unknown_accuracy_variant(tmp_path: Path) -> Non
         build_site_data(repo_root=tmp_path)
 
 
+def test_programbench_accuracy_rows_carry_agentic_caveat(tmp_path: Path) -> None:
+    _write_site_inputs(
+        tmp_path,
+        accuracy_rows=[
+            _accuracy_row(
+                dim="agentic_code",
+                task="programbench",
+                subtask="programbench",
+                metric="resolved_rate,none",
+                value=0.2,
+            )
+        ],
+    )
+
+    data = build_site_data(repo_root=tmp_path)
+
+    assert data["accuracy"][0]["confidence"] == "measured"
+    assert data["accuracy"][0]["caveats"] == ["agentic-scaffold-dependent"]
+    assert {"id": "agentic-scaffold-dependent", "status": "measured"} in data["caveats"]
+
+
 def test_build_site_data_rejects_invalid_speed_scenario(tmp_path: Path) -> None:
     _write_site_inputs(tmp_path, speed_rows=[_speed_row(scenario="bad_scenario")])
 

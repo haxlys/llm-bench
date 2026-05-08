@@ -746,6 +746,10 @@
     {
       "id": "generative-exact-match",
       "status": "directional"
+    },
+    {
+      "id": "agentic-scaffold-dependent",
+      "status": "measured"
     }
   ],
   "generatedAt": "2026-05-06T06:35:16.361022+00:00",

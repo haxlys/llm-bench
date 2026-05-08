@@ -28,6 +28,7 @@ _DIRECTIONAL_TASKS = {
     "truthfulqa-multi_gen_en",
     "longbench",
 }
+_AGENTIC_TASKS = {"programbench"}
 
 
 def parse_scenario(value: str) -> tuple[int, int]:
@@ -295,6 +296,8 @@ def _accuracy_confidence(task: str, metric: str) -> str:
 
 
 def _accuracy_caveats(task: str, metric: str) -> list[str]:
+    if task in _AGENTIC_TASKS:
+        return ["agentic-scaffold-dependent"]
     if _accuracy_confidence(task, metric) == "directional":
         return ["generative-exact-match"]
     return []
@@ -309,6 +312,10 @@ def _caveats() -> list[dict[str, str]]:
         {
             "id": "generative-exact-match",
             "status": "directional",
+        },
+        {
+            "id": "agentic-scaffold-dependent",
+            "status": "measured",
         },
     ]
 

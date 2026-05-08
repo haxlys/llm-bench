@@ -83,3 +83,27 @@ def test_primary_metric_view_latest_subtask_aggregate_keeps_run_id(tmp_path, mon
 
     assert primary.iloc[0]["value"] == 0.75
     assert primary.iloc[0]["run_id"] == "20260102T000000Z_vA_full"
+
+
+def test_programbench_primary_metric_is_resolved_rate(tmp_path, monkeypatch):
+    monkeypatch.setattr(aggregate_mod, "get_registry", lambda: _FakeRegistry())
+    task_dir = tmp_path / "20260101T000000Z_vA_full" / "programbench"
+    task_dir.mkdir(parents=True)
+    (task_dir / "results_programbench.json").write_text(
+        json.dumps({
+            "results": {
+                "programbench": {
+                    "resolved_rate,none": 0.2,
+                    "almost_resolved_rate,none": 0.4,
+                    "avg_test_pass_rate,none": 0.7,
+                }
+            }
+        })
+    )
+
+    full = load_eval_results(tmp_path)
+    primary = primary_metric_view(full)
+
+    assert full.iloc[0]["dim"] == "agentic_code"
+    assert primary.iloc[0]["metric"] == "resolved_rate,none"
+    assert primary.iloc[0]["value"] == 0.2

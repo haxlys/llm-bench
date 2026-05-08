@@ -84,6 +84,7 @@ their configured `/v1` endpoint directly and do not spawn a subprocess.
 | reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag` |
 | korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
 | code | `humaneval_instruct`, `mbpp_instruct` | — |
+| agentic code | `programbench` eval + result import | — |
 | long | `longbench` (21 sub-tasks) | — |
 | source grounding | `sourceqa` pinned-repo evidence QA | — |
 | safety | `truthfulqa-multi_gen_en` | `toxigen` |
@@ -135,6 +136,20 @@ evidence files into the prompt, and scores the answer deterministically via
 required-signal recall, evidence-path recall, and forbidden-phrase violations.
 Optional judge metadata can be requested, but it is recorded separately and does
 not change the primary `acc,none` metric.
+
+`programbench` is the agentic whole-program reconstruction dimension.
+ProgramBench's Docker evaluation targets Linux x86_64 infrastructure and the
+agent scaffold materially affects results. llm-bench therefore separates agent
+submission generation from scoring: once an agent has produced
+`<instance_id>/submission.tar.gz`, `scripts/run_programbench.py` invokes
+upstream `programbench eval` and imports the resulting `*.eval.json` files into
+the same synthetic `results_*.json` shape as other external runners. If scoring
+already happened elsewhere, `scripts/import_programbench.py` can import those
+eval JSON files directly. The primary metric is `resolved_rate,none` (fully
+solved instances). `almost_resolved_rate,none` and `avg_test_pass_rate,none`
+are supporting diagnostics. When a ProgramBench `data/tasks` directory is
+provided, ignored branches/tests from `tests.json` are excluded to mirror
+`programbench info`.
 
 Every eval task execution also appends one row to
 `results/eval_traces/<run_id>.jsonl` with variant, task, runner, status, wall

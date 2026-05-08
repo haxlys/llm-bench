@@ -56,6 +56,7 @@ TASK_DIM = {
     "mbpp": "code",             # evalplus runner output dir
     "livecodebench": "code",
     "leaderboard_ifeval": "instruction",
+    "programbench": "agentic_code",
     "longbench": "long",
     "bfcl": "tool",
     "sourceqa": "source_grounding",
@@ -79,6 +80,9 @@ PRIMARY_METRICS = [
     "pass_at_1,base",            # evalplus base metric
     "pass@1,create_test",
     "pass@1,none",
+    # ProgramBench headline: whole-program task fully resolved.
+    "resolved_rate,none",
+    "almost_resolved_rate,none",
     # IFEval headline (HF Open LLM Leaderboard v2 reports prompt-level strict).
     "prompt_level_strict_acc,none",
     "prompt_level_loose_acc,none",

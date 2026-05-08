@@ -12,7 +12,10 @@ const basePagePathSet = new Set<string>(basePagePaths);
 
 export type NavKey = "summary" | "accuracy" | "speed" | "methodology" | "data";
 
-export type KnownCaveatId = "latency-not-measured" | "generative-exact-match";
+export type KnownCaveatId =
+  | "latency-not-measured"
+  | "generative-exact-match"
+  | "agentic-scaffold-dependent";
 
 export type Messages = {
   root: {
@@ -263,6 +266,8 @@ export const messages = {
         "bench_version 0.3 does not directly measure TTFT or ITL.",
       "generative-exact-match":
         "Generative exact-match rows can undercount correct answers because of output formatting and answer extraction.",
+      "agentic-scaffold-dependent":
+        "ProgramBench scores include the agent scaffold, tools, and execution environment, not only the base model.",
     },
     tables: {
       accuracy: {
@@ -566,6 +571,8 @@ export const messages = {
         "bench_version 0.3에서는 TTFT와 ITL을 직접 측정하지 않습니다.",
       "generative-exact-match":
         "생성형 exact-match 행은 출력 형식과 정답 추출 방식 때문에 정답을 낮게 셀 수 있습니다.",
+      "agentic-scaffold-dependent":
+        "ProgramBench 점수는 base model뿐 아니라 agent scaffold, 도구, 실행 환경의 영향도 포함합니다.",
     },
     tables: {
       accuracy: {

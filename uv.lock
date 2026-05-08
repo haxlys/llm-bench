@@ -1145,6 +1145,15 @@ wheels = [
 ]
 
 [[package]]
+name = "junitparser"
+version = "5.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/26/61/1685f940545177c553683c10114f5bb5bc093996fe651b29b8bee07f63e9/junitparser-5.0.0.tar.gz", hash = "sha256:f15e292877258d7c5755d672ce86f82c3622c7ea4c2f44f55de44ed7518484d3", size = 26259, upload-time = "2026-03-29T01:59:15.864Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/31/e6/54c543336cc49aadc50fea1b66835903afbdcff9eeb8a9d26a475b2d9c47/junitparser-5.0.0-py3-none-any.whl", hash = "sha256:9e279f2214dc74b6a86b22db757abda2e8e66e819fe882dad5b392d57024cd26", size = 14801, upload-time = "2026-03-29T01:59:14.613Z" },
+]
+
+[[package]]
 name = "langdetect"
 version = "1.0.9"
 source = { registry = "https://pypi.org/simple" }
@@ -1240,6 +1249,9 @@ evals = [
 mtplx = [
     { name = "mtplx" },
 ]
+programbench = [
+    { name = "programbench" },
+]
 quality = [
     { name = "sentence-transformers" },
 ]
@@ -1267,6 +1279,7 @@ requires-dist = [
     { name = "openai", marker = "extra == 'evals'", specifier = ">=1.50" },
     { name = "pandas", specifier = ">=2.2" },
     { name = "plotly", specifier = ">=5.24" },
+    { name = "programbench", marker = "extra == 'programbench'", specifier = ">=1.0.1" },
     { name = "psutil", specifier = ">=6.0" },
     { name = "python-levenshtein", marker = "extra == 'evals'", specifier = ">=0.25" },
     { name = "pyyaml", specifier = ">=6.0" },
@@ -1275,7 +1288,7 @@ requires-dist = [
     { name = "sentence-transformers", marker = "extra == 'quality'", specifier = ">=3.0" },
     { name = "streamlit", specifier = ">=1.40" },
 ]
-provides-extras = ["quality", "mtplx", "evals"]
+provides-extras = ["quality", "mtplx", "programbench", "evals"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -2057,6 +2070,25 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/5e/77/65b857a69ed876e1951e88aaba60f5ce6120c33703f7cb61a3c894b8c1b6/portalocker-3.2.0.tar.gz", hash = "sha256:1f3002956a54a8c3730586c5c77bf18fae4149e07eaf1c29fc3faf4d5a3f89ac", size = 95644, upload-time = "2025-06-14T13:20:40.03Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4b/a6/38c8e2f318bf67d338f4d629e93b0b4b9af331f455f0390ea8ce4a099b26/portalocker-3.2.0-py3-none-any.whl", hash = "sha256:3cdc5f565312224bc570c49337bd21428bba0ef363bbcf58b9ef4a9f11779968", size = 22424, upload-time = "2025-06-14T13:20:38.083Z" },
+]
+
+[[package]]
+name = "programbench"
+version = "1.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "huggingface-hub" },
+    { name = "jinja2" },
+    { name = "junitparser" },
+    { name = "pydantic" },
+    { name = "pyyaml" },
+    { name = "rich" },
+    { name = "tqdm" },
+    { name = "typer" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ad/7c/7daa7149b0b56de83d98cd1035e6863ce85dd8846f9da88b542dbb5932ab/programbench-1.0.1.tar.gz", hash = "sha256:94a07f90cfeffaf1c3b94d7818cb463d4b62b1a1e9a4645246490e3e6a57cee6", size = 3252107, upload-time = "2026-05-07T12:46:11.497Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f4/3b/8f23c59ff8506bfb1cd08b3c1a33a3ef8a49afd224225cc68984c9e61ea9/programbench-1.0.1-py3-none-any.whl", hash = "sha256:4665384c8ecab5d7f13a730eb2e059559e228d8adcc37fcd18b39fad6fd06815", size = 3399939, upload-time = "2026-05-07T12:46:09.888Z" },
 ]
 
 [[package]]
