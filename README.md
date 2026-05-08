@@ -8,7 +8,7 @@
 
 Registry-driven LLM benchmark for local runtimes and OpenAI-compatible endpoints.
 
-Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BFCL, SourceQA, ProgramBench eval/import) across reasoning, Korean, code, agentic code, instruction-following, long context, tool use, source grounding, and safety dimensions.
+Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BigCodeBench, BFCL, SourceQA, LiveBench, KMMLU-Pro, ProgramBench eval/import) across reasoning, Korean, code, agentic code, instruction-following, long context, tool use, source grounding, fresh-eval, and safety dimensions.
 
 The shipped registry still includes the original Gemma 4 MLX/GGUF matrix, but the schema now also supports hosted `openai-compatible` endpoint variants.
 
@@ -194,12 +194,22 @@ Currently shipped:
 | `26B-MoE-gguf-q4`    | gemma-4-26B-A4B-it (MoE) | GGUF | Q4_K_M | 4bit |
 | `31B-Dense-mlx-8bit` | gemma-4-31B-it (Dense)   | MLX  | 8-bit  | 8bit |
 | `31B-Dense-gguf-q8`  | gemma-4-31B-it (Dense)   | GGUF | Q8_0   | 8bit |
+| `gemma-4-E4B-gguf-q8` | gemma-4-E4B-it (Dense) | GGUF | Q8_0 | 8bit |
+| `qwen-3.5-4b-gguf-q8` | qwen-3.5-4B (Dense) | GGUF | Q8_0 | 8bit |
+| `qwen-3.5-9b-gguf-q8` | qwen-3.5-9B (Dense) | GGUF | Q8_0 | 8bit |
+| `qwen-3.6-35b-a3b-gguf-q4` | qwen-3.6-35B-A3B (MoE) | GGUF | Q4_K_M | 4bit |
+| `qwen-3-next-80b-a3b-instruct-gguf-q4` | Qwen3-Next-80B-A3B-Instruct (MoE) | GGUF | Q4_K_M | 4bit |
+| `qwen-3-coder-30b-a3b-instruct-gguf-q4` | Qwen3-Coder-30B-A3B-Instruct (MoE) | GGUF | Q4_K_M | 4bit |
 | `qwen-3.6-27b-mtplx-speed-mlx-4bit` | qwen-3.6-27B-MTPLX | MLX | 4-bit | 4bit |
 | `qwen-3.6-27b-mtplx-speed-mtplx-mtp` | qwen-3.6-27B-MTPLX | MTPLX | 4-bit MTP-on | 4bit |
 | `qwen-3.6-27b-mtplx-speed-mtplx-ar` | qwen-3.6-27B-MTPLX | MTPLX | 4-bit MTP-off | 4bit |
 | `qwen-3.6-27b-mtplx-optimized-mlx-mixed4` | qwen-3.6-27B-MTPLX | MLX | mixed 4/8-bit | 4bit |
 | `qwen-3.6-27b-mtplx-optimized-mtplx-mtp` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-on | 4bit |
 | `qwen-3.6-27b-mtplx-optimized-mtplx-ar` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-off | 4bit |
+| `qwen-3-coder-next-gguf-q4` | Qwen3-Coder-Next (MoE) | GGUF | Q4_K_M | 4bit |
+| `gpt-oss-20b-gguf-q4` | gpt-oss-20b (MoE) | GGUF | Q4_K_M | 4bit |
+| `gpt-oss-120b-gguf-q4` | gpt-oss-120b (MoE, split GGUF) | GGUF | Q4_K_M | 4bit |
+| `nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4` | Nemotron-3-Nano-Omni-30B-A3B-Reasoning (MoE) | GGUF | UD-Q4_K_M | 4bit |
 
 `tier` pairs MLX-Nbit ↔ Q*_K_M for fair runtime comparisons. The dashboard
 **Catalog** page shows registry × measurement status at a glance.
@@ -289,13 +299,15 @@ MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 |---|---|---|
 | Reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag`, `leaderboard_mmlu_pro`, `leaderboard_gpqa_diamond` |
 | Korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
-| Code | `humaneval` / `mbpp` (EvalPlus), `livecodebench` | — |
+| Code | `humaneval` / `mbpp` (EvalPlus), `livecodebench`, `bigcodebench_hard` | — |
 | Instruction | `leaderboard_ifeval` | — |
 | Long context | `longbench` (21 sub-tasks, EN+ZH) | — |
 | Safety | `truthfulqa-multi_gen_en` | `toxigen` |
 | Tool use | `bfcl` (BFCL v4, opt-in via `--include-bfcl`) | — |
 | Source grounding | `sourceqa` (pinned-repo evidence QA, deterministic checker) | — |
+| Fresh eval | `livebench_subset` (LiveBench non-agentic subset) | — |
 | Agentic code | `programbench` (ProgramBench eval + result import) | — |
+| Korean professional | `kmmlu_pro` (KMMLU-Pro weighted MCQ) | — |
 
 The reasoning + instruction additions mirror HF Open LLM Leaderboard v2
 (MMLU-Pro / GPQA-Diamond / IFEval). LiveCodeBench complements EvalPlus
@@ -324,13 +336,33 @@ uv sync --extra evals
 # Optional, for the frontier external runners:
 uv pip install bfcl-eval                                                       # BFCL v4 (tool use)
 uv pip install git+https://github.com/LiveCodeBench/LiveCodeBench.git          # LiveCodeBench (contamination-free code)
+uv pip install bigcodebench --upgrade                                          # BigCodeBench-Hard (practical code)
+git clone https://github.com/LiveBench/LiveBench.git /path/to/LiveBench        # LiveBench subset
+export LIVEBENCH_REPO=/path/to/LiveBench
 ```
+
+`kmmlu_pro` uses the `datasets` and `openai` packages already installed by
+`uv sync --extra evals`, but the dataset is gated: request access to
+`LGAI-EXAONE/KMMLU-Pro` on Hugging Face and authenticate with `hf auth login`
+or `HF_TOKEN` before running it.
 
 Smoke (verify wiring, ~10 min, limit=2 per task):
 
 ```bash
 uv run python scripts/run_evals.py --variant 26B-MoE-mlx-8bit --suite smoke --limit 2
 ```
+
+Frontier external smoke (LiveBench / BigCodeBench-Hard / KMMLU-Pro with a
+small per-task cap):
+
+```bash
+uv run python scripts/run_evals.py --variant 26B-MoE-gguf-q8 --suite full --limit 2
+```
+
+`--suite full --limit N` is the smoke path for these external runners. EvalPlus
+is skipped under a limit because its upstream CLI does not provide a compatible
+partial matrix, while LiveBench, BigCodeBench-Hard, and KMMLU-Pro do run with
+the cap.
 
 ProgramBench is agentic: the model/agent must first produce a complete
 `<instance_id>/submission.tar.gz` codebase, then ProgramBench evaluates it in
@@ -386,6 +418,11 @@ Env overrides:
 - `LIVE_CODE_BENCH_REPO=/path/to/LiveCodeBench` — run source checkout version
 - `LIVE_CODE_BENCH_START_DATE=YYYY-MM-DD`, `LIVE_CODE_BENCH_END_DATE=YYYY-MM-DD`,
   `LIVE_CODE_BENCH_MAX_TOKENS=N` — run a reproducible release window
+- `LIVEBENCH_REPO=/path/to/LiveBench`, `LIVEBENCH_RELEASE=YYYY-MM-DD`,
+  `LIVEBENCH_MAX_TOKENS=N` — LiveBench checkout and release selection
+- `BIGCODEBENCH_EXECUTION=gradio|local|e2b`,
+  `BIGCODEBENCH_GRADIO_ENDPOINT=https://...` — BigCodeBench execution backend
+- `KMMLU_PRO_MAX_TOKENS=N` — maximum chat tokens for each KMMLU-Pro response
 - `LAUNCH_AGENTS="com.you.foo com.you.bar"` — launchd agent labels to stop
   before the run and restart at the end. Default empty = no launchd
   management; stop GPU-using processes manually instead.

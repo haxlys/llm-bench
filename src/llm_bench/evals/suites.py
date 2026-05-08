@@ -76,6 +76,7 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
         ("humaneval", "evalplus"),
         ("mbpp", "evalplus"),
         ("livecodebench", "livecodebench"),
+        ("bigcodebench_hard", "bigcodebench"),
     ],
     # Tool-use dim: BFCL is opt-in via --include-bfcl in run_evals.py because
     # `bfcl_eval` requires an additional manual install (`uv pip install bfcl-eval`)
@@ -85,6 +86,12 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
     # pinned repositories. Lightweight enough to run with the default full
     # suite and supported on both MLX and GGUF because it uses chat completion.
     "source_grounding": [("sourceqa", "sourceqa")],
+    # Fresh, contamination-resistant general eval. Runs a non-agentic subset by
+    # default; agentic coding remains out of scope for local smoke runs.
+    "fresh": [("livebench_subset", "livebench")],
+    # Professional Korean license exam benchmark. Implemented as a direct
+    # OpenAI-compatible runner so smoke runs can limit question count.
+    "korean": [("kmmlu_pro", "kmmlu_pro")],
     # simple-evals MMLU and KMMLU-Pro are planned but not yet wired.
     # Removed from this list so run_evals.py doesn't surface 'runner not
     # implemented' noise on every variant. Re-add once the wrappers exist.
@@ -96,7 +103,13 @@ def external_suite() -> list[tuple[str, str, str]]:
     return [(d, t, r) for d, items in EXTERNAL_SUITES.items() for t, r in items]
 
 
-MLX_UNSUPPORTED_EXTERNAL_TASKS = {"humaneval", "mbpp", "livecodebench", "bfcl"}
+MLX_UNSUPPORTED_EXTERNAL_TASKS = {
+    "humaneval",
+    "mbpp",
+    "livecodebench",
+    "bigcodebench_hard",
+    "bfcl",
+}
 
 
 def capabilities_for_backend(backend_or_fmt: str) -> frozenset[str]:
@@ -123,7 +136,7 @@ def external_supports_capabilities(
     capabilities: set[str] | frozenset[str],
 ) -> bool:
     """False when an external runner needs capabilities the backend lacks."""
-    if runner in {"evalplus", "livecodebench"}:
+    if runner in {"evalplus", "livecodebench", "bigcodebench"}:
         return "code_eval_chat" in capabilities
     if runner == "bfcl":
         return "tool_use_eval" in capabilities

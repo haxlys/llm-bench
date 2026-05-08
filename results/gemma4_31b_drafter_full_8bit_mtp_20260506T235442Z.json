@@ -1,0 +1,261 @@
+{
+  "created_at": "2026-05-07T00:01:59.486060+00:00",
+  "host": "haxlysui-MacBookPro.local",
+  "prompt": "Write a concise technical explanation of speculative decoding for local LLM inference. Include why it can improve tokens per second and one caveat. Continue until the answer is complete.",
+  "max_tokens": [
+    128,
+    512
+  ],
+  "trials": 2,
+  "temperature": 0.0,
+  "suites": [
+    {
+      "runtime": "mlx_vlm",
+      "target_model": "/Users/haxlys/models/huggingface/hub/models--lmstudio-community--gemma-4-31B-it-MLX-8bit/snapshots/244e29d3b19e7b50e3ddddc33fcc882f24a19399",
+      "draft_block_size": 6,
+      "results": [
+        {
+          "max_tokens": 128,
+          "baseline": {
+            "label": "baseline",
+            "trials": 2,
+            "generation_tps": [
+              14.969015525840067,
+              15.023011101018971
+            ],
+            "generation_tps_mean": 14.996013313429518,
+            "prompt_tps_mean": 125.89748937420885,
+            "tokens": [
+              128,
+              128
+            ],
+            "wall_seconds": [
+              8.813750457949936,
+              8.836416583042592
+            ],
+            "wall_seconds_mean": 8.825083520496264,
+            "peak_memory_gb_max": 34.051453595,
+            "raw_trials": [
+              {
+                "tokens": 128,
+                "generation_tps": 14.969015525840067,
+                "prompt_tps": 138.57215408625,
+                "wall_seconds": 8.813750457949936,
+                "peak_memory_gb": 34.051453595
+              },
+              {
+                "tokens": 128,
+                "generation_tps": 15.023011101018971,
+                "prompt_tps": 113.2228246621677,
+                "wall_seconds": 8.836416583042592,
+                "peak_memory_gb": 34.051453595
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-31B-it-assistant",
+              "trials": 2,
+              "generation_tps": [
+                34.81755081402439,
+                35.24726195224324
+              ],
+              "generation_tps_mean": 35.03240638313382,
+              "prompt_tps_mean": 153.1192051591505,
+              "tokens": [
+                128,
+                128
+              ],
+              "wall_seconds": [
+                3.9267456250963733,
+                3.865083832992241
+              ],
+              "wall_seconds_mean": 3.895914729044307,
+              "peak_memory_gb_max": 34.90385896,
+              "raw_trials": [
+                {
+                  "tokens": 128,
+                  "generation_tps": 34.81755081402439,
+                  "prompt_tps": 147.41460515515374,
+                  "wall_seconds": 3.9267456250963733,
+                  "peak_memory_gb": 34.90385896
+                },
+                {
+                  "tokens": 128,
+                  "generation_tps": 35.24726195224324,
+                  "prompt_tps": 158.82380516314726,
+                  "wall_seconds": 3.865083832992241,
+                  "peak_memory_gb": 34.90385896
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.7727272727272725,
+              "accepted_rounds": 22,
+              "speedup_vs_baseline": 2.336114649335562
+            },
+            {
+              "label": "mlx-community/gemma-4-31B-it-assistant-bf16",
+              "trials": 2,
+              "generation_tps": [
+                35.09488202188491,
+                35.309703973478705
+              ],
+              "generation_tps_mean": 35.20229299768181,
+              "prompt_tps_mean": 159.2871260793115,
+              "tokens": [
+                128,
+                128
+              ],
+              "wall_seconds": [
+                3.878291083034128,
+                3.85932495794259
+              ],
+              "wall_seconds_mean": 3.868808020488359,
+              "peak_memory_gb_max": 34.903859728,
+              "raw_trials": [
+                {
+                  "tokens": 128,
+                  "generation_tps": 35.09488202188491,
+                  "prompt_tps": 160.0304216359896,
+                  "wall_seconds": 3.878291083034128,
+                  "peak_memory_gb": 34.903859728
+                },
+                {
+                  "tokens": 128,
+                  "generation_tps": 35.309703973478705,
+                  "prompt_tps": 158.54383052263339,
+                  "wall_seconds": 3.85932495794259,
+                  "peak_memory_gb": 34.90385896
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.7727272727272725,
+              "accepted_rounds": 22,
+              "speedup_vs_baseline": 2.3474434345931643
+            }
+          ]
+        },
+        {
+          "max_tokens": 512,
+          "baseline": {
+            "label": "baseline",
+            "trials": 2,
+            "generation_tps": [
+              14.877872535003634,
+              14.795780107102269
+            ],
+            "generation_tps_mean": 14.836826321052952,
+            "prompt_tps_mean": 124.22861606570011,
+            "tokens": [
+              512,
+              512
+            ],
+            "wall_seconds": [
+              34.683796916971914,
+              34.916939457994886
+            ],
+            "wall_seconds_mean": 34.8003681874834,
+            "peak_memory_gb_max": 34.303700605,
+            "raw_trials": [
+              {
+                "tokens": 512,
+                "generation_tps": 14.877872535003634,
+                "prompt_tps": 133.97936671697965,
+                "wall_seconds": 34.683796916971914,
+                "peak_memory_gb": 34.303700605
+              },
+              {
+                "tokens": 512,
+                "generation_tps": 14.795780107102269,
+                "prompt_tps": 114.47786541442056,
+                "wall_seconds": 34.916939457994886,
+                "peak_memory_gb": 34.303700605
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-31B-it-assistant",
+              "trials": 2,
+              "generation_tps": [
+                34.70675555373144,
+                34.686416823933456
+              ],
+              "generation_tps_mean": 34.69658618883245,
+              "prompt_tps_mean": 142.26203797386717,
+              "tokens": [
+                512,
+                512
+              ],
+              "wall_seconds": [
+                15.06596695794724,
+                15.063555042026564
+              ],
+              "wall_seconds_mean": 15.064760999986902,
+              "peak_memory_gb_max": 35.29537435,
+              "raw_trials": [
+                {
+                  "tokens": 512,
+                  "generation_tps": 34.70675555373144,
+                  "prompt_tps": 139.00867856123887,
+                  "wall_seconds": 15.06596695794724,
+                  "peak_memory_gb": 35.29537435
+                },
+                {
+                  "tokens": 512,
+                  "generation_tps": 34.686416823933456,
+                  "prompt_tps": 145.51539738649544,
+                  "wall_seconds": 15.063555042026564,
+                  "peak_memory_gb": 35.29537435
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.941860465116279,
+              "accepted_rounds": 86,
+              "speedup_vs_baseline": 2.338545012122921
+            },
+            {
+              "label": "mlx-community/gemma-4-31B-it-assistant-bf16",
+              "trials": 2,
+              "generation_tps": [
+                34.31934561653739,
+                34.2393827841162
+              ],
+              "generation_tps_mean": 34.279364200326796,
+              "prompt_tps_mean": 147.74513196321897,
+              "tokens": [
+                512,
+                512
+              ],
+              "wall_seconds": [
+                15.20965612505097,
+                15.262627292075194
+              ],
+              "wall_seconds_mean": 15.236141708563082,
+              "peak_memory_gb_max": 35.295376398,
+              "raw_trials": [
+                {
+                  "tokens": 512,
+                  "generation_tps": 34.31934561653739,
+                  "prompt_tps": 153.82006896219633,
+                  "wall_seconds": 15.20965612505097,
+                  "peak_memory_gb": 35.295376398
+                },
+                {
+                  "tokens": 512,
+                  "generation_tps": 34.2393827841162,
+                  "prompt_tps": 141.67019496424157,
+                  "wall_seconds": 15.262627292075194,
+                  "peak_memory_gb": 35.295376398
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.941860465116279,
+              "accepted_rounds": 86,
+              "speedup_vs_baseline": 2.3104243089834884
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "finished_at": "2026-05-07T00:04:52.588791+00:00",
+  "wall_seconds": 173.102731
+}

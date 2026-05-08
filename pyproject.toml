@@ -43,9 +43,12 @@ evals = [
 #
 #     uv pip install bfcl-eval
 #     uv pip install git+https://github.com/LiveCodeBench/LiveCodeBench.git
+#     uv pip install bigcodebench --upgrade
+#     git clone https://github.com/LiveBench/LiveBench.git /path/to/LiveBench
+#     export LIVEBENCH_REPO=/path/to/LiveBench
 #
-# The `livecodebench_runner.py` and `bfcl.py` modules detect missing
-# packages at run time and surface a clear error.
+# The frontier runner modules detect missing packages/checkouts at run time and
+# surface clear errors or skips.
 
 [build-system]
 requires = ["hatchling"]

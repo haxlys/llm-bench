@@ -27,10 +27,17 @@ import click
 
 from llm_bench.evals import ModelServer, full_suite, smoke_suite
 from llm_bench.evals.bfcl import run_bfcl
+from llm_bench.evals.bigcodebench_runner import bigcodebench_available
+from llm_bench.evals.bigcodebench_runner import run_bigcodebench_hard
 from llm_bench.evals.evalplus_runner import run_evalplus
+from llm_bench.evals.kmmlu_pro_runner import kmmlu_pro_available
+from llm_bench.evals.kmmlu_pro_runner import run_kmmlu_pro
 from llm_bench.evals.livecodebench_runner import DEFAULT_RELEASE as LCB_RELEASE
 from llm_bench.evals.livecodebench_runner import livecodebench_available
 from llm_bench.evals.livecodebench_runner import run_livecodebench
+from llm_bench.evals.livebench_runner import DEFAULT_RELEASE as LIVEBENCH_RELEASE
+from llm_bench.evals.livebench_runner import livebench_available
+from llm_bench.evals.livebench_runner import run_livebench
 from llm_bench.evals.lmeval import run_lmeval
 from llm_bench.evals.sourceqa import DEFAULT_TASKS_PATH as SOURCEQA_DEFAULT_TASKS
 from llm_bench.evals.sourceqa import run_sourceqa
@@ -141,6 +148,12 @@ def _external_skip_reason(runner: str, effective_limit: int | None) -> str | Non
     if runner == "evalplus" and effective_limit is not None:
         return "skipped_limit_incompatible"
     if runner == "livecodebench" and not livecodebench_available():
+        return "skipped_unavailable_external"
+    if runner == "bigcodebench" and not bigcodebench_available():
+        return "skipped_unavailable_external"
+    if runner == "livebench" and not livebench_available():
+        return "skipped_unavailable_external"
+    if runner == "kmmlu_pro" and not kmmlu_pro_available():
         return "skipped_unavailable_external"
     return None
 
@@ -290,8 +303,8 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         "quant": v.quant, "dim": dim, "task": task,
                         "wall_s": round(dt, 1), **res,
                     })
-                # External runners (EvalPlus, LiveCodeBench, BFCL) — they
-                # talk to the same server but don't go through lm-eval-harness.
+                # External runners talk to the same server but don't go through
+                # lm-eval-harness.
                 # Skip them on smoke runs because each is a heavyweight tool.
                 # BFCL is gated on --include-bfcl (manual bfcl-eval install).
                 if suite == "full":
@@ -309,6 +322,14 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         elif runner == "livecodebench":
                             res = run_livecodebench(
                                 release=LCB_RELEASE, base_url=base_url,
+                                model_label=api_model_label,
+                                output_dir=out_dir / task,
+                                limit=effective_limit,
+                                api_key=api_key,
+                            )
+                        elif runner == "bigcodebench":
+                            res = run_bigcodebench_hard(
+                                base_url=base_url,
                                 model_label=api_model_label,
                                 output_dir=out_dir / task,
                                 limit=effective_limit,
@@ -332,9 +353,26 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                                 judge_model=sourceqa_judge_model,
                                 api_key=api_key,
                             )
+                        elif runner == "livebench":
+                            res = run_livebench(
+                                base_url=base_url,
+                                model_label=api_model_label,
+                                output_dir=out_dir / task,
+                                limit=effective_limit,
+                                release=os.environ.get("LIVEBENCH_RELEASE", LIVEBENCH_RELEASE),
+                                api_key=api_key,
+                            )
+                        elif runner == "kmmlu_pro":
+                            res = run_kmmlu_pro(
+                                base_url=base_url,
+                                model_label=api_model_label,
+                                output_dir=out_dir / task,
+                                limit=effective_limit,
+                                api_key=api_key,
+                            )
                         else:
-                            # simple_evals and kmmlu_pro runners not yet wired.
-                            # Surface the gap explicitly so it shows in summary.
+                            # Surface newly declared-but-unimplemented runners in
+                            # the summary instead of silently ignoring them.
                             res = {"task": task, "error": f"runner not implemented: {runner}"}
                         dt = time.perf_counter() - ts0
                         if "error" in res:

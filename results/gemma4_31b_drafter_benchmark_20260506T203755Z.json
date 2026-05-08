@@ -1,0 +1,808 @@
+{
+  "created_at": "2026-05-06T20:37:55.958468+00:00",
+  "host": "haxlysui-MacBookPro.local",
+  "prompt": "Write a concise technical explanation of speculative decoding for local LLM inference. Include why it can improve tokens per second and one caveat. Continue until the answer is complete.",
+  "max_tokens": [
+    128,
+    512
+  ],
+  "trials": 2,
+  "temperature": 0.0,
+  "suites": [
+    {
+      "runtime": "mlx_vlm",
+      "target_model": "/Users/haxlys/models/huggingface/hub/models--mlx-community--gemma-4-31b-it-4bit/snapshots/dcb78c3f5d6becacbfce71cd4851ad98c4f08a05",
+      "draft_block_size": 6,
+      "results": [
+        {
+          "max_tokens": 128,
+          "baseline": {
+            "label": "baseline",
+            "trials": 2,
+            "generation_tps": [
+              28.295284281679855,
+              28.366913201185866
+            ],
+            "generation_tps_mean": 28.33109874143286,
+            "prompt_tps_mean": 184.65563238425273,
+            "tokens": [
+              128,
+              128
+            ],
+            "wall_seconds": [
+              4.724012500024401,
+              4.712465582997538
+            ],
+            "wall_seconds_mean": 4.718239041510969,
+            "peak_memory_gb_max": 18.7106984,
+            "raw_trials": [
+              {
+                "tokens": 128,
+                "generation_tps": 28.295284281679855,
+                "prompt_tps": 184.67530724623188,
+                "wall_seconds": 4.724012500024401,
+                "peak_memory_gb": 18.7106984
+              },
+              {
+                "tokens": 128,
+                "generation_tps": 28.366913201185866,
+                "prompt_tps": 184.6359575222736,
+                "wall_seconds": 4.712465582997538,
+                "peak_memory_gb": 18.7106984
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-31B-it-assistant",
+              "trials": 2,
+              "generation_tps": [
+                59.464337804334434,
+                55.95550750456697
+              ],
+              "generation_tps_mean": 57.7099226544507,
+              "prompt_tps_mean": 221.6741554401338,
+              "tokens": [
+                128,
+                128
+              ],
+              "wall_seconds": [
+                2.3246017089113593,
+                2.464687207946554
+              ],
+              "wall_seconds_mean": 2.3946444584289566,
+              "peak_memory_gb_max": 19.562848056,
+              "raw_trials": [
+                {
+                  "tokens": 128,
+                  "generation_tps": 59.464337804334434,
+                  "prompt_tps": 224.90447999552444,
+                  "wall_seconds": 2.3246017089113593,
+                  "peak_memory_gb": 19.562848056
+                },
+                {
+                  "tokens": 128,
+                  "generation_tps": 55.95550750456697,
+                  "prompt_tps": 218.44383088474316,
+                  "wall_seconds": 2.464687207946554,
+                  "peak_memory_gb": 19.562848056
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.7727272727272725,
+              "accepted_rounds": 22,
+              "speedup_vs_baseline": 2.036981452119001
+            },
+            {
+              "label": "mlx-community/gemma-4-31B-it-assistant-bf16",
+              "trials": 2,
+              "generation_tps": [
+                55.605207676822744,
+                55.25688496779696
+              ],
+              "generation_tps_mean": 55.431046322309854,
+              "prompt_tps_mean": 210.0387853207699,
+              "tokens": [
+                128,
+                128
+              ],
+              "wall_seconds": [
+                2.4817905840463936,
+                2.50322720897384
+              ],
+              "wall_seconds_mean": 2.4925088965101168,
+              "peak_memory_gb_max": 19.56284844,
+              "raw_trials": [
+                {
+                  "tokens": 128,
+                  "generation_tps": 55.605207676822744,
+                  "prompt_tps": 214.55076809366264,
+                  "wall_seconds": 2.4817905840463936,
+                  "peak_memory_gb": 19.562848056
+                },
+                {
+                  "tokens": 128,
+                  "generation_tps": 55.25688496779696,
+                  "prompt_tps": 205.52680254787717,
+                  "wall_seconds": 2.50322720897384,
+                  "peak_memory_gb": 19.56284844
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.7727272727272725,
+              "accepted_rounds": 22,
+              "speedup_vs_baseline": 1.9565441788265214
+            }
+          ]
+        },
+        {
+          "max_tokens": 512,
+          "baseline": {
+            "label": "baseline",
+            "trials": 2,
+            "generation_tps": [
+              26.853021331384088,
+              26.205408596625432
+            ],
+            "generation_tps_mean": 26.52921496400476,
+            "prompt_tps_mean": 178.93128411211092,
+            "tokens": [
+              512,
+              512
+            ],
+            "wall_seconds": [
+              19.270205999957398,
+              19.752112874994054
+            ],
+            "wall_seconds_mean": 19.511159437475726,
+            "peak_memory_gb_max": 18.975729244,
+            "raw_trials": [
+              {
+                "tokens": 512,
+                "generation_tps": 26.853021331384088,
+                "prompt_tps": 184.00251477600713,
+                "wall_seconds": 19.270205999957398,
+                "peak_memory_gb": 18.975729244
+              },
+              {
+                "tokens": 512,
+                "generation_tps": 26.205408596625432,
+                "prompt_tps": 173.86005344821473,
+                "wall_seconds": 19.752112874994054,
+                "peak_memory_gb": 18.975726684
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-31B-it-assistant",
+              "trials": 2,
+              "generation_tps": [
+                49.46565080939528,
+                49.05557009250544
+              ],
+              "generation_tps_mean": 49.26061045095036,
+              "prompt_tps_mean": 195.43418217817756,
+              "tokens": [
+                512,
+                512
+              ],
+              "wall_seconds": [
+                10.60667074995581,
+                10.692305708071217
+              ],
+              "wall_seconds_mean": 10.649488229013514,
+              "peak_memory_gb_max": 19.965193774,
+              "raw_trials": [
+                {
+                  "tokens": 512,
+                  "generation_tps": 49.46565080939528,
+                  "prompt_tps": 199.00227496777657,
+                  "wall_seconds": 10.60667074995581,
+                  "peak_memory_gb": 19.965193774
+                },
+                {
+                  "tokens": 512,
+                  "generation_tps": 49.05557009250544,
+                  "prompt_tps": 191.86608938857856,
+                  "wall_seconds": 10.692305708071217,
+                  "peak_memory_gb": 19.965193774
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.941860465116279,
+              "accepted_rounds": 86,
+              "speedup_vs_baseline": 1.8568438801445089
+            },
+            {
+              "label": "mlx-community/gemma-4-31B-it-assistant-bf16",
+              "trials": 2,
+              "generation_tps": [
+                49.23800934881352,
+                48.08959128599418
+              ],
+              "generation_tps_mean": 48.663800317403854,
+              "prompt_tps_mean": 197.89157909842106,
+              "tokens": [
+                512,
+                512
+              ],
+              "wall_seconds": [
+                10.645343624986708,
+                10.899988624965772
+              ],
+              "wall_seconds_mean": 10.77266612497624,
+              "peak_memory_gb_max": 19.965193774,
+              "raw_trials": [
+                {
+                  "tokens": 512,
+                  "generation_tps": 49.23800934881352,
+                  "prompt_tps": 202.1566959225512,
+                  "wall_seconds": 10.645343624986708,
+                  "peak_memory_gb": 19.965193774
+                },
+                {
+                  "tokens": 512,
+                  "generation_tps": 48.08959128599418,
+                  "prompt_tps": 193.6264622742909,
+                  "wall_seconds": 10.899988624965772,
+                  "peak_memory_gb": 19.965193774
+                }
+              ],
+              "accepted_tokens_per_round_mean": 4.941860465116279,
+              "accepted_rounds": 86,
+              "speedup_vs_baseline": 1.8343475441482773
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "runtime": "dflash_mlx",
+      "target_model": "mlx-community/gemma-4-31b-it-4bit",
+      "draft_block_size": 16,
+      "results": [
+        {
+          "max_tokens": 128,
+          "baseline": {
+            "label": "baseline",
+            "trials": 2,
+            "generation_tps": [
+              27.047703774589014,
+              24.719113182803117
+            ],
+            "generation_tps_mean": 25.883408478696065,
+            "prompt_tps_mean": 0.0,
+            "tokens": [
+              128,
+              128
+            ],
+            "wall_seconds": [
+              5.074249165947549,
+              5.62202254193835
+            ],
+            "wall_seconds_mean": 5.348135853942949,
+            "peak_memory_gb_max": 17.579115068,
+            "raw_trials": [
+              {
+                "tokens": 128,
+                "generation_tps": 27.047703774589014,
+                "wall_seconds": 5.074249165947549,
+                "peak_memory_gb": 17.579098684
+              },
+              {
+                "tokens": 128,
+                "generation_tps": 24.719113182803117,
+                "wall_seconds": 5.62202254193835,
+                "peak_memory_gb": 17.579115068
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "z-lab/gemma-4-31B-it-DFlash",
+              "trials": 2,
+              "generation_tps": [
+                21.053069316656746,
+                22.634644471672352
+              ],
+              "generation_tps_mean": 21.84385689416455,
+              "prompt_tps_mean": 0.0,
+              "tokens": [
+                128,
+                128
+              ],
+              "wall_seconds": [
+                6.3915235419990495,
+                5.987906125024892
+              ],
+              "wall_seconds_mean": 6.189714833511971,
+              "peak_memory_gb_max": 20.602914276,
+              "raw_trials": [
+                {
+                  "tokens": 128,
+                  "generation_tps": 21.053069316656746,
+                  "wall_seconds": 6.3915235419990495,
+                  "peak_memory_gb": 20.602914276,
+                  "avg_accept_length": 4.3,
+                  "accept_lengths": [
+                    1,
+                    9,
+                    10,
+                    10,
+                    5,
+                    1,
+                    13,
+                    16,
+                    1,
+                    2,
+                    1,
+                    2,
+                    2,
+                    6,
+                    5,
+                    3,
+                    3,
+                    1,
+                    4,
+                    1,
+                    1,
+                    1,
+                    4,
+                    6,
+                    1,
+                    2,
+                    8,
+                    1,
+                    7,
+                    2
+                  ]
+                },
+                {
+                  "tokens": 128,
+                  "generation_tps": 22.634644471672352,
+                  "wall_seconds": 5.987906125024892,
+                  "peak_memory_gb": 20.602914276,
+                  "avg_accept_length": 4.3,
+                  "accept_lengths": [
+                    1,
+                    9,
+                    10,
+                    10,
+                    5,
+                    1,
+                    13,
+                    16,
+                    1,
+                    2,
+                    1,
+                    2,
+                    2,
+                    6,
+                    5,
+                    3,
+                    3,
+                    1,
+                    4,
+                    1,
+                    1,
+                    1,
+                    4,
+                    6,
+                    1,
+                    2,
+                    8,
+                    1,
+                    7,
+                    2
+                  ]
+                }
+              ],
+              "avg_accept_length_mean": 4.3,
+              "speedup_vs_baseline": 0.843932780806038
+            }
+          ]
+        },
+        {
+          "max_tokens": 512,
+          "baseline": {
+            "label": "baseline",
+            "trials": 2,
+            "generation_tps": [
+              21.967476328606175,
+              19.907488307717806
+            ],
+            "generation_tps_mean": 20.93748231816199,
+            "prompt_tps_mean": 0.0,
+            "tokens": [
+              512,
+              512
+            ],
+            "wall_seconds": [
+              23.73463424993679,
+              26.2046500419965
+            ],
+            "wall_seconds_mean": 24.969642145966645,
+            "peak_memory_gb_max": 18.10696186,
+            "raw_trials": [
+              {
+                "tokens": 512,
+                "generation_tps": 21.967476328606175,
+                "wall_seconds": 23.73463424993679,
+                "peak_memory_gb": 18.10696186
+              },
+              {
+                "tokens": 512,
+                "generation_tps": 19.907488307717806,
+                "wall_seconds": 26.2046500419965,
+                "peak_memory_gb": 18.106958788
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "z-lab/gemma-4-31B-it-DFlash",
+              "trials": 2,
+              "generation_tps": [
+                16.0217994942282,
+                16.566431464999557
+              ],
+              "generation_tps_mean": 16.29411547961388,
+              "prompt_tps_mean": 0.0,
+              "tokens": [
+                512,
+                512
+              ],
+              "wall_seconds": [
+                32.26540870894678,
+                31.19879408297129
+              ],
+              "wall_seconds_mean": 31.732101395959035,
+              "peak_memory_gb_max": 21.004672018,
+              "raw_trials": [
+                {
+                  "tokens": 512,
+                  "generation_tps": 16.0217994942282,
+                  "wall_seconds": 32.26540870894678,
+                  "peak_memory_gb": 21.004672018,
+                  "avg_accept_length": 3.2264150943396226,
+                  "accept_lengths": [
+                    1,
+                    9,
+                    10,
+                    10,
+                    5,
+                    1,
+                    13,
+                    16,
+                    1,
+                    2,
+                    1,
+                    2,
+                    2,
+                    6,
+                    5,
+                    3,
+                    3,
+                    1,
+                    4,
+                    1,
+                    1,
+                    1,
+                    4,
+                    6,
+                    1,
+                    2,
+                    8,
+                    1,
+                    7,
+                    5,
+                    2,
+                    1,
+                    1,
+                    2,
+                    1,
+                    4,
+                    2,
+                    2,
+                    4,
+                    1,
+                    5,
+                    2,
+                    3,
+                    3,
+                    2,
+                    3,
+                    1,
+                    1,
+                    2,
+                    4,
+                    10,
+                    2,
+                    3,
+                    3,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    4,
+                    1,
+                    8,
+                    4,
+                    6,
+                    2,
+                    3,
+                    2,
+                    2,
+                    1,
+                    3,
+                    4,
+                    3,
+                    2,
+                    4,
+                    2,
+                    3,
+                    4,
+                    8,
+                    4,
+                    1,
+                    3,
+                    1,
+                    6,
+                    2,
+                    4,
+                    7,
+                    5,
+                    2,
+                    2,
+                    3,
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    8,
+                    1,
+                    2,
+                    1,
+                    3,
+                    9,
+                    4,
+                    1,
+                    2,
+                    4,
+                    3,
+                    2,
+                    4,
+                    1,
+                    1,
+                    3,
+                    2,
+                    1,
+                    1,
+                    1,
+                    2,
+                    5,
+                    1,
+                    3,
+                    3,
+                    1,
+                    3,
+                    2,
+                    1,
+                    1,
+                    2,
+                    3,
+                    2,
+                    2,
+                    1,
+                    1,
+                    9,
+                    3,
+                    2,
+                    2,
+                    1,
+                    1,
+                    5,
+                    3,
+                    3,
+                    2,
+                    5,
+                    2,
+                    1,
+                    1,
+                    9,
+                    4,
+                    5,
+                    16,
+                    9,
+                    2,
+                    3,
+                    2,
+                    3,
+                    3,
+                    1,
+                    4
+                  ]
+                },
+                {
+                  "tokens": 512,
+                  "generation_tps": 16.566431464999557,
+                  "wall_seconds": 31.19879408297129,
+                  "peak_memory_gb": 21.004672018,
+                  "avg_accept_length": 3.2264150943396226,
+                  "accept_lengths": [
+                    1,
+                    9,
+                    10,
+                    10,
+                    5,
+                    1,
+                    13,
+                    16,
+                    1,
+                    2,
+                    1,
+                    2,
+                    2,
+                    6,
+                    5,
+                    3,
+                    3,
+                    1,
+                    4,
+                    1,
+                    1,
+                    1,
+                    4,
+                    6,
+                    1,
+                    2,
+                    8,
+                    1,
+                    7,
+                    5,
+                    2,
+                    1,
+                    1,
+                    2,
+                    1,
+                    4,
+                    2,
+                    2,
+                    4,
+                    1,
+                    5,
+                    2,
+                    3,
+                    3,
+                    2,
+                    3,
+                    1,
+                    1,
+                    2,
+                    4,
+                    10,
+                    2,
+                    3,
+                    3,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    4,
+                    1,
+                    8,
+                    4,
+                    6,
+                    2,
+                    3,
+                    2,
+                    2,
+                    1,
+                    3,
+                    4,
+                    3,
+                    2,
+                    4,
+                    2,
+                    3,
+                    4,
+                    8,
+                    4,
+                    1,
+                    3,
+                    1,
+                    6,
+                    2,
+                    4,
+                    7,
+                    5,
+                    2,
+                    2,
+                    3,
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    8,
+                    1,
+                    2,
+                    1,
+                    3,
+                    9,
+                    4,
+                    1,
+                    2,
+                    4,
+                    3,
+                    2,
+                    4,
+                    1,
+                    1,
+                    3,
+                    2,
+                    1,
+                    1,
+                    1,
+                    2,
+                    5,
+                    1,
+                    3,
+                    3,
+                    1,
+                    3,
+                    2,
+                    1,
+                    1,
+                    2,
+                    3,
+                    2,
+                    2,
+                    1,
+                    1,
+                    9,
+                    3,
+                    2,
+                    2,
+                    1,
+                    1,
+                    5,
+                    3,
+                    3,
+                    2,
+                    5,
+                    2,
+                    1,
+                    1,
+                    9,
+                    4,
+                    5,
+                    16,
+                    9,
+                    2,
+                    3,
+                    2,
+                    3,
+                    3,
+                    1,
+                    4
+                  ]
+                }
+              ],
+              "avg_accept_length_mean": 3.2264150943396226,
+              "speedup_vs_baseline": 0.7782270681838249
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "finished_at": "2026-05-06T20:42:03.135739+00:00",
+  "wall_seconds": 247.177271
+}

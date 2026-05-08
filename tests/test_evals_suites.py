@@ -20,13 +20,22 @@ def test_loglikelihood_tasks_need_explicit_logprob_capability():
 def test_external_code_runners_are_not_supported_on_mlx_until_server_bug_is_fixed():
     assert external_supports_fmt("humaneval", "evalplus", "mlx") is False
     assert external_supports_fmt("livecodebench", "livecodebench", "mlx") is False
+    assert external_supports_fmt("bigcodebench_hard", "bigcodebench", "mlx") is False
     assert external_supports_fmt("humaneval", "evalplus", "gguf") is True
+    assert external_supports_fmt("bigcodebench_hard", "bigcodebench", "gguf") is True
 
 
 def test_sourceqa_external_runner_is_supported_for_both_formats():
     assert ("source_grounding", "sourceqa", "sourceqa") in external_suite()
     assert external_supports_fmt("sourceqa", "sourceqa", "mlx") is True
     assert external_supports_fmt("sourceqa", "sourceqa", "gguf") is True
+
+
+def test_fresh_and_korean_external_runners_are_supported_for_chat_formats():
+    assert ("fresh", "livebench_subset", "livebench") in external_suite()
+    assert ("korean", "kmmlu_pro", "kmmlu_pro") in external_suite()
+    assert external_supports_fmt("livebench_subset", "livebench", "mlx") is True
+    assert external_supports_fmt("kmmlu_pro", "kmmlu_pro", "gguf") is True
 
 
 def test_smoke_suite_excludes_heavy_or_superseded_tasks():

@@ -1,0 +1,181 @@
+{
+  "created_at": "2026-05-06T23:54:00.056888+00:00",
+  "host": "haxlysui-MacBookPro.local",
+  "prompt": "Write a concise technical explanation of speculative decoding for local LLM inference. Include why it can improve tokens per second and one caveat. Continue until the answer is complete.",
+  "max_tokens": [
+    16
+  ],
+  "trials": 1,
+  "temperature": 0.0,
+  "suites": [
+    {
+      "runtime": "mlx_vlm",
+      "target_model": "/Users/haxlys/models/huggingface/hub/models--mlx-community--gemma-4-31b-it-4bit/snapshots/dcb78c3f5d6becacbfce71cd4851ad98c4f08a05",
+      "draft_block_size": 6,
+      "results": [
+        {
+          "max_tokens": 16,
+          "baseline": {
+            "label": "baseline",
+            "trials": 1,
+            "generation_tps": [
+              24.966790581724112
+            ],
+            "generation_tps_mean": 24.966790581724112,
+            "prompt_tps_mean": 165.09472304022074,
+            "tokens": [
+              16
+            ],
+            "wall_seconds": [
+              0.865716291940771
+            ],
+            "wall_seconds_mean": 0.865716291940771,
+            "peak_memory_gb_max": 18.7106984,
+            "raw_trials": [
+              {
+                "tokens": 16,
+                "generation_tps": 24.966790581724112,
+                "prompt_tps": 165.09472304022074,
+                "wall_seconds": 0.865716291940771,
+                "peak_memory_gb": 18.7106984
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-31B-it-assistant",
+              "trials": 1,
+              "generation_tps": [
+                39.689639428021295
+              ],
+              "generation_tps_mean": 39.689639428021295,
+              "prompt_tps_mean": 206.3409717370238,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.5836645410163328
+              ],
+              "wall_seconds_mean": 0.5836645410163328,
+              "peak_memory_gb_max": 19.504687014,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 39.689639428021295,
+                  "prompt_tps": 206.3409717370238,
+                  "wall_seconds": 0.5836645410163328,
+                  "peak_memory_gb": 19.504687014
+                }
+              ],
+              "accepted_tokens_per_round_mean": 3.0,
+              "accepted_rounds": 4,
+              "speedup_vs_baseline": 1.5896972940156122
+            },
+            {
+              "label": "mlx-community/gemma-4-31B-it-assistant-bf16",
+              "trials": 1,
+              "generation_tps": [
+                39.62701489194991
+              ],
+              "generation_tps_mean": 39.62701489194991,
+              "prompt_tps_mean": 205.10435240096928,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.5854322080267593
+              ],
+              "wall_seconds_mean": 0.5854322080267593,
+              "peak_memory_gb_max": 19.504687014,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 39.62701489194991,
+                  "prompt_tps": 205.10435240096928,
+                  "wall_seconds": 0.5854322080267593,
+                  "peak_memory_gb": 19.504687014
+                }
+              ],
+              "accepted_tokens_per_round_mean": 3.0,
+              "accepted_rounds": 4,
+              "speedup_vs_baseline": 1.587188980587565
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "runtime": "dflash_mlx",
+      "target_model": "mlx-community/gemma-4-31b-it-4bit",
+      "draft_block_size": 16,
+      "results": [
+        {
+          "max_tokens": 16,
+          "baseline": {
+            "label": "baseline",
+            "trials": 1,
+            "generation_tps": [
+              25.174830702869627
+            ],
+            "generation_tps_mean": 25.174830702869627,
+            "prompt_tps_mean": 0.0,
+            "tokens": [
+              16
+            ],
+            "wall_seconds": [
+              1.0454963749507442
+            ],
+            "wall_seconds_mean": 1.0454963749507442,
+            "peak_memory_gb_max": 17.579087932,
+            "raw_trials": [
+              {
+                "tokens": 16,
+                "generation_tps": 25.174830702869627,
+                "wall_seconds": 1.0454963749507442,
+                "peak_memory_gb": 17.579087932
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "z-lab/gemma-4-31B-it-DFlash",
+              "trials": 1,
+              "generation_tps": [
+                13.634037228458803
+              ],
+              "generation_tps_mean": 13.634037228458803,
+              "prompt_tps_mean": 0.0,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                1.5094970830250531
+              ],
+              "wall_seconds_mean": 1.5094970830250531,
+              "peak_memory_gb_max": 20.544789011,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 13.634037228458803,
+                  "wall_seconds": 1.5094970830250531,
+                  "peak_memory_gb": 20.544789011,
+                  "avg_accept_length": 5.666666666666667,
+                  "accept_lengths": [
+                    1,
+                    9,
+                    7
+                  ]
+                }
+              ],
+              "avg_accept_length_mean": 5.666666666666667,
+              "speedup_vs_baseline": 0.5415741376526789
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "finished_at": "2026-05-06T23:54:13.410259+00:00",
+  "wall_seconds": 13.353371
+}

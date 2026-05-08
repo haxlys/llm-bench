@@ -108,3 +108,14 @@ def test_livecodebench_is_skipped_when_runner_unavailable(monkeypatch):
     monkeypatch.setattr(run_evals, "livecodebench_available", lambda: False)
 
     assert run_evals._external_skip_reason("livecodebench", 1) == "skipped_unavailable_external"
+
+
+def test_frontier_runners_are_skipped_when_unavailable(monkeypatch):
+    run_evals = _load_run_evals()
+    monkeypatch.setattr(run_evals, "bigcodebench_available", lambda: False)
+    monkeypatch.setattr(run_evals, "livebench_available", lambda: False)
+    monkeypatch.setattr(run_evals, "kmmlu_pro_available", lambda: False)
+
+    assert run_evals._external_skip_reason("bigcodebench", 1) == "skipped_unavailable_external"
+    assert run_evals._external_skip_reason("livebench", 1) == "skipped_unavailable_external"
+    assert run_evals._external_skip_reason("kmmlu_pro", 1) == "skipped_unavailable_external"

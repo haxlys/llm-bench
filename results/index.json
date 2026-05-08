@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-05T20:18:46+00:00",
+  "generated_at": "2026-05-06T11:39:54+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -26,7 +26,7 @@
       },
       "evals": {
         "tasks_measured": 3,
-        "tasks_supported": 4,
+        "tasks_supported": 6,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -65,7 +65,7 @@
       },
       "evals": {
         "tasks_measured": 1,
-        "tasks_supported": 4,
+        "tasks_supported": 6,
         "tasks": [
           "gsm8k_cot_zeroshot"
         ],
@@ -98,7 +98,7 @@
       },
       "evals": {
         "tasks_measured": 3,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -137,7 +137,7 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [],
         "extra_tasks": [],
         "last_measured": null
@@ -166,7 +166,7 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 4,
+        "tasks_supported": 6,
         "tasks": [],
         "extra_tasks": [],
         "last_measured": null
@@ -197,7 +197,7 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [],
         "extra_tasks": [],
         "last_measured": null
@@ -228,7 +228,7 @@
       },
       "evals": {
         "tasks_measured": 5,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -265,7 +265,7 @@
       },
       "evals": {
         "tasks_measured": 5,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -306,7 +306,7 @@
       },
       "evals": {
         "tasks_measured": 4,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -342,7 +342,7 @@
       },
       "evals": {
         "tasks_measured": 5,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -352,6 +352,254 @@
         ],
         "extra_tasks": [],
         "last_measured": "2026-05-04T14:19:03Z"
+      }
+    },
+    {
+      "key": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "model_id": "qwen-3-next-80B-A3B-instruct",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "moe",
+      "approx_size_gb": 45,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": null
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 10,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
+    },
+    {
+      "key": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "model_id": "qwen-3-coder-30B-A3B-instruct",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "moe",
+      "approx_size_gb": 17,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": null
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 10,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
+    },
+    {
+      "key": "qwen-3.6-27b-mtplx-speed-mlx-4bit",
+      "model_id": "qwen-3.6-27B-MTPLX",
+      "fmt": "mlx",
+      "backend": "mlx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
+      "quant": "MLX-4bit",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 15,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-06T00:58:36+00:00"
+      },
+      "evals": {
+        "tasks_measured": 3,
+        "tasks_supported": 6,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "leaderboard_ifeval"
+        ],
+        "extra_tasks": [
+          "kmmlu_direct"
+        ],
+        "last_measured": "2026-05-06T01:01:40Z"
+      }
+    },
+    {
+      "key": "qwen-3.6-27b-mtplx-speed-mtplx-mtp",
+      "model_id": "qwen-3.6-27B-MTPLX",
+      "fmt": "mlx",
+      "backend": "mtplx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
+      "quant": "MLX-4bit",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 15,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 4,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-06T01:52:02+00:00"
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 6,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
+    },
+    {
+      "key": "qwen-3.6-27b-mtplx-speed-mtplx-ar",
+      "model_id": "qwen-3.6-27B-MTPLX",
+      "fmt": "mlx",
+      "backend": "mtplx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
+      "quant": "MLX-4bit",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 15,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 4,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-06T01:54:30+00:00"
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 6,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
+    },
+    {
+      "key": "qwen-3.6-27b-mtplx-optimized-mlx-mixed4",
+      "model_id": "qwen-3.6-27B-MTPLX",
+      "fmt": "mlx",
+      "backend": "mlx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
+      "quant": "MLX-mixed-4bit",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 19,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-06T01:01:28+00:00"
+      },
+      "evals": {
+        "tasks_measured": 3,
+        "tasks_supported": 6,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "leaderboard_ifeval"
+        ],
+        "extra_tasks": [
+          "kmmlu_direct"
+        ],
+        "last_measured": "2026-05-06T01:06:03Z"
+      }
+    },
+    {
+      "key": "qwen-3.6-27b-mtplx-optimized-mtplx-mtp",
+      "model_id": "qwen-3.6-27B-MTPLX",
+      "fmt": "mlx",
+      "backend": "mtplx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
+      "quant": "MLX-mixed-4bit",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 19,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-06T01:35:36+00:00"
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 6,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
+    },
+    {
+      "key": "qwen-3.6-27b-mtplx-optimized-mtplx-ar",
+      "model_id": "qwen-3.6-27B-MTPLX",
+      "fmt": "mlx",
+      "backend": "mtplx",
+      "artifact_type": "hf_repo",
+      "capabilities": [
+        "chat",
+        "completions"
+      ],
+      "quant": "MLX-mixed-4bit",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "dense",
+      "approx_size_gb": 19,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-06T01:35:44+00:00"
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 6,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
       }
     },
     {
@@ -379,7 +627,7 @@
       },
       "evals": {
         "tasks_measured": 5,
-        "tasks_supported": 7,
+        "tasks_supported": 10,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -390,11 +638,104 @@
         "extra_tasks": [],
         "last_measured": "2026-05-05T19:45:06Z"
       }
+    },
+    {
+      "key": "gpt-oss-20b-gguf-q4",
+      "model_id": "gpt-oss-20b",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "openai",
+      "architecture": "moe",
+      "approx_size_gb": 11,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": null
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 10,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
+    },
+    {
+      "key": "gpt-oss-120b-gguf-q4",
+      "model_id": "gpt-oss-120b",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "openai",
+      "architecture": "moe",
+      "approx_size_gb": 58,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": null
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 10,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
+    },
+    {
+      "key": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "model_id": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "UD-Q4_K_M",
+      "tier": "4bit",
+      "family": "nemotron",
+      "architecture": "moe",
+      "approx_size_gb": 24,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 0,
+        "scenarios_total": 8,
+        "last_measured": null
+      },
+      "evals": {
+        "tasks_measured": 0,
+        "tasks_supported": 10,
+        "tasks": [],
+        "extra_tasks": [],
+        "last_measured": null
+      }
     }
   ],
   "totals": {
-    "variants": 11,
+    "variants": 22,
     "speed_complete": 11,
-    "evals_started": 8
+    "evals_started": 10
   }
 }

@@ -752,7 +752,7 @@
       "status": "measured"
     }
   ],
-  "generatedAt": "2026-05-06T06:35:16.361022+00:00",
+  "generatedAt": "2026-05-08T02:53:19.076732+00:00",
   "hardware": {
     "machine": "Apple M5 Max",
     "memoryGb": 128,
@@ -865,7 +865,7 @@
       "verifyMsPerCallMean": 86.086
     }
   ],
-  "sourceCommit": "440d065",
+  "sourceCommit": "7e48ca5",
   "speed": [
     {
       "backend": "gguf",
@@ -2559,6 +2559,966 @@
         "latency-not-measured"
       ],
       "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:08:26+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:08:37+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.693999999999996,
+      "ppTpsMean": 1455.0104323333333,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g128",
+      "tgTpsMean": 87.427773,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 5.173333333333333
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:08:57+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:09:17+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.693999999999996,
+      "ppTpsMean": 1426.7592663333335,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g512",
+      "tgTpsMean": 80.70250266666666,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 10.156666666666666
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:07:32+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:07:40+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.635,
+      "ppTpsMean": 1427.548403,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g128",
+      "tgTpsMean": 101.85910566666666,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 4.096666666666667
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:07:58+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:08:16+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.64333333333334,
+      "ppTpsMean": 1323.0391220000001,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g512",
+      "tgTpsMean": 82.82981366666667,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 9.14
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:09:40+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:10:03+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.81199999999999,
+      "ppTpsMean": 1038.5688283333332,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g128",
+      "tgTpsMean": 84.03107899999999,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 11.326666666666668
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:10:35+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:11:08+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.81199999999999,
+      "ppTpsMean": 1041.3500246666665,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g512",
+      "tgTpsMean": 76.595218,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 16.363333333333333
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:11:52+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:12:34+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.969,
+      "ppTpsMean": 929.445732,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g128",
+      "tgTpsMean": 79.61488433333334,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 20.923333333333332
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:13:31+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:14:24+00:00",
+      "modelId": "gpt-oss-120b",
+      "peakMemGbMean": 58.969,
+      "ppTpsMean": 880.3792166666667,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g512",
+      "tgTpsMean": 76.607784,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-120b-gguf-q4",
+      "wallSecondsMean": 27.16
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:03:54+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:03:59+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 11.039,
+      "ppTpsMean": 2281.981043333333,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g128",
+      "tgTpsMean": 116.06449366666668,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 2.9233333333333333
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:04:13+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:04:26+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 11.039,
+      "ppTpsMean": 2404.7311313333335,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g512",
+      "tgTpsMean": 110.52444233333334,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 6.613333333333333
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:03:18+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:03:22+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 10.994,
+      "ppTpsMean": 2843.096436,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g128",
+      "tgTpsMean": 127.13780366666667,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 2.0866666666666664
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:03:34+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:03:47+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 10.999,
+      "ppTpsMean": 2806.736927666667,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g512",
+      "tgTpsMean": 104.25596133333333,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 6.28
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:04:38+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:04:49+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 11.122,
+      "ppTpsMean": 2045.1640123333334,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g128",
+      "tgTpsMean": 121.35721000000001,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 5.796666666666667
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:05:08+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:05:26+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 11.121333333333334,
+      "ppTpsMean": 2066.604766666667,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g512",
+      "tgTpsMean": 114.79537733333332,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 9.18
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:05:49+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:06:11+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 11.231666666666667,
+      "ppTpsMean": 1699.0069726666668,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g128",
+      "tgTpsMean": 120.38836066666666,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 11.339999999999998
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:06:41+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:07:13+00:00",
+      "modelId": "gpt-oss-20b",
+      "peakMemGbMean": 11.231333333333334,
+      "ppTpsMean": 1635.5219213333332,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g512",
+      "tgTpsMean": 105.59960633333333,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "gpt-oss-20b-gguf-q4",
+      "wallSecondsMean": 15.533333333333333
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:15:14+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:15:21+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.427000000000003,
+      "ppTpsMean": 1962.7871223333332,
+      "promptTokens": 1024,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g128",
+      "tgTpsMean": 91.20421900000001,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 3.5966666666666662
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:15:38+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:15:56+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.427000000000003,
+      "ppTpsMean": 1559.7468740000002,
+      "promptTokens": 1024,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g512",
+      "tgTpsMean": 78.062952,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 8.976666666666667
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:14:32+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:14:37+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.412666666666667,
+      "ppTpsMean": 2182.296646666666,
+      "promptTokens": 256,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g128",
+      "tgTpsMean": 106.19438600000001,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 2.61
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:14:52+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:15:06+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.413,
+      "ppTpsMean": 2060.4973213333333,
+      "promptTokens": 256,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g512",
+      "tgTpsMean": 87.65919633333334,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 7.4799999999999995
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:16:11+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:16:26+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.457000000000004,
+      "ppTpsMean": 1662.5426156666665,
+      "promptTokens": 4096,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g128",
+      "tgTpsMean": 92.38430833333332,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 7.486666666666667
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:16:50+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:17:14+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.457000000000004,
+      "ppTpsMean": 1669.0493513333333,
+      "promptTokens": 4096,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g512",
+      "tgTpsMean": 84.83128133333334,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 12.026666666666666
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:17:40+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:18:09+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.496,
+      "ppTpsMean": 1446.5667389999999,
+      "promptTokens": 8192,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g128",
+      "tgTpsMean": 86.02799900000001,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 14.17
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:18:45+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:19:20+00:00",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "peakMemGbMean": 22.496,
+      "ppTpsMean": 1589.5404206666665,
+      "promptTokens": 8192,
+      "quant": "UD-Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g512",
+      "tgTpsMean": 84.84619933333333,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "wallSecondsMean": 17.56
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:58:51+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:58:57+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 17.498,
+      "ppTpsMean": 2672.7583926666666,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g128",
+      "tgTpsMean": 115.448288,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 3.0933333333333333
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:59:11+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:59:25+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 17.498,
+      "ppTpsMean": 2261.925047333333,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g512",
+      "tgTpsMean": 98.89600833333334,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 7.140000000000001
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:57:06+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:57:11+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 17.418,
+      "ppTpsMean": 2632.680279333333,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g128",
+      "tgTpsMean": 128.73696700000002,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 2.2566666666666664
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:57:56+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:58:44+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 17.439333333333334,
+      "ppTpsMean": 807.1544463333333,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g512",
+      "tgTpsMean": 23.278394333333335,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 25.47666666666667
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:59:41+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:59:57+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 17.792,
+      "ppTpsMean": 1443.5424283333334,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g128",
+      "tgTpsMean": 100.83402033333333,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 7.960000000000001
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:00:19+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:00:42+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 17.792,
+      "ppTpsMean": 1518.7990723333332,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g512",
+      "tgTpsMean": 100.90342300000002,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 11.346666666666666
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:01:15+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:01:49+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 18.183,
+      "ppTpsMean": 1141.3775063333333,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g128",
+      "tgTpsMean": 95.28152666666666,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 16.71666666666667
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T03:02:30+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T03:03:13+00:00",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "peakMemGbMean": 18.183,
+      "ppTpsMean": 1124.6428856666666,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g512",
+      "tgTpsMean": 95.74868933333335,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 21.073333333333334
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
       "firstMeasuredAt": "2026-05-04T02:13:52+00:00",
       "fmt": "gguf",
       "generationTokens": 128,
@@ -2792,6 +3752,246 @@
       "ttftMs": null,
       "variant": "qwen-3-coder-next-gguf-q4",
       "wallSecondsMean": 21.263333333333335
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:49:06+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:49:16+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 45.41466666666667,
+      "ppTpsMean": 1782.6952023333333,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g128",
+      "tgTpsMean": 80.668814,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 4.796666666666667
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:49:36+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:49:59+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 45.41466666666667,
+      "ppTpsMean": 1568.990520666667,
+      "promptTokens": 1024,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g512",
+      "tgTpsMean": 68.04143266666667,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 10.863333333333335
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:48:07+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:48:22+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 42.988,
+      "ppTpsMean": 1506.4530936666667,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g128",
+      "tgTpsMean": 60.72276,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 6.473333333333334
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:48:40+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:48:57+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 45.412,
+      "ppTpsMean": 1669.8698080000001,
+      "promptTokens": 256,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g512",
+      "tgTpsMean": 85.23999966666666,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 8.68
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:50:20+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:50:41+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 45.49699999999999,
+      "ppTpsMean": 1179.1686296666667,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g128",
+      "tgTpsMean": 67.89587433333334,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 10.526666666666666
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:51:12+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:52:22+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 45.49733333333333,
+      "ppTpsMean": 1141.3011116666667,
+      "promptTokens": 4096,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g512",
+      "tgTpsMean": 52.200975,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 28.346666666666664
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:53:26+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:54:22+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 44.49433333333334,
+      "ppTpsMean": 913.524304,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g128",
+      "tgTpsMean": 65.28735433333333,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 28.846666666666664
+    },
+    {
+      "backend": "gguf",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-07T02:55:40+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-07T02:57:00+00:00",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "peakMemGbMean": 45.607,
+      "ppTpsMean": 963.1419989999999,
+      "promptTokens": 8192,
+      "quant": "Q4_K_M",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g512",
+      "tgTpsMean": 33.600203,
+      "tier": "4bit",
+      "ttftMs": null,
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "wallSecondsMean": 45.73333333333333
     },
     {
       "backend": "gguf",
@@ -4425,6 +5625,38 @@
       "tier": "4bit"
     },
     {
+      "approxSizeGb": 45,
+      "architecture": "moe",
+      "artifactType": "gguf_file",
+      "backend": "gguf",
+      "family": "qwen",
+      "fmt": "gguf",
+      "generationMode": "",
+      "key": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "notes": "Qwen3-Next sparse MoE instruction model; local GGUF downloaded to a per-model directory",
+      "paramsActiveB": 3,
+      "paramsTotalB": 81.325,
+      "quant": "Q4_K_M",
+      "tier": "4bit"
+    },
+    {
+      "approxSizeGb": 17,
+      "architecture": "moe",
+      "artifactType": "gguf_file",
+      "backend": "gguf",
+      "family": "qwen",
+      "fmt": "gguf",
+      "generationMode": "",
+      "key": "qwen-3-coder-30b-a3b-instruct-gguf-q4",
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "notes": "Qwen3-Coder MoE instruction model for code-focused benchmark lanes",
+      "paramsActiveB": 3,
+      "paramsTotalB": 30.532,
+      "quant": "Q4_K_M",
+      "tier": "4bit"
+    },
+    {
       "approxSizeGb": 15,
       "architecture": "dense",
       "artifactType": "hf_repo",
@@ -4534,6 +5766,54 @@
       "paramsActiveB": null,
       "paramsTotalB": 79.7,
       "quant": "Q4_K_M",
+      "tier": "4bit"
+    },
+    {
+      "approxSizeGb": 11,
+      "architecture": "moe",
+      "artifactType": "gguf_file",
+      "backend": "gguf",
+      "family": "openai",
+      "fmt": "gguf",
+      "generationMode": "",
+      "key": "gpt-oss-20b-gguf-q4",
+      "modelId": "gpt-oss-20b",
+      "notes": "OpenAI open-weight reasoning model; MoE with 3.6B active params/token",
+      "paramsActiveB": 3.6,
+      "paramsTotalB": 21,
+      "quant": "Q4_K_M",
+      "tier": "4bit"
+    },
+    {
+      "approxSizeGb": 58,
+      "architecture": "moe",
+      "artifactType": "gguf_file",
+      "backend": "gguf",
+      "family": "openai",
+      "fmt": "gguf",
+      "generationMode": "",
+      "key": "gpt-oss-120b-gguf-q4",
+      "modelId": "gpt-oss-120b",
+      "notes": "OpenAI open-weight reasoning model; split GGUF, first shard path points llama.cpp at the full pair",
+      "paramsActiveB": 5.1,
+      "paramsTotalB": 117,
+      "quant": "Q4_K_M",
+      "tier": "4bit"
+    },
+    {
+      "approxSizeGb": 24,
+      "architecture": "moe",
+      "artifactType": "gguf_file",
+      "backend": "gguf",
+      "family": "nemotron",
+      "fmt": "gguf",
+      "generationMode": "",
+      "key": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4",
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "notes": "Multimodal Nemotron reasoning model; text GGUF registered, mmproj-BF16.gguf is present locally but not used by text benchmarks",
+      "paramsActiveB": 3,
+      "paramsTotalB": 33.016,
+      "quant": "UD-Q4_K_M",
       "tier": "4bit"
     }
   ]

@@ -283,6 +283,31 @@ models:
     assert v.api_key_env == "PROVIDER_API_KEY"
 
 
+def test_split_gguf_requires_every_shard(tmp_path):
+    first = tmp_path / "model-00001-of-00002.gguf"
+    second = tmp_path / "model-00002-of-00002.gguf"
+    first.write_bytes(b"first")
+    body = f"""
+defaults: {{}}
+models:
+  - id: split
+    family: f
+    architecture: dense
+    variants:
+      - key: split-v
+        fmt: gguf
+        path: {first}
+        quant: Q4_K_M
+        tier: 4bit
+        download: {{repo: org/split, revision: abc123}}
+"""
+    v = load_registry(_write(tmp_path, body)).variant("split-v")
+
+    assert v.exists_locally() is False
+    second.write_bytes(b"second")
+    assert v.exists_locally() is True
+
+
 def test_mlx_exists_locally_requires_weight_file(tmp_path, monkeypatch):
     """A cached config.json alone is not enough for a benchmarkable MLX model."""
     from llm_bench.registry import Variant

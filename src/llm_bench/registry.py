@@ -10,6 +10,7 @@ Adding a new model variant: edit registry.yaml, no Python changes.
 from __future__ import annotations
 
 import os
+import re
 import warnings
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -105,7 +106,18 @@ class Variant:
             return True
         if self.is_local_file:
             p = Path(self.resolved_path)
-            return p.is_file() and p.stat().st_size > 0
+            if not p.is_file() or p.stat().st_size <= 0:
+                return False
+            split_match = re.match(r"^(?P<prefix>.+)-00001-of-(?P<total>\d{5})\.gguf$", p.name)
+            if split_match:
+                total = int(split_match.group("total"))
+                prefix = split_match.group("prefix")
+                return all(
+                    (p.parent / f"{prefix}-{idx:05d}-of-{total:05d}.gguf").is_file()
+                    and (p.parent / f"{prefix}-{idx:05d}-of-{total:05d}.gguf").stat().st_size > 0
+                    for idx in range(1, total + 1)
+                )
+            return True
         if self.artifact_type != "hf_repo":
             return False
         cache_dir = Path.home() / ".cache" / "huggingface" / "hub"

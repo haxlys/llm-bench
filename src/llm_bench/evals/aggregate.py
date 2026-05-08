@@ -50,12 +50,15 @@ TASK_DIM = {
     "hrm8k": "korean",
     "haerae": "korean",
     "kobest": "korean",
+    "kmmlu_pro": "korean",
     "humaneval_instruct": "code",
     "mbpp_instruct": "code",
     "humaneval": "code",        # evalplus runner output dir
     "mbpp": "code",             # evalplus runner output dir
     "livecodebench": "code",
+    "bigcodebench_hard": "code",
     "leaderboard_ifeval": "instruction",
+    "livebench_subset": "fresh",
     "programbench": "agentic_code",
     "longbench": "long",
     "bfcl": "tool",

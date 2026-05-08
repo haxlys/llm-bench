@@ -1,0 +1,207 @@
+{
+  "created_at": "2026-05-06T23:53:32.157863+00:00",
+  "host": "haxlysui-MacBookPro.local",
+  "runtime": "mlx_vlm",
+  "prompt": "Write a concise technical explanation of speculative decoding for local LLM inference. Include why it can improve tokens per second and one caveat. Continue until the answer is complete.",
+  "max_tokens": [
+    16
+  ],
+  "trials": 1,
+  "temperature": 0.0,
+  "targets": [
+    {
+      "target_label": "26B-A4B-4bit",
+      "target_model": "/Users/haxlys/models/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-MLX-4bit/snapshots/3af5252ed1e675e6bba9be8cc3087bc00920799c",
+      "draft_block_size": 6,
+      "results": [
+        {
+          "max_tokens": 16,
+          "baseline": {
+            "label": "26B-A4B-4bit-baseline",
+            "trials": 1,
+            "generation_tps": [
+              107.75435711361368
+            ],
+            "generation_tps_mean": 107.75435711361368,
+            "prompt_tps_mean": 439.5148220164687,
+            "tokens": [
+              16
+            ],
+            "wall_seconds": [
+              0.24294949998147786
+            ],
+            "wall_seconds_mean": 0.24294949998147786,
+            "peak_memory_gb_max": 15.70739402,
+            "raw_trials": [
+              {
+                "tokens": 16,
+                "generation_tps": 107.75435711361368,
+                "prompt_tps": 439.5148220164687,
+                "wall_seconds": 0.24294949998147786,
+                "peak_memory_gb": 15.70739402
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-26B-A4B-it-assistant",
+              "trials": 1,
+              "generation_tps": [
+                78.29070219399401
+              ],
+              "generation_tps_mean": 78.29070219399401,
+              "prompt_tps_mean": 488.5215931428287,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.29301033297087997
+              ],
+              "wall_seconds_mean": 0.29301033297087997,
+              "peak_memory_gb_max": 16.548523477,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 78.29070219399401,
+                  "prompt_tps": 488.5215931428287,
+                  "wall_seconds": 0.29301033297087997,
+                  "peak_memory_gb": 16.548523477
+                }
+              ],
+              "accepted_tokens_per_round_mean": 1.6666666666666667,
+              "accepted_rounds": 6,
+              "speedup_vs_baseline": 0.726566463678551
+            },
+            {
+              "label": "mlx-community/gemma-4-26B-A4B-it-assistant-bf16",
+              "trials": 1,
+              "generation_tps": [
+                78.85126868598321
+              ],
+              "generation_tps_mean": 78.85126868598321,
+              "prompt_tps_mean": 485.4107088952278,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.2908853749977425
+              ],
+              "wall_seconds_mean": 0.2908853749977425,
+              "peak_memory_gb_max": 16.548507093,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 78.85126868598321,
+                  "prompt_tps": 485.4107088952278,
+                  "wall_seconds": 0.2908853749977425,
+                  "peak_memory_gb": 16.548507093
+                }
+              ],
+              "accepted_tokens_per_round_mean": 1.6666666666666667,
+              "accepted_rounds": 6,
+              "speedup_vs_baseline": 0.7317687265568693
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_label": "26B-A4B-8bit",
+      "target_model": "/Users/haxlys/models/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-MLX-8bit/snapshots/669237cd8dad363224c976432475b81dd5db5a89",
+      "draft_block_size": 6,
+      "results": [
+        {
+          "max_tokens": 16,
+          "baseline": {
+            "label": "26B-A4B-8bit-baseline",
+            "trials": 1,
+            "generation_tps": [
+              78.93787433146689
+            ],
+            "generation_tps_mean": 78.93787433146689,
+            "prompt_tps_mean": 346.3457894919529,
+            "tokens": [
+              16
+            ],
+            "wall_seconds": [
+              0.31844433303922415
+            ],
+            "wall_seconds_mean": 0.31844433303922415,
+            "peak_memory_gb_max": 28.032669946,
+            "raw_trials": [
+              {
+                "tokens": 16,
+                "generation_tps": 78.93787433146689,
+                "prompt_tps": 346.3457894919529,
+                "wall_seconds": 0.31844433303922415,
+                "peak_memory_gb": 28.032669946
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-26B-A4B-it-assistant",
+              "trials": 1,
+              "generation_tps": [
+                46.51658043996615
+              ],
+              "generation_tps_mean": 46.51658043996615,
+              "prompt_tps_mean": 382.82267265156474,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.4499949999153614
+              ],
+              "wall_seconds_mean": 0.4499949999153614,
+              "peak_memory_gb_max": 28.859531947,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 46.51658043996615,
+                  "prompt_tps": 382.82267265156474,
+                  "wall_seconds": 0.4499949999153614,
+                  "peak_memory_gb": 28.859531947
+                }
+              ],
+              "accepted_tokens_per_round_mean": 1.0,
+              "accepted_rounds": 8,
+              "speedup_vs_baseline": 0.5892808849227311
+            },
+            {
+              "label": "mlx-community/gemma-4-26B-A4B-it-assistant-bf16",
+              "trials": 1,
+              "generation_tps": [
+                46.63894150468434
+              ],
+              "generation_tps_mean": 46.63894150468434,
+              "prompt_tps_mean": 396.7427039326141,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.44548816699534655
+              ],
+              "wall_seconds_mean": 0.44548816699534655,
+              "peak_memory_gb_max": 28.859531914,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 46.63894150468434,
+                  "prompt_tps": 396.7427039326141,
+                  "wall_seconds": 0.44548816699534655,
+                  "peak_memory_gb": 28.859531914
+                }
+              ],
+              "accepted_tokens_per_round_mean": 1.0,
+              "accepted_rounds": 8,
+              "speedup_vs_baseline": 0.5908309781543323
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-05-06T23:53:53.499087+00:00",
+  "wall_seconds": 21.341224
+}

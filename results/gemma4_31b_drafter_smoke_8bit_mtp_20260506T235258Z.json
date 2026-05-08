@@ -1,0 +1,111 @@
+{
+  "created_at": "2026-05-06T23:54:22.812420+00:00",
+  "host": "haxlysui-MacBookPro.local",
+  "prompt": "Write a concise technical explanation of speculative decoding for local LLM inference. Include why it can improve tokens per second and one caveat. Continue until the answer is complete.",
+  "max_tokens": [
+    16
+  ],
+  "trials": 1,
+  "temperature": 0.0,
+  "suites": [
+    {
+      "runtime": "mlx_vlm",
+      "target_model": "/Users/haxlys/models/huggingface/hub/models--lmstudio-community--gemma-4-31B-it-MLX-8bit/snapshots/244e29d3b19e7b50e3ddddc33fcc882f24a19399",
+      "draft_block_size": 6,
+      "results": [
+        {
+          "max_tokens": 16,
+          "baseline": {
+            "label": "baseline",
+            "trials": 1,
+            "generation_tps": [
+              16.397962848335233
+            ],
+            "generation_tps_mean": 16.397962848335233,
+            "prompt_tps_mean": 140.4254320980961,
+            "tokens": [
+              16
+            ],
+            "wall_seconds": [
+              1.234970958903432
+            ],
+            "wall_seconds_mean": 1.234970958903432,
+            "peak_memory_gb_max": 34.051453595,
+            "raw_trials": [
+              {
+                "tokens": 16,
+                "generation_tps": 16.397962848335233,
+                "prompt_tps": 140.4254320980961,
+                "wall_seconds": 1.234970958903432,
+                "peak_memory_gb": 34.051453595
+              }
+            ]
+          },
+          "drafters": [
+            {
+              "label": "google/gemma-4-31B-it-assistant",
+              "trials": 1,
+              "generation_tps": [
+                30.962041403650478
+              ],
+              "generation_tps_mean": 30.962041403650478,
+              "prompt_tps_mean": 187.21965866639454,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.7135296670021489
+              ],
+              "wall_seconds_mean": 0.7135296670021489,
+              "peak_memory_gb_max": 34.826393513,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 30.962041403650478,
+                  "prompt_tps": 187.21965866639454,
+                  "wall_seconds": 0.7135296670021489,
+                  "peak_memory_gb": 34.826393513
+                }
+              ],
+              "accepted_tokens_per_round_mean": 3.0,
+              "accepted_rounds": 4,
+              "speedup_vs_baseline": 1.8881638951141928
+            },
+            {
+              "label": "mlx-community/gemma-4-31B-it-assistant-bf16",
+              "trials": 1,
+              "generation_tps": [
+                31.744092330468746
+              ],
+              "generation_tps_mean": 31.744092330468746,
+              "prompt_tps_mean": 190.47701500248763,
+              "tokens": [
+                16
+              ],
+              "wall_seconds": [
+                0.6962449580896646
+              ],
+              "wall_seconds_mean": 0.6962449580896646,
+              "peak_memory_gb_max": 34.826393513,
+              "raw_trials": [
+                {
+                  "tokens": 16,
+                  "generation_tps": 31.744092330468746,
+                  "prompt_tps": 190.47701500248763,
+                  "wall_seconds": 0.6962449580896646,
+                  "peak_memory_gb": 34.826393513
+                }
+              ],
+              "accepted_tokens_per_round_mean": 3.0,
+              "accepted_rounds": 4,
+              "speedup_vs_baseline": 1.9358558513682385
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "finished_at": "2026-05-06T23:54:37.005902+00:00",
+  "wall_seconds": 14.193482
+}

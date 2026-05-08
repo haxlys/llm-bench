@@ -41,6 +41,10 @@ def hf_download(variant: Variant) -> int:
                        err=True)
             return 0
         local_dir = Path(variant.resolved_path).parent
+        if variant.download.pattern and "/" in variant.download.pattern:
+            first_segment = variant.download.pattern.split("/", 1)[0]
+            if local_dir.name == first_segment:
+                local_dir = local_dir.parent
         local_dir.mkdir(parents=True, exist_ok=True)
         cmd = ["hf", "download", variant.download.repo,
                "--local-dir", str(local_dir)]
