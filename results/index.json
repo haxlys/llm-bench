@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-06T11:39:54+00:00",
+  "generated_at": "2026-05-09T06:03:38+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -373,16 +373,23 @@
       "approx_size_gb": 45,
       "exists_locally": true,
       "speed": {
-        "scenarios_measured": 0,
+        "scenarios_measured": 8,
         "scenarios_total": 8,
-        "last_measured": null
+        "last_measured": "2026-05-07T02:57:00+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 6,
         "tasks_supported": 10,
-        "tasks": [],
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-08T14:22:18Z"
       }
     },
     {
@@ -404,16 +411,23 @@
       "approx_size_gb": 17,
       "exists_locally": true,
       "speed": {
-        "scenarios_measured": 0,
+        "scenarios_measured": 8,
         "scenarios_total": 8,
-        "last_measured": null
+        "last_measured": "2026-05-07T03:03:13+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 6,
         "tasks_supported": 10,
-        "tasks": [],
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-08T19:34:16Z"
       }
     },
     {
@@ -658,16 +672,23 @@
       "approx_size_gb": 11,
       "exists_locally": true,
       "speed": {
-        "scenarios_measured": 0,
+        "scenarios_measured": 8,
         "scenarios_total": 8,
-        "last_measured": null
+        "last_measured": "2026-05-07T03:07:13+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 6,
         "tasks_supported": 10,
-        "tasks": [],
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-08T22:46:03Z"
       }
     },
     {
@@ -689,16 +710,23 @@
       "approx_size_gb": 58,
       "exists_locally": true,
       "speed": {
-        "scenarios_measured": 0,
+        "scenarios_measured": 8,
         "scenarios_total": 8,
-        "last_measured": null
+        "last_measured": "2026-05-07T03:14:24+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 6,
         "tasks_supported": 10,
-        "tasks": [],
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-09T01:52:19Z"
       }
     },
     {
@@ -720,22 +748,29 @@
       "approx_size_gb": 24,
       "exists_locally": true,
       "speed": {
-        "scenarios_measured": 0,
+        "scenarios_measured": 8,
         "scenarios_total": 8,
-        "last_measured": null
+        "last_measured": "2026-05-07T03:19:20+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 6,
         "tasks_supported": 10,
-        "tasks": [],
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
+        ],
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-09T05:49:51Z"
       }
     }
   ],
   "totals": {
     "variants": 22,
-    "speed_complete": 11,
-    "evals_started": 10
+    "speed_complete": 16,
+    "evals_started": 15
   }
 }

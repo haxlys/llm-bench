@@ -49,6 +49,7 @@ class ModelServer:
         boot_timeout_s: int = 240,
         log_file: Path | None = None,
         chat_template_args: dict[str, Any] | None = None,
+        server_args: list[str] | None = None,
     ):
         self.fmt = fmt
         self.backend = backend or fmt
@@ -63,6 +64,7 @@ class ModelServer:
         self.boot_timeout_s = boot_timeout_s
         self.log_file = log_file
         self.chat_template_args = chat_template_args
+        self.server_args = server_args or []
         self.proc: subprocess.Popen | None = None
 
     @property
@@ -94,6 +96,8 @@ class ModelServer:
                     "--chat-template-args",
                     json.dumps(chat_template_args, separators=(",", ":")),
                 ])
+            if self.server_args:
+                cmd.extend(self.server_args)
             return cmd
         if self.backend != "gguf":
             raise RuntimeError(
@@ -101,7 +105,7 @@ class ModelServer:
             )
         if not shutil.which("llama-server"):
             raise RuntimeError("llama-server not found (brew install llama.cpp)")
-        return [
+        cmd = [
             "llama-server",
             "-m", self.model_path,
             "--host", self.host, "--port", str(self.port),
@@ -109,6 +113,9 @@ class ModelServer:
             "--jinja",                        # required for Gemma 4 chat template
             "-c", str(self.context_size),
         ]
+        if self.server_args:
+            cmd.extend(self.server_args)
+        return cmd
 
     def _is_ready(self) -> bool:
         try:

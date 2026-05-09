@@ -26,7 +26,7 @@ DEFAULT_TASK_TIMEOUT_S = 6 * 60 * 60
 MIN_MAX_GEN_TOKS = 8192
 LONGBENCH_MAX_GEN_TOKS = 1024
 REASONING_MAX_GEN_TOKS = 1024
-INSTRUCTION_MAX_GEN_TOKS = 4096
+INSTRUCTION_MAX_GEN_TOKS = 512
 
 # Per-task overrides applied on top of the lm-eval-harness defaults.
 # Why: the bundled task YAMLs ship choices that don't fit our setup:
@@ -67,8 +67,8 @@ TASK_OVERRIDES: dict[str, dict] = {
     # 6-variant matrix.
     "leaderboard_mmlu_pro":      {"limit_cap": 1000},
     # GPQA-Diamond: 198 Q only, no cap needed.
-    # IFEval: outputs should fit well below the global MLX safety default in
-    # local matrix runs; 4096 avoids pathological non-stop generations.
+    # IFEval answers are short by design. Keep this low to avoid local GGUF
+    # server parse failures on long multilingual/reasoning continuations.
     "leaderboard_ifeval":        {"gen_kwargs": f"max_gen_toks={INSTRUCTION_MAX_GEN_TOKS}"},
 }
 

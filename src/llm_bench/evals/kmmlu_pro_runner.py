@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_DATASET = "LGAI-EXAONE/KMMLU-Pro"
-DEFAULT_CONFIG = "test"
+DEFAULT_CONFIG = "kmmlu_pro"
 DEFAULT_TASK_TIMEOUT_S = 2 * 60 * 60
 
 
@@ -48,8 +48,11 @@ def run_kmmlu_pro(
     samples_path = output_dir / "samples_kmmlu_pro.jsonl"
     scored: list[dict[str, Any]] = []
     errors: list[str] = []
-    with samples_path.open("w", encoding="utf-8") as f:
+    with samples_path.open("w", encoding="utf-8") as f, log_path.open("w", encoding="utf-8") as log:
         for idx, row in enumerate(rows):
+            if idx % 100 == 0:
+                log.write(f"progress {idx}/{len(rows)}\n")
+                log.flush()
             prompt = _build_prompt(row)
             try:
                 response = client.chat.completions.create(
@@ -61,6 +64,8 @@ def run_kmmlu_pro(
                 answer_text = response.choices[0].message.content or ""
             except Exception as e:
                 errors.append(f"row {idx}: {e}")
+                log.write(errors[-1] + "\n")
+                log.flush()
                 answer_text = ""
 
             extracted = _extract_choice(answer_text)
@@ -79,9 +84,8 @@ def run_kmmlu_pro(
             }
             scored.append(record)
             f.write(json.dumps(record, ensure_ascii=False) + "\n")
-
-    if errors:
-        log_path.write_text("\n".join(errors), encoding="utf-8")
+            f.flush()
+        log.write(f"progress {len(rows)}/{len(rows)}\n")
 
     weighted_acc = _weighted_accuracy(scored)
     metrics = {"acc,none": weighted_acc, "questions,none": float(len(scored))}
