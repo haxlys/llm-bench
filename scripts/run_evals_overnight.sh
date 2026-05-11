@@ -15,6 +15,8 @@
 #   SUITE=full|smoke         # default: full
 #   LIMIT=<int>              # override per-task sample limit
 #   VARIANTS="key1 key2"     # space-separated variant keys; empty = --all-variants
+#   TASKS="sourceqa kmmlu_pro"  # optional task ids; empty = whole suite
+#   LLM_BENCH_INCLUDE_BFCL=1    # pass --include-bfcl for BFCL optional lane
 #   LLM_BENCH_STRICT_COVERAGE=1  # pass --strict-coverage to enforce full required-task completion
 #   LLM_BENCH_RESILIENT_IFEVAL=1  # pass --resilient-ifeval
 #   LAUNCH_AGENTS="com.you.x com.you.y"
@@ -37,6 +39,7 @@ RUN_LOG="$LOG_DIR/$TS.log"
 SUITE="${SUITE:-full}"
 LIMIT="${LIMIT:-}"
 VARIANTS="${VARIANTS:-}"
+TASKS="${TASKS:-}"
 
 # launchd agents to stop before benchmarking (Metal contention).
 # Override via env: LAUNCH_AGENTS="com.you.foo com.you.bar"
@@ -49,6 +52,7 @@ log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$RUN_LOG"; }
 # optional overrides for additional run_evals.py flags
 LLM_BENCH_STRICT_COVERAGE="${LLM_BENCH_STRICT_COVERAGE:-0}"
 LLM_BENCH_RESILIENT_IFEVAL="${LLM_BENCH_RESILIENT_IFEVAL:-0}"
+LLM_BENCH_INCLUDE_BFCL="${LLM_BENCH_INCLUDE_BFCL:-0}"
 
 # --- bootstrap agents back; called from EXIT trap ---
 restore_agents() {
@@ -69,8 +73,8 @@ trap restore_agents EXIT
 
 # --- 1. stop production agents ---
 log "=== STARTING overnight eval run ($TS) ==="
-log "suite=$SUITE limit='${LIMIT}' variants='${VARIANTS:-all}'"
-log "strict_coverage=${LLM_BENCH_STRICT_COVERAGE} resilient_ifeval=${LLM_BENCH_RESILIENT_IFEVAL}"
+log "suite=$SUITE limit='${LIMIT}' variants='${VARIANTS:-all}' tasks='${TASKS:-all}'"
+log "strict_coverage=${LLM_BENCH_STRICT_COVERAGE} resilient_ifeval=${LLM_BENCH_RESILIENT_IFEVAL} include_bfcl=${LLM_BENCH_INCLUDE_BFCL}"
 log "launchd agents to manage: ${LAUNCH_AGENTS[*]:-none}"
 log
 if [[ ${#LAUNCH_AGENTS[@]} -gt 0 ]]; then
@@ -118,6 +122,9 @@ log
 log "==== Running run_evals.py ===="
 ARGS=(--suite "$SUITE")
 if [[ -n "$LIMIT" ]]; then ARGS+=(--limit "$LIMIT"); fi
+if [[ -n "$TASKS" ]]; then
+    for task in $TASKS; do ARGS+=(--task "$task"); done
+fi
 if [[ -n "$VARIANTS" ]]; then
     for v in $VARIANTS; do ARGS+=(--variant "$v"); done
 else
@@ -125,6 +132,7 @@ else
 fi
 if [[ "$LLM_BENCH_STRICT_COVERAGE" == "1" ]]; then ARGS+=(--strict-coverage); fi
 if [[ "$LLM_BENCH_RESILIENT_IFEVAL" == "1" ]]; then ARGS+=(--resilient-ifeval); fi
+if [[ "$LLM_BENCH_INCLUDE_BFCL" == "1" ]]; then ARGS+=(--include-bfcl); fi
 ARGS+=(--skip-existing)
 log "  cmd: uv run python scripts/run_evals.py ${ARGS[*]}"
 

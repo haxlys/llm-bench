@@ -125,7 +125,8 @@ Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.
   headline metric (e.g. `exact_match,strict-match` for gsm8k,
   `pass@1,create_test` for HumanEval, subtask average for hrm8k)
 - `index.json` — registry × speed/eval coverage, including whether each task is
-  `measured`, `directional`, `missing`, `optional`, or `unsupported`
+  `measured`, `directional`, `missing`, `optional`, `speed_only`, or
+  `unsupported`
 
 External runners also emit aggregate-compatible synthetic `results_*.json`
 files. For example, EvalPlus keeps its native `*_eval_results.json` beside the
@@ -163,7 +164,8 @@ time, result artifact path, optional sample path, log path, and error text.
 Primary lanes are the minimum common matrix used for model-family comparisons:
 reasoning (`gsm8k_cot_zeroshot`, instruction), Korean (`hrm8k`, `kmmlu_pro`),
 code (`humaneval`, `mbpp`, `livecodebench`), source grounding (`sourceqa`), and
-speed/MTPLX where applicable. Optional lanes are intentionally separated:
+speed where applicable. MTPLX native MTP/AR variants are a separate
+`mtplx_speedup` lane, not accuracy candidates. Optional lanes are intentionally separated:
 `bigcodebench_hard`, `bfcl`, `livebench_subset`, and `programbench`.
 
 The site reads `results/index.json` before showing score tables. That lets it
@@ -174,10 +176,14 @@ distinguish:
   generation formatting or extraction.
 - `missing`: primary supported task with no committed result yet.
 - `optional`: optional-lane task with no committed result yet.
+- `speed_only`: MTPLX speedup variant; accuracy coverage is intentionally not
+  required for that row.
 - `unsupported`: task is not valid for the variant's declared capabilities.
 
 `--strict-coverage` fails only on missing primary supported tasks. Optional lanes
-remain visible but do not block a primary matrix run.
+and MTPLX speed-only rows remain visible but do not block a primary matrix run.
+Use `--task sourceqa --task kmmlu_pro` (or `TASKS="sourceqa kmmlu_pro"` with the
+overnight wrapper) to fill catch-up buckets in the planned order.
 
 ### Registry-driven variants
 
@@ -186,6 +192,10 @@ Adding a new model = edit YAML, run `sync_models.py`, run `run_bench.py
 --all-pending` and `run_evals.py --all-variants --skip-existing`. The
 `--skip-existing` flag (default ON) skips combos already measured at the
 current `BENCH_VERSION`.
+
+`run_evals.py --all-variants` skips `backend: mtplx` variants because those
+entries are speed-only speculative decoding comparators. The paired flat MLX
+variants stay in the quality/eval matrix.
 
 Registry variants now distinguish the legacy `fmt` label from the more general
 runtime `backend`, `artifact_type`, `capabilities`, `api_model`, and

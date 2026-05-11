@@ -53,7 +53,7 @@ from llm_bench.evals.suites import (
 )
 from llm_bench.evals.trace import append_trace
 from llm_bench.manifest import eval_is_measured, eval_manifest
-from llm_bench.registry import Variant, get_registry
+from llm_bench.registry import Variant, get_registry, is_speed_only_variant
 
 ROOT = Path(__file__).resolve().parent.parent
 EVAL_RESULTS_DIR = ROOT / "results" / "eval_scores"
@@ -80,6 +80,20 @@ def _resolve_targets(variant_keys: tuple, all_variants: bool) -> list[Variant]:
                            f"Run sync_models.py --variant {v.key} first.", err=True)
         return targets
     return []
+
+
+def _filter_eval_targets(targets: list[Variant]) -> list[Variant]:
+    eval_targets = []
+    for variant in targets:
+        if is_speed_only_variant(variant):
+            click.echo(
+                f"  · {variant.key}: speed-only MTPLX variant, "
+                "skipping eval server path.",
+                err=True,
+            )
+            continue
+        eval_targets.append(variant)
+    return eval_targets
 
 
 def _trace_task_result(
@@ -144,6 +158,35 @@ def _server_context_size(tasks: list[tuple[str, str]]) -> int:
     if any(task == "longbench" for _, task in tasks):
         return 65536
     return 16384
+
+
+def _selected_tasks(task_filters: tuple[str, ...]) -> set[str]:
+    return {
+        task.strip()
+        for raw in task_filters
+        for task in raw.split(",")
+        if task.strip()
+    }
+
+
+def _filter_tasks(
+    tasks: list[tuple[str, str]],
+    selected_tasks: set[str],
+) -> list[tuple[str, str]]:
+    if not selected_tasks:
+        return tasks
+    return [(dim, task) for dim, task in tasks if task in selected_tasks]
+
+
+def _available_tasks(
+    tasks: list[tuple[str, str]],
+    *,
+    include_external: bool,
+) -> set[str]:
+    available = {task for _, task in tasks}
+    if include_external:
+        available.update(task for _, task, _ in external_suite())
+    return available
 
 
 def _external_skip_reason(runner: str, effective_limit: int | None) -> str | None:
@@ -225,6 +268,8 @@ def _lmeval_runner_for_task(task: str, resilient_ifeval: bool) -> str:
 @click.option("--variant", multiple=True, help="Registry key (repeatable)")
 @click.option("--all-variants", is_flag=True, help="Every locally-present variant")
 @click.option("--suite", type=click.Choice(["smoke", "full", "long"]), default="smoke", show_default=True)
+@click.option("--task", "task_filter", multiple=True,
+              help="Run only these task ids. Repeat or comma-separate values.")
 @click.option("--limit", type=int, default=None,
               help="Override per-task sample limit. Smoke default = 3.")
 @click.option("--port", type=int, default=9090, show_default=True)
@@ -240,10 +285,11 @@ def _lmeval_runner_for_task(task: str, resilient_ifeval: bool) -> str:
               help=f"Source-grounding task YAML/JSON (default: {SOURCEQA_DEFAULT_TASKS}).")
 @click.option("--sourceqa-judge-model", default=None,
               help="Optional judge model label for sourceqa metadata; deterministic score remains primary.")
-def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
+def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str, ...],
+         limit: int | None,
          port: int, skip_existing: bool, include_bfcl: bool, resilient_ifeval: bool,
          strict_coverage: bool, sourceqa_tasks: str | None, sourceqa_judge_model: str | None):
-    targets = _resolve_targets(variant, all_variants)
+    targets = _filter_eval_targets(_resolve_targets(variant, all_variants))
     if not targets:
         click.echo("→ no targets. Specify --variant or --all-variants.")
         sys.exit(2)
@@ -254,12 +300,27 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
         tasks = long_suite()
     else:
         tasks = full_suite()
+    selected_tasks = _selected_tasks(task_filter)
+    unknown_tasks = selected_tasks - _available_tasks(tasks, include_external=suite == "full")
+    if unknown_tasks:
+        raise click.BadParameter(
+            "unknown task id(s): "
+            + ", ".join(sorted(unknown_tasks))
+            + ". External tasks require --suite full; ProgramBench is imported "
+            "with scripts/import_programbench.py."
+        )
+    tasks = _filter_tasks(tasks, selected_tasks)
     effective_limit = limit if limit is not None else (3 if suite == "smoke" else 1 if suite == "long" else None)
     server_context_size = _server_context_size(tasks)
 
     measured = eval_manifest(EVAL_RESULTS_DIR).measured if skip_existing else set()
+    external_task_count = (
+        sum(1 for _, task, _ in external_suite() if not selected_tasks or task in selected_tasks)
+        if suite == "full"
+        else 0
+    )
 
-    click.echo(f"→ {len(targets)} variants × {len(tasks)} tasks "
+    click.echo(f"→ {len(targets)} variants × {len(tasks) + external_task_count} tasks "
                f"(suite={suite}, limit={effective_limit})")
     SERVER_LOG_DIR.mkdir(parents=True, exist_ok=True)
     TRACE_DIR.mkdir(parents=True, exist_ok=True)
@@ -303,6 +364,8 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
         external_runnable: list[tuple[str, str, str]] = []
         if suite == "full":
             for dim, task, runner in external_suite():
+                if selected_tasks and task not in selected_tasks:
+                    continue
                 if runner == "bfcl" and not include_bfcl:
                     grand_summary.append({
                         "variant": v.key, "model_id": v.model_id, "fmt": v.fmt,

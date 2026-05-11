@@ -158,6 +158,14 @@ uv run python scripts/run_bench.py --variant qwen-27b-mlx-8bit --variant qwen-27
 uv run python scripts/run_evals.py --variant qwen-27b-mlx-8bit --variant qwen-27b-gguf-q8 --suite full
 ```
 
+Use `--task` to run an ordered catch-up bucket without re-running the whole
+suite:
+
+```bash
+uv run python scripts/run_evals.py --all-variants --suite full \
+  --task sourceqa --task kmmlu_pro --resilient-ifeval --strict-coverage
+```
+
 MTPLX-ready MLX checkpoints can be benchmarked through the normal MLX runner
 for apples-to-apples autoregressive speed/eval numbers:
 
@@ -171,6 +179,8 @@ To measure MTPLX speculative decoding itself inside the same speed pipeline,
 use the paired `mtplx-mtp` and `mtplx-ar` variants. The `mtplx-mtp` rows run
 native MTP speculative decoding; the `mtplx-ar` rows run the same MTPLX runtime
 with MTP disabled as the target-only baseline.
+These MTPLX MTP/AR variants are speed-only and are skipped by the eval runner;
+use their paired flat MLX variants for quality coverage.
 
 ```bash
 uv sync --extra mtplx
@@ -251,6 +261,7 @@ src/llm_bench/
   registry.py               # YAML loader + Variant/Model dataclasses
   manifest.py               # idempotency: which (variant, scenario) is measured
   index.py                  # build results/index.json (registry × status)
+  eval_plan.py              # ordered catch-up plan from coverage gaps
   runners/                  # speed/memory benchmark
     base.py                 # BenchResult + /usr/bin/time -l wrapper
     mlx_runner.py           # mlx_lm.generate subprocess
@@ -272,6 +283,7 @@ scripts/
   compare_quality.py        # cos-sim divergence (20 prompts)
   aggregate_evals.py        # eval JSON → CSVs + index.json
   build_index.py            # build only the index
+  plan_eval_catchup.py      # write results/eval_catchup_plan.{json,md}
 results/
   raw/                      # per-run speed JSON (gitignored)
   summary.csv               # speed aggregated (committed)
@@ -279,6 +291,7 @@ results/
   eval_scores/              # lm-eval outputs (gitignored)
   eval_summary_*.csv        # eval aggregated (committed)
   index.json                # registry × measurement status (committed)
+  eval_catchup_plan.*       # generated catch-up queue (committed)
   server_logs/              # gitignored
   overnight_logs/           # gitignored
 dashboard/
@@ -369,7 +382,8 @@ run exits non-zero when any required supported primary task is missing a
 completed result (for example, external runner unavailable,
 limit-incompatible skip, or hard task error). Optional lanes
 (`bigcodebench_hard`, BFCL, LiveBench subset, ProgramBench) are reported in
-coverage but do not block the primary matrix.
+coverage but do not block the primary matrix. MTPLX MTP/AR rows are reported as
+`speed_only` under the `mtplx_speedup` lane and also do not block coverage.
 
 ProgramBench is agentic: the model/agent must first produce a complete
 `<instance_id>/submission.tar.gz` codebase, then ProgramBench evaluates it in
@@ -421,12 +435,20 @@ tail -f /tmp/llm-evals-overnight.log
 See `docs/overnight_plan.md` for the family-batched catch-up plan and optional
 lane schedule.
 
+To generate the concrete catch-up queue from the current coverage index:
+
+```bash
+uv run python scripts/plan_eval_catchup.py
+```
+
 Env overrides:
 - `SUITE=smoke|full` (default `full`)
 - `LIMIT=N` (per-task sample cap)
 - `VARIANTS="26B-MoE-mlx-8bit 26B-MoE-gguf-q8"` (subset, default = all)
+- `TASKS="sourceqa kmmlu_pro"` (task-filtered catch-up bucket)
 - `LLM_BENCH_STRICT_COVERAGE=1` — pass `--strict-coverage` to `run_evals.py`
 - `LLM_BENCH_RESILIENT_IFEVAL=1` — pass `--resilient-ifeval` to `run_evals.py`
+- `LLM_BENCH_INCLUDE_BFCL=1` — pass `--include-bfcl` for the BFCL optional lane
 - `LIVE_CODE_BENCH_REPO=/path/to/LiveCodeBench` — run source checkout version
 - `LIVE_CODE_BENCH_START_DATE=YYYY-MM-DD`, `LIVE_CODE_BENCH_END_DATE=YYYY-MM-DD`,
   `LIVE_CODE_BENCH_MAX_TOKENS=N` — run a reproducible release window
@@ -460,7 +482,9 @@ Results:
 - `results/eval_summary_full.csv` — every metric × subtask × variant (244+ rows)
 - `results/eval_summary_primary.csv` — one row per (variant, task), canonical metric
 - `results/index.json` — registry × speed/eval coverage with measured,
-  directional, missing, optional, and unsupported statuses
+  directional, missing, optional, speed_only, and unsupported statuses
+- `results/eval_catchup_plan.json` / `.md` — ordered commands generated from
+  the current coverage gaps
 - `results/server_logs/<run_id>.log` — model server stderr for debugging
 
 After the eval run, `scripts/aggregate_evals.py` rebuilds the CSVs and the

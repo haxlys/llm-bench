@@ -388,6 +388,10 @@ def _caveats() -> list[dict[str, str]]:
             "id": "optional-eval-lane",
             "status": "optional",
         },
+        {
+            "id": "mtplx-speed-only",
+            "status": "speed_only",
+        },
     ]
 
 

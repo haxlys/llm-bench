@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T13:18:29+00:00",
+  "generated_at": "2026-05-11T13:45:00+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -237,6 +237,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 2,
+          "speed_only": 0,
           "unsupported": 11,
           "total": 18
         },
@@ -482,6 +483,7 @@
           "directional": 1,
           "missing": 4,
           "optional": 2,
+          "speed_only": 0,
           "unsupported": 11,
           "total": 18
         },
@@ -725,6 +727,7 @@
           "directional": 2,
           "missing": 5,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -968,6 +971,7 @@
           "directional": 0,
           "missing": 8,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -1205,6 +1209,7 @@
           "directional": 0,
           "missing": 5,
           "optional": 2,
+          "speed_only": 0,
           "unsupported": 11,
           "total": 18
         },
@@ -1444,6 +1449,7 @@
           "directional": 0,
           "missing": 8,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -1689,6 +1695,7 @@
           "directional": 2,
           "missing": 3,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -1934,6 +1941,7 @@
           "directional": 2,
           "missing": 3,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -2182,6 +2190,7 @@
           "directional": 2,
           "missing": 4,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -2427,6 +2436,7 @@
           "directional": 2,
           "missing": 3,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -2673,6 +2683,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -2919,6 +2930,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -3160,6 +3172,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 2,
+          "speed_only": 0,
           "unsupported": 11,
           "total": 18
         },
@@ -3192,214 +3205,215 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 5,
+        "tasks_supported": 0,
         "tasks": [],
         "coverage": [
           {
             "dim": "reasoning",
             "task": "gsm8k_cot_zeroshot",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "hellaswag",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_mmlu_pro",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_gpqa_diamond",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "hrm8k",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "haerae",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kobest",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "instruction",
             "task": "leaderboard_ifeval",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "safety",
             "task": "toxigen",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "humaneval",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "mbpp",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "tool",
             "task": "bfcl",
             "runner": "bfcl",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "source_grounding",
             "task": "sourceqa",
             "runner": "sourceqa",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kmmlu_pro",
             "runner": "kmmlu_pro",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           }
         ],
         "coverage_summary": {
           "measured": 0,
           "directional": 0,
-          "missing": 5,
-          "optional": 2,
-          "unsupported": 11,
+          "missing": 0,
+          "optional": 0,
+          "speed_only": 18,
+          "unsupported": 0,
           "total": 18
         },
         "extra_tasks": [],
@@ -3429,214 +3443,215 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 5,
+        "tasks_supported": 0,
         "tasks": [],
         "coverage": [
           {
             "dim": "reasoning",
             "task": "gsm8k_cot_zeroshot",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "hellaswag",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_mmlu_pro",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_gpqa_diamond",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "hrm8k",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "haerae",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kobest",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "instruction",
             "task": "leaderboard_ifeval",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "safety",
             "task": "toxigen",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "humaneval",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "mbpp",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "tool",
             "task": "bfcl",
             "runner": "bfcl",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "source_grounding",
             "task": "sourceqa",
             "runner": "sourceqa",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kmmlu_pro",
             "runner": "kmmlu_pro",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           }
         ],
         "coverage_summary": {
           "measured": 0,
           "directional": 0,
-          "missing": 5,
-          "optional": 2,
-          "unsupported": 11,
+          "missing": 0,
+          "optional": 0,
+          "speed_only": 18,
+          "unsupported": 0,
           "total": 18
         },
         "extra_tasks": [],
@@ -3877,6 +3892,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 2,
+          "speed_only": 0,
           "unsupported": 11,
           "total": 18
         },
@@ -3909,214 +3925,215 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 5,
+        "tasks_supported": 0,
         "tasks": [],
         "coverage": [
           {
             "dim": "reasoning",
             "task": "gsm8k_cot_zeroshot",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "hellaswag",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_mmlu_pro",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_gpqa_diamond",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "hrm8k",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "haerae",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kobest",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "instruction",
             "task": "leaderboard_ifeval",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "safety",
             "task": "toxigen",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "humaneval",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "mbpp",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "tool",
             "task": "bfcl",
             "runner": "bfcl",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "source_grounding",
             "task": "sourceqa",
             "runner": "sourceqa",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kmmlu_pro",
             "runner": "kmmlu_pro",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           }
         ],
         "coverage_summary": {
           "measured": 0,
           "directional": 0,
-          "missing": 5,
-          "optional": 2,
-          "unsupported": 11,
+          "missing": 0,
+          "optional": 0,
+          "speed_only": 18,
+          "unsupported": 0,
           "total": 18
         },
         "extra_tasks": [],
@@ -4146,214 +4163,215 @@
       },
       "evals": {
         "tasks_measured": 0,
-        "tasks_supported": 5,
+        "tasks_supported": 0,
         "tasks": [],
         "coverage": [
           {
             "dim": "reasoning",
             "task": "gsm8k_cot_zeroshot",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "hellaswag",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_mmlu_pro",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "reasoning",
             "task": "leaderboard_gpqa_diamond",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "hrm8k",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "directional",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "haerae",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kobest",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "instruction",
             "task": "leaderboard_ifeval",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "safety",
             "task": "toxigen",
             "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "humaneval",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "mbpp",
             "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "mtplx_speedup",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "tool",
             "task": "bfcl",
             "runner": "bfcl",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "unsupported"
+            "status": "speed_only"
           },
           {
             "dim": "source_grounding",
             "task": "sourceqa",
             "runner": "sourceqa",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           },
           {
             "dim": "korean",
             "task": "kmmlu_pro",
             "runner": "kmmlu_pro",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "missing"
+            "status": "speed_only"
           },
           {
             "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
-            "lane": "optional",
+            "lane": "mtplx_speedup",
             "required": false,
-            "supported": true,
+            "supported": false,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "speed_only"
           }
         ],
         "coverage_summary": {
           "measured": 0,
           "directional": 0,
-          "missing": 5,
-          "optional": 2,
-          "unsupported": 11,
+          "missing": 0,
+          "optional": 0,
+          "speed_only": 18,
+          "unsupported": 0,
           "total": 18
         },
         "extra_tasks": [],
@@ -4598,6 +4616,7 @@
           "directional": 2,
           "missing": 3,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -4844,6 +4863,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -5090,6 +5110,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -5336,6 +5357,7 @@
           "directional": 2,
           "missing": 2,
           "optional": 4,
+          "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
@@ -5348,6 +5370,6 @@
     "variants": 22,
     "speed_complete": 16,
     "evals_started": 15,
-    "evals_missing_required": 82
+    "evals_missing_required": 62
   }
 }

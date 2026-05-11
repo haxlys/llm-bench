@@ -87,6 +87,11 @@ class Variant:
         return self.key
 
     @property
+    def is_speed_only(self) -> bool:
+        """True for variants that only participate in speed/speedup reporting."""
+        return self.backend == "mtplx"
+
+    @property
     def resolved_path(self) -> str:
         """Expand local paths; keep repo ids/endpoints as-is."""
         if self.is_local_file:
@@ -228,6 +233,12 @@ def default_capabilities(backend: str, fmt: str) -> frozenset[str]:
     if key == "mtplx":
         return frozenset({"chat", "completions"})
     return frozenset()
+
+
+def is_speed_only_variant(variant: object) -> bool:
+    """Return whether a registry-like variant is outside the eval matrix."""
+    backend = getattr(variant, "backend", getattr(variant, "fmt", ""))
+    return backend == "mtplx"
 
 
 def _validate(variants: list[Variant], models: list["Model"]) -> None:

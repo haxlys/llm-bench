@@ -6,6 +6,15 @@ Goal: complete the minimum common primary matrix first, then run optional
 frontier lanes separately so the site never blends missing coverage into model
 quality claims.
 
+Regenerate the concrete queue from the current coverage index:
+
+```bash
+uv run python scripts/plan_eval_catchup.py
+```
+
+This writes `results/eval_catchup_plan.json` and
+`results/eval_catchup_plan.md` with task-filtered commands.
+
 ## Primary matrix
 
 Run with resilient IFEval and strict coverage:
@@ -14,6 +23,25 @@ Run with resilient IFEval and strict coverage:
 LLM_BENCH_RESILIENT_IFEVAL=1 \
 LLM_BENCH_STRICT_COVERAGE=1 \
 SUITE=full \
+bash scripts/run_evals_overnight.sh
+```
+
+Recommended task buckets:
+
+```bash
+# 1. Source-grounding + Korean professional coverage
+TASKS="sourceqa kmmlu_pro" \
+LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
+bash scripts/run_evals_overnight.sh
+
+# 2. Primary code coverage
+TASKS="humaneval mbpp livecodebench" \
+LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
+bash scripts/run_evals_overnight.sh
+
+# 3. Remaining reasoning / Korean / instruction coverage
+TASKS="gsm8k_cot_zeroshot hrm8k leaderboard_ifeval" \
+LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
 bash scripts/run_evals_overnight.sh
 ```
 
@@ -27,6 +55,9 @@ Primary tasks to fill where supported:
 | Source grounding | `sourceqa` |
 | Speed | all `results/summary.csv` scenarios via `scripts/run_bench.py --all-pending` |
 | MTPLX speedup | `scripts/compare_mtplx.py` after paired MTPLX speed runs |
+
+MTPLX MTP/AR variants are speed-only. They are visible as `mtplx_speedup` /
+`speed_only` rows in coverage and are skipped by `run_evals.py --all-variants`.
 
 ## Family batches
 
@@ -68,8 +99,12 @@ Run optional lanes after primary coverage is green:
 
 ```bash
 # BFCL explicitly opt-in
-uv run python scripts/run_evals.py --variant qwen-3-coder-next-gguf-q4 \
-  --suite full --include-bfcl --skip-existing
+TASKS="bfcl" LLM_BENCH_INCLUDE_BFCL=1 \
+bash scripts/run_evals_overnight.sh
+
+# BigCodeBench-Hard and LiveBench subset stay separate from the primary matrix
+TASKS="bigcodebench_hard livebench_subset" \
+bash scripts/run_evals_overnight.sh
 
 # ProgramBench import after agent submissions exist
 uv run python scripts/import_programbench.py \

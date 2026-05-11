@@ -75,6 +75,20 @@ const fixture: BenchmarkData = {
       task: "bfcl",
       variant: "b",
     },
+    {
+      confidence: "measured",
+      dim: "source_grounding",
+      family: "test",
+      lane: "mtplx_speedup",
+      measured: false,
+      modelId: "model-b",
+      required: false,
+      runner: "sourceqa",
+      status: "speed_only",
+      supported: false,
+      task: "sourceqa",
+      variant: "b",
+    },
   ],
   generatedAt: "2026-05-06T00:00:00Z",
   hardware: {
@@ -184,9 +198,11 @@ describe("benchmark data helpers", () => {
   });
 
   it("summarizes coverage statuses", () => {
-    expect(dimensions(fixture)).toEqual(["code", "tool"]);
+    expect(dimensions(fixture)).toEqual(["code", "source_grounding", "tool"]);
+    expect(tasks(fixture)).toEqual(["bfcl", "humaneval", "sourceqa"]);
     expect(coverageSummary(fixture).measured).toBe(1);
     expect(coverageSummary(fixture).optional).toBe(1);
+    expect(coverageSummary(fixture).speed_only).toBe(1);
   });
 
   it("labels the ProgramBench caveat", () => {
@@ -206,7 +222,7 @@ describe("benchmark data helpers", () => {
     expect(benchmarkData.coverage.length).toBeGreaterThan(0);
 
     const firstVariant = benchmarkData.variants[0];
-    const firstTask = tasks(benchmarkData)[0];
+    const firstTask = benchmarkData.accuracy[0].task;
     const firstScenario = scenarios(benchmarkData)[0];
     const firstCaveat = benchmarkData.caveats[0];
 
@@ -219,6 +235,7 @@ describe("benchmark data helpers", () => {
       "measured",
       "unavailable",
       "optional",
+      "speed_only",
       "missing",
       "unsupported",
     ]).toContain(firstCaveat.status);

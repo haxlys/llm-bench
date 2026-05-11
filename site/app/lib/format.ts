@@ -5,6 +5,7 @@ export type MetricStatus =
   | "directional"
   | "unavailable"
   | "optional"
+  | "speed_only"
   | "missing"
   | "unsupported";
 

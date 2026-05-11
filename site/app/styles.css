@@ -406,6 +406,12 @@ a {
   color: var(--accent-3);
 }
 
+.badge.speed_only {
+  border-color: rgba(119, 218, 190, 0.58);
+  background: #0d2723;
+  color: #77dabe;
+}
+
 .badge.unsupported {
   border-color: rgba(146, 163, 154, 0.48);
   background: #151a18;

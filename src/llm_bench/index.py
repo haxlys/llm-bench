@@ -50,7 +50,7 @@ from llm_bench.evals.suites import (
     task_lane,
 )
 from llm_bench.manifest import eval_manifest, speed_manifest
-from llm_bench.registry import get_registry
+from llm_bench.registry import get_registry, is_speed_only_variant
 from llm_bench.scenarios import default_scenarios
 
 ROOT = Path(__file__).resolve().parent.parent.parent
@@ -70,6 +70,7 @@ def build_index() -> dict:
 
     variant_entries = []
     for v in registry.variants:
+        speed_only = is_speed_only_variant(v)
         caps = getattr(
             v,
             "capabilities",
@@ -79,18 +80,21 @@ def build_index() -> dict:
             1 for sc in scenarios
             if speed_m.counts.get((v.key, sc.name, BENCH_VERSION), 0) >= N_RUNS_REQUIRED
         )
-        e_supported = {t for _, t in full_tasks if supports_capabilities(t, caps)}
-        e_supported.update(
-            t for _, t, runner in external_tasks
-            if _external_task_is_primary(t)
-            and external_supports_capabilities(t, runner, caps)
-        )
+        if speed_only:
+            e_supported = set()
+        else:
+            e_supported = {t for _, t in full_tasks if supports_capabilities(t, caps)}
+            e_supported.update(
+                t for _, t, runner in external_tasks
+                if _external_task_is_primary(t)
+                and external_supports_capabilities(t, runner, caps)
+            )
         e_measured_all = {t for (k, t) in eval_m.measured if k == v.key}
         e_measured_tasks = sorted(e_measured_all & e_supported)
         e_catalog_tasks = {entry["task"] for entry in task_catalog}
         e_extra_tasks = sorted(e_measured_all - e_catalog_tasks)
         coverage = [
-            _coverage_row(entry, caps, e_measured_all)
+            _coverage_row(entry, caps, e_measured_all, speed_only=speed_only)
             for entry in task_catalog
         ]
         coverage_summary = _coverage_summary(coverage)
@@ -153,7 +157,7 @@ def write_index(out_path: Path | None = None) -> Path:
 
 
 def _external_task_is_primary(task: str) -> bool:
-    return task not in {"bigcodebench_hard", "bfcl", "livebench_subset", "programbench"}
+    return task_lane(task) == "primary"
 
 
 def _eval_task_catalog(
@@ -183,17 +187,20 @@ def _coverage_row(
     entry: dict[str, str],
     capabilities: set[str] | frozenset[str],
     measured_tasks: set[str],
+    *,
+    speed_only: bool = False,
 ) -> dict:
     task = entry["task"]
-    lane = entry["lane"]
-    supported = _catalog_entry_supported(entry, capabilities)
+    lane = "mtplx_speedup" if speed_only else entry["lane"]
     measured = task in measured_tasks
+    supported = measured if speed_only else _catalog_entry_supported(entry, capabilities)
     confidence = task_confidence(task)
     status = _coverage_status(
         lane=lane,
         supported=supported,
         measured=measured,
         confidence=confidence,
+        speed_only=speed_only,
     )
     return {
         "dim": entry["dim"],
@@ -226,9 +233,13 @@ def _coverage_status(
     supported: bool,
     measured: bool,
     confidence: str,
+    *,
+    speed_only: bool = False,
 ) -> str:
     if measured:
         return confidence
+    if speed_only:
+        return "speed_only"
     if lane == "optional":
         return "optional" if supported else "unsupported"
     return "missing" if supported else "unsupported"
@@ -240,6 +251,7 @@ def _coverage_summary(rows: list[dict]) -> dict[str, int]:
         "directional": sum(1 for row in rows if row["status"] == "directional"),
         "missing": sum(1 for row in rows if row["status"] == "missing"),
         "optional": sum(1 for row in rows if row["status"] == "optional"),
+        "speed_only": sum(1 for row in rows if row["status"] == "speed_only"),
         "unsupported": sum(1 for row in rows if row["status"] == "unsupported"),
         "total": len(rows),
     }

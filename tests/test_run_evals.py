@@ -82,6 +82,41 @@ def test_server_context_size_expands_for_longbench():
     assert run_evals._server_context_size([("reasoning", "gsm8k_cot_zeroshot")]) == 16384
 
 
+def test_selected_tasks_accepts_repeated_and_comma_separated_values():
+    run_evals = _load_run_evals()
+
+    assert run_evals._selected_tasks(("sourceqa,kmmlu_pro", " mbpp ")) == {
+        "sourceqa",
+        "kmmlu_pro",
+        "mbpp",
+    }
+
+
+def test_filter_tasks_keeps_requested_task_ids_only():
+    run_evals = _load_run_evals()
+    tasks = [
+        ("reasoning", "gsm8k_cot_zeroshot"),
+        ("instruction", "leaderboard_ifeval"),
+    ]
+
+    assert run_evals._filter_tasks(tasks, {"leaderboard_ifeval"}) == [
+        ("instruction", "leaderboard_ifeval"),
+    ]
+
+
+def test_available_tasks_includes_external_tasks_only_when_requested():
+    run_evals = _load_run_evals()
+
+    assert "sourceqa" not in run_evals._available_tasks(
+        [("reasoning", "gsm8k_cot_zeroshot")],
+        include_external=False,
+    )
+    assert "sourceqa" in run_evals._available_tasks(
+        [("reasoning", "gsm8k_cot_zeroshot")],
+        include_external=True,
+    )
+
+
 def test_tokenizer_label_prefers_variant_tokenizer():
     run_evals = _load_run_evals()
 
@@ -94,6 +129,25 @@ def test_tokenizer_label_prefers_variant_tokenizer():
         fmt = "gguf"
 
     assert run_evals._tokenizer_label(GGUFVariant()) == "provider/tokenizer"
+
+
+def test_mtplx_variants_are_filtered_from_eval_targets(capsys):
+    run_evals = _load_run_evals()
+
+    class EvalVariant:
+        key = "gguf-v"
+        backend = "gguf"
+        fmt = "gguf"
+
+    class SpeedOnlyVariant:
+        key = "mtplx-mtp"
+        backend = "mtplx"
+        fmt = "mlx"
+
+    targets = run_evals._filter_eval_targets([EvalVariant(), SpeedOnlyVariant()])
+
+    assert [target.key for target in targets] == ["gguf-v"]
+    assert "speed-only MTPLX variant" in capsys.readouterr().err
 
 
 def test_evalplus_is_skipped_for_limited_matrix():

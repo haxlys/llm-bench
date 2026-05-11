@@ -7,6 +7,7 @@ const metricStatuses: ReadonlySet<string> = new Set<MetricStatus>([
   "directional",
   "unavailable",
   "optional",
+  "speed_only",
   "missing",
   "unsupported",
 ]);
@@ -338,7 +339,12 @@ export function scenarios(input: BenchmarkData): string[] {
 }
 
 export function tasks(input: BenchmarkData): string[] {
-  return Array.from(new Set(input.accuracy.map((row) => row.task))).sort();
+  return Array.from(
+    new Set([
+      ...input.accuracy.map((row) => row.task),
+      ...input.coverage.map((row) => row.task),
+    ]),
+  ).sort();
 }
 
 export function dimensions(input: BenchmarkData): string[] {
@@ -351,6 +357,7 @@ export function coverageSummary(input: BenchmarkData): Record<MetricStatus, numb
     directional: 0,
     unavailable: 0,
     optional: 0,
+    speed_only: 0,
     missing: 0,
     unsupported: 0,
   };

@@ -67,7 +67,7 @@ export function SummaryPage({ locale = defaultLocale }: SummaryPageProps) {
       </section>
 
       <CaveatCallout title={t.pages.summary.coverageTitle}>
-        <p>{t.pages.summary.coverageBody(coverage.missing, coverage.optional)}</p>
+        <p>{t.pages.summary.coverageBody(coverage.missing, coverage.optional, coverage.speed_only)}</p>
       </CaveatCallout>
 
       <section className="section card-grid" aria-label={t.pages.summary.findingsAria}>

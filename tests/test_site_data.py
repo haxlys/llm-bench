@@ -462,6 +462,7 @@ def test_programbench_accuracy_rows_carry_agentic_caveat(tmp_path: Path) -> None
     assert data["accuracy"][0]["confidence"] == "measured"
     assert data["accuracy"][0]["caveats"] == ["agentic-scaffold-dependent"]
     assert {"id": "agentic-scaffold-dependent", "status": "measured"} in data["caveats"]
+    assert {"id": "mtplx-speed-only", "status": "speed_only"} in data["caveats"]
 
 
 def test_build_site_data_exports_index_coverage(tmp_path: Path) -> None:

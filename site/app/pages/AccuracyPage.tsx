@@ -14,6 +14,7 @@ const coverageStatuses: MetricStatus[] = [
   "directional",
   "missing",
   "optional",
+  "speed_only",
   "unsupported",
 ];
 

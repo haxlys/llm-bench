@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_bench.registry import Registry, get_registry, load_registry
+from llm_bench.registry import Registry, get_registry, is_speed_only_variant, load_registry
 
 
 def _write(tmp_path: Path, body: str) -> Path:
@@ -248,6 +248,29 @@ models:
     assert gguf.artifact_type == "gguf_file"
     assert "chat" in gguf.capabilities
     assert "logprobs" not in gguf.capabilities
+
+
+def test_mtplx_backend_is_marked_speed_only(tmp_path):
+    body = """
+defaults: {}
+models:
+  - id: mtplx
+    family: qwen
+    architecture: dense
+    variants:
+      - key: mtplx-mtp
+        fmt: mlx
+        backend: mtplx
+        generation_mode: mtp
+        path: org/mtplx
+        quant: MLX-4bit
+        tier: 4bit
+        download: {repo: org/mtplx, revision: abc123}
+"""
+    v = load_registry(_write(tmp_path, body)).variant("mtplx-mtp")
+
+    assert v.is_speed_only is True
+    assert is_speed_only_variant(v) is True
 
 
 def test_generic_endpoint_variant_can_be_declared_without_local_artifact(tmp_path):

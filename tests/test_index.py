@@ -24,6 +24,16 @@ class _FakeRegistry:
     variants = [_FakeVariant()]
 
 
+class _FakeSpeedOnlyVariant(_FakeVariant):
+    key = "vSpeed"
+    backend = "mtplx"
+    generation_mode = "mtp"
+
+
+class _FakeSpeedOnlyRegistry:
+    variants = [_FakeSpeedOnlyVariant()]
+
+
 def _write_result(eval_dir: Path, task: str) -> None:
     task_dir = eval_dir / "20260101T000000Z_vA_full" / task / "snapshot"
     task_dir.mkdir(parents=True, exist_ok=True)
@@ -50,3 +60,20 @@ def test_eval_progress_counts_supported_tasks_only(tmp_path, monkeypatch):
     assert variant["evals"]["coverage"][0]["status"] == "directional"
     assert variant["evals"]["coverage_summary"]["optional"] == 1
     assert variant["evals"]["extra_tasks"] == ["mmlu_generative"]
+
+
+def test_mtplx_speed_only_variants_do_not_create_eval_debt(tmp_path, monkeypatch):
+    index_mod = importlib.import_module("llm_bench.index")
+    monkeypatch.setattr(index_mod, "ROOT", tmp_path)
+    monkeypatch.setattr(index_mod, "get_registry", lambda: _FakeSpeedOnlyRegistry())
+    monkeypatch.setattr(index_mod, "full_suite", lambda: [("reasoning", "gsm8k_cot_zeroshot")])
+    monkeypatch.setattr(index_mod, "external_suite", lambda: [])
+
+    variant = index_mod.build_index()["variants"][0]
+
+    assert variant["evals"]["tasks_supported"] == 0
+    assert variant["evals"]["coverage"][0]["lane"] == "mtplx_speedup"
+    assert variant["evals"]["coverage"][0]["required"] is False
+    assert variant["evals"]["coverage"][0]["status"] == "speed_only"
+    assert variant["evals"]["coverage_summary"]["missing"] == 0
+    assert variant["evals"]["coverage_summary"]["speed_only"] == 2

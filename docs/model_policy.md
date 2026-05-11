@@ -1,6 +1,6 @@
 # Local Model Policy
 
-Updated: 2026-05-10
+Updated: 2026-05-11
 
 This policy ranks locally downloaded GGUF/MTPLX models for this benchmark
 project. Scores are from deterministic local evals unless noted. Higher is better.
@@ -43,8 +43,8 @@ Notes:
 ## Decision rules
 
 Do not promote one global rank without checking coverage first. The site now
-surfaces `measured`, `directional`, `missing`, `optional`, and `unsupported`
-statuses from `results/index.json` before the score table.
+surfaces `measured`, `directional`, `missing`, `optional`, `speed_only`, and
+`unsupported` statuses from `results/index.json` before the score table.
 
 Use `qwen-3-coder-next-gguf-q4` when the benchmark needs one strong local model. It is the only candidate that is simultaneously strong on GSM8K, HRM8K, EvalPlus, LiveCodeBench, and SourceQA.
 
@@ -62,7 +62,7 @@ Avoid promoting the 35B-A3B Qwen row until its output formatting/scoring behavio
 | Korean | HRM8K, KMMLU-Pro | Gemma, Qwen, Qwen3.6 |
 | Code | EvalPlus, LiveCodeBench | Qwen3-Coder, gpt-oss, Gemma baseline |
 | Source grounding | SourceQA | All chat-capable local and endpoint variants |
-| Speed | `summary.csv` scenarios | MLX, GGUF, MTPLX AR |
+| Speed | `summary.csv` scenarios | MLX, GGUF, MTPLX MTP/AR |
 | MTPLX speedup | `mtplx_speedups.csv` matching pairs | Qwen3.6 MTPLX MTP vs AR only |
 
 Optional lanes are BigCodeBench-Hard, BFCL V4, LiveBench subset, and
@@ -79,3 +79,5 @@ For overnight catch-up runs, fill the common primary matrix first:
 `gsm8k_cot_zeroshot`, `hrm8k`, `leaderboard_ifeval`, `sourceqa`, `humaneval`,
 `mbpp`, `livecodebench`, and `kmmlu_pro` where the variant supports the runner.
 Then schedule optional lanes separately with their own release/package pins.
+MTPLX MTP/AR variants are speed-only; use their paired flat MLX variant for
+quality comparisons and their MTP/AR rows only for speedup claims.

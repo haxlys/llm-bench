@@ -17,7 +17,8 @@ export type KnownCaveatId =
   | "generative-exact-match"
   | "agentic-scaffold-dependent"
   | "coverage-missing"
-  | "optional-eval-lane";
+  | "optional-eval-lane"
+  | "mtplx-speed-only";
 
 export type Messages = {
   root: {
@@ -152,7 +153,7 @@ export type Messages = {
         };
       };
       coverageTitle: string;
-      coverageBody: (missing: number, optional: number) => string;
+      coverageBody: (missing: number, optional: number, speedOnly: number) => string;
       caveatTitle: string;
       caveatBody: string;
       accuracySnapshot: {
@@ -283,6 +284,7 @@ export const messages = {
       directional: "directional",
       unavailable: "not measured",
       optional: "optional",
+      speed_only: "speed-only",
       missing: "missing",
       unsupported: "unsupported",
     },
@@ -297,6 +299,8 @@ export const messages = {
         "A primary supported evaluation has no committed result yet.",
       "optional-eval-lane":
         "This benchmark is tracked as an optional lane and does not block the primary matrix.",
+      "mtplx-speed-only":
+        "MTPLX MTP/AR variants are speedup comparators, so they do not add accuracy coverage debt.",
     },
     tables: {
       accuracy: {
@@ -475,8 +479,8 @@ export const messages = {
           },
         },
         coverageTitle: "Coverage first",
-        coverageBody: (missing, optional) =>
-          `${missing} primary coverage gaps and ${optional} optional lanes are visible in this export before score ranking.`,
+        coverageBody: (missing, optional, speedOnly) =>
+          `${missing} primary coverage gaps, ${optional} optional lanes, and ${speedOnly} MTPLX speed-only rows are visible before score ranking.`,
         caveatTitle: "Metric caveat",
         caveatBody:
           "TTFT and ITL are unavailable in this export, so speed comparisons use generation tokens per second. Generative exact-match accuracy rows can be directional when answer extraction or formatting may undercount correct outputs.",
@@ -621,6 +625,7 @@ export const messages = {
       directional: "방향성",
       unavailable: "미측정",
       optional: "옵션",
+      speed_only: "속도 전용",
       missing: "누락",
       unsupported: "미지원",
     },
@@ -635,6 +640,8 @@ export const messages = {
         "지원되는 primary 평가인데 아직 커밋된 결과가 없습니다.",
       "optional-eval-lane":
         "이 벤치마크는 optional lane으로 추적하며 primary matrix 완료 여부를 막지 않습니다.",
+      "mtplx-speed-only":
+        "MTPLX MTP/AR 변형은 speedup 비교용이라 정확도 coverage 부채로 세지 않습니다.",
     },
     tables: {
       accuracy: {
@@ -813,8 +820,8 @@ export const messages = {
           },
         },
         coverageTitle: "Coverage 먼저 보기",
-        coverageBody: (missing, optional) =>
-          `이 export는 score ranking보다 먼저 primary coverage 누락 ${missing}개와 optional lane ${optional}개를 보여줍니다.`,
+        coverageBody: (missing, optional, speedOnly) =>
+          `이 export는 score ranking보다 먼저 primary 누락 ${missing}개, optional lane ${optional}개, MTPLX 속도 전용 행 ${speedOnly}개를 보여줍니다.`,
         caveatTitle: "Metric caveat",
         caveatBody:
           "이 export에서는 TTFT와 ITL이 제공되지 않으므로 속도 비교는 generation tokens per second를 기준으로 봅니다. Generative exact-match 정확도 행은 정답 추출이나 formatting 때문에 실제 정답을 낮게 셀 수 있어 방향성 지표로 해석해야 합니다.",

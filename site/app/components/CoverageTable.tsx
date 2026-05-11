@@ -57,7 +57,13 @@ export function CoverageTable({ locale = defaultLocale, rows, variants }: Covera
                   </td>
                   <td>
                     <strong>{row.task}</strong>
-                    <div className="muted">{row.supported ? row.confidence : "unsupported"}</div>
+                    <div className="muted">
+                      {row.status === "speed_only"
+                        ? row.lane
+                        : row.supported
+                          ? row.confidence
+                          : "unsupported"}
+                    </div>
                   </td>
                   <td>{row.dim}</td>
                   <td>{row.runner}</td>
