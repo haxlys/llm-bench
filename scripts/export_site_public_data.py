@@ -15,6 +15,7 @@ STATIC_DOWNLOADS = (
     Path("results/summary.csv"),
     Path("results/eval_summary_primary.csv"),
     Path("results/mtplx_speedups.csv"),
+    Path("results/index.json"),
 )
 
 

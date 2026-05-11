@@ -46,6 +46,8 @@ from llm_bench.evals.suites import (
     external_supports_capabilities,
     full_suite,
     supports_capabilities,
+    task_confidence,
+    task_lane,
 )
 from llm_bench.manifest import eval_manifest, speed_manifest
 from llm_bench.registry import get_registry
@@ -63,6 +65,8 @@ def build_index() -> dict:
     eval_m = eval_manifest(eval_dir)
     scenarios = default_scenarios()
     full_tasks = full_suite()
+    external_tasks = external_suite()
+    task_catalog = _eval_task_catalog(full_tasks, external_tasks)
 
     variant_entries = []
     for v in registry.variants:
@@ -77,12 +81,19 @@ def build_index() -> dict:
         )
         e_supported = {t for _, t in full_tasks if supports_capabilities(t, caps)}
         e_supported.update(
-            t for _, t, runner in external_suite()
-            if runner != "bfcl" and external_supports_capabilities(t, runner, caps)
+            t for _, t, runner in external_tasks
+            if _external_task_is_primary(t)
+            and external_supports_capabilities(t, runner, caps)
         )
         e_measured_all = {t for (k, t) in eval_m.measured if k == v.key}
         e_measured_tasks = sorted(e_measured_all & e_supported)
-        e_extra_tasks = sorted(e_measured_all - e_supported)
+        e_catalog_tasks = {entry["task"] for entry in task_catalog}
+        e_extra_tasks = sorted(e_measured_all - e_catalog_tasks)
+        coverage = [
+            _coverage_row(entry, caps, e_measured_all)
+            for entry in task_catalog
+        ]
+        coverage_summary = _coverage_summary(coverage)
         variant_entries.append({
             "key": v.key,
             "model_id": v.model_id,
@@ -105,6 +116,8 @@ def build_index() -> dict:
                 "tasks_measured": len(e_measured_tasks),
                 "tasks_supported": len(e_supported),
                 "tasks": e_measured_tasks,
+                "coverage": coverage,
+                "coverage_summary": coverage_summary,
                 "extra_tasks": e_extra_tasks,
                 "last_measured": eval_m.last_ts.get(v.key) or None,
             },
@@ -124,6 +137,10 @@ def build_index() -> dict:
             "evals_started": sum(
                 1 for e in variant_entries if e["evals"]["tasks_measured"] > 0
             ),
+            "evals_missing_required": sum(
+                e["evals"]["coverage_summary"]["missing"]
+                for e in variant_entries
+            ),
         },
     }
 
@@ -133,3 +150,96 @@ def write_index(out_path: Path | None = None) -> Path:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(build_index(), indent=2, ensure_ascii=False))
     return out
+
+
+def _external_task_is_primary(task: str) -> bool:
+    return task not in {"bigcodebench_hard", "bfcl", "livebench_subset", "programbench"}
+
+
+def _eval_task_catalog(
+    full_tasks: list[tuple[str, str]],
+    external_tasks: list[tuple[str, str, str]],
+) -> list[dict[str, str]]:
+    rows = [
+        {"dim": dim, "task": task, "runner": "lm-eval", "lane": task_lane(task)}
+        for dim, task in full_tasks
+    ]
+    rows.extend(
+        {"dim": dim, "task": task, "runner": runner, "lane": task_lane(task)}
+        for dim, task, runner in external_tasks
+    )
+    rows.append(
+        {
+            "dim": "agentic_code",
+            "task": "programbench",
+            "runner": "programbench",
+            "lane": "optional",
+        }
+    )
+    return rows
+
+
+def _coverage_row(
+    entry: dict[str, str],
+    capabilities: set[str] | frozenset[str],
+    measured_tasks: set[str],
+) -> dict:
+    task = entry["task"]
+    lane = entry["lane"]
+    supported = _catalog_entry_supported(entry, capabilities)
+    measured = task in measured_tasks
+    confidence = task_confidence(task)
+    status = _coverage_status(
+        lane=lane,
+        supported=supported,
+        measured=measured,
+        confidence=confidence,
+    )
+    return {
+        "dim": entry["dim"],
+        "task": task,
+        "runner": entry["runner"],
+        "lane": lane,
+        "required": lane == "primary",
+        "supported": supported,
+        "measured": measured,
+        "confidence": confidence,
+        "status": status,
+    }
+
+
+def _catalog_entry_supported(
+    entry: dict[str, str],
+    capabilities: set[str] | frozenset[str],
+) -> bool:
+    runner = entry["runner"]
+    task = entry["task"]
+    if runner == "lm-eval":
+        return supports_capabilities(task, capabilities)
+    if runner == "programbench":
+        return True
+    return external_supports_capabilities(task, runner, capabilities)
+
+
+def _coverage_status(
+    lane: str,
+    supported: bool,
+    measured: bool,
+    confidence: str,
+) -> str:
+    if measured:
+        return confidence
+    if lane == "optional":
+        return "optional" if supported else "unsupported"
+    return "missing" if supported else "unsupported"
+
+
+def _coverage_summary(rows: list[dict]) -> dict[str, int]:
+    return {
+        "measured": sum(1 for row in rows if row["status"] == "measured"),
+        "directional": sum(1 for row in rows if row["status"] == "directional"),
+        "missing": sum(1 for row in rows if row["status"] == "missing"),
+        "optional": sum(1 for row in rows if row["status"] == "optional"),
+        "unsupported": sum(1 for row in rows if row["status"] == "unsupported"),
+        "total": len(rows),
+    }

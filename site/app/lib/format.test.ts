@@ -19,8 +19,12 @@ describe("format helpers", () => {
     expect(statusLabel("measured")).toBe("measured");
     expect(statusLabel("directional")).toBe("directional");
     expect(statusLabel("unavailable")).toBe("not measured");
+    expect(statusLabel("optional")).toBe("optional");
+    expect(statusLabel("missing")).toBe("missing");
     expect(statusLabel("measured", "ko")).toBe("측정됨");
     expect(statusLabel("directional", "ko")).toBe("방향성");
     expect(statusLabel("unavailable", "ko")).toBe("미측정");
+    expect(statusLabel("optional", "ko")).toBe("옵션");
+    expect(statusLabel("missing", "ko")).toBe("누락");
   });
 });

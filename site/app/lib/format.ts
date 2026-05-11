@@ -1,6 +1,12 @@
 import { defaultLocale, messages, type Locale } from "./i18n";
 
-export type MetricStatus = "measured" | "directional" | "unavailable";
+export type MetricStatus =
+  | "measured"
+  | "directional"
+  | "unavailable"
+  | "optional"
+  | "missing"
+  | "unsupported";
 
 export function formatPercent(value: number): string {
   return `${(value * 100).toFixed(1)}%`;

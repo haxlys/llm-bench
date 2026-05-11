@@ -110,6 +110,84 @@ def test_livecodebench_is_skipped_when_runner_unavailable(monkeypatch):
     assert run_evals._external_skip_reason("livecodebench", 1) == "skipped_unavailable_external"
 
 
+def test_livecodebench_release_defaults_to_constant(monkeypatch):
+    run_evals = _load_run_evals()
+    monkeypatch.delenv("LIVE_CODE_BENCH_RELEASE", raising=False)
+    assert run_evals._livecodebench_release() == run_evals.LCB_RELEASE
+
+
+def test_livecodebench_release_reads_env_override(monkeypatch):
+    run_evals = _load_run_evals()
+    monkeypatch.setenv("LIVE_CODE_BENCH_RELEASE", "release_v9")
+    assert run_evals._livecodebench_release() == "release_v9"
+
+
+def test_coverage_summary_marks_status_completion():
+    run_evals = _load_run_evals()
+    coverage = [
+        run_evals._build_coverage_row("reasoning", "gsm8k_cot_zeroshot", "lm-eval", "completed"),
+        run_evals._build_coverage_row("korean", "hrm8k", "lm-eval", "failed"),
+        run_evals._build_coverage_row("reasoning", "toxigen", "livebench", "skipped_unavailable_external"),
+    ]
+    run_evals._set_coverage_status(coverage, "korean", "hrm8k", "lm-eval", "completed")
+    summary = run_evals._coverage_summary(coverage)
+    assert summary["required"] == 3
+    assert summary["completed"] == 2
+    assert summary["missing_count"] == 1
+    assert summary["missing"][0]["task"] == "toxigen"
+
+
+def test_resilient_ifeval_coverage_uses_resilient_runner():
+    run_evals = _load_run_evals()
+    coverage = [
+        run_evals._build_coverage_row(
+            "instruction",
+            "leaderboard_ifeval",
+            run_evals._lmeval_runner_for_task("leaderboard_ifeval", True),
+            "pending",
+        )
+    ]
+
+    run_evals._set_coverage_status(
+        coverage,
+        "instruction",
+        "leaderboard_ifeval",
+        "ifeval_resilient",
+        "completed",
+    )
+
+    assert coverage == [
+        {
+            "dim": "instruction",
+            "task": "leaderboard_ifeval",
+            "runner": "ifeval_resilient",
+            "lane": "primary",
+            "required": True,
+            "status": "completed",
+        }
+    ]
+
+
+def test_optional_rows_do_not_fail_strict_coverage():
+    run_evals = _load_run_evals()
+    coverage = [
+        run_evals._build_coverage_row("code", "humaneval", "evalplus", "completed"),
+        run_evals._build_coverage_row(
+            "tool",
+            "bfcl",
+            "bfcl",
+            "skipped_optional_disabled",
+        ),
+    ]
+
+    summary = run_evals._coverage_summary(coverage)
+
+    assert summary["required"] == 1
+    assert summary["completed"] == 1
+    assert summary["missing_count"] == 0
+    assert summary["optional"] == 1
+
+
 def test_frontier_runners_are_skipped_when_unavailable(monkeypatch):
     run_evals = _load_run_evals()
     monkeypatch.setattr(run_evals, "bigcodebench_available", lambda: False)

@@ -70,6 +70,47 @@ models:
     )
 
 
+def _write_index(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "variants": [
+                    {
+                        "key": "test-variant",
+                        "evals": {
+                            "coverage": [
+                                {
+                                    "dim": "source_grounding",
+                                    "task": "sourceqa",
+                                    "runner": "sourceqa",
+                                    "lane": "primary",
+                                    "required": True,
+                                    "supported": True,
+                                    "measured": True,
+                                    "confidence": "measured",
+                                    "status": "measured",
+                                },
+                                {
+                                    "dim": "agentic_code",
+                                    "task": "programbench",
+                                    "runner": "programbench",
+                                    "lane": "optional",
+                                    "required": False,
+                                    "supported": True,
+                                    "measured": False,
+                                    "confidence": "measured",
+                                    "status": "optional",
+                                },
+                            ]
+                        },
+                    }
+                ]
+            }
+        )
+    )
+
+
 def _speed_row(**overrides: object) -> dict[str, object]:
     row: dict[str, object] = {
         "ts": "2026-05-06T00:00:00+00:00",
@@ -149,6 +190,7 @@ def _write_site_inputs(
     mtplx_rows: list[dict[str, object]] | None = None,
 ) -> None:
     _write_registry(tmp_path / "models" / "registry.yaml")
+    _write_index(tmp_path / "results" / "index.json")
     _write_csv(tmp_path / "results" / "summary.csv", speed_rows or [_speed_row()])
     _write_csv(
         tmp_path / "results" / "eval_summary_primary.csv",
@@ -422,6 +464,17 @@ def test_programbench_accuracy_rows_carry_agentic_caveat(tmp_path: Path) -> None
     assert {"id": "agentic-scaffold-dependent", "status": "measured"} in data["caveats"]
 
 
+def test_build_site_data_exports_index_coverage(tmp_path: Path) -> None:
+    _write_site_inputs(tmp_path)
+
+    data = build_site_data(repo_root=tmp_path)
+
+    assert data["coverage"][0]["task"] == "sourceqa"
+    assert data["coverage"][0]["status"] == "measured"
+    assert data["coverage"][1]["task"] == "programbench"
+    assert data["coverage"][1]["status"] == "optional"
+
+
 def test_build_site_data_rejects_invalid_speed_scenario(tmp_path: Path) -> None:
     _write_site_inputs(tmp_path, speed_rows=[_speed_row(scenario="bad_scenario")])
 
@@ -553,10 +606,14 @@ def test_sync_site_public_data_copies_json_and_downloads(tmp_path: Path) -> None
     assert (public_dir / "mtplx_speedups.csv").read_bytes() == (
         tmp_path / "results" / "mtplx_speedups.csv"
     ).read_bytes()
+    assert (public_dir / "index.json").read_bytes() == (
+        tmp_path / "results" / "index.json"
+    ).read_bytes()
     assert copied == [
         src_json,
         public_json,
         public_dir / "summary.csv",
         public_dir / "eval_summary_primary.csv",
         public_dir / "mtplx_speedups.csv",
+        public_dir / "index.json",
     ]

@@ -5,6 +5,7 @@ import { SpeedBars } from "../components/SpeedBars";
 import {
   benchmarkData,
   bestAccuracyRows,
+  coverageSummary,
   fastestSpeedRows,
   variantByKey,
 } from "../lib/benchmark-data";
@@ -27,6 +28,7 @@ export function SummaryPage({ locale = defaultLocale }: SummaryPageProps) {
   const fastestVariant = fastestRow ? variants.get(fastestRow.variant) : undefined;
   const mtplxVariant = mtplxBest ? variants.get(mtplxBest.mtpVariant) : undefined;
   const measuredSpeedRows = benchmarkData.speed.filter((row) => row.confidence === "measured");
+  const coverage = coverageSummary(benchmarkData);
 
   return (
     <>
@@ -63,6 +65,10 @@ export function SummaryPage({ locale = defaultLocale }: SummaryPageProps) {
           </div>
         </dl>
       </section>
+
+      <CaveatCallout title={t.pages.summary.coverageTitle}>
+        <p>{t.pages.summary.coverageBody(coverage.missing, coverage.optional)}</p>
+      </CaveatCallout>
 
       <section className="section card-grid" aria-label={t.pages.summary.findingsAria}>
         <FindingCard

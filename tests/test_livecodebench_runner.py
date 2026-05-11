@@ -167,6 +167,7 @@ def test_run_uses_source_checkout_pythonpath_and_openai_base(tmp_path, monkeypat
     monkeypatch.setenv("LIVE_CODE_BENCH_START_DATE", "2025-03-29")
     monkeypatch.setenv("LIVE_CODE_BENCH_END_DATE", "2025-04-06")
     monkeypatch.setenv("LIVE_CODE_BENCH_MAX_TOKENS", "1024")
+    monkeypatch.setenv("LIVE_CODE_BENCH_NOT_FAST", "1")
     monkeypatch.setattr(lcb, "_module_exists", lambda _: False)
 
     def fake_run(cmd, *, capture_output, text, env, timeout, cwd=None):
@@ -197,5 +198,6 @@ def test_run_uses_source_checkout_pythonpath_and_openai_base(tmp_path, monkeypat
     assert captured["cmd"][captured["cmd"].index("--start_date") + 1] == "2025-03-29"
     assert captured["cmd"][captured["cmd"].index("--end_date") + 1] == "2025-04-06"
     assert captured["cmd"][captured["cmd"].index("--max_tokens") + 1] == "1024"
+    assert "--not_fast" in captured["cmd"]
     assert "--debug" in captured["cmd"]
     assert "gpt-4o-mini-2024-07-18" in captured["cmd"]

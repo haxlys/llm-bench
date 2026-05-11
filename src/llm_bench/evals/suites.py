@@ -97,10 +97,55 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
     # implemented' noise on every variant. Re-add once the wrappers exist.
 }
 
+OPTIONAL_EVAL_TASKS = {
+    "bigcodebench_hard",
+    "bfcl",
+    "livebench_subset",
+    "programbench",
+}
+
+DIRECTIONAL_EVAL_TASKS = {
+    "gsm8k_cot_zeroshot",
+    "hrm8k",
+    "kmmlu_direct",
+    "mmlu_generative",
+    "truthfulqa-multi_gen_en",
+    "longbench",
+}
+
 
 def external_suite() -> list[tuple[str, str, str]]:
     """Returns [(dim, task, runner), ...] for the non-lm-eval pipeline."""
     return [(d, t, r) for d, items in EXTERNAL_SUITES.items() for t, r in items]
+
+
+def task_lane(task: str) -> str:
+    return "optional" if task in OPTIONAL_EVAL_TASKS else "primary"
+
+
+def task_confidence(task: str) -> str:
+    return "directional" if task in DIRECTIONAL_EVAL_TASKS else "measured"
+
+
+def eval_task_catalog() -> list[dict[str, str]]:
+    """Declared evaluation matrix, including optional lanes not run by default."""
+    rows = [
+        {"dim": dim, "task": task, "runner": "lm-eval", "lane": task_lane(task)}
+        for dim, task in full_suite()
+    ]
+    rows.extend(
+        {"dim": dim, "task": task, "runner": runner, "lane": task_lane(task)}
+        for dim, task, runner in external_suite()
+    )
+    rows.append(
+        {
+            "dim": "agentic_code",
+            "task": "programbench",
+            "runner": "programbench",
+            "lane": "optional",
+        }
+    )
+    return rows
 
 
 MLX_UNSUPPORTED_EXTERNAL_TASKS = {

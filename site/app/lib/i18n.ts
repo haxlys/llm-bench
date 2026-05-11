@@ -15,7 +15,9 @@ export type NavKey = "summary" | "accuracy" | "speed" | "methodology" | "data";
 export type KnownCaveatId =
   | "latency-not-measured"
   | "generative-exact-match"
-  | "agentic-scaffold-dependent";
+  | "agentic-scaffold-dependent"
+  | "coverage-missing"
+  | "optional-eval-lane";
 
 export type Messages = {
   root: {
@@ -28,6 +30,7 @@ export type Messages = {
   };
   common: {
     allFamilies: string;
+    allDimensions: string;
     allTasks: string;
     caveatsTracked: string;
     comparisons: string;
@@ -52,6 +55,18 @@ export type Messages = {
         runId: string;
         score: string;
         taskDim: string;
+      };
+    };
+    coverage: {
+      aria: string;
+      empty: string;
+      headers: {
+        dim: string;
+        lane: string;
+        model: string;
+        runner: string;
+        status: string;
+        task: string;
       };
     };
     speed: {
@@ -136,6 +151,8 @@ export type Messages = {
           detail: string;
         };
       };
+      coverageTitle: string;
+      coverageBody: (missing: number, optional: number) => string;
       caveatTitle: string;
       caveatBody: string;
       accuracySnapshot: {
@@ -155,7 +172,11 @@ export type Messages = {
       lead: string;
       filtersAria: string;
       taskLabel: string;
+      dimensionLabel: string;
       familyLabel: string;
+      coverageEyebrow: string;
+      coverageTitle: string;
+      coverageAside: string;
       tableEyebrow: string;
       tableTitle: string;
       sortedBy: string;
@@ -245,6 +266,7 @@ export const messages = {
     },
     common: {
       allFamilies: "All families",
+      allDimensions: "All dimensions",
       allTasks: "All tasks",
       caveatsTracked: "caveats tracked",
       comparisons: "comparisons",
@@ -260,6 +282,9 @@ export const messages = {
       measured: "measured",
       directional: "directional",
       unavailable: "not measured",
+      optional: "optional",
+      missing: "missing",
+      unsupported: "unsupported",
     },
     caveats: {
       "latency-not-measured":
@@ -268,6 +293,10 @@ export const messages = {
         "Generative exact-match rows can undercount correct answers because of output formatting and answer extraction.",
       "agentic-scaffold-dependent":
         "ProgramBench scores include the agent scaffold, tools, and execution environment, not only the base model.",
+      "coverage-missing":
+        "A primary supported evaluation has no committed result yet.",
+      "optional-eval-lane":
+        "This benchmark is tracked as an optional lane and does not block the primary matrix.",
     },
     tables: {
       accuracy: {
@@ -280,6 +309,18 @@ export const messages = {
           runId: "Run ID",
           score: "Score",
           taskDim: "Task / dim",
+        },
+      },
+      coverage: {
+        aria: "Evaluation coverage",
+        empty: "No coverage rows match the current filters.",
+        headers: {
+          dim: "Dimension",
+          lane: "Lane",
+          model: "Model",
+          runner: "Runner",
+          status: "Status",
+          task: "Task",
         },
       },
       speed: {
@@ -388,6 +429,11 @@ export const messages = {
         href: "/data/mtplx_speedups.csv",
         label: "mtplx_speedups.csv",
       },
+      {
+        description: "Registry and evaluation coverage status snapshot.",
+        href: "/data/index.json",
+        label: "index.json",
+      },
     ],
     pages: {
       summary: {
@@ -428,6 +474,9 @@ export const messages = {
               "Latency metrics and generative exact-match interpretation are explicitly marked where applicable.",
           },
         },
+        coverageTitle: "Coverage first",
+        coverageBody: (missing, optional) =>
+          `${missing} primary coverage gaps and ${optional} optional lanes are visible in this export before score ranking.`,
         caveatTitle: "Metric caveat",
         caveatBody:
           "TTFT and ITL are unavailable in this export, so speed comparisons use generation tokens per second. Generative exact-match accuracy rows can be directional when answer extraction or formatting may undercount correct outputs.",
@@ -445,10 +494,15 @@ export const messages = {
       accuracy: {
         eyebrow: "Accuracy explorer",
         title: "Committed accuracy rows",
-        lead: "Filter committed benchmark accuracy artifacts by task and model family.",
+        lead:
+          "Filter committed benchmark accuracy artifacts by task, dimension, and model family. Coverage is shown before scores so missing tests are not mistaken for weak scores.",
         filtersAria: "Accuracy filters",
         taskLabel: "Task",
+        dimensionLabel: "Dimension",
         familyLabel: "Family",
+        coverageEyebrow: "Coverage",
+        coverageTitle: "Which tests each model has taken",
+        coverageAside: "Status from results/index.json",
         tableEyebrow: "Explorer",
         tableTitle: "Accuracy results",
         sortedBy: "Sorted by task, score, model",
@@ -550,6 +604,7 @@ export const messages = {
     },
     common: {
       allFamilies: "전체 family",
+      allDimensions: "전체 dimension",
       allTasks: "전체 task",
       caveatsTracked: "개 caveat 추적",
       comparisons: "개 비교",
@@ -565,6 +620,9 @@ export const messages = {
       measured: "측정됨",
       directional: "방향성",
       unavailable: "미측정",
+      optional: "옵션",
+      missing: "누락",
+      unsupported: "미지원",
     },
     caveats: {
       "latency-not-measured":
@@ -573,6 +631,10 @@ export const messages = {
         "생성형 exact-match 행은 출력 형식과 정답 추출 방식 때문에 정답을 낮게 셀 수 있습니다.",
       "agentic-scaffold-dependent":
         "ProgramBench 점수는 base model뿐 아니라 agent scaffold, 도구, 실행 환경의 영향도 포함합니다.",
+      "coverage-missing":
+        "지원되는 primary 평가인데 아직 커밋된 결과가 없습니다.",
+      "optional-eval-lane":
+        "이 벤치마크는 optional lane으로 추적하며 primary matrix 완료 여부를 막지 않습니다.",
     },
     tables: {
       accuracy: {
@@ -585,6 +647,18 @@ export const messages = {
           runId: "Run ID",
           score: "Score",
           taskDim: "Task / dim",
+        },
+      },
+      coverage: {
+        aria: "평가 coverage",
+        empty: "현재 필터와 일치하는 coverage 행이 없습니다.",
+        headers: {
+          dim: "Dimension",
+          lane: "Lane",
+          model: "Model",
+          runner: "Runner",
+          status: "상태",
+          task: "Task",
         },
       },
       speed: {
@@ -693,6 +767,11 @@ export const messages = {
         href: "/data/mtplx_speedups.csv",
         label: "mtplx_speedups.csv",
       },
+      {
+        description: "Registry와 evaluation coverage 상태 snapshot입니다.",
+        href: "/data/index.json",
+        label: "index.json",
+      },
     ],
     pages: {
       summary: {
@@ -733,6 +812,9 @@ export const messages = {
               "Latency metric과 generative exact-match 해석 caveat을 필요한 위치에 명시했습니다.",
           },
         },
+        coverageTitle: "Coverage 먼저 보기",
+        coverageBody: (missing, optional) =>
+          `이 export는 score ranking보다 먼저 primary coverage 누락 ${missing}개와 optional lane ${optional}개를 보여줍니다.`,
         caveatTitle: "Metric caveat",
         caveatBody:
           "이 export에서는 TTFT와 ITL이 제공되지 않으므로 속도 비교는 generation tokens per second를 기준으로 봅니다. Generative exact-match 정확도 행은 정답 추출이나 formatting 때문에 실제 정답을 낮게 셀 수 있어 방향성 지표로 해석해야 합니다.",
@@ -750,10 +832,15 @@ export const messages = {
       accuracy: {
         eyebrow: "Accuracy explorer",
         title: "커밋된 정확도 행",
-        lead: "커밋된 benchmark accuracy artifact를 task와 model family 기준으로 필터링합니다.",
+        lead:
+          "커밋된 benchmark accuracy artifact를 task, dimension, model family 기준으로 필터링합니다. 점수 표보다 먼저 coverage를 보여줘서 미측정과 낮은 점수를 구분합니다.",
         filtersAria: "정확도 필터",
         taskLabel: "Task",
+        dimensionLabel: "Dimension",
         familyLabel: "Family",
+        coverageEyebrow: "Coverage",
+        coverageTitle: "모델별 응시한 시험",
+        coverageAside: "results/index.json 기준 상태",
         tableEyebrow: "Explorer",
         tableTitle: "정확도 결과",
         sortedBy: "Task, score, model 순 정렬",

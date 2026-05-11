@@ -4,6 +4,8 @@ import {
   type BenchmarkData,
   benchmarkData,
   bestAccuracyRows,
+  coverageSummary,
+  dimensions,
   fastestSpeedRows,
   scenarios,
   tasks,
@@ -44,6 +46,36 @@ const fixture: BenchmarkData = {
   ],
   benchVersion: "0.3",
   caveats: [],
+  coverage: [
+    {
+      confidence: "measured",
+      dim: "code",
+      family: "test",
+      lane: "primary",
+      measured: true,
+      modelId: "model-a",
+      required: true,
+      runner: "evalplus",
+      status: "measured",
+      supported: true,
+      task: "humaneval",
+      variant: "a",
+    },
+    {
+      confidence: "measured",
+      dim: "tool",
+      family: "test",
+      lane: "optional",
+      measured: false,
+      modelId: "model-b",
+      required: false,
+      runner: "bfcl",
+      status: "optional",
+      supported: true,
+      task: "bfcl",
+      variant: "b",
+    },
+  ],
   generatedAt: "2026-05-06T00:00:00Z",
   hardware: {
     machine: "test-machine",
@@ -151,6 +183,12 @@ describe("benchmark data helpers", () => {
     expect(fastestSpeedRows(fixture, "p256_g128", 1)[0].variant).toBe("b");
   });
 
+  it("summarizes coverage statuses", () => {
+    expect(dimensions(fixture)).toEqual(["code", "tool"]);
+    expect(coverageSummary(fixture).measured).toBe(1);
+    expect(coverageSummary(fixture).optional).toBe(1);
+  });
+
   it("labels the ProgramBench caveat", () => {
     expect(caveatText("agentic-scaffold-dependent")).toContain("agent scaffold");
     expect(caveatText("agentic-scaffold-dependent", "ko")).toContain("agent scaffold");
@@ -165,6 +203,7 @@ describe("benchmark data helpers", () => {
     expect(benchmarkData.speed.length).toBeGreaterThan(0);
     expect(benchmarkData.mtplx.length).toBeGreaterThan(0);
     expect(benchmarkData.caveats.length).toBeGreaterThan(0);
+    expect(benchmarkData.coverage.length).toBeGreaterThan(0);
 
     const firstVariant = benchmarkData.variants[0];
     const firstTask = tasks(benchmarkData)[0];
@@ -175,6 +214,13 @@ describe("benchmark data helpers", () => {
     expect(bestAccuracyRows(benchmarkData, firstTask, 1)[0].task).toBe(firstTask);
     expect(fastestSpeedRows(benchmarkData, firstScenario, 1)[0].scenario).toBe(firstScenario);
     expect(firstCaveat.id).toBeTruthy();
-    expect(["directional", "measured", "unavailable"]).toContain(firstCaveat.status);
+    expect([
+      "directional",
+      "measured",
+      "unavailable",
+      "optional",
+      "missing",
+      "unsupported",
+    ]).toContain(firstCaveat.status);
   });
 });

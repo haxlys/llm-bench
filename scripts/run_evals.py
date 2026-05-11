@@ -29,6 +29,7 @@ from llm_bench.evals import ModelServer, full_suite, smoke_suite
 from llm_bench.evals.bfcl import run_bfcl
 from llm_bench.evals.bigcodebench_runner import bigcodebench_available
 from llm_bench.evals.bigcodebench_runner import run_bigcodebench_hard
+from llm_bench.evals.ifeval_resilient_runner import run_leaderboard_ifeval_resilient
 from llm_bench.evals.evalplus_runner import run_evalplus
 from llm_bench.evals.kmmlu_pro_runner import kmmlu_pro_available
 from llm_bench.evals.kmmlu_pro_runner import run_kmmlu_pro
@@ -48,6 +49,7 @@ from llm_bench.evals.suites import (
     is_chat_task,
     long_suite,
     supports_capabilities,
+    task_lane,
 )
 from llm_bench.evals.trace import append_trace
 from llm_bench.manifest import eval_is_measured, eval_manifest
@@ -158,6 +160,67 @@ def _external_skip_reason(runner: str, effective_limit: int | None) -> str | Non
     return None
 
 
+def _coverage_done_statuses() -> set[str]:
+    # "unsupported by this backend" tasks are intentional skips, not hard failures.
+    return {
+        "completed",
+        "skipped_already_measured",
+        "skipped_unsupported_external",
+        "skipped_optional_disabled",
+    }
+
+
+def _build_coverage_row(dim: str, task: str, runner: str, status: str) -> dict:
+    lane = task_lane(task)
+    return {
+        "dim": dim,
+        "task": task,
+        "runner": runner,
+        "lane": lane,
+        "required": lane == "primary",
+        "status": status,
+    }
+
+
+def _set_coverage_status(
+    rows: list[dict],
+    dim: str,
+    task: str,
+    runner: str,
+    status: str,
+) -> None:
+    """Mutate exactly one coverage row for the task/run tuple."""
+    for row in rows:
+        if row["dim"] == dim and row["task"] == task and row["runner"] == runner:
+            row["status"] = status
+            return
+    rows.append(_build_coverage_row(dim, task, runner, status))
+
+
+def _coverage_summary(rows: list[dict]) -> dict:
+    done = _coverage_done_statuses()
+    required_rows = [row for row in rows if row.get("required", True)]
+    missing_rows = [row for row in required_rows if row["status"] not in done]
+    optional_rows = [row for row in rows if not row.get("required", True)]
+    return {
+        "required": len(required_rows),
+        "completed": len(required_rows) - len(missing_rows),
+        "missing_count": len(missing_rows),
+        "missing": missing_rows,
+        "optional": len(optional_rows),
+    }
+
+
+def _livecodebench_release() -> str:
+    return os.environ.get("LIVE_CODE_BENCH_RELEASE", LCB_RELEASE)
+
+
+def _lmeval_runner_for_task(task: str, resilient_ifeval: bool) -> str:
+    if task == "leaderboard_ifeval" and resilient_ifeval:
+        return "ifeval_resilient"
+    return "lm-eval"
+
+
 @click.command()
 @click.option("--variant", multiple=True, help="Registry key (repeatable)")
 @click.option("--all-variants", is_flag=True, help="Every locally-present variant")
@@ -168,14 +231,18 @@ def _external_skip_reason(runner: str, effective_limit: int | None) -> str | Non
 @click.option("--skip-existing/--no-skip-existing", default=True)
 @click.option("--include-bfcl", is_flag=True,
               help="Run BFCL v4 tool-use eval (requires `uv pip install bfcl-eval`, ~30 min/variant).")
+@click.option("--resilient-ifeval/--strict-ifeval", default=False,
+              help="Use resilient leaderboard_ifeval runner for per-sample API errors.")
+@click.option("--strict-coverage", is_flag=True, default=False,
+              help="Fail if any required task in this run has no successful result.")
 @click.option("--sourceqa-tasks", type=click.Path(exists=True, dir_okay=False),
               default=None,
               help=f"Source-grounding task YAML/JSON (default: {SOURCEQA_DEFAULT_TASKS}).")
 @click.option("--sourceqa-judge-model", default=None,
               help="Optional judge model label for sourceqa metadata; deterministic score remains primary.")
 def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
-         port: int, skip_existing: bool, include_bfcl: bool,
-         sourceqa_tasks: str | None, sourceqa_judge_model: str | None):
+         port: int, skip_existing: bool, include_bfcl: bool, resilient_ifeval: bool,
+         strict_coverage: bool, sourceqa_tasks: str | None, sourceqa_judge_model: str | None):
     targets = _resolve_targets(variant, all_variants)
     if not targets:
         click.echo("→ no targets. Specify --variant or --all-variants.")
@@ -198,6 +265,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
     TRACE_DIR.mkdir(parents=True, exist_ok=True)
 
     grand_summary: list[dict] = []
+    has_coverage_failure = False
     for v in targets:
         run_id = f"{now_safe()}_{v.key}_{suite}"
         out_dir = EVAL_RESULTS_DIR / run_id
@@ -208,6 +276,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
         click.echo(f"\n=== {v.key} ({v.fmt}, {v.quant}) ===")
 
         # Pre-filter tasks for this variant: skip unsupported, skip already-measured
+        variant_coverage: list[dict] = []
         runnable: list[tuple[str, str]] = []
         capabilities = _variant_capabilities(v)
         for dim, task in tasks:
@@ -224,13 +293,23 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                     "quant": v.quant, "dim": dim, "task": task,
                     "status": "skipped_already_measured",
                 })
+                runner = _lmeval_runner_for_task(task, resilient_ifeval)
+                variant_coverage.append(_build_coverage_row(dim, task, runner, "skipped_already_measured"))
                 continue
             runnable.append((dim, task))
+            runner = _lmeval_runner_for_task(task, resilient_ifeval)
+            variant_coverage.append(_build_coverage_row(dim, task, runner, "pending"))
 
         external_runnable: list[tuple[str, str, str]] = []
         if suite == "full":
             for dim, task, runner in external_suite():
                 if runner == "bfcl" and not include_bfcl:
+                    grand_summary.append({
+                        "variant": v.key, "model_id": v.model_id, "fmt": v.fmt,
+                        "quant": v.quant, "dim": dim, "task": task,
+                        "runner": runner, "status": "skipped_bfcl_disabled",
+                    })
+                    variant_coverage.append(_build_coverage_row(dim, task, runner, "skipped_optional_disabled"))
                     continue
                 if reason := _external_skip_reason(runner, effective_limit):
                     grand_summary.append({
@@ -238,6 +317,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         "quant": v.quant, "dim": dim, "task": task,
                         "runner": runner, "status": reason,
                     })
+                    variant_coverage.append(_build_coverage_row(dim, task, runner, reason))
                     continue
                 if not external_supports_capabilities(task, runner, capabilities):
                     grand_summary.append({
@@ -245,6 +325,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         "quant": v.quant, "dim": dim, "task": task,
                         "runner": runner, "status": "skipped_unsupported_external",
                     })
+                    variant_coverage.append(_build_coverage_row(dim, task, runner, "skipped_unsupported_external"))
                     continue
                 if skip_existing and eval_is_measured(measured, v.key, task):
                     grand_summary.append({
@@ -252,10 +333,32 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         "quant": v.quant, "dim": dim, "task": task,
                         "runner": runner, "status": "skipped_already_measured",
                     })
+                    variant_coverage.append(_build_coverage_row(dim, task, runner, "skipped_already_measured"))
                     continue
                 external_runnable.append((dim, task, runner))
+                variant_coverage.append(_build_coverage_row(dim, task, runner, "pending"))
         if not runnable and not external_runnable:
             click.echo("  → all tasks already measured / unsupported, skipping server boot")
+            if variant_coverage:
+                coverage = _coverage_summary(variant_coverage)
+                click.echo(
+                    f"  coverage: {coverage['completed']}/{coverage['required']} required tasks "
+                    f"completed ({coverage['missing_count']} missing)"
+                )
+                if coverage["missing"]:
+                    for row in coverage["missing"]:
+                        click.echo(
+                            f"    - {row['dim']}/{row['runner']}/{row['task']}: "
+                            f"{row['status']}"
+                        )
+                has_coverage_failure = has_coverage_failure or (
+                    strict_coverage and coverage["missing_count"] > 0
+                )
+                grand_summary.append({
+                    "variant": v.key, "model_id": v.model_id, "fmt": v.fmt,
+                    "quant": v.quant, "status": "coverage_report",
+                    "suite": suite, **coverage,
+                })
             continue
 
         t0 = time.perf_counter()
@@ -277,13 +380,23 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                     click.echo(f"  [{dim}] {task} ", nl=False)
                     use_chat = is_chat_task(task)
                     ts0 = time.perf_counter()
-                    res = run_lmeval(
-                        task=task, base_url=base_url, model_label=api_model_label,
-                        output_dir=out_dir / task, limit=effective_limit,
-                        use_chat=use_chat,
-                        tokenizer_label=tokenizer_label,
-                        api_key=api_key,
-                    )
+                    runner = _lmeval_runner_for_task(task, resilient_ifeval)
+                    if task == "leaderboard_ifeval" and resilient_ifeval:
+                        res = run_leaderboard_ifeval_resilient(
+                            base_url=base_url,
+                            model_label=api_model_label,
+                            output_dir=out_dir / task,
+                            limit=effective_limit,
+                            api_key=api_key,
+                        )
+                    else:
+                        res = run_lmeval(
+                            task=task, base_url=base_url, model_label=api_model_label,
+                            output_dir=out_dir / task, limit=effective_limit,
+                            use_chat=use_chat,
+                            tokenizer_label=tokenizer_label,
+                            api_key=api_key,
+                        )
                     dt = time.perf_counter() - ts0
                     if "error" in res:
                         click.echo(f"FAIL ({dt:.0f}s): {res['error']}")
@@ -293,16 +406,23 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                         trace_path=trace_path,
                         variant_key=v.key,
                         task=task,
-                        runner="lm-eval",
+                        runner=runner,
                         dim=dim,
                         wall_s=dt,
                         result=res,
                     )
                     grand_summary.append({
                         "variant": v.key, "model_id": v.model_id, "fmt": v.fmt,
-                        "quant": v.quant, "dim": dim, "task": task,
+                        "quant": v.quant, "dim": dim, "task": task, "runner": runner,
                         "wall_s": round(dt, 1), **res,
                     })
+                    _set_coverage_status(
+                        variant_coverage,
+                        dim,
+                        task,
+                        runner,
+                        "completed" if "error" not in res else "failed",
+                    )
                 # External runners talk to the same server but don't go through
                 # lm-eval-harness.
                 # Skip them on smoke runs because each is a heavyweight tool.
@@ -321,7 +441,7 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                             )
                         elif runner == "livecodebench":
                             res = run_livecodebench(
-                                release=LCB_RELEASE, base_url=base_url,
+                                release=_livecodebench_release(), base_url=base_url,
                                 model_label=api_model_label,
                                 output_dir=out_dir / task,
                                 limit=effective_limit,
@@ -393,14 +513,46 @@ def main(variant: tuple, all_variants: bool, suite: str, limit: int | None,
                             "quant": v.quant, "dim": dim, "task": task,
                             "runner": runner, "wall_s": round(dt, 1), **res,
                         })
+                        _set_coverage_status(
+                            variant_coverage,
+                            dim,
+                            task,
+                            runner,
+                            "completed" if "error" not in res else "failed",
+                        )
         except Exception as e:
             click.echo(f"  ! variant {v.key} aborted: {e}", err=True)
             grand_summary.append({"variant": v.key, "fatal": str(e)})
+            for row in variant_coverage:
+                if row["status"] == "pending":
+                    row["status"] = "failed"
+
+        if variant_coverage:
+            coverage = _coverage_summary(variant_coverage)
+            click.echo(
+                f"  coverage: {coverage['completed']}/{coverage['required']} required tasks "
+                f"completed ({coverage['missing_count']} missing)"
+            )
+            if coverage["missing"]:
+                for row in coverage["missing"]:
+                    click.echo(
+                        f"    - {row['dim']}/{row['runner']}/{row['task']}: {row['status']}"
+                    )
+            has_coverage_failure = has_coverage_failure or (
+                strict_coverage and coverage["missing_count"] > 0
+            )
+            grand_summary.append({
+                "variant": v.key, "model_id": v.model_id, "fmt": v.fmt,
+                "quant": v.quant, "status": "coverage_report",
+                "suite": suite, **coverage,
+            })
 
     summary_path = EVAL_RESULTS_DIR / f"summary_{now_safe()}_{suite}.json"
     summary_path.parent.mkdir(parents=True, exist_ok=True)
     summary_path.write_text(json.dumps(grand_summary, indent=2, ensure_ascii=False))
     click.echo(f"\n→ summary: {summary_path}")
+    if has_coverage_failure:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

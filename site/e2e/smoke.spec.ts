@@ -128,6 +128,7 @@ for (const artifactPath of [
   "/data/summary.csv",
   "/data/eval_summary_primary.csv",
   "/data/mtplx_speedups.csv",
+  "/data/index.json",
 ] as const) {
   test(`serves ${artifactPath}`, async ({ request }) => {
     const response = await request.get(artifactPath);

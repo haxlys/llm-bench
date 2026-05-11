@@ -92,6 +92,8 @@ def run_livecodebench(
         cmd.extend(["--end_date", end_date])
     if max_tokens := os.environ.get("LIVE_CODE_BENCH_MAX_TOKENS"):
         cmd.extend(["--max_tokens", max_tokens])
+    if os.environ.get("LIVE_CODE_BENCH_NOT_FAST") == "1":
+        cmd.append("--not_fast")
     if limit is not None:
         cmd.append("--debug")
 

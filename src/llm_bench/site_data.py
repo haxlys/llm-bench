@@ -50,6 +50,7 @@ def build_site_data(
     speed_rows = _read_csv(root / "results" / "summary.csv")
     accuracy_rows = _read_csv(root / "results" / "eval_summary_primary.csv")
     mtplx_rows = _read_csv(root / "results" / "mtplx_speedups.csv")
+    index_data = _read_json_optional(root / "results" / "index.json")
 
     return {
         "generatedAt": generated_at or datetime.now(UTC).isoformat(),
@@ -62,6 +63,7 @@ def build_site_data(
         },
         "variants": [_variant_entry(variant) for variant in registry.variants],
         "accuracy": _accuracy_entries(accuracy_rows, variants),
+        "coverage": _coverage_entries(index_data, variants),
         "speed": _speed_entries(speed_rows, registry),
         "mtplx": _mtplx_entries(mtplx_rows, variants),
         "caveats": _caveats(),
@@ -84,6 +86,18 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
         raise SiteDataError(f"required input file is missing: {path}")
     with path.open(newline="") as f:
         return list(csv.DictReader(f))
+
+
+def _read_json_optional(path: Path) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    try:
+        data = json.loads(path.read_text())
+    except json.JSONDecodeError as exc:
+        raise SiteDataError(f"invalid JSON file: {path}") from exc
+    if not isinstance(data, dict):
+        raise SiteDataError(f"expected JSON object: {path}")
+    return data
 
 
 def _load_registry(repo_root: Path) -> Registry:
@@ -172,6 +186,55 @@ def _accuracy_entries(
                 "caveats": _accuracy_caveats(task, metric),
             }
         )
+    return entries
+
+
+def _coverage_entries(
+    index_data: dict[str, Any] | None,
+    variants: dict[str, Variant],
+) -> list[dict[str, Any]]:
+    if not index_data:
+        return []
+    raw_variants = index_data.get("variants", [])
+    if not isinstance(raw_variants, list):
+        raise SiteDataError("results/index.json variants must be a list")
+
+    entries: list[dict[str, Any]] = []
+    for raw_variant in raw_variants:
+        if not isinstance(raw_variant, dict):
+            continue
+        variant_key = str(raw_variant.get("key", ""))
+        if not variant_key:
+            continue
+        if variant_key not in variants:
+            raise SiteDataError(f"coverage row references unknown variant: {variant_key}")
+        variant = variants[variant_key]
+        evals = raw_variant.get("evals", {})
+        if not isinstance(evals, dict):
+            continue
+        coverage = evals.get("coverage", [])
+        if not isinstance(coverage, list):
+            raise SiteDataError("results/index.json evals.coverage must be a list")
+        for raw_row in coverage:
+            if not isinstance(raw_row, dict):
+                continue
+            status = str(raw_row.get("status", "missing"))
+            entries.append(
+                {
+                    "variant": variant_key,
+                    "modelId": variant.model_id,
+                    "family": variant.family,
+                    "dim": str(raw_row.get("dim", "")),
+                    "task": str(raw_row.get("task", "")),
+                    "runner": str(raw_row.get("runner", "")),
+                    "lane": str(raw_row.get("lane", "primary")),
+                    "required": bool(raw_row.get("required", False)),
+                    "supported": bool(raw_row.get("supported", False)),
+                    "measured": bool(raw_row.get("measured", False)),
+                    "confidence": str(raw_row.get("confidence", "measured")),
+                    "status": status,
+                }
+            )
     return entries
 
 
@@ -316,6 +379,14 @@ def _caveats() -> list[dict[str, str]]:
         {
             "id": "agentic-scaffold-dependent",
             "status": "measured",
+        },
+        {
+            "id": "coverage-missing",
+            "status": "missing",
+        },
+        {
+            "id": "optional-eval-lane",
+            "status": "optional",
         },
     ]
 

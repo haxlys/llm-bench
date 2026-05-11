@@ -65,8 +65,8 @@ def run_bfcl(
     if not _cli_loads("bfcl_eval"):
         return {
             "task": "bfcl",
-            "error": ("bfcl_eval not installed or broken-installed "
-                      "(`uv pip install bfcl-eval`; if it loads but `python "
+                "error": ("bfcl_eval not installed or broken-installed "
+                      "(`uv pip install bfcl-eval==2025.12.17`; if it loads but `python "
                       "-m bfcl_eval --help` raises, the package version is "
                       "incompatible with installed tree-sitter — pin "
                       "`tree-sitter==0.21.3` and `tree-sitter-java==0.21.0`)"),

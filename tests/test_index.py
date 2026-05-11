@@ -46,4 +46,7 @@ def test_eval_progress_counts_supported_tasks_only(tmp_path, monkeypatch):
     assert variant["evals"]["tasks_supported"] == 1
     assert variant["evals"]["tasks_measured"] == 1
     assert variant["evals"]["tasks"] == ["gsm8k_cot_zeroshot"]
+    assert variant["evals"]["coverage"][0]["task"] == "gsm8k_cot_zeroshot"
+    assert variant["evals"]["coverage"][0]["status"] == "directional"
+    assert variant["evals"]["coverage_summary"]["optional"] == 1
     assert variant["evals"]["extra_tasks"] == ["mmlu_generative"]

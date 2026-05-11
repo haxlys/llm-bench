@@ -6,6 +6,9 @@ const metricStatuses: ReadonlySet<string> = new Set<MetricStatus>([
   "measured",
   "directional",
   "unavailable",
+  "optional",
+  "missing",
+  "unsupported",
 ]);
 
 export type Variant = {
@@ -37,6 +40,21 @@ export type AccuracyRow = {
   task: string;
   timestamp: string;
   value: number;
+  variant: string;
+};
+
+export type CoverageRow = {
+  confidence: MetricStatus;
+  dim: string;
+  family: string;
+  lane: string;
+  measured: boolean;
+  modelId: string;
+  required: boolean;
+  runner: string;
+  status: MetricStatus;
+  supported: boolean;
+  task: string;
   variant: string;
 };
 
@@ -94,6 +112,7 @@ export type BenchmarkData = {
     id: string;
     status: MetricStatus;
   }>;
+  coverage: CoverageRow[];
   generatedAt: string;
   hardware: {
     machine: string;
@@ -120,6 +139,7 @@ function assertBenchmarkData(input: unknown): asserts input is BenchmarkData {
   assertArray(input.mtplx, "mtplx");
   assertArray(input.variants, "variants");
   assertArray(input.caveats, "caveats");
+  assertArray(input.coverage, "coverage");
   assertString(input.benchVersion, "benchVersion");
   assertString(input.generatedAt, "generatedAt");
   assertString(input.sourceCommit, "sourceCommit");
@@ -132,6 +152,7 @@ function assertBenchmarkData(input: unknown): asserts input is BenchmarkData {
   input.mtplx.forEach(assertMtplxRow);
   input.variants.forEach(assertVariant);
   input.caveats.forEach(assertCaveat);
+  input.coverage.forEach(assertCoverageRow);
 }
 
 function assertCaveat(input: unknown): asserts input is BenchmarkData["caveats"][number] {
@@ -155,6 +176,22 @@ function assertAccuracyRow(input: unknown): asserts input is AccuracyRow {
   assertString(input.timestamp, "accuracy row timestamp");
   assertNumber(input.value, "accuracy row value");
   assertString(input.variant, "accuracy row variant");
+}
+
+function assertCoverageRow(input: unknown): asserts input is CoverageRow {
+  assertRecord(input, "coverage row");
+  assertMetricStatus(input.confidence, "coverage row confidence");
+  assertString(input.dim, "coverage row dim");
+  assertString(input.family, "coverage row family");
+  assertString(input.lane, "coverage row lane");
+  assertBoolean(input.measured, "coverage row measured");
+  assertString(input.modelId, "coverage row modelId");
+  assertBoolean(input.required, "coverage row required");
+  assertString(input.runner, "coverage row runner");
+  assertMetricStatus(input.status, "coverage row status");
+  assertBoolean(input.supported, "coverage row supported");
+  assertString(input.task, "coverage row task");
+  assertString(input.variant, "coverage row variant");
 }
 
 function assertSpeedRow(input: unknown): asserts input is SpeedRow {
@@ -250,6 +287,12 @@ function assertNumber(input: unknown, label: string): asserts input is number {
   }
 }
 
+function assertBoolean(input: unknown, label: string): asserts input is boolean {
+  if (typeof input !== "boolean") {
+    throw new Error(`Expected ${label} to be a boolean`);
+  }
+}
+
 function assertNullableNumber(input: unknown, label: string): asserts input is number | null {
   if (input !== null && typeof input !== "number") {
     throw new Error(`Expected ${label} to be a number or null`);
@@ -296,4 +339,23 @@ export function scenarios(input: BenchmarkData): string[] {
 
 export function tasks(input: BenchmarkData): string[] {
   return Array.from(new Set(input.accuracy.map((row) => row.task))).sort();
+}
+
+export function dimensions(input: BenchmarkData): string[] {
+  return Array.from(new Set(input.coverage.map((row) => row.dim))).sort();
+}
+
+export function coverageSummary(input: BenchmarkData): Record<MetricStatus, number> {
+  const summary: Record<MetricStatus, number> = {
+    measured: 0,
+    directional: 0,
+    unavailable: 0,
+    optional: 0,
+    missing: 0,
+    unsupported: 0,
+  };
+  for (const row of input.coverage) {
+    summary[row.status] += 1;
+  }
+  return summary;
 }

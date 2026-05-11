@@ -79,23 +79,25 @@ their configured `/v1` endpoint directly and do not spawn a subprocess.
 
 ### Tasks per dimension
 
-| Dim | Chat-compatible tasks (works on both fmts) | Loglikelihood-only (GGUF only) |
+| Dim | lm-eval tasks | External runners |
 |---|---|---|
-| reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag` |
-| korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
-| code | `humaneval_instruct`, `mbpp_instruct` | — |
-| agentic code | `programbench` eval + result import | — |
-| long | `longbench` (21 sub-tasks) | — |
-| source grounding | `sourceqa` pinned-repo evidence QA | — |
-| safety | `truthfulqa-multi_gen_en` | `toxigen` |
+| reasoning | `leaderboard_mmlu_pro`, `leaderboard_gpqa_diamond`, `mmlu_generative`, `gsm8k_cot_zeroshot` | — |
+| korean | `kmmlu_direct`, `hrm8k` | `kmmlu_pro` |
+| instruction | `leaderboard_ifeval` | — |
+| safety | `truthfulqa-multi_gen_en`, `toxigen` | — |
+| source grounding | — | `sourceqa` (pinned-repo evidence QA) |
+| code / contamination-fresh | — | primary: `humaneval`, `mbpp` (EvalPlus), `livecodebench`; optional: `bigcodebench_hard`, `livebench_subset` |
+| tool use | — | optional: `bfcl` (opt-in via `--include-bfcl`) |
+| long context | `longbench` (21 sub-tasks, run with `--suite long`) | — |
+| agentic code | — | optional: `programbench` eval + result import |
 
 ### Why two task families?
 
 `mlx_lm.server` does not return per-token logprobs in `/v1/completions`
-responses. Tasks scored via loglikelihood (multi-choice "which continuation
-has higher log P?") therefore cannot run on MLX. We use generative variants
-(`mmlu_generative`, `kmmlu_direct`, `truthfulqa-multi_gen_en`) so both
-runtimes are evaluated on identical task definitions where possible.
+responses. Loglikelihood-only tasks (`leaderboard_mmlu_pro`, `leaderboard_gpqa_diamond`,
+`toxigen`, etc.) still run only on logprobs-capable backends (GGUF). We use
+generative variants (`mmlu_generative`, `kmmlu_direct`, `truthfulqa-multi_gen_en`)
+so both runtimes are evaluated on comparable task definitions where possible.
 
 `run_evals.py` gates tasks through declared variant capabilities. For example,
 tasks that require logprobs are skipped for backends that only declare chat and
@@ -109,11 +111,10 @@ For each variant (model_id × fmt × quant):
 2. Run each task in the suite via `lm_eval` subprocess. Tasks tagged "chat"
    use `local-chat-completions` model class with `--apply_chat_template`;
    loglikelihood tasks use `local-completions` with HF tokenizer.
-3. For code-eval tasks, set `HF_ALLOW_CODE_EVAL=1` and pass
-   `--confirm_run_unsafe_code`. Note: lm-eval runs the model's generated
-   Python in-process — there is no sandbox. Only safe with trusted
-   checkpoints; wrap the eval call in `sandbox-exec` (macOS) or
-   `firejail` (Linux) for unknown weights.
+3. For code-eval external runners (`EvalPlus`, `LiveCodeBench`, `BigCodeBench-Hard`),
+   required toolchains are wrapped in their own runner environments. They can still
+   execute user code, so use trusted checkpoints for safety and keep runner-level
+   sandboxing in mind.
 4. Tear down server before next variant.
 
 Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.
@@ -123,6 +124,8 @@ Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.
 - `eval_summary_primary.csv` — one row per (variant, task) with the canonical
   headline metric (e.g. `exact_match,strict-match` for gsm8k,
   `pass@1,create_test` for HumanEval, subtask average for hrm8k)
+- `index.json` — registry × speed/eval coverage, including whether each task is
+  `measured`, `directional`, `missing`, `optional`, or `unsupported`
 
 External runners also emit aggregate-compatible synthetic `results_*.json`
 files. For example, EvalPlus keeps its native `*_eval_results.json` beside the
@@ -155,6 +158,27 @@ Every eval task execution also appends one row to
 `results/eval_traces/<run_id>.jsonl` with variant, task, runner, status, wall
 time, result artifact path, optional sample path, log path, and error text.
 
+### Coverage lanes and score status
+
+Primary lanes are the minimum common matrix used for model-family comparisons:
+reasoning (`gsm8k_cot_zeroshot`, instruction), Korean (`hrm8k`, `kmmlu_pro`),
+code (`humaneval`, `mbpp`, `livecodebench`), source grounding (`sourceqa`), and
+speed/MTPLX where applicable. Optional lanes are intentionally separated:
+`bigcodebench_hard`, `bfcl`, `livebench_subset`, and `programbench`.
+
+The site reads `results/index.json` before showing score tables. That lets it
+distinguish:
+
+- `measured`: committed result with a direct deterministic score.
+- `directional`: committed result whose scorer can undercount because of
+  generation formatting or extraction.
+- `missing`: primary supported task with no committed result yet.
+- `optional`: optional-lane task with no committed result yet.
+- `unsupported`: task is not valid for the variant's declared capabilities.
+
+`--strict-coverage` fails only on missing primary supported tasks. Optional lanes
+remain visible but do not block a primary matrix run.
+
 ### Registry-driven variants
 
 The list of variants is declared in `models/registry.yaml`, not in code.
@@ -177,18 +201,34 @@ backends fail explicitly instead of being treated as GGUF. Eval runners can use
 `openai-compatible` endpoint variants directly; those variants reuse the
 configured endpoint instead of booting a local subprocess.
 
-Currently shipped: 6 variants in the gemma-4 family (26B-A4B MoE × {MLX-8bit,
-MLX-4bit, Q8_0, Q4_K_M} + 31B Dense × {MLX-8bit, Q8_0}). The full eval
-matrix size depends on enabled external runners and format support; GGUF gets
-additional loglikelihood tasks while MLX gets only chat-compatible tasks.
-Wall time is driven mostly by long-context and code/tool runners, so run those
-only when their dimensions are the explicit goal.
+Current shipped matrix now includes Gemma, Qwen/Qwen3.6, gpt-oss, Nemotron,
+and MTPLX variants alongside hosted endpoints. The full eval matrix size depends
+on enabled external runners and format support; GGUF adds additional
+loglikelihood-only coverage while MLX uses chat-compatible counterparts.
+Wall time is driven mostly by long-context and frontier external runners, so run
+those only when long-context and frontier capability coverage are the explicit
+goal.
 
 ### Bench versioning
 
 `src/llm_bench/__init__.py:BENCH_VERSION` is stamped into every BenchResult.
 Bumping it triggers full re-measurement on the next `--skip-existing` run.
 History: `0.3` is the first version with manifest-based idempotency.
+
+External benchmark versions are pinned separately because their upstream data
+changes over time:
+
+- LiveCodeBench defaults to `release_v6`; override with
+  `LIVE_CODE_BENCH_RELEASE=release_vX`. The runner uses the upstream default
+  fast/lite code-generation setting unless `LIVE_CODE_BENCH_NOT_FAST=1` is set.
+- LiveBench defaults to `2024-11-25`, the most recent fully public release noted
+  by upstream for all categories. Override with `LIVEBENCH_RELEASE=YYYY-MM-DD`.
+- BFCL is treated as BFCL V4 and should use the official reproducibility
+  checkpoint/package (`bfcl-eval==2025.12.17`, leaderboard updated 2026-04-12).
+- BigCodeBench is pinned in code to split `instruct`, subset `hard`.
+- ProgramBench is imported from explicit `*.eval.json` artifacts; record the
+  upstream ProgramBench package/release beside the agent run when generating
+  those submissions.
 
 ## Out of scope (v0.2)
 
@@ -199,8 +239,6 @@ Done in earlier phases (no longer "out"):
 Still out of scope:
 - Batched / concurrent inference
 - KV-cache reuse across turns
-- Tool-use / structured output (BFCL skeleton in `evals/bfcl.py`, runner TBD)
-- Other model families (Qwen, Llama)
 - Power consumption (`powermetrics`)
 - Other quantizations (Q5_K_M, Q6_K, IQ4_XS, MLX 6-bit)
-- Context lengths beyond 8K (LongBench covers up to 31K avg, but no 64K+)
+- Context lengths beyond 31K+ (LongBench covers up to 31K avg, not 64K+)

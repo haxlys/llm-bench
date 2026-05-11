@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Overnight wrapper: stops production launchd agents, runs the full eval matrix
-# across all 6 model variants, then restores agents (always — even on failure).
+# across all locally present model variants, then restores agents (always — even on failure).
 #
 # Usage:
 #   bash scripts/run_evals_overnight.sh
@@ -15,6 +15,8 @@
 #   SUITE=full|smoke         # default: full
 #   LIMIT=<int>              # override per-task sample limit
 #   VARIANTS="key1 key2"     # space-separated variant keys; empty = --all-variants
+#   LLM_BENCH_STRICT_COVERAGE=1  # pass --strict-coverage to enforce full required-task completion
+#   LLM_BENCH_RESILIENT_IFEVAL=1  # pass --resilient-ifeval
 #   LAUNCH_AGENTS="com.you.x com.you.y"
 #                            # space-separated launchd labels to bootout before
 #                            # the run and bootstrap back on EXIT (always).
@@ -44,6 +46,10 @@ read -ra LAUNCH_AGENTS <<< "${LAUNCH_AGENTS:-}"
 
 log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$RUN_LOG"; }
 
+# optional overrides for additional run_evals.py flags
+LLM_BENCH_STRICT_COVERAGE="${LLM_BENCH_STRICT_COVERAGE:-0}"
+LLM_BENCH_RESILIENT_IFEVAL="${LLM_BENCH_RESILIENT_IFEVAL:-0}"
+
 # --- bootstrap agents back; called from EXIT trap ---
 restore_agents() {
     if [[ ${#LAUNCH_AGENTS[@]} -eq 0 ]]; then return; fi
@@ -64,6 +70,7 @@ trap restore_agents EXIT
 # --- 1. stop production agents ---
 log "=== STARTING overnight eval run ($TS) ==="
 log "suite=$SUITE limit='${LIMIT}' variants='${VARIANTS:-all}'"
+log "strict_coverage=${LLM_BENCH_STRICT_COVERAGE} resilient_ifeval=${LLM_BENCH_RESILIENT_IFEVAL}"
 log "launchd agents to manage: ${LAUNCH_AGENTS[*]:-none}"
 log
 if [[ ${#LAUNCH_AGENTS[@]} -gt 0 ]]; then
@@ -116,6 +123,8 @@ if [[ -n "$VARIANTS" ]]; then
 else
     ARGS+=(--all-variants)
 fi
+if [[ "$LLM_BENCH_STRICT_COVERAGE" == "1" ]]; then ARGS+=(--strict-coverage); fi
+if [[ "$LLM_BENCH_RESILIENT_IFEVAL" == "1" ]]; then ARGS+=(--resilient-ifeval); fi
 ARGS+=(--skip-existing)
 log "  cmd: uv run python scripts/run_evals.py ${ARGS[*]}"
 

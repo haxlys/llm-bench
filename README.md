@@ -320,13 +320,7 @@ loglikelihood-based MCQ tasks (`hellaswag`, `kobest`, `haerae`, `toxigen`,
 path. Generative variants are used for the rest so both runtimes get
 apples-to-apples coverage.
 
-> **⚠️ Code-eval safety.** `humaneval_instruct` and `mbpp_instruct` execute
-> the model's generated Python directly inside the lm-eval process
-> (`HF_ALLOW_CODE_EVAL=1` + `--confirm_run_unsafe_code`). There is no
-> sandbox. Run them only against models you trust (your own fine-tunes,
-> reputable HF checkpoints) — never against an unknown third-party
-> checkpoint without first wrapping in `firejail` / `bubblewrap` /
-> `sandbox-exec`.
+> **⚠️ Code-eval safety.** Code-family tasks (`humaneval`, `mbpp`, `bigcodebench_hard`, `livecodebench`) run through dedicated external runners outside lm-eval. They still execute model-generated code or benchmark harness tooling, so use trusted checkpoints and keep sandboxing in mind. `--suite full` skips these for unsupported backends and also supports `--skip-existing` gating for repeatability.
 
 Setup:
 
@@ -334,7 +328,7 @@ Setup:
 uv sync --extra evals
 
 # Optional, for the frontier external runners:
-uv pip install bfcl-eval                                                       # BFCL v4 (tool use)
+uv pip install bfcl-eval==2025.12.17                                          # BFCL v4 (tool use)
 uv pip install git+https://github.com/LiveCodeBench/LiveCodeBench.git          # LiveCodeBench (contamination-free code)
 uv pip install bigcodebench --upgrade                                          # BigCodeBench-Hard (practical code)
 git clone https://github.com/LiveBench/LiveBench.git /path/to/LiveBench        # LiveBench subset
@@ -359,10 +353,23 @@ small per-task cap):
 uv run python scripts/run_evals.py --variant 26B-MoE-gguf-q8 --suite full --limit 2
 ```
 
+```bash
+# Optional: resilient instruction eval and strict coverage check
+uv run python scripts/run_evals.py --variant 26B-MoE-gguf-q8 --suite full \
+  --resilient-ifeval --strict-coverage
+```
+
 `--suite full --limit N` is the smoke path for these external runners. EvalPlus
 is skipped under a limit because its upstream CLI does not provide a compatible
 partial matrix, while LiveBench, BigCodeBench-Hard, and KMMLU-Pro do run with
 the cap.
+
+For stricter governance on a full matrix run, add `--strict-coverage` so the
+run exits non-zero when any required supported primary task is missing a
+completed result (for example, external runner unavailable,
+limit-incompatible skip, or hard task error). Optional lanes
+(`bigcodebench_hard`, BFCL, LiveBench subset, ProgramBench) are reported in
+coverage but do not block the primary matrix.
 
 ProgramBench is agentic: the model/agent must first produce a complete
 `<instance_id>/submission.tar.gz` codebase, then ProgramBench evaluates it in
@@ -397,7 +404,7 @@ program-rebuild tasks). `almost_resolved_rate,none` and
 Pass `--tasks-dir` when available so ignored ProgramBench branches/tests are
 excluded the same way as `programbench info`.
 
-Full overnight matrix (all 6 model variants × full suite) — wrapper script
+Full overnight matrix (all locally present variants × full suite) — wrapper script
 manages optional launchd bootout + run + bootstrap automatically (always
 restores agents on EXIT, even if eval fails):
 
@@ -411,13 +418,22 @@ disown
 tail -f /tmp/llm-evals-overnight.log
 ```
 
+See `docs/overnight_plan.md` for the family-batched catch-up plan and optional
+lane schedule.
+
 Env overrides:
 - `SUITE=smoke|full` (default `full`)
 - `LIMIT=N` (per-task sample cap)
 - `VARIANTS="26B-MoE-mlx-8bit 26B-MoE-gguf-q8"` (subset, default = all)
+- `LLM_BENCH_STRICT_COVERAGE=1` — pass `--strict-coverage` to `run_evals.py`
+- `LLM_BENCH_RESILIENT_IFEVAL=1` — pass `--resilient-ifeval` to `run_evals.py`
 - `LIVE_CODE_BENCH_REPO=/path/to/LiveCodeBench` — run source checkout version
 - `LIVE_CODE_BENCH_START_DATE=YYYY-MM-DD`, `LIVE_CODE_BENCH_END_DATE=YYYY-MM-DD`,
   `LIVE_CODE_BENCH_MAX_TOKENS=N` — run a reproducible release window
+- `LIVE_CODE_BENCH_RELEASE=release_vX` — override `run_livecodebench` dataset
+  release (default from `scripts/livecodebench_runner.py`)
+- `LIVE_CODE_BENCH_NOT_FAST=1` — use the original non-lite LiveCodeBench code
+  generation benchmark instead of the upstream default fast/lite setting
 - `LIVEBENCH_REPO=/path/to/LiveBench`, `LIVEBENCH_RELEASE=YYYY-MM-DD`,
   `LIVEBENCH_MAX_TOKENS=N` — LiveBench checkout and release selection
 - `BIGCODEBENCH_EXECUTION=gradio|local|e2b`,
@@ -443,10 +459,12 @@ Results:
   wall time, artifacts, and errors
 - `results/eval_summary_full.csv` — every metric × subtask × variant (244+ rows)
 - `results/eval_summary_primary.csv` — one row per (variant, task), canonical metric
+- `results/index.json` — registry × speed/eval coverage with measured,
+  directional, missing, optional, and unsupported statuses
 - `results/server_logs/<run_id>.log` — model server stderr for debugging
 
 After the eval run, `scripts/aggregate_evals.py` rebuilds the CSVs and the
-Streamlit dashboard auto-loads them. The overnight wrapper calls this for you.
+coverage index. The overnight wrapper calls this for you.
 
 ## Dashboard (11 pages)
 

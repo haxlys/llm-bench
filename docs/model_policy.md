@@ -1,9 +1,11 @@
 # Local Model Policy
 
-Updated: 2026-05-05
+Updated: 2026-05-10
 
-This policy ranks locally downloaded GGUF models for this benchmark project.
-Scores are from deterministic local evals unless noted. Higher is better.
+This policy ranks locally downloaded GGUF/MTPLX models for this benchmark
+project. Scores are from deterministic local evals unless noted. Higher is better.
+The frontier task set now includes Open-LLM-Leaderboard v2 + code/freshness tasks,
+so model choice should be made by objective, not only one global winner.
 
 ## Default choices
 
@@ -14,6 +16,12 @@ Scores are from deterministic local evals unless noted. Higher is better.
 | Instruction-following baseline | `gemma-4-E4B-gguf-q8` | Best IFEval strict score at 0.920, with good GSM8K 0.700. |
 | Small/fast budget baseline | `qwen-3.5-4b-gguf-q8` | Useful as a lower-cost control, but not a quality leader. |
 | Not recommended as default | `qwen-3.6-35b-a3b-gguf-q4` | Poor reasoning/code scores despite acceptable IFEval. |
+
+### Expanded families now available
+
+- `gpt-oss-20b-gguf-q4`, `gpt-oss-120b-gguf-q4`: frontier open-weight checkpoints for broader reasoning spread checks.
+- `nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4`: alternative MoE reasoning profile.
+- `qwen-3.6-27b-mtplx-*`: MTPLX family for speculative decoding and throughput-first benchmarking.
 
 ## Current headline scores
 
@@ -34,6 +42,10 @@ Notes:
 
 ## Decision rules
 
+Do not promote one global rank without checking coverage first. The site now
+surfaces `measured`, `directional`, `missing`, `optional`, and `unsupported`
+statuses from `results/index.json` before the score table.
+
 Use `qwen-3-coder-next-gguf-q4` when the benchmark needs one strong local model. It is the only candidate that is simultaneously strong on GSM8K, HRM8K, EvalPlus, LiveCodeBench, and SourceQA.
 
 Use `gemma-4-E4B-gguf-q8` when instruction following is the center of the test or when a non-Qwen comparison point is valuable. Its code scores are much weaker, so do not use it as the code default.
@@ -42,8 +54,28 @@ Keep `qwen-3.5-4b-gguf-q8` as a small baseline. It is useful for speed/cost comp
 
 Avoid promoting the 35B-A3B Qwen row until its output formatting/scoring behavior is understood. The larger size did not translate into better local deterministic benchmark scores here.
 
+## Purpose lanes
+
+| Lane | Primary signal | Families to compare |
+|---|---|---|
+| Reasoning | GSM8K, HRM8K, IFEval, GPQA/MMLU-Pro where supported | Gemma, Qwen, gpt-oss, Nemotron |
+| Korean | HRM8K, KMMLU-Pro | Gemma, Qwen, Qwen3.6 |
+| Code | EvalPlus, LiveCodeBench | Qwen3-Coder, gpt-oss, Gemma baseline |
+| Source grounding | SourceQA | All chat-capable local and endpoint variants |
+| Speed | `summary.csv` scenarios | MLX, GGUF, MTPLX AR |
+| MTPLX speedup | `mtplx_speedups.csv` matching pairs | Qwen3.6 MTPLX MTP vs AR only |
+
+Optional lanes are BigCodeBench-Hard, BFCL V4, LiveBench subset, and
+ProgramBench. They are important for frontier interpretation, but they should
+not block the minimum common matrix or be blended into a single headline score.
+
 ## Reproducibility policy
 
 Primary scores should remain deterministic rule/checker scores. Optional judge-model evaluations may be added as a secondary signal, but they must not overwrite the primary score.
 
 When a task needs a practical cap, the cap belongs in the trace or documentation. Full no-limit EvalPlus/LiveCodeBench runs should be reserved for final release gates because they are expensive and less useful for daily model selection.
+
+For overnight catch-up runs, fill the common primary matrix first:
+`gsm8k_cot_zeroshot`, `hrm8k`, `leaderboard_ifeval`, `sourceqa`, `humaneval`,
+`mbpp`, `livecodebench`, and `kmmlu_pro` where the variant supports the runner.
+Then schedule optional lanes separately with their own release/package pins.

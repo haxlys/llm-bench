@@ -122,7 +122,7 @@ def test_ifeval_uses_bounded_instruction_generation_cap(monkeypatch, tmp_path):
 
     gen_index = captured["cmd"].index("--gen_kwargs") + 1
 
-    assert captured["cmd"][gen_index] == "max_gen_toks=4096"
+    assert captured["cmd"][gen_index] == "max_gen_toks=512"
 
 
 def test_completion_tasks_can_use_explicit_tokenizer(monkeypatch, tmp_path):
