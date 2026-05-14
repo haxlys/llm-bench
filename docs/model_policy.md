@@ -1,11 +1,33 @@
 # Local Model Policy
 
-Updated: 2026-05-11
+Updated: 2026-05-14
 
 This policy ranks locally downloaded GGUF/MTPLX models for this benchmark
 project. Scores are from deterministic local evals unless noted. Higher is better.
 The frontier task set now includes Open-LLM-Leaderboard v2 + code/freshness tasks,
 so model choice should be made by objective, not only one global winner.
+
+> Important: this is a local model-selection policy, not a public global
+> leaderboard. Interpret every score together with the hardware target, local
+> runtime, committed `results/index.json` coverage state, task limits, release
+> pins, and per-task traces. Before citing a row, verify that the needed tasks
+> are `measured` rather than `missing`, `optional`, `diagnostic`,
+> `directional`, `speed_only`, or `unsupported`.
+
+## Interpretation guardrails
+
+- Scores describe this repo's local benchmark matrix on the documented Apple
+  Silicon setup. They should not be generalized to other hardware, server
+  builds, quantizations, prompts, or sampling settings without rerunning.
+- Practical caps such as `limit=50`, release windows, and `max_tokens` settings
+  are part of the result. Treat them as methodology, not incidental details.
+- SourceQA is useful as a smoke/regression diagnostic, but it is intentionally
+  excluded from headline ranking and primary coverage debt.
+- `directional` rows can undercount models because formatting or answer
+  extraction failed even when the model produced useful reasoning. Check samples
+  before making a close-call decision.
+- MTPLX MTP/AR variants are speed-only comparators. Use their paired flat MLX
+  variants for quality and eval coverage.
 
 ## Default choices
 

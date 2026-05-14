@@ -3,19 +3,45 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/)
 [![bench_version](https://img.shields.io/badge/bench__version-0.3-green.svg)](src/llm_bench/__init__.py)
-[![tests](https://img.shields.io/badge/tests-18%20passed-brightgreen.svg)](tests/)
+[![tests](https://img.shields.io/badge/tests-pytest%20suite-brightgreen.svg)](tests/)
 [![platform](https://img.shields.io/badge/platform-macOS%20Apple%20Silicon-lightgrey.svg)](#)
 
-Registry-driven LLM benchmark for local runtimes and OpenAI-compatible endpoints.
+Registry-driven LLM benchmark harness for Apple Silicon local runtimes and
+OpenAI-compatible endpoints.
 
-Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BigCodeBench, BFCL, SourceQA, LiveBench, KMMLU-Pro, ProgramBench eval/import) across reasoning, Korean, code, agentic code, instruction-following, long context, tool use, source-grounding diagnostics, fresh-eval, and safety dimensions.
+This repo keeps model and runtime declarations in `models/registry.yaml`, runs
+repeatable speed/memory benchmarks, runs multi-dimensional evals, and publishes
+the resulting coverage through Streamlit plus a static TanStack/Cloudflare site.
 
-The shipped registry still includes the original Gemma 4 MLX/GGUF matrix, but the schema now also supports hosted `openai-compatible` endpoint variants.
+## What this is for
 
-## Quickstart
+- Compare local runtime formats such as MLX, GGUF/llama.cpp, DS4, and MTPLX on
+  the same Apple Silicon machine.
+- Track prompt-processing speed, generation speed, peak memory, wall time, and
+  benchmark version for each scenario.
+- Run accuracy and capability evals through `lm-eval-harness` plus external
+  runners for EvalPlus, LiveCodeBench, BigCodeBench, BFCL, SourceQA, LiveBench,
+  KMMLU-Pro, and ProgramBench import/eval.
+- Include hosted or remote OpenAI-compatible `/v1` endpoints in the same
+  registry and reporting pipeline when local artifacts are not required.
+- Keep coverage explicit: measured, directional, diagnostic, missing,
+  optional, speed-only, and unsupported rows are surfaced separately.
+
+## Current scope
+
+| Area | Supported today |
+|---|---|
+| Speed runners | MLX, GGUF/llama.cpp, DS4, MTPLX, OpenAI-compatible endpoints |
+| Eval runners | `lm-eval-harness`, EvalPlus, LiveCodeBench, BigCodeBench-Hard, BFCL, SourceQA, LiveBench subset, KMMLU-Pro, ProgramBench import/eval |
+| Reporting | Streamlit dashboard, Quarto report, TanStack Start public site on Cloudflare Workers |
+| Primary machine | Apple M5 Max, 128GB unified memory, macOS |
+| Registry | Local HF repos, local GGUF files, split GGUF files, MTPLX speed-only variants, hosted endpoints |
+
+## Quickstart: local Apple Silicon
 
 ```bash
-git clone <repo> ~/llm-bench && cd ~/llm-bench
+git clone https://github.com/haxlys/llm-bench.git ~/llm-bench
+cd ~/llm-bench
 
 # System tools (one-time)
 brew install llama.cpp
@@ -24,19 +50,72 @@ brew install --cask quarto      # optional, only for the static report
 # Python env
 uv sync
 
-# Download every variant declared in models/registry.yaml (~50–100 GB total).
-# MLX variants land in the HF cache; GGUF variants in ~/models/gguf/.
-uv run python scripts/sync_models.py --all-missing
+# Inspect what the registry knows and what is already present locally.
+uv run python scripts/sync_models.py --check
+
+# Download one small/local target first. MLX variants land in the HF cache;
+# GGUF variants land under the registry's {gguf_dir}, default ~/models/gguf/.
+uv run python scripts/sync_models.py --variant gemma-4-E4B-gguf-q8
 
 # Smoke test (single scenario, ~1 min) — verifies wiring before the full matrix
-uv run python scripts/run_bench.py --variant 26B-MoE-mlx-8bit --smoke
+uv run python scripts/run_bench.py --variant gemma-4-E4B-gguf-q8 --smoke
 
-# Full matrix across every variant present locally (~15–25 min per variant on M5 Max)
+# Full speed matrix for locally present variants
 uv run python scripts/run_bench.py --all-pending
 
 # Visualize
 uv run streamlit run dashboard/app.py
+```
 
+Use the full registry download only when you intentionally want the whole local
+matrix; it can require tens or hundreds of GB depending on the variants present
+in `models/registry.yaml`.
+
+```bash
+uv run python scripts/sync_models.py --all-missing
+```
+
+## Quickstart: OpenAI-compatible endpoint
+
+For an existing `/v1` server or hosted provider, add an endpoint variant to
+`models/registry.yaml`:
+
+```yaml
+models:
+  - id: my-endpoint-model
+    family: hosted
+    architecture: dense
+    variants:
+      - key: my-endpoint-api
+        fmt: api
+        backend: openai-compatible
+        artifact_type: endpoint
+        path: https://provider.example/v1
+        api_model: provider/model-id
+        api_key_env: PROVIDER_API_KEY
+        quant: hosted
+        tier: hosted
+        capabilities: [chat, completions, code_eval_chat, tool_use_eval]
+```
+
+Then run a speed smoke and eval smoke without downloading local model weights:
+
+```bash
+uv sync
+export PROVIDER_API_KEY=...
+
+uv run python scripts/run_bench.py --variant my-endpoint-api --smoke
+
+uv sync --extra evals
+uv run python scripts/run_evals.py --variant my-endpoint-api --suite smoke --limit 3
+```
+
+Endpoint speed rows use wall-clock effective token rates because hosted APIs
+usually do not expose separate prefill/generation timing or local peak memory.
+
+## Optional reports and quality checks
+
+```bash
 # Output divergence (quality)
 uv sync --extra quality          # pulls sentence-transformers
 uv run python scripts/compare_quality.py \
@@ -263,16 +342,29 @@ src/llm_bench/
   manifest.py               # idempotency: which (variant, scenario) is measured
   index.py                  # build results/index.json (registry × status)
   eval_plan.py              # ordered catch-up plan from coverage gaps
+  site_data.py              # typed public-site data export
+  reporting.py              # shared ordering/report helpers
   runners/                  # speed/memory benchmark
     base.py                 # BenchResult + /usr/bin/time -l wrapper
     mlx_runner.py           # mlx_lm.generate subprocess
     gguf_runner.py          # llama-bench subprocess
+    ds4_runner.py           # DeepSeek V4 Flash-specific ds4-bench adapter
+    mtplx_runner.py         # MTPLX MTP-on / target-only AR speed adapter
+    openai_runner.py        # OpenAI-compatible endpoint speed adapter
   evals/                    # multi-dim accuracy (lm-eval-harness)
     server.py               # ModelServer (mlx_lm.server | llama-server)
     lmeval.py               # lm_eval CLI wrapper
     suites.py               # SMOKE/FULL task lists, capability gating
     aggregate.py            # eval JSON → tidy DataFrame
-    bfcl.py                 # external-repo placeholder
+    evalplus_runner.py      # HumanEval / MBPP via EvalPlus
+    livecodebench_runner.py # contamination-fresh coding eval adapter
+    bigcodebench_runner.py  # BigCodeBench-Hard adapter
+    bfcl.py                 # BFCL v4 tool-use adapter
+    sourceqa.py             # pinned-repo evidence QA diagnostic
+    livebench_runner.py     # LiveBench subset adapter
+    kmmlu_pro_runner.py     # KMMLU-Pro direct runner
+    programbench_runner.py  # ProgramBench import/eval helpers
+    trace.py                # per-task execution ledger
   prompts.py                # 20 quality-comparison prompts (KO/EN)
   scenarios.py              # speed scenario matrices
   aggregate.py              # speed raw JSON → summary CSV
@@ -281,15 +373,22 @@ scripts/
   run_bench.py              # speed CLI: --variant / --all-pending
   run_evals.py              # eval CLI: --variant / --all-variants
   run_evals_overnight.sh    # launchd stop → run → aggregate → restore
+  preflight.py              # limit=2 wiring check for one local variant
   compare_quality.py        # cos-sim divergence (20 prompts)
+  compare_mtplx.py          # paired MTPLX MTP vs AR summary
   aggregate_evals.py        # eval JSON → CSVs + index.json
   build_index.py            # build only the index
   plan_eval_catchup.py      # write results/eval_catchup_plan.{json,md}
+  run_programbench.py       # run upstream ProgramBench eval + import
+  import_programbench.py    # import existing ProgramBench eval JSON
+  export_site_public_data.py # regenerate site/public/data and TS fixture
 results/
   raw/                      # per-run speed JSON (gitignored)
   summary.csv               # speed aggregated (committed)
+  mtplx_speedups.csv        # paired MTPLX MTP/AR summary (committed)
   quality_*.json            # gitignored
   eval_scores/              # lm-eval outputs (gitignored)
+  eval_traces/              # per-task execution ledger
   eval_summary_*.csv        # eval aggregated (committed)
   index.json                # registry × measurement status (committed)
   eval_catchup_plan.*       # generated catch-up queue (committed)
@@ -297,11 +396,17 @@ results/
   overnight_logs/           # gitignored
 dashboard/
   app.py                    # Streamlit (11 pages, Catalog first)
+site/
+  app/                      # TanStack Start public benchmark site
+  public/data/              # exported benchmark JSON/CSV for the site
+  wrangler.jsonc            # Cloudflare Workers deployment config
 report/
   _quarto.yml
   index.qmd                 # static HTML report (Quarto)
 docs/
   methodology.md            # measurement protocol
+  model_policy.md           # local model selection policy and caveats
+  overnight_plan.md         # family-batched eval catch-up plan
 ```
 
 ## Multi-dimensional evals (added v0.2)
@@ -527,9 +632,9 @@ selection policy and headline eval scores.
 uv run pytest tests/ -v
 ```
 
-Covers registry validation (duplicate keys, invalid fmt/tier/architecture,
-default interpolation) and manifest building (legacy data rescue, warmup
-exclusion, timestamp normalization, eval-results detection).
+The pytest suite covers registry validation, manifest/idempotency behavior,
+speed runners, eval runners, aggregation, ProgramBench import/eval helpers,
+site data export, and public-site data contracts.
 
 ## License
 
