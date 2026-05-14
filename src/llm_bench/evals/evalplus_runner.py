@@ -52,6 +52,7 @@ def run_evalplus(
     """
     if dataset not in EVALPLUS_TASKS:
         return {"task": dataset, "error": f"unknown evalplus dataset: {dataset}"}
+    timeout_s = _evalplus_timeout_s(timeout_s)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     log_path = output_dir / f"{dataset}.log"
@@ -244,3 +245,14 @@ def _find_latest_samples(output_dir: Path) -> Path | None:
     if not candidates:
         return None
     return max(candidates, key=lambda p: p.stat().st_mtime)
+
+
+def _evalplus_timeout_s(default: int) -> int:
+    raw = os.environ.get("EVALPLUS_TASK_TIMEOUT_S")
+    if not raw:
+        return default
+    try:
+        value = int(raw)
+    except ValueError:
+        return default
+    return value if value > 0 else default

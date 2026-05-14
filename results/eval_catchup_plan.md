@@ -4,32 +4,21 @@ Generated from `results/index.json`.
 
 ## Summary
 
-- Primary missing rows: 62
+- Primary missing rows: 21
 - Optional pending rows: 62
 - Speed-incomplete variants: 6
 
 ## Primary evals
-
-### sourceqa_kmmlu_pro
-
-Fill source-grounding and Korean professional coverage first.
-
-- Tasks: sourceqa, kmmlu_pro
-- Variants: 13
-
-```bash
-VARIANTS="26B-MoE-gguf-q4 26B-MoE-gguf-q8 26B-MoE-mlx-4bit 26B-MoE-mlx-8bit 31B-Dense-gguf-q8 31B-Dense-mlx-8bit gemma-4-E4B-gguf-q8 qwen-3-coder-next-gguf-q4 qwen-3.5-4b-gguf-q8 qwen-3.5-9b-gguf-q8 qwen-3.6-27b-mtplx-optimized-mlx-mixed4 qwen-3.6-27b-mtplx-speed-mlx-4bit qwen-3.6-35b-a3b-gguf-q4" TASKS="sourceqa kmmlu_pro" SUITE=full LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 bash scripts/run_evals_overnight.sh
-```
 
 ### primary_code
 
 Fill standard code coverage before optional agentic/code lanes.
 
 - Tasks: humaneval, mbpp, livecodebench
-- Variants: 13
+- Variants: 8
 
 ```bash
-VARIANTS="26B-MoE-gguf-q4 26B-MoE-gguf-q8 31B-Dense-gguf-q8 gemma-4-E4B-gguf-q8 gpt-oss-120b-gguf-q4 gpt-oss-20b-gguf-q4 nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4 qwen-3-coder-30b-a3b-instruct-gguf-q4 qwen-3-coder-next-gguf-q4 qwen-3-next-80b-a3b-instruct-gguf-q4 qwen-3.5-4b-gguf-q8 qwen-3.5-9b-gguf-q8 qwen-3.6-35b-a3b-gguf-q4" TASKS="humaneval mbpp livecodebench" SUITE=full LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 bash scripts/run_evals_overnight.sh
+VARIANTS="31B-Dense-gguf-q8 gpt-oss-120b-gguf-q4 gpt-oss-20b-gguf-q4 nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4 qwen-3-coder-30b-a3b-instruct-gguf-q4 qwen-3-next-80b-a3b-instruct-gguf-q4 qwen-3.5-9b-gguf-q8 qwen-3.6-35b-a3b-gguf-q4" TASKS="humaneval mbpp livecodebench" SUITE=full LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 bash scripts/run_evals_overnight.sh
 ```
 
 ### reasoning_instruction_catchup

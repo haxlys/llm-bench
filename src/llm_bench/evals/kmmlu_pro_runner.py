@@ -14,6 +14,12 @@ from typing import Any
 DEFAULT_DATASET = "LGAI-EXAONE/KMMLU-Pro"
 DEFAULT_CONFIG = "kmmlu_pro"
 DEFAULT_TASK_TIMEOUT_S = 2 * 60 * 60
+DEFAULT_MAX_TOKENS = 4
+ANSWER_ONLY_SYSTEM_PROMPT = (
+    "You answer multiple-choice benchmark questions. "
+    "Reply with exactly one uppercase letter from A, B, C, D, or E. "
+    "Do not include explanations, punctuation, or any other text."
+)
 
 
 def run_kmmlu_pro(
@@ -57,9 +63,12 @@ def run_kmmlu_pro(
             try:
                 response = client.chat.completions.create(
                     model=model_label,
-                    messages=[{"role": "user", "content": prompt}],
+                    messages=[
+                        {"role": "system", "content": ANSWER_ONLY_SYSTEM_PROMPT},
+                        {"role": "user", "content": prompt},
+                    ],
                     temperature=0.0,
-                    max_tokens=int(os.environ.get("KMMLU_PRO_MAX_TOKENS", "512")),
+                    max_tokens=int(os.environ.get("KMMLU_PRO_MAX_TOKENS", str(DEFAULT_MAX_TOKENS))),
                 )
                 answer_text = response.choices[0].message.content or ""
             except Exception as e:
@@ -136,7 +145,9 @@ def _build_prompt(row: dict[str, Any]) -> str:
     return (
         "다음은 한국어 전문자격시험 객관식 문제입니다.\n"
         "정답 선택지는 A, B, C, D 또는 E 중 하나입니다.\n"
-        "마지막 줄에 반드시 `정답: <선택지>` 형식으로 답하세요.\n\n"
+        "반드시 정답 선택지 문자 하나만 출력하세요.\n"
+        "풀이, 설명, 문장, 괄호, 마침표, `정답:` 접두사는 출력하지 마세요.\n"
+        "출력 예: A\n\n"
         f"문제:\n{row.get('question', '')}\n\n"
         f"선택지:\n{option_lines}"
     )

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T13:45:00+00:00",
+  "generated_at": "2026-05-13T22:57:13+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -25,12 +25,14 @@
         "last_measured": "2026-04-28T04:00:09+00:00"
       },
       "evals": {
-        "tasks_measured": 3,
+        "tasks_measured": 5,
         "tasks_supported": 5,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
-          "leaderboard_ifeval"
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
         ],
         "coverage": [
           {
@@ -194,9 +196,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -216,9 +218,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -233,9 +235,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 1,
+          "measured": 3,
           "directional": 2,
-          "missing": 2,
+          "missing": 0,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
@@ -248,7 +250,7 @@
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-01T06:09:30Z"
+        "last_measured": "2026-05-13T07:19:08Z"
       }
     },
     {
@@ -273,10 +275,12 @@
         "last_measured": "2026-04-28T06:28:03+00:00"
       },
       "evals": {
-        "tasks_measured": 1,
+        "tasks_measured": 3,
         "tasks_supported": 5,
         "tasks": [
-          "gsm8k_cot_zeroshot"
+          "gsm8k_cot_zeroshot",
+          "kmmlu_pro",
+          "sourceqa"
         ],
         "coverage": [
           {
@@ -440,9 +444,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -462,9 +466,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -479,16 +483,16 @@
           }
         ],
         "coverage_summary": {
-          "measured": 0,
+          "measured": 2,
           "directional": 1,
-          "missing": 4,
+          "missing": 2,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
           "total": 18
         },
         "extra_tasks": [],
-        "last_measured": "2026-04-29T21:52:11Z"
+        "last_measured": "2026-05-13T06:43:23Z"
       }
     },
     {
@@ -515,12 +519,17 @@
         "last_measured": "2026-04-28T04:04:32+00:00"
       },
       "evals": {
-        "tasks_measured": 3,
+        "tasks_measured": 8,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
-          "leaderboard_ifeval"
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "livecodebench",
+          "mbpp",
+          "sourceqa"
         ],
         "coverage": [
           {
@@ -629,9 +638,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -640,9 +649,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -651,9 +660,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -684,9 +693,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -706,9 +715,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -723,9 +732,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 1,
+          "measured": 6,
           "directional": 2,
-          "missing": 5,
+          "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
@@ -736,7 +745,7 @@
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-01T06:55:07Z"
+        "last_measured": "2026-05-13T12:58:51Z"
       }
     },
     {
@@ -763,9 +772,15 @@
         "last_measured": "2026-04-28T06:32:25+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 5,
         "tasks_supported": 8,
-        "tasks": [],
+        "tasks": [
+          "humaneval",
+          "kmmlu_pro",
+          "livecodebench",
+          "mbpp",
+          "sourceqa"
+        ],
         "coverage": [
           {
             "dim": "reasoning",
@@ -873,9 +888,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -884,9 +899,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -895,9 +910,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -928,9 +943,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -950,9 +965,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -967,16 +982,16 @@
           }
         ],
         "coverage_summary": {
-          "measured": 0,
+          "measured": 5,
           "directional": 0,
-          "missing": 8,
+          "missing": 3,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-13T12:13:40Z"
       }
     },
     {
@@ -1001,9 +1016,12 @@
         "last_measured": "2026-04-28T06:48:54+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 2,
         "tasks_supported": 5,
-        "tasks": [],
+        "tasks": [
+          "kmmlu_pro",
+          "sourceqa"
+        ],
         "coverage": [
           {
             "dim": "reasoning",
@@ -1166,9 +1184,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -1188,9 +1206,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -1205,16 +1223,16 @@
           }
         ],
         "coverage_summary": {
-          "measured": 0,
+          "measured": 2,
           "directional": 0,
-          "missing": 5,
+          "missing": 3,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
           "total": 18
         },
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-13T09:51:58Z"
       }
     },
     {
@@ -1241,9 +1259,14 @@
         "last_measured": "2026-04-28T07:14:54+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 4,
         "tasks_supported": 8,
-        "tasks": [],
+        "tasks": [
+          "humaneval",
+          "kmmlu_pro",
+          "mbpp",
+          "sourceqa"
+        ],
         "coverage": [
           {
             "dim": "reasoning",
@@ -1351,9 +1374,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -1362,9 +1385,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -1406,9 +1429,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -1428,9 +1451,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -1445,16 +1468,16 @@
           }
         ],
         "coverage_summary": {
-          "measured": 0,
+          "measured": 4,
           "directional": 0,
-          "missing": 8,
+          "missing": 4,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-13T14:45:26Z"
       }
     },
     {
@@ -1481,13 +1504,16 @@
         "last_measured": "2026-05-04T01:56:58+00:00"
       },
       "evals": {
-        "tasks_measured": 5,
+        "tasks_measured": 8,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
+          "kmmlu_pro",
           "leaderboard_ifeval",
+          "livecodebench",
+          "mbpp",
           "sourceqa"
         ],
         "coverage": [
@@ -1608,9 +1634,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -1619,9 +1645,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -1674,9 +1700,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -1691,16 +1717,16 @@
           }
         ],
         "coverage_summary": {
-          "measured": 3,
+          "measured": 6,
           "directional": 2,
-          "missing": 3,
+          "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-05T16:36:42Z"
+        "last_measured": "2026-05-13T18:59:27Z"
       }
     },
     {
@@ -1727,13 +1753,16 @@
         "last_measured": "2026-05-04T02:01:09+00:00"
       },
       "evals": {
-        "tasks_measured": 5,
+        "tasks_measured": 8,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
+          "kmmlu_pro",
           "leaderboard_ifeval",
+          "livecodebench",
+          "mbpp",
           "sourceqa"
         ],
         "coverage": [
@@ -1854,9 +1883,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -1865,9 +1894,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -1920,9 +1949,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -1937,9 +1966,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 3,
+          "measured": 6,
           "directional": 2,
-          "missing": 3,
+          "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
@@ -1950,7 +1979,7 @@
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-05T17:55:03Z"
+        "last_measured": "2026-05-13T05:54:58Z"
       }
     },
     {
@@ -1977,503 +2006,11 @@
         "last_measured": "2026-05-04T02:08:15+00:00"
       },
       "evals": {
-        "tasks_measured": 4,
-        "tasks_supported": 8,
-        "tasks": [
-          "gsm8k_cot_zeroshot",
-          "hrm8k",
-          "leaderboard_ifeval",
-          "sourceqa"
-        ],
-        "coverage": [
-          {
-            "dim": "reasoning",
-            "task": "gsm8k_cot_zeroshot",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "directional",
-            "status": "directional"
-          },
-          {
-            "dim": "reasoning",
-            "task": "hellaswag",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "reasoning",
-            "task": "leaderboard_mmlu_pro",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "reasoning",
-            "task": "leaderboard_gpqa_diamond",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "korean",
-            "task": "hrm8k",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "directional",
-            "status": "directional"
-          },
-          {
-            "dim": "korean",
-            "task": "haerae",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "korean",
-            "task": "kobest",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "instruction",
-            "task": "leaderboard_ifeval",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "measured",
-            "status": "measured"
-          },
-          {
-            "dim": "safety",
-            "task": "toxigen",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "code",
-            "task": "humaneval",
-            "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "mbpp",
-            "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "livecodebench",
-            "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          },
-          {
-            "dim": "tool",
-            "task": "bfcl",
-            "runner": "bfcl",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          },
-          {
-            "dim": "source_grounding",
-            "task": "sourceqa",
-            "runner": "sourceqa",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "measured",
-            "status": "measured"
-          },
-          {
-            "dim": "fresh",
-            "task": "livebench_subset",
-            "runner": "livebench",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          },
-          {
-            "dim": "korean",
-            "task": "kmmlu_pro",
-            "runner": "kmmlu_pro",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "agentic_code",
-            "task": "programbench",
-            "runner": "programbench",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          }
-        ],
-        "coverage_summary": {
-          "measured": 2,
-          "directional": 2,
-          "missing": 4,
-          "optional": 4,
-          "speed_only": 0,
-          "unsupported": 6,
-          "total": 18
-        },
-        "extra_tasks": [],
-        "last_measured": "2026-05-04T13:10:35Z"
-      }
-    },
-    {
-      "key": "qwen-3.6-35b-a3b-gguf-q4",
-      "model_id": "qwen-3.6-35B-A3B",
-      "fmt": "gguf",
-      "backend": "gguf",
-      "artifact_type": "gguf_file",
-      "capabilities": [
-        "chat",
-        "code_eval_chat",
-        "completions",
-        "tool_use_eval"
-      ],
-      "quant": "Q4_K_M",
-      "tier": "4bit",
-      "family": "qwen",
-      "architecture": "moe",
-      "approx_size_gb": 22.1,
-      "exists_locally": true,
-      "speed": {
-        "scenarios_measured": 8,
-        "scenarios_total": 8,
-        "last_measured": "2026-05-04T02:12:49+00:00"
-      },
-      "evals": {
         "tasks_measured": 5,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
-          "humaneval",
-          "leaderboard_ifeval",
-          "sourceqa"
-        ],
-        "coverage": [
-          {
-            "dim": "reasoning",
-            "task": "gsm8k_cot_zeroshot",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "directional",
-            "status": "directional"
-          },
-          {
-            "dim": "reasoning",
-            "task": "hellaswag",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "reasoning",
-            "task": "leaderboard_mmlu_pro",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "reasoning",
-            "task": "leaderboard_gpqa_diamond",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "korean",
-            "task": "hrm8k",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "directional",
-            "status": "directional"
-          },
-          {
-            "dim": "korean",
-            "task": "haerae",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "korean",
-            "task": "kobest",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "instruction",
-            "task": "leaderboard_ifeval",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "measured",
-            "status": "measured"
-          },
-          {
-            "dim": "safety",
-            "task": "toxigen",
-            "runner": "lm-eval",
-            "lane": "primary",
-            "required": true,
-            "supported": false,
-            "measured": false,
-            "confidence": "measured",
-            "status": "unsupported"
-          },
-          {
-            "dim": "code",
-            "task": "humaneval",
-            "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "measured",
-            "status": "measured"
-          },
-          {
-            "dim": "code",
-            "task": "mbpp",
-            "runner": "evalplus",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "livecodebench",
-            "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          },
-          {
-            "dim": "tool",
-            "task": "bfcl",
-            "runner": "bfcl",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          },
-          {
-            "dim": "source_grounding",
-            "task": "sourceqa",
-            "runner": "sourceqa",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": true,
-            "confidence": "measured",
-            "status": "measured"
-          },
-          {
-            "dim": "fresh",
-            "task": "livebench_subset",
-            "runner": "livebench",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          },
-          {
-            "dim": "korean",
-            "task": "kmmlu_pro",
-            "runner": "kmmlu_pro",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "agentic_code",
-            "task": "programbench",
-            "runner": "programbench",
-            "lane": "optional",
-            "required": false,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "optional"
-          }
-        ],
-        "coverage_summary": {
-          "measured": 3,
-          "directional": 2,
-          "missing": 3,
-          "optional": 4,
-          "speed_only": 0,
-          "unsupported": 6,
-          "total": 18
-        },
-        "extra_tasks": [],
-        "last_measured": "2026-05-04T14:19:03Z"
-      }
-    },
-    {
-      "key": "qwen-3-next-80b-a3b-instruct-gguf-q4",
-      "model_id": "qwen-3-next-80B-A3B-instruct",
-      "fmt": "gguf",
-      "backend": "gguf",
-      "artifact_type": "gguf_file",
-      "capabilities": [
-        "chat",
-        "code_eval_chat",
-        "completions",
-        "tool_use_eval"
-      ],
-      "quant": "Q4_K_M",
-      "tier": "4bit",
-      "family": "qwen",
-      "architecture": "moe",
-      "approx_size_gb": 45,
-      "exists_locally": true,
-      "speed": {
-        "scenarios_measured": 8,
-        "scenarios_total": 8,
-        "last_measured": "2026-05-07T02:57:00+00:00"
-      },
-      "evals": {
-        "tasks_measured": 6,
-        "tasks_supported": 8,
-        "tasks": [
-          "gsm8k_cot_zeroshot",
-          "hrm8k",
-          "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
           "sourceqa"
@@ -2585,9 +2122,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": true,
+            "measured": false,
             "confidence": "measured",
-            "status": "measured"
+            "status": "missing"
           },
           {
             "dim": "code",
@@ -2679,9 +2216,505 @@
           }
         ],
         "coverage_summary": {
-          "measured": 4,
+          "measured": 3,
           "directional": 2,
-          "missing": 2,
+          "missing": 3,
+          "optional": 4,
+          "speed_only": 0,
+          "unsupported": 6,
+          "total": 18
+        },
+        "extra_tasks": [],
+        "last_measured": "2026-05-13T06:01:42Z"
+      }
+    },
+    {
+      "key": "qwen-3.6-35b-a3b-gguf-q4",
+      "model_id": "qwen-3.6-35B-A3B",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "moe",
+      "approx_size_gb": 22.1,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 8,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-04T02:12:49+00:00"
+      },
+      "evals": {
+        "tasks_measured": 7,
+        "tasks_supported": 8,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "mbpp",
+          "sourceqa"
+        ],
+        "coverage": [
+          {
+            "dim": "reasoning",
+            "task": "gsm8k_cot_zeroshot",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "directional",
+            "status": "directional"
+          },
+          {
+            "dim": "reasoning",
+            "task": "hellaswag",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "reasoning",
+            "task": "leaderboard_mmlu_pro",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "reasoning",
+            "task": "leaderboard_gpqa_diamond",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "korean",
+            "task": "hrm8k",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "directional",
+            "status": "directional"
+          },
+          {
+            "dim": "korean",
+            "task": "haerae",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "korean",
+            "task": "kobest",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "instruction",
+            "task": "leaderboard_ifeval",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "safety",
+            "task": "toxigen",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "code",
+            "task": "humaneval",
+            "runner": "evalplus",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "code",
+            "task": "mbpp",
+            "runner": "evalplus",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "code",
+            "task": "livecodebench",
+            "runner": "livecodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          },
+          {
+            "dim": "tool",
+            "task": "bfcl",
+            "runner": "bfcl",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          },
+          {
+            "dim": "source_grounding",
+            "task": "sourceqa",
+            "runner": "sourceqa",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "fresh",
+            "task": "livebench_subset",
+            "runner": "livebench",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          },
+          {
+            "dim": "korean",
+            "task": "kmmlu_pro",
+            "runner": "kmmlu_pro",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "agentic_code",
+            "task": "programbench",
+            "runner": "programbench",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          }
+        ],
+        "coverage_summary": {
+          "measured": 5,
+          "directional": 2,
+          "missing": 1,
+          "optional": 4,
+          "speed_only": 0,
+          "unsupported": 6,
+          "total": 18
+        },
+        "extra_tasks": [],
+        "last_measured": "2026-05-13T06:16:39Z"
+      }
+    },
+    {
+      "key": "qwen-3-next-80b-a3b-instruct-gguf-q4",
+      "model_id": "qwen-3-next-80B-A3B-instruct",
+      "fmt": "gguf",
+      "backend": "gguf",
+      "artifact_type": "gguf_file",
+      "capabilities": [
+        "chat",
+        "code_eval_chat",
+        "completions",
+        "tool_use_eval"
+      ],
+      "quant": "Q4_K_M",
+      "tier": "4bit",
+      "family": "qwen",
+      "architecture": "moe",
+      "approx_size_gb": 45,
+      "exists_locally": true,
+      "speed": {
+        "scenarios_measured": 8,
+        "scenarios_total": 8,
+        "last_measured": "2026-05-07T02:57:00+00:00"
+      },
+      "evals": {
+        "tasks_measured": 7,
+        "tasks_supported": 8,
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "mbpp",
+          "sourceqa"
+        ],
+        "coverage": [
+          {
+            "dim": "reasoning",
+            "task": "gsm8k_cot_zeroshot",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "directional",
+            "status": "directional"
+          },
+          {
+            "dim": "reasoning",
+            "task": "hellaswag",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "reasoning",
+            "task": "leaderboard_mmlu_pro",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "reasoning",
+            "task": "leaderboard_gpqa_diamond",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "korean",
+            "task": "hrm8k",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "directional",
+            "status": "directional"
+          },
+          {
+            "dim": "korean",
+            "task": "haerae",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "korean",
+            "task": "kobest",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "instruction",
+            "task": "leaderboard_ifeval",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "safety",
+            "task": "toxigen",
+            "runner": "lm-eval",
+            "lane": "primary",
+            "required": true,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "unsupported"
+          },
+          {
+            "dim": "code",
+            "task": "humaneval",
+            "runner": "evalplus",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "code",
+            "task": "mbpp",
+            "runner": "evalplus",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "code",
+            "task": "livecodebench",
+            "runner": "livecodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          },
+          {
+            "dim": "tool",
+            "task": "bfcl",
+            "runner": "bfcl",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          },
+          {
+            "dim": "source_grounding",
+            "task": "sourceqa",
+            "runner": "sourceqa",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "fresh",
+            "task": "livebench_subset",
+            "runner": "livebench",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          },
+          {
+            "dim": "korean",
+            "task": "kmmlu_pro",
+            "runner": "kmmlu_pro",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "agentic_code",
+            "task": "programbench",
+            "runner": "programbench",
+            "lane": "optional",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "optional"
+          }
+        ],
+        "coverage_summary": {
+          "measured": 5,
+          "directional": 2,
+          "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
@@ -2715,7 +2748,7 @@
         "last_measured": "2026-05-07T03:03:13+00:00"
       },
       "evals": {
-        "tasks_measured": 6,
+        "tasks_measured": 7,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
@@ -2723,6 +2756,7 @@
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
+          "mbpp",
           "sourceqa"
         ],
         "coverage": [
@@ -2843,9 +2877,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -2926,9 +2960,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 4,
+          "measured": 5,
           "directional": 2,
-          "missing": 2,
+          "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
@@ -2960,12 +2994,14 @@
         "last_measured": "2026-05-06T00:58:36+00:00"
       },
       "evals": {
-        "tasks_measured": 3,
+        "tasks_measured": 5,
         "tasks_supported": 5,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
-          "leaderboard_ifeval"
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
         ],
         "coverage": [
           {
@@ -3129,9 +3165,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -3151,9 +3187,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -3168,9 +3204,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 1,
+          "measured": 3,
           "directional": 2,
-          "missing": 2,
+          "missing": 0,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
@@ -3179,7 +3215,7 @@
         "extra_tasks": [
           "kmmlu_direct"
         ],
-        "last_measured": "2026-05-06T01:01:40Z"
+        "last_measured": "2026-05-13T07:33:54Z"
       }
     },
     {
@@ -3680,12 +3716,14 @@
         "last_measured": "2026-05-06T01:01:28+00:00"
       },
       "evals": {
-        "tasks_measured": 3,
+        "tasks_measured": 5,
         "tasks_supported": 5,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
-          "leaderboard_ifeval"
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "sourceqa"
         ],
         "coverage": [
           {
@@ -3849,9 +3887,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "fresh",
@@ -3871,9 +3909,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -3888,9 +3926,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 1,
+          "measured": 3,
           "directional": 2,
-          "missing": 2,
+          "missing": 0,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
@@ -3899,7 +3937,7 @@
         "extra_tasks": [
           "kmmlu_direct"
         ],
-        "last_measured": "2026-05-06T01:06:03Z"
+        "last_measured": "2026-05-13T08:10:28Z"
       }
     },
     {
@@ -4402,13 +4440,16 @@
         "last_measured": "2026-05-04T02:18:49+00:00"
       },
       "evals": {
-        "tasks_measured": 5,
+        "tasks_measured": 8,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
+          "kmmlu_pro",
           "leaderboard_ifeval",
+          "livecodebench",
+          "mbpp",
           "sourceqa"
         ],
         "coverage": [
@@ -4529,9 +4570,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -4540,9 +4581,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -4595,9 +4636,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -4612,16 +4653,16 @@
           }
         ],
         "coverage_summary": {
-          "measured": 3,
+          "measured": 6,
           "directional": 2,
-          "missing": 3,
+          "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-05T19:45:06Z"
+        "last_measured": "2026-05-13T08:52:33Z"
       }
     },
     {
@@ -4648,7 +4689,7 @@
         "last_measured": "2026-05-07T03:07:13+00:00"
       },
       "evals": {
-        "tasks_measured": 6,
+        "tasks_measured": 7,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
@@ -4656,6 +4697,7 @@
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
+          "mbpp",
           "sourceqa"
         ],
         "coverage": [
@@ -4776,9 +4818,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -4859,9 +4901,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 4,
+          "measured": 5,
           "directional": 2,
-          "missing": 2,
+          "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
@@ -4895,7 +4937,7 @@
         "last_measured": "2026-05-07T03:14:24+00:00"
       },
       "evals": {
-        "tasks_measured": 6,
+        "tasks_measured": 7,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
@@ -4903,6 +4945,7 @@
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
+          "mbpp",
           "sourceqa"
         ],
         "coverage": [
@@ -5023,9 +5066,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -5106,16 +5149,16 @@
           }
         ],
         "coverage_summary": {
-          "measured": 4,
+          "measured": 5,
           "directional": 2,
-          "missing": 2,
+          "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
           "total": 18
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-09T01:52:19Z"
+        "last_measured": "2026-05-13T18:59:27Z"
       }
     },
     {
@@ -5142,7 +5185,7 @@
         "last_measured": "2026-05-07T03:19:20+00:00"
       },
       "evals": {
-        "tasks_measured": 6,
+        "tasks_measured": 7,
         "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
@@ -5150,6 +5193,7 @@
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
+          "mbpp",
           "sourceqa"
         ],
         "coverage": [
@@ -5270,9 +5314,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -5353,9 +5397,9 @@
           }
         ],
         "coverage_summary": {
-          "measured": 4,
+          "measured": 5,
           "directional": 2,
-          "missing": 2,
+          "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
@@ -5369,7 +5413,7 @@
   "totals": {
     "variants": 22,
     "speed_complete": 16,
-    "evals_started": 15,
-    "evals_missing_required": 62
+    "evals_started": 18,
+    "evals_missing_required": 21
   }
 }

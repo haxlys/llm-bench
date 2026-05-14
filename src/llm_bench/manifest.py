@@ -143,9 +143,20 @@ def eval_manifest(eval_dir: Path) -> EvalManifest:
             if not task_dir.is_dir():
                 continue
             task = task_dir.name
-            if any(p.stat().st_size > 100 for p in task_dir.rglob("results_*.json")):
+            if any(_is_eval_results_file(p) for p in task_dir.rglob("results_*.json")):
                 out.measured.add((variant_key, task))
     return out
+
+
+def _is_eval_results_file(path: Path) -> bool:
+    if path.stat().st_size == 0:
+        return False
+    try:
+        data = json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return False
+    results = data.get("results") if isinstance(data, dict) else None
+    return isinstance(results, dict) and bool(results)
 
 
 def eval_is_measured(

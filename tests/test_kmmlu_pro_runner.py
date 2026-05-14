@@ -80,6 +80,9 @@ def test_run_kmmlu_pro_scores_weighted_accuracy(tmp_path, monkeypatch):
     assert res["results"]["kmmlu_pro"]["questions,none"] == pytest.approx(2.0)
     assert res["results"]["kmmlu_pro"]["law_acc,none"] == pytest.approx(2 / 3)
     assert client.chat.completions.calls[0]["model"] == "m"
+    assert client.chat.completions.calls[0]["messages"][0]["role"] == "system"
+    assert "exactly one uppercase letter" in client.chat.completions.calls[0]["messages"][0]["content"]
+    assert client.chat.completions.calls[0]["max_tokens"] == kmmlu.DEFAULT_MAX_TOKENS
 
     synth = list(tmp_path.glob("results_*_kmmlu_pro.json"))
     assert len(synth) == 1
@@ -90,6 +93,13 @@ def test_run_kmmlu_pro_scores_weighted_accuracy(tmp_path, monkeypatch):
 
 def test_extract_choice_prefers_final_answer_marker():
     assert kmmlu._extract_choice("A도 가능하지만 최종 정답: C") == "C"
+
+
+def test_build_prompt_requires_answer_letter_only():
+    prompt = kmmlu._build_prompt({"question": "1+1?", "options": ["2", "3", "4", "5", "6"]})
+
+    assert "문자 하나만" in prompt
+    assert "`정답:` 접두사는 출력하지 마세요" in prompt
 
 
 def test_target_choice_accepts_one_indexed_solution():

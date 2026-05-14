@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 import importlib.util
@@ -36,8 +37,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 DEFAULT_RELEASE = "release_v6"
-DEFAULT_TASK_TIMEOUT_S = 3 * 60 * 60
+DEFAULT_TASK_TIMEOUT_S = 5 * 60 * 60
 DEFAULT_OPENAI_CHAT_MODEL = "gpt-4o-mini-2024-07-18"
+DEFAULT_OPENAI_TIMEOUT_S = 900
 
 
 def run_livecodebench(
@@ -71,6 +73,7 @@ def run_livecodebench(
     env = os.environ.copy()
     env["OPENAI_BASE_URL"] = base_url.rstrip("/")
     env["OPENAI_KEY"] = api_key or env.get("OPENAI_API_KEY", "local-no-auth")
+    work_dir = _prepare_work_dir(output_dir, source_checkout)
     if source_checkout:
         existing_pythonpath = env.get("PYTHONPATH")
         env["PYTHONPATH"] = (
@@ -86,13 +89,23 @@ def run_livecodebench(
         "--n", "1",
         "--evaluate",
     ]
-    if start_date := os.environ.get("LIVE_CODE_BENCH_START_DATE"):
+    start_date = os.environ.get("LIVE_CODE_BENCH_START_DATE")
+    end_date = os.environ.get("LIVE_CODE_BENCH_END_DATE")
+    max_tokens = os.environ.get("LIVE_CODE_BENCH_MAX_TOKENS")
+    openai_timeout = os.environ.get(
+        "LIVE_CODE_BENCH_OPENAI_TIMEOUT",
+        str(DEFAULT_OPENAI_TIMEOUT_S),
+    )
+    not_fast = os.environ.get("LIVE_CODE_BENCH_NOT_FAST") == "1"
+    if start_date:
         cmd.extend(["--start_date", start_date])
-    if end_date := os.environ.get("LIVE_CODE_BENCH_END_DATE"):
+    if end_date:
         cmd.extend(["--end_date", end_date])
-    if max_tokens := os.environ.get("LIVE_CODE_BENCH_MAX_TOKENS"):
+    if max_tokens:
         cmd.extend(["--max_tokens", max_tokens])
-    if os.environ.get("LIVE_CODE_BENCH_NOT_FAST") == "1":
+    if openai_timeout:
+        cmd.extend(["--openai_timeout", openai_timeout])
+    if not_fast:
         cmd.append("--not_fast")
     if limit is not None:
         cmd.append("--debug")
@@ -104,15 +117,15 @@ def run_livecodebench(
             text=True,
             env=env,
             timeout=timeout_s,
-            cwd=str(source_checkout) if source_checkout else None,
+            cwd=str(work_dir),
         )
     except subprocess.TimeoutExpired as e:
         log_path.write_text(
             "=== cmd ===\n" + " ".join(cmd) +
             f"\n=== TIMEOUT after {timeout_s}s ===\n" +
-            (e.stdout or b"").decode("utf-8", errors="replace") +
+            _decode_timeout_stream(e.stdout) +
             "\n=== stderr ===\n" +
-            (e.stderr or b"").decode("utf-8", errors="replace")
+            _decode_timeout_stream(e.stderr)
         )
         return {"task": "livecodebench",
                 "error": f"timeout after {timeout_s}s",
@@ -129,10 +142,7 @@ def run_livecodebench(
                 "error": f"rc={proc.returncode}",
                 "log": str(log_path)}
 
-    score_roots = [output_dir]
-    if source_checkout:
-        score_roots.append(source_checkout / "output")
-    pass_at_1 = _extract_pass_at_1(score_roots, proc.stdout)
+    pass_at_1 = _extract_pass_at_1(work_dir, proc.stdout)
     if pass_at_1 is None:
         return {"task": "livecodebench",
                 "error": "no pass@1 in lcb output",
@@ -148,7 +158,17 @@ def run_livecodebench(
                 "pass@1,none": pass_at_1,
                 "release,none": release,
             }
-        }
+        },
+        "metadata": {
+            "release": release,
+            "start_date": start_date,
+            "end_date": end_date,
+            "not_fast": not_fast,
+            "model_label": model_label,
+            "openai_timeout_s": int(openai_timeout) if openai_timeout.isdigit() else openai_timeout,
+            "max_tokens": int(max_tokens) if max_tokens and max_tokens.isdigit() else max_tokens,
+            "problem_count": _extract_loaded_problem_count(proc.stdout),
+        },
     }))
 
     return {
@@ -227,6 +247,53 @@ def _find_pass_at_1_in_dict(d: object) -> float | None:
     return None
 
 
+def _extract_loaded_problem_count(stdout: str) -> int | None:
+    import re
+    match = re.search(r"Loaded\s+(\d+)\s+problems", stdout)
+    return int(match.group(1)) if match else None
+
+
+def _decode_timeout_stream(value: bytes | str | None) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return value
+
+
+def _prepare_work_dir(output_dir: Path, source_checkout: Path | None) -> Path:
+    """Create a per-run cwd that keeps lcb_runner's relative file reads working."""
+    work_dir = output_dir / "_lcb_work"
+    work_dir.mkdir(parents=True, exist_ok=True)
+
+    package_dir = (
+        source_checkout / "lcb_runner"
+        if source_checkout
+        else _installed_package_dir("lcb_runner")
+    )
+    if package_dir is None:
+        return work_dir
+    package_dir = package_dir.resolve()
+
+    target = work_dir / "lcb_runner"
+    if target.exists() or target.is_symlink():
+        if target.is_symlink() and target.resolve() == package_dir.resolve():
+            return work_dir
+        if target.is_dir() and not target.is_symlink():
+            shutil.rmtree(target)
+        else:
+            target.unlink()
+    target.symlink_to(package_dir, target_is_directory=True)
+    return work_dir
+
+
+def _installed_package_dir(name: str) -> Path | None:
+    spec = importlib.util.find_spec(name)
+    if not spec or not spec.submodule_search_locations:
+        return None
+    return Path(next(iter(spec.submodule_search_locations)))
+
+
 def _module_exists(name: str) -> bool:
     try:
         return importlib.util.find_spec(name) is not None
@@ -242,6 +309,6 @@ def _source_checkout() -> Path | None:
     raw = os.environ.get("LIVE_CODE_BENCH_REPO")
     if not raw:
         return None
-    path = Path(raw).expanduser()
+    path = Path(raw).expanduser().resolve()
     main = path / "lcb_runner" / "runner" / "main.py"
     return path if main.is_file() else None

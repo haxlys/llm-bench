@@ -49,6 +49,10 @@ def test_gguf_model_server_uses_configured_context_size(monkeypatch):
     cmd = server._build_cmd()
 
     assert cmd[cmd.index("-c") + 1] == "65536"
+    assert cmd[cmd.index("--reasoning") + 1] == "off"
+    assert json.loads(cmd[cmd.index("--chat-template-kwargs") + 1]) == {
+        "enable_thinking": False,
+    }
 
 
 def test_mlx_model_server_disables_thinking_by_default():

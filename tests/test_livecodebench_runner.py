@@ -19,6 +19,7 @@ from llm_bench.evals import livecodebench_runner as lcb
 
 
 def test_missing_package_returns_error(tmp_path, monkeypatch):
+    monkeypatch.delenv("LIVE_CODE_BENCH_REPO", raising=False)
     monkeypatch.setattr(lcb, "_module_exists", lambda _: False)
     res = lcb.run_livecodebench(
         release="release_v6",
@@ -32,6 +33,7 @@ def test_missing_package_returns_error(tmp_path, monkeypatch):
 
 
 def test_availability_requires_runner_main(monkeypatch):
+    monkeypatch.delenv("LIVE_CODE_BENCH_REPO", raising=False)
     seen = {}
 
     def fake_module_exists(name):
@@ -77,7 +79,9 @@ def test_pass_at_1_above_one_normalised(tmp_path, monkeypatch):
     """Some lcb_runner versions report pass@1 as a percent (e.g. 21.3)."""
     monkeypatch.setattr(lcb, "_module_exists", lambda _: True)
     monkeypatch.setattr(lcb, "_source_checkout", lambda: None)
-    (tmp_path / "Scores.json").write_text(json.dumps({"pass@1": 21.3}))
+    work_dir = tmp_path / "_lcb_work"
+    work_dir.mkdir()
+    (work_dir / "Scores.json").write_text(json.dumps({"pass@1": 21.3}))
 
     def fake_run(cmd, **kwargs):
         return subprocess.CompletedProcess(args=cmd, returncode=0, stdout="", stderr="")
@@ -162,11 +166,15 @@ def test_run_uses_source_checkout_pythonpath_and_openai_base(tmp_path, monkeypat
     main = checkout / "lcb_runner" / "runner" / "main.py"
     main.parent.mkdir(parents=True)
     main.write_text("")
+    stale_scores = checkout / "output" / "StaleModel" / "Scores.json"
+    stale_scores.parent.mkdir(parents=True)
+    stale_scores.write_text(json.dumps({"pass@1": 0.99}))
     captured = {}
     monkeypatch.setenv("LIVE_CODE_BENCH_REPO", str(checkout))
     monkeypatch.setenv("LIVE_CODE_BENCH_START_DATE", "2025-03-29")
     monkeypatch.setenv("LIVE_CODE_BENCH_END_DATE", "2025-04-06")
     monkeypatch.setenv("LIVE_CODE_BENCH_MAX_TOKENS", "1024")
+    monkeypatch.setenv("LIVE_CODE_BENCH_OPENAI_TIMEOUT", "1200")
     monkeypatch.setenv("LIVE_CODE_BENCH_NOT_FAST", "1")
     monkeypatch.setattr(lcb, "_module_exists", lambda _: False)
 
@@ -193,11 +201,12 @@ def test_run_uses_source_checkout_pythonpath_and_openai_base(tmp_path, monkeypat
     assert captured["env"]["OPENAI_BASE_URL"] == "http://localhost:9090/v1"
     assert captured["env"]["OPENAI_KEY"] == "local-no-auth"
     assert str(checkout) in captured["env"]["PYTHONPATH"]
-    assert captured["cwd"] == str(checkout)
+    assert captured["cwd"] == str(tmp_path / "out" / "_lcb_work")
     assert captured["cmd"][captured["cmd"].index("--n") + 1] == "1"
     assert captured["cmd"][captured["cmd"].index("--start_date") + 1] == "2025-03-29"
     assert captured["cmd"][captured["cmd"].index("--end_date") + 1] == "2025-04-06"
     assert captured["cmd"][captured["cmd"].index("--max_tokens") + 1] == "1024"
+    assert captured["cmd"][captured["cmd"].index("--openai_timeout") + 1] == "1200"
     assert "--not_fast" in captured["cmd"]
     assert "--debug" in captured["cmd"]
     assert "gpt-4o-mini-2024-07-18" in captured["cmd"]

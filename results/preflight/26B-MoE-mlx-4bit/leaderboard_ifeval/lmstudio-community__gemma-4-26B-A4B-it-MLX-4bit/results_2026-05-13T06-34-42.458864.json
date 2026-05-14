@@ -1,0 +1,146 @@
+{
+  "results": {
+    "leaderboard_ifeval": {
+      "alias": "leaderboard_ifeval",
+      "prompt_level_strict_acc,none": 1.0,
+      "prompt_level_strict_acc_stderr,none": 0.0,
+      "inst_level_strict_acc,none": 1.0,
+      "inst_level_strict_acc_stderr,none": "N/A",
+      "prompt_level_loose_acc,none": 1.0,
+      "prompt_level_loose_acc_stderr,none": 0.0,
+      "inst_level_loose_acc,none": 1.0,
+      "inst_level_loose_acc_stderr,none": "N/A"
+    }
+  },
+  "group_subtasks": {
+    "leaderboard_ifeval": []
+  },
+  "configs": {
+    "leaderboard_ifeval": {
+      "task": "leaderboard_ifeval",
+      "dataset_path": "wis-k/instruction-following-eval",
+      "test_split": "train",
+      "doc_to_text": "prompt",
+      "doc_to_target": 0,
+      "unsafe_code": false,
+      "process_results": "def process_results(doc, results):\n    inp = InputExample(\n        key=doc[\"key\"],\n        instruction_id_list=doc[\"instruction_id_list\"],\n        prompt=doc[\"prompt\"],\n        kwargs=doc[\"kwargs\"],\n    )\n    response = results[0]\n\n    out_strict = test_instruction_following_strict(inp, response)\n    out_loose = test_instruction_following_loose(inp, response)\n\n    return {\n        \"prompt_level_strict_acc\": out_strict.follow_all_instructions,\n        \"inst_level_strict_acc\": out_strict.follow_instruction_list,\n        \"prompt_level_loose_acc\": out_loose.follow_all_instructions,\n        \"inst_level_loose_acc\": out_loose.follow_instruction_list,\n    }\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": null,
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "prompt",
+        "doc_to_choice": null,
+        "doc_to_target": 0,
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "prompt_level_strict_acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "inst_level_strict_acc",
+          "aggregation": "def agg_inst_level_acc(items):\n    flat_items = [item for sublist in items for item in sublist]\n    inst_level_acc = sum(flat_items) / len(flat_items)\n    return inst_level_acc\n",
+          "higher_is_better": true
+        },
+        {
+          "metric": "prompt_level_loose_acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "inst_level_loose_acc",
+          "aggregation": "def agg_inst_level_acc(items):\n    flat_items = [item for sublist in items for item in sublist]\n    inst_level_acc = sum(flat_items) / len(flat_items)\n    return inst_level_acc\n",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [],
+        "do_sample": false,
+        "temperature": 0.0,
+        "max_gen_toks": 512
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0,
+        "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+        "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+        "tokenizer_backend": null,
+        "num_concurrent": 1,
+        "max_retries": 2
+      }
+    }
+  },
+  "versions": {
+    "leaderboard_ifeval": 3.0
+  },
+  "n-shot": {
+    "leaderboard_ifeval": 0
+  },
+  "higher_is_better": {
+    "leaderboard_ifeval": {
+      "prompt_level_strict_acc": true,
+      "inst_level_strict_acc": true,
+      "prompt_level_loose_acc": true,
+      "inst_level_loose_acc": true
+    }
+  },
+  "n-samples": {
+    "leaderboard_ifeval": {
+      "original": 541,
+      "effective": 2
+    }
+  },
+  "config": {
+    "model": "local-chat-completions",
+    "model_args": {
+      "base_url": "http://127.0.0.1:9091/v1/chat/completions",
+      "model": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+      "tokenizer_backend": null,
+      "num_concurrent": 1,
+      "max_retries": 2
+    },
+    "batch_size": "1",
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "use_cache": null,
+    "limit": 2.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": {
+      "max_gen_toks": 512
+    },
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "839c7f4",
+  "date": 1778621672.419127,
+  "pretty_env_info": "PyTorch version: 2.8.0\nIs debug build: False\nCUDA used to build PyTorch: None\nROCM used to build PyTorch: N/A\n\nOS: macOS 26.4.1 (arm64)\nGCC version: Could not collect\nClang version: 21.0.0 (clang-2100.0.123.102)\nCMake version: Could not collect\nLibc version: N/A\n\nPython version: 3.13.13 (main, Apr  7 2026, 18:19:01) [Clang 21.0.0 (clang-2100.0.123.102)] (64-bit runtime)\nPython platform: macOS-26.4.1-arm64-arm-64bit-Mach-O\nIs CUDA available: False\nCUDA runtime version: No CUDA\nCUDA_MODULE_LOADING set to: N/A\nGPU models and configuration: No CUDA\nNvidia driver version: No CUDA\ncuDNN version: No CUDA\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: True\n\nCPU:\nApple M5 Max\n\nVersions of relevant libraries:\n[pip3] Could not collect\n[conda] Could not collect",
+  "transformers_version": "5.6.2",
+  "lm_eval_version": "0.4.11",
+  "upper_git_hash": null,
+  "task_hashes": {
+    "leaderboard_ifeval": "1fd29e258600c9b7d21b565c3f0f6c318f4918f8043a3796b6e63294f2cac59e"
+  },
+  "model_source": "local-chat-completions",
+  "model_name": "lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit",
+  "model_name_sanitized": "lmstudio-community__gemma-4-26B-A4B-it-MLX-4bit",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": true,
+  "chat_template": "",
+  "chat_template_sha": null,
+  "total_evaluation_time_seconds": "11.439542082953267"
+}

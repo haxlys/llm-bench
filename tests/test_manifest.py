@@ -84,10 +84,9 @@ def test_eval_manifest_recognises_runs(tmp_path):
     run_dir = eval_dir / "20260101T000000Z_26B-MoE-mlx-8bit_smoke"
     task_dir = run_dir / "mmlu_generative" / "snapshot"
     task_dir.mkdir(parents=True)
-    # Padding to clear the 100-byte minimum that filters trivial empties.
     payload = json.dumps({"results": {"mmlu_generative": {
         "acc,none": 0.5, "acc_stderr,none": 0.01, "alias": "mmlu_generative"}}})
-    (task_dir / "results_2026-01-01.json").write_text(payload + " " * 200)
+    (task_dir / "results_2026-01-01.json").write_text(payload)
     em = eval_manifest(eval_dir)
     assert ("26B-MoE-mlx-8bit", "mmlu_generative") in em.measured
     assert eval_is_measured(em.measured, "26B-MoE-mlx-8bit", "mmlu_generative")
@@ -115,11 +114,24 @@ def test_eval_manifest_normalises_timestamp(tmp_path):
     assert em.last_ts["26B-MoE-mlx-8bit"] == "2026-04-28T08:04:26Z"
 
 
-def test_eval_manifest_ignores_tiny_results(tmp_path):
-    """Results files smaller than 100 bytes are treated as failures."""
+def test_eval_manifest_recognises_small_valid_results(tmp_path):
+    eval_dir = tmp_path / "eval_scores"
+    run_dir = eval_dir / "20260101T000000Z_vA_smoke"
+    (run_dir / "mbpp").mkdir(parents=True)
+    (run_dir / "mbpp" / "results_x.json").write_text(
+        json.dumps({"results": {"mbpp": {"pass_at_1,base": 1.0}}})
+    )
+
+    em = eval_manifest(eval_dir)
+
+    assert ("vA", "mbpp") in em.measured
+
+
+def test_eval_manifest_ignores_empty_results_payload(tmp_path):
+    """A results filename alone is not enough; it must contain result metrics."""
     eval_dir = tmp_path / "eval_scores"
     run_dir = eval_dir / "20260101T000000Z_vA_smoke"
     (run_dir / "tiny").mkdir(parents=True)
-    (run_dir / "tiny" / "results_x.json").write_text("{}")  # too small
+    (run_dir / "tiny" / "results_x.json").write_text("{}")
     em = eval_manifest(eval_dir)
     assert em.measured == set()

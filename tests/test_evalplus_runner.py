@@ -64,6 +64,26 @@ def test_evalplus_evaluate_disables_memory_limit(monkeypatch, tmp_path):
     assert captured_envs[-1]["EVALPLUS_MAX_MEMORY_BYTES"] == "-1"
 
 
+def test_evalplus_timeout_can_be_extended_with_env(monkeypatch, tmp_path):
+    captured_timeouts = []
+
+    def fake_run(cmd, *, capture_output, text, env, timeout):
+        captured_timeouts.append(timeout)
+        return subprocess.CompletedProcess(cmd, 1, stdout="", stderr="")
+
+    monkeypatch.setenv("EVALPLUS_TASK_TIMEOUT_S", "14400")
+    monkeypatch.setattr(evalplus_runner.subprocess, "run", fake_run)
+
+    evalplus_runner.run_evalplus(
+        dataset="mbpp",
+        base_url="https://models.example.test/v1",
+        model_label="provider/model",
+        output_dir=tmp_path,
+    )
+
+    assert captured_timeouts == [14400]
+
+
 def test_write_synthetic_results_uses_aggregate_shape(tmp_path):
     path = evalplus_runner._write_synthetic_results(
         tmp_path,

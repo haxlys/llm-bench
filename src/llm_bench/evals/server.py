@@ -111,6 +111,9 @@ class ModelServer:
             "--host", self.host, "--port", str(self.port),
             "-ngl", str(self.n_gpu_layers),
             "--jinja",                        # required for Gemma 4 chat template
+            "--reasoning", "off",
+            "--chat-template-kwargs",
+            json.dumps({"enable_thinking": False}, separators=(",", ":")),
             "-c", str(self.context_size),
         ]
         if self.server_args:
