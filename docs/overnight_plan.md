@@ -29,8 +29,8 @@ bash scripts/run_evals_overnight.sh
 Recommended task buckets:
 
 ```bash
-# 1. Source-grounding + Korean professional coverage
-TASKS="sourceqa kmmlu_pro" \
+# 1. Korean professional coverage
+TASKS="kmmlu_pro" \
 LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
 bash scripts/run_evals_overnight.sh
 
@@ -52,12 +52,14 @@ Primary tasks to fill where supported:
 | Reasoning / instruction | `gsm8k_cot_zeroshot`, `hrm8k`, `leaderboard_ifeval` |
 | Korean | `kmmlu_pro` |
 | Code | `humaneval`, `mbpp`, `livecodebench` |
-| Source grounding | `sourceqa` |
+| Diagnostic source grounding | `sourceqa` (visible diagnostic, not primary debt) |
 | Speed | all `results/summary.csv` scenarios via `scripts/run_bench.py --all-pending` |
 | MTPLX speedup | `scripts/compare_mtplx.py` after paired MTPLX speed runs |
 
 MTPLX MTP/AR variants are speed-only. They are visible as `mtplx_speedup` /
 `speed_only` rows in coverage and are skipped by `run_evals.py --all-variants`.
+SourceQA remains visible as a `diagnostic` row, but it is excluded from
+headline ranking and strict primary coverage debt.
 
 ## Family batches
 

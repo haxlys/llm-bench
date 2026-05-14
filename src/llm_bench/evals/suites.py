@@ -9,7 +9,7 @@ from __future__ import annotations
 #   4. Long context: LongBench
 #   5. Instruction following: IFEval
 #   6. Tool use: BFCL v4
-#   7. Source grounding: pinned repo QA
+#   7. Source grounding: pinned repo QA (diagnostic smoke/regression check)
 #   8. Safety: TruthfulQA + ToxiGen
 #
 # Frontier additions (2026-05-01):
@@ -83,9 +83,9 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
     # and adds ~30 min per variant.
     "tool": [("bfcl", "bfcl")],
     # Source-grounded QA: deterministic scoring over curated evidence from
-    # pinned repositories. Lightweight enough to run with the default full
-    # suite and supported on both MLX and GGUF because it uses chat completion.
-    "source_grounding": [("sourceqa", "sourceqa")],
+    # pinned repositories. This is intentionally diagnostic: the current task
+    # set is too small/saturated to affect headline ranking or primary debt.
+    "diagnostic": [("sourceqa", "sourceqa")],
     # Fresh, contamination-resistant general eval. Runs a non-agentic subset by
     # default; agentic coding remains out of scope for local smoke runs.
     "fresh": [("livebench_subset", "livebench")],
@@ -104,6 +104,10 @@ OPTIONAL_EVAL_TASKS = {
     "programbench",
 }
 
+DIAGNOSTIC_EVAL_TASKS = {
+    "sourceqa",
+}
+
 DIRECTIONAL_EVAL_TASKS = {
     "gsm8k_cot_zeroshot",
     "hrm8k",
@@ -120,10 +124,14 @@ def external_suite() -> list[tuple[str, str, str]]:
 
 
 def task_lane(task: str) -> str:
+    if task in DIAGNOSTIC_EVAL_TASKS:
+        return "diagnostic"
     return "optional" if task in OPTIONAL_EVAL_TASKS else "primary"
 
 
 def task_confidence(task: str) -> str:
+    if task in DIAGNOSTIC_EVAL_TASKS:
+        return "diagnostic"
     return "directional" if task in DIRECTIONAL_EVAL_TASKS else "measured"
 
 
@@ -159,7 +167,7 @@ MLX_UNSUPPORTED_EXTERNAL_TASKS = {
 
 def capabilities_for_backend(backend_or_fmt: str) -> frozenset[str]:
     """Default task capabilities for legacy fmt/backend names."""
-    if backend_or_fmt == "gguf":
+    if backend_or_fmt in {"gguf", "ds4"}:
         return frozenset({"chat", "completions", "code_eval_chat", "tool_use_eval"})
     if backend_or_fmt == "mlx":
         return frozenset({"chat", "completions"})

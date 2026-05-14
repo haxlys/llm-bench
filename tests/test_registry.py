@@ -27,6 +27,7 @@ def test_real_registry_loads():
     assert "qwen-3.6-27b-mtplx-optimized-mlx-mixed4" in keys
     assert "qwen-3.6-27b-mtplx-speed-mtplx-mtp" in keys
     assert "qwen-3.6-27b-mtplx-speed-mtplx-ar" in keys
+    assert "deepseek-v4-flash-gguf-iq2xxs" in keys
 
 
 def test_variant_lookup_by_model_and_tier():

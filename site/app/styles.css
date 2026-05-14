@@ -388,6 +388,12 @@ a {
   color: var(--warning);
 }
 
+.badge.diagnostic {
+  border-color: rgba(166, 132, 255, 0.58);
+  background: #211936;
+  color: #cdbdff;
+}
+
 .badge.unavailable {
   border-color: rgba(255, 90, 103, 0.65);
   background: #311216;

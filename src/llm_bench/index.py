@@ -240,6 +240,8 @@ def _coverage_status(
         return confidence
     if speed_only:
         return "speed_only"
+    if lane == "diagnostic":
+        return "diagnostic" if supported else "unsupported"
     if lane == "optional":
         return "optional" if supported else "unsupported"
     return "missing" if supported else "unsupported"
@@ -249,6 +251,7 @@ def _coverage_summary(rows: list[dict]) -> dict[str, int]:
     return {
         "measured": sum(1 for row in rows if row["status"] == "measured"),
         "directional": sum(1 for row in rows if row["status"] == "directional"),
+        "diagnostic": sum(1 for row in rows if row["status"] == "diagnostic"),
         "missing": sum(1 for row in rows if row["status"] == "missing"),
         "optional": sum(1 for row in rows if row["status"] == "optional"),
         "speed_only": sum(1 for row in rows if row["status"] == "speed_only"),

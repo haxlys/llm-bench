@@ -126,6 +126,30 @@ def test_build_runner_supports_mtplx_backend():
     assert runner.model_path == "Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed"
 
 
+def test_build_runner_supports_ds4_backend(monkeypatch):
+    run_bench = _load_run_bench()
+
+    class FakeDS4Runner:
+        def __init__(self, **kwargs):
+            self.kwargs = kwargs
+
+    monkeypatch.setattr(run_bench, "DS4Runner", FakeDS4Runner)
+
+    class DS4Variant:
+        key = "deepseek-v4-flash-gguf-iq2xxs"
+        backend = "ds4"
+        artifact_type = "gguf_file"
+        fmt = "gguf"
+        quant = "IQ2XXS"
+        model_id = "deepseek-v4-flash"
+        resolved_path = "/models/deepseek.gguf"
+
+    runner = run_bench._build_runner(DS4Variant())
+
+    assert runner.kwargs["variant_key"] == "deepseek-v4-flash-gguf-iq2xxs"
+    assert runner.kwargs["model_path"] == "/models/deepseek.gguf"
+
+
 def test_select_scenarios_filters_default_matrix():
     run_bench = _load_run_bench()
 

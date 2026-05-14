@@ -100,7 +100,7 @@ def test_run_sourceqa_writes_synthetic_results_json(tmp_path):
     assert parsed["samples"][0]["deterministic"]["score"] == pytest.approx(1.0)
 
 
-def test_sourceqa_results_load_with_source_grounding_dimension(tmp_path):
+def test_sourceqa_results_load_with_diagnostic_dimension(tmp_path):
     task_dir = tmp_path / "20260101T000000Z_vA_full" / "sourceqa" / "snapshot"
     task_dir.mkdir(parents=True)
     (task_dir / "results_2026-01-01_sourceqa.json").write_text(
@@ -110,7 +110,7 @@ def test_sourceqa_results_load_with_source_grounding_dimension(tmp_path):
     full = load_eval_results(tmp_path)
     primary = primary_metric_view(full)
 
-    assert full.iloc[0]["dim"] == "source_grounding"
+    assert full.iloc[0]["dim"] == "diagnostic"
     assert primary.iloc[0]["metric"] == "acc,none"
     assert primary.iloc[0]["value"] == pytest.approx(0.75)
 

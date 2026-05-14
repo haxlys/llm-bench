@@ -8,7 +8,7 @@
 
 Registry-driven LLM benchmark for local runtimes and OpenAI-compatible endpoints.
 
-Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BigCodeBench, BFCL, SourceQA, LiveBench, KMMLU-Pro, ProgramBench eval/import) across reasoning, Korean, code, agentic code, instruction-following, long context, tool use, source grounding, fresh-eval, and safety dimensions.
+Measures **prompt processing speed (PP tok/s)**, **generation speed (TG tok/s)**, **peak memory**, and multi-dimensional accuracy via `lm-eval-harness` (+ EvalPlus, LiveCodeBench, BigCodeBench, BFCL, SourceQA, LiveBench, KMMLU-Pro, ProgramBench eval/import) across reasoning, Korean, code, agentic code, instruction-following, long context, tool use, source-grounding diagnostics, fresh-eval, and safety dimensions.
 
 The shipped registry still includes the original Gemma 4 MLX/GGUF matrix, but the schema now also supports hosted `openai-compatible` endpoint variants.
 
@@ -103,10 +103,10 @@ Inference benchmarks are extremely sensitive to Metal contention. Before running
 ```bash
 # Confirm nothing else is holding the GPU
 lsof -i :8080 -i :8081 -i :8082    # mlx servers in ~/llm-stack
-ps aux | grep -iE "mlx|llama" | grep -v grep
+ps aux | grep -iE "mlx|llama|ds4" | grep -v grep
 ```
 
-If you run other MLX servers (e.g. `~/llm-stack`), pause them during the run. Otherwise expect 2–5× slower numbers and possible OOM at the 31B class.
+If you run other MLX/DS4 servers (e.g. `~/llm-stack`), pause them during the run. Otherwise expect 2–5× slower numbers, single-instance DS4 lock failures, and possible OOM at the 31B+ class.
 
 ## What gets measured
 
@@ -163,7 +163,7 @@ suite:
 
 ```bash
 uv run python scripts/run_evals.py --all-variants --suite full \
-  --task sourceqa --task kmmlu_pro --resilient-ifeval --strict-coverage
+  --task kmmlu_pro --resilient-ifeval --strict-coverage
 ```
 
 MTPLX-ready MLX checkpoints can be benchmarked through the normal MLX runner
@@ -217,6 +217,7 @@ Currently shipped:
 | `qwen-3.6-27b-mtplx-optimized-mtplx-mtp` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-on | 4bit |
 | `qwen-3.6-27b-mtplx-optimized-mtplx-ar` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-off | 4bit |
 | `qwen-3-coder-next-gguf-q4` | Qwen3-Coder-Next (MoE) | GGUF | Q4_K_M | 4bit |
+| `deepseek-v4-flash-gguf-iq2xxs` | DeepSeek-V4-Flash (MoE) | GGUF | IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8 | 2bit |
 | `gpt-oss-20b-gguf-q4` | gpt-oss-20b (MoE) | GGUF | Q4_K_M | 4bit |
 | `gpt-oss-120b-gguf-q4` | gpt-oss-120b (MoE, split GGUF) | GGUF | Q4_K_M | 4bit |
 | `nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4` | Nemotron-3-Nano-Omni-30B-A3B-Reasoning (MoE) | GGUF | UD-Q4_K_M | 4bit |
@@ -235,7 +236,7 @@ api_key_env: PROVIDER_API_KEY  # optional env var copied to Authorization/OpenAI
 ```
 
 Existing `mlx` and `gguf` variants infer these fields automatically. Speed
-benchmark adapters cover MLX, GGUF, and OpenAI-compatible endpoints.
+benchmark adapters cover MLX, GGUF, DS4, and OpenAI-compatible endpoints.
 Unsupported backends are rejected explicitly so new adapters can be added
 without silently misrouting results. Endpoint speed uses wall-clock effective
 token rates because hosted APIs generally do not expose separate
@@ -317,7 +318,7 @@ MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 | Long context | `longbench` (21 sub-tasks, EN+ZH) | — |
 | Safety | `truthfulqa-multi_gen_en` | `toxigen` |
 | Tool use | `bfcl` (BFCL v4, opt-in via `--include-bfcl`) | — |
-| Source grounding | `sourceqa` (pinned-repo evidence QA, deterministic checker) | — |
+| Diagnostic source grounding | `sourceqa` (pinned-repo evidence QA, deterministic checker) | — |
 | Fresh eval | `livebench_subset` (LiveBench non-agentic subset) | — |
 | Agentic code | `programbench` (ProgramBench eval + result import) | — |
 | Korean professional | `kmmlu_pro` (KMMLU-Pro weighted MCQ) | — |
@@ -445,7 +446,7 @@ Env overrides:
 - `SUITE=smoke|full` (default `full`)
 - `LIMIT=N` (per-task sample cap)
 - `VARIANTS="26B-MoE-mlx-8bit 26B-MoE-gguf-q8"` (subset, default = all)
-- `TASKS="sourceqa kmmlu_pro"` (task-filtered catch-up bucket)
+- `TASKS="kmmlu_pro"` (task-filtered catch-up bucket)
 - `LLM_BENCH_STRICT_COVERAGE=1` — pass `--strict-coverage` to `run_evals.py`
 - `LLM_BENCH_RESILIENT_IFEVAL=1` — pass `--resilient-ifeval` to `run_evals.py`
 - `LLM_BENCH_INCLUDE_BFCL=1` — pass `--include-bfcl` for the BFCL optional lane
@@ -468,11 +469,14 @@ Env overrides:
 Each variant boots its own server on port 9090; tasks run sequentially per
 variant. Expect ~2–3 hours per variant for the full suite.
 
-`sourceqa` is a lightweight external runner inspired by repo-search benchmarks:
-it clones pinned source repositories, injects curated evidence files into a
-chat prompt, and writes deterministic `acc,none` / recall metrics to the same
-`results_*.json` shape as lm-eval. Optional judge metadata can be recorded with
-`--sourceqa-judge-model`, but it does not affect the primary score.
+`sourceqa` is a lightweight diagnostic runner inspired by repo-search
+benchmarks: it clones pinned source repositories, injects curated evidence files
+into a chat prompt, and writes deterministic `acc,none` / recall metrics to the
+same `results_*.json` shape as lm-eval. Because the current task set is small
+and saturated, SourceQA is kept for smoke/regression checks and excluded from
+headline ranking and primary coverage debt. Optional judge metadata can be
+recorded with `--sourceqa-judge-model`, but it does not affect the diagnostic
+score.
 
 Results:
 - `results/eval_scores/<run_id>/<task>/.../results_*.json` — raw lm-eval output

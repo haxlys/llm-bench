@@ -9,9 +9,9 @@ from typing import Any
 
 PRIMARY_GROUPS = [
     (
-        "sourceqa_kmmlu_pro",
-        "Fill source-grounding and Korean professional coverage first.",
-        ("sourceqa", "kmmlu_pro"),
+        "kmmlu_pro",
+        "Fill Korean professional coverage first.",
+        ("kmmlu_pro",),
     ),
     (
         "primary_code",
@@ -119,6 +119,8 @@ def _coverage_by_task(index_data: dict[str, Any], status: str) -> dict[str, set[
             continue
         for row in coverage:
             if not isinstance(row, dict):
+                continue
+            if status == "missing" and row.get("required") is False:
                 continue
             if row.get("status") != status:
                 continue

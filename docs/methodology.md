@@ -85,7 +85,7 @@ their configured `/v1` endpoint directly and do not spawn a subprocess.
 | korean | `kmmlu_direct`, `hrm8k` | `kmmlu_pro` |
 | instruction | `leaderboard_ifeval` | — |
 | safety | `truthfulqa-multi_gen_en`, `toxigen` | — |
-| source grounding | — | `sourceqa` (pinned-repo evidence QA) |
+| diagnostic source grounding | — | `sourceqa` (pinned-repo evidence QA) |
 | code / contamination-fresh | — | primary: `humaneval`, `mbpp` (EvalPlus), `livecodebench`; optional: `bigcodebench_hard`, `livebench_subset` |
 | tool use | — | optional: `bfcl` (opt-in via `--include-bfcl`) |
 | long context | `longbench` (21 sub-tasks, run with `--suite long`) | — |
@@ -125,21 +125,23 @@ Results land in `results/eval_scores/<run_id>/<task>/.../results_*.json`.
   headline metric (e.g. `exact_match,strict-match` for gsm8k,
   `pass@1,create_test` for HumanEval, subtask average for hrm8k)
 - `index.json` — registry × speed/eval coverage, including whether each task is
-  `measured`, `directional`, `missing`, `optional`, `speed_only`, or
-  `unsupported`
+  `measured`, `directional`, `diagnostic`, `missing`, `optional`,
+  `speed_only`, or `unsupported`
 
 External runners also emit aggregate-compatible synthetic `results_*.json`
 files. For example, EvalPlus keeps its native `*_eval_results.json` beside the
 samples, then writes a compact `results_*.json` with `pass_at_1,base` and
 `pass_at_1,plus` so the same CSV/index path can consume it.
 
-`sourceqa` is the source-grounding dimension. Each task declares a pinned repo,
-commit, question, `required_any` signals, `forbidden` phrases, and exact
-`evidence_paths`. The runner clones the pinned commit, injects only the curated
-evidence files into the prompt, and scores the answer deterministically via
-required-signal recall, evidence-path recall, and forbidden-phrase violations.
-Optional judge metadata can be requested, but it is recorded separately and does
-not change the primary `acc,none` metric.
+`sourceqa` is a source-grounding diagnostic, not a headline ranking dimension.
+Each task declares a pinned repo, commit, question, `required_any` signals,
+`forbidden` phrases, and exact `evidence_paths`. The runner clones the pinned
+commit, injects only the curated evidence files into the prompt, and scores the
+answer deterministically via required-signal recall, evidence-path recall, and
+forbidden-phrase violations. Optional judge metadata can be requested, but it is
+recorded separately and does not change the `acc,none` metric. Because the
+current task set is small and saturated, SourceQA is kept for smoke/regression
+checks and excluded from headline ranking and primary coverage debt.
 
 `programbench` is the agentic whole-program reconstruction dimension.
 ProgramBench's Docker evaluation targets Linux x86_64 infrastructure and the
@@ -163,8 +165,9 @@ time, result artifact path, optional sample path, log path, and error text.
 
 Primary lanes are the minimum common matrix used for model-family comparisons:
 reasoning (`gsm8k_cot_zeroshot`, instruction), Korean (`hrm8k`, `kmmlu_pro`),
-code (`humaneval`, `mbpp`, `livecodebench`), source grounding (`sourceqa`), and
-speed where applicable. MTPLX native MTP/AR variants are a separate
+code (`humaneval`, `mbpp`, `livecodebench`), and speed where applicable.
+SourceQA is a diagnostic lane for source-grounding smoke/regression checks, not
+primary coverage debt. MTPLX native MTP/AR variants are a separate
 `mtplx_speedup` lane, not accuracy candidates. Optional lanes are intentionally separated:
 `bigcodebench_hard`, `bfcl`, `livebench_subset`, and `programbench`.
 
@@ -174,16 +177,18 @@ distinguish:
 - `measured`: committed result with a direct deterministic score.
 - `directional`: committed result whose scorer can undercount because of
   generation formatting or extraction.
+- `diagnostic`: committed diagnostic result that remains visible but is excluded
+  from headline ranking and primary coverage debt.
 - `missing`: primary supported task with no committed result yet.
 - `optional`: optional-lane task with no committed result yet.
 - `speed_only`: MTPLX speedup variant; accuracy coverage is intentionally not
   required for that row.
 - `unsupported`: task is not valid for the variant's declared capabilities.
 
-`--strict-coverage` fails only on missing primary supported tasks. Optional lanes
-and MTPLX speed-only rows remain visible but do not block a primary matrix run.
-Use `--task sourceqa --task kmmlu_pro` (or `TASKS="sourceqa kmmlu_pro"` with the
-overnight wrapper) to fill catch-up buckets in the planned order.
+`--strict-coverage` fails only on missing primary supported tasks. Optional
+lanes, diagnostic rows, and MTPLX speed-only rows remain visible but do not
+block a primary matrix run. Use the generated `results/eval_catchup_plan.md`
+commands to fill catch-up buckets in the planned order.
 
 ### Registry-driven variants
 

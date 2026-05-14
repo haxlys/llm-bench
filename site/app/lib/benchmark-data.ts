@@ -5,6 +5,7 @@ import type { MetricStatus } from "./format";
 const metricStatuses: ReadonlySet<string> = new Set<MetricStatus>([
   "measured",
   "directional",
+  "diagnostic",
   "unavailable",
   "optional",
   "speed_only",
@@ -355,6 +356,7 @@ export function coverageSummary(input: BenchmarkData): Record<MetricStatus, numb
   const summary: Record<MetricStatus, number> = {
     measured: 0,
     directional: 0,
+    diagnostic: 0,
     unavailable: 0,
     optional: 0,
     speed_only: 0,

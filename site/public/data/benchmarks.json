@@ -375,9 +375,11 @@
       "variant": "gemma-4-E4B-gguf-q8"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gemma-4-E4B-it",
       "runId": "20260505T163642Z_gemma-4-E4B-gguf-q8_full",
@@ -389,9 +391,11 @@
       "variant": "gemma-4-E4B-gguf-q8"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3.5-4B",
       "runId": "20260505T175503Z_qwen-3.5-4b-gguf-q8_full",
@@ -449,9 +453,11 @@
       "variant": "qwen-3.5-9b-gguf-q8"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3.5-9B",
       "runId": "20260504T131035Z_qwen-3.5-9b-gguf-q8_full",
@@ -509,9 +515,11 @@
       "variant": "qwen-3.6-35b-a3b-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3.6-35B-A3B",
       "runId": "20260504T141903Z_qwen-3.6-35b-a3b-gguf-q4_full",
@@ -569,9 +577,11 @@
       "variant": "qwen-3-coder-next-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3-coder-next",
       "runId": "20260505T155742Z_qwen-3-coder-next-gguf-q4_full",
@@ -935,9 +945,11 @@
       "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3-next-80B-A3B-instruct",
       "runId": "20260507T072425Z_qwen-3-next-80b-a3b-instruct-gguf-q4_full",
@@ -1009,9 +1021,11 @@
       "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3-coder-30B-A3B-instruct",
       "runId": "20260507T111750Z_qwen-3-coder-30b-a3b-instruct-gguf-q4_full",
@@ -1097,9 +1111,11 @@
       "variant": "gpt-oss-20b-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gpt-oss-20b",
       "runId": "20260507T132651Z_gpt-oss-20b-gguf-q4_full",
@@ -1185,9 +1201,11 @@
       "variant": "gpt-oss-120b-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gpt-oss-120b",
       "runId": "20260508T060843Z_gpt-oss-120b-gguf-q4_full",
@@ -1259,9 +1277,11 @@
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
       "runId": "20260508T073140Z_nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4_full",
@@ -1371,9 +1391,11 @@
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gemma-4-26B-A4B-it",
       "runId": "20260512T213443Z_26B-MoE-gguf-q4_full",
@@ -1413,9 +1435,11 @@
       "variant": "26B-MoE-gguf-q8"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gemma-4-26B-A4B-it",
       "runId": "20260512T223415Z_26B-MoE-gguf-q8_full",
@@ -1441,9 +1465,11 @@
       "variant": "26B-MoE-mlx-4bit"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gemma-4-26B-A4B-it",
       "runId": "20260512T224729Z_26B-MoE-mlx-4bit_full",
@@ -1469,9 +1495,11 @@
       "variant": "26B-MoE-mlx-8bit"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gemma-4-26B-A4B-it",
       "runId": "20260513T010357Z_26B-MoE-mlx-8bit_full",
@@ -1483,9 +1511,11 @@
       "variant": "26B-MoE-mlx-8bit"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gemma-4-31B-it",
       "runId": "20260513T012408Z_31B-Dense-gguf-q8_full",
@@ -1497,9 +1527,11 @@
       "variant": "31B-Dense-gguf-q8"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "gemma-4-31B-it",
       "runId": "20260513T013251Z_31B-Dense-mlx-8bit_full",
@@ -1581,9 +1613,11 @@
       "variant": "qwen-3.6-27b-mtplx-speed-mlx-4bit"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3.6-27B-MTPLX",
       "runId": "20260513T034954Z_qwen-3.6-27b-mtplx-speed-mlx-4bit_full",
@@ -1609,9 +1643,11 @@
       "variant": "qwen-3.6-27b-mtplx-optimized-mlx-mixed4"
     },
     {
-      "caveats": [],
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "metric": "acc,none",
       "modelId": "qwen-3.6-27B-MTPLX",
       "runId": "20260513T043754Z_qwen-3.6-27b-mtplx-optimized-mlx-mixed4_full",
@@ -1790,6 +1826,10 @@
     {
       "id": "agentic-scaffold-dependent",
       "status": "measured"
+    },
+    {
+      "id": "diagnostic-sourceqa",
+      "status": "diagnostic"
     },
     {
       "id": "coverage-missing",
@@ -2002,15 +2042,15 @@
       "variant": "26B-MoE-mlx-8bit"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "gemma",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gemma-4-26B-A4B-it",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "26B-MoE-mlx-8bit"
@@ -2254,15 +2294,15 @@
       "variant": "26B-MoE-mlx-4bit"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "gemma",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gemma-4-26B-A4B-it",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "26B-MoE-mlx-4bit"
@@ -2506,15 +2546,15 @@
       "variant": "26B-MoE-gguf-q8"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "gemma",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gemma-4-26B-A4B-it",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "26B-MoE-gguf-q8"
@@ -2758,15 +2798,15 @@
       "variant": "26B-MoE-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "gemma",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gemma-4-26B-A4B-it",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "26B-MoE-gguf-q4"
@@ -3010,15 +3050,15 @@
       "variant": "31B-Dense-mlx-8bit"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "gemma",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gemma-4-31B-it",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "31B-Dense-mlx-8bit"
@@ -3262,15 +3302,15 @@
       "variant": "31B-Dense-gguf-q8"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "gemma",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gemma-4-31B-it",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "31B-Dense-gguf-q8"
@@ -3514,15 +3554,15 @@
       "variant": "gemma-4-E4B-gguf-q8"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "gemma",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gemma-4-E4B-it",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "gemma-4-E4B-gguf-q8"
@@ -3766,15 +3806,15 @@
       "variant": "qwen-3.5-4b-gguf-q8"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3.5-4B",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3.5-4b-gguf-q8"
@@ -4018,15 +4058,15 @@
       "variant": "qwen-3.5-9b-gguf-q8"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3.5-9B",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3.5-9b-gguf-q8"
@@ -4270,15 +4310,15 @@
       "variant": "qwen-3.6-35b-a3b-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3.6-35B-A3B",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3.6-35b-a3b-gguf-q4"
@@ -4522,15 +4562,15 @@
       "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3-next-80B-A3B-instruct",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4"
@@ -4774,15 +4814,15 @@
       "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3-coder-30B-A3B-instruct",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4"
@@ -5026,15 +5066,15 @@
       "variant": "qwen-3.6-27b-mtplx-speed-mlx-4bit"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3.6-27B-MTPLX",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3.6-27b-mtplx-speed-mlx-4bit"
@@ -5278,8 +5318,8 @@
       "variant": "qwen-3.6-27b-mtplx-speed-mtplx-mtp"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
       "lane": "mtplx_speedup",
       "measured": false,
@@ -5530,8 +5570,8 @@
       "variant": "qwen-3.6-27b-mtplx-speed-mtplx-ar"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
       "lane": "mtplx_speedup",
       "measured": false,
@@ -5782,15 +5822,15 @@
       "variant": "qwen-3.6-27b-mtplx-optimized-mlx-mixed4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3.6-27B-MTPLX",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3.6-27b-mtplx-optimized-mlx-mixed4"
@@ -6034,8 +6074,8 @@
       "variant": "qwen-3.6-27b-mtplx-optimized-mtplx-mtp"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
       "lane": "mtplx_speedup",
       "measured": false,
@@ -6286,8 +6326,8 @@
       "variant": "qwen-3.6-27b-mtplx-optimized-mtplx-ar"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
       "lane": "mtplx_speedup",
       "measured": false,
@@ -6538,15 +6578,15 @@
       "variant": "qwen-3-coder-next-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "qwen",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "qwen-3-coder-next",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "qwen-3-coder-next-gguf-q4"
@@ -6592,6 +6632,258 @@
       "supported": true,
       "task": "programbench",
       "variant": "qwen-3-coder-next-gguf-q4"
+    },
+    {
+      "confidence": "directional",
+      "dim": "reasoning",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "missing",
+      "supported": true,
+      "task": "gsm8k_cot_zeroshot",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "reasoning",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "unsupported",
+      "supported": false,
+      "task": "hellaswag",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "reasoning",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "unsupported",
+      "supported": false,
+      "task": "leaderboard_mmlu_pro",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "reasoning",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "unsupported",
+      "supported": false,
+      "task": "leaderboard_gpqa_diamond",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "directional",
+      "dim": "korean",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "missing",
+      "supported": true,
+      "task": "hrm8k",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "korean",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "unsupported",
+      "supported": false,
+      "task": "haerae",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "korean",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "unsupported",
+      "supported": false,
+      "task": "kobest",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "instruction",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "missing",
+      "supported": true,
+      "task": "leaderboard_ifeval",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "safety",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "lm-eval",
+      "status": "unsupported",
+      "supported": false,
+      "task": "toxigen",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "code",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "evalplus",
+      "status": "missing",
+      "supported": true,
+      "task": "humaneval",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "code",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "evalplus",
+      "status": "missing",
+      "supported": true,
+      "task": "mbpp",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "code",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "livecodebench",
+      "status": "missing",
+      "supported": true,
+      "task": "livecodebench",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "code",
+      "family": "deepseek",
+      "lane": "optional",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": false,
+      "runner": "bigcodebench",
+      "status": "optional",
+      "supported": true,
+      "task": "bigcodebench_hard",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "tool",
+      "family": "deepseek",
+      "lane": "optional",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": false,
+      "runner": "bfcl",
+      "status": "optional",
+      "supported": true,
+      "task": "bfcl",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "deepseek",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": false,
+      "runner": "sourceqa",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "sourceqa",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "fresh",
+      "family": "deepseek",
+      "lane": "optional",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": false,
+      "runner": "livebench",
+      "status": "optional",
+      "supported": true,
+      "task": "livebench_subset",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "korean",
+      "family": "deepseek",
+      "lane": "primary",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": true,
+      "runner": "kmmlu_pro",
+      "status": "missing",
+      "supported": true,
+      "task": "kmmlu_pro",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "measured",
+      "dim": "agentic_code",
+      "family": "deepseek",
+      "lane": "optional",
+      "measured": false,
+      "modelId": "deepseek-v4-flash",
+      "required": false,
+      "runner": "programbench",
+      "status": "optional",
+      "supported": true,
+      "task": "programbench",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
     },
     {
       "confidence": "directional",
@@ -6790,15 +7082,15 @@
       "variant": "gpt-oss-20b-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "openai",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gpt-oss-20b",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "gpt-oss-20b-gguf-q4"
@@ -7042,15 +7334,15 @@
       "variant": "gpt-oss-120b-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "openai",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "gpt-oss-120b",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "gpt-oss-120b-gguf-q4"
@@ -7294,15 +7586,15 @@
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     },
     {
-      "confidence": "measured",
-      "dim": "source_grounding",
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
       "family": "nemotron",
-      "lane": "primary",
+      "lane": "diagnostic",
       "measured": true,
       "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
-      "required": true,
+      "required": false,
       "runner": "sourceqa",
-      "status": "measured",
+      "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
@@ -7350,7 +7642,7 @@
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     }
   ],
-  "generatedAt": "2026-05-13T22:57:14.056722+00:00",
+  "generatedAt": "2026-05-14T01:51:24.144927+00:00",
   "hardware": {
     "machine": "Apple M5 Max",
     "memoryGb": 128,
@@ -7463,7 +7755,7 @@
       "verifyMsPerCallMean": 86.086
     }
   ],
-  "sourceCommit": "839c7f4",
+  "sourceCommit": "41c5c41",
   "speed": [
     {
       "backend": "gguf",
@@ -8908,6 +9200,62 @@
       "ttftMs": null,
       "variant": "31B-Dense-mlx-8bit",
       "wallSecondsMean": 48.65333333333333
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T01:38:38+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T01:38:38+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.137,
+      "ppTpsMean": 199.01,
+      "promptTokens": 256,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1
+      ],
+      "runs": 1,
+      "scenario": "p256_g128",
+      "tgTpsMean": 36.88,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 5.63
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T01:39:43+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T01:39:43+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.302,
+      "ppTpsMean": 332.25,
+      "promptTokens": 8192,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1
+      ],
+      "runs": 1,
+      "scenario": "p8192_g512",
+      "tgTpsMean": 29.71,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 42.77
     },
     {
       "backend": "gguf",
@@ -12365,6 +12713,22 @@
       "paramsTotalB": 79.7,
       "quant": "Q4_K_M",
       "tier": "4bit"
+    },
+    {
+      "approxSizeGb": 80.8,
+      "architecture": "moe",
+      "artifactType": "gguf_file",
+      "backend": "ds4",
+      "family": "deepseek",
+      "fmt": "gguf",
+      "generationMode": "",
+      "key": "deepseek-v4-flash-gguf-iq2xxs",
+      "modelId": "deepseek-v4-flash",
+      "notes": "Routed experts use IQ2_XXS/Q2_K; attention projections, shared experts, and output use Q8_0. File is already present locally.",
+      "paramsActiveB": 13,
+      "paramsTotalB": 284,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "tier": "2bit"
     },
     {
       "approxSizeGb": 11,

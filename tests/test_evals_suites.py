@@ -26,7 +26,7 @@ def test_external_code_runners_are_not_supported_on_mlx_until_server_bug_is_fixe
 
 
 def test_sourceqa_external_runner_is_supported_for_both_formats():
-    assert ("source_grounding", "sourceqa", "sourceqa") in external_suite()
+    assert ("diagnostic", "sourceqa", "sourceqa") in external_suite()
     assert external_supports_fmt("sourceqa", "sourceqa", "mlx") is True
     assert external_supports_fmt("sourceqa", "sourceqa", "gguf") is True
 

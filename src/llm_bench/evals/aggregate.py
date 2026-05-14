@@ -62,7 +62,7 @@ TASK_DIM = {
     "programbench": "agentic_code",
     "longbench": "long",
     "bfcl": "tool",
-    "sourceqa": "source_grounding",
+    "sourceqa": "diagnostic",
     "truthfulqa-multi_gen_en": "safety",
     "toxigen": "safety",
 }

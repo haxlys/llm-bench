@@ -16,6 +16,7 @@ export type KnownCaveatId =
   | "latency-not-measured"
   | "generative-exact-match"
   | "agentic-scaffold-dependent"
+  | "diagnostic-sourceqa"
   | "coverage-missing"
   | "optional-eval-lane"
   | "mtplx-speed-only";
@@ -282,6 +283,7 @@ export const messages = {
     status: {
       measured: "measured",
       directional: "directional",
+      diagnostic: "diagnostic",
       unavailable: "not measured",
       optional: "optional",
       speed_only: "speed-only",
@@ -295,6 +297,8 @@ export const messages = {
         "Generative exact-match rows can undercount correct answers because of output formatting and answer extraction.",
       "agentic-scaffold-dependent":
         "ProgramBench scores include the agent scaffold, tools, and execution environment, not only the base model.",
+      "diagnostic-sourceqa":
+        "SourceQA is a small source-grounding smoke/regression check, so it is not used for headline ranking or primary coverage debt.",
       "coverage-missing":
         "A primary supported evaluation has no committed result yet.",
       "optional-eval-lane":
@@ -623,6 +627,7 @@ export const messages = {
     status: {
       measured: "측정됨",
       directional: "방향성",
+      diagnostic: "진단용",
       unavailable: "미측정",
       optional: "옵션",
       speed_only: "속도 전용",
@@ -636,6 +641,8 @@ export const messages = {
         "생성형 exact-match 행은 출력 형식과 정답 추출 방식 때문에 정답을 낮게 셀 수 있습니다.",
       "agentic-scaffold-dependent":
         "ProgramBench 점수는 base model뿐 아니라 agent scaffold, 도구, 실행 환경의 영향도 포함합니다.",
+      "diagnostic-sourceqa":
+        "SourceQA는 작은 source-grounding smoke/regression check이므로 headline ranking이나 primary coverage 부채에 사용하지 않습니다.",
       "coverage-missing":
         "지원되는 primary 평가인데 아직 커밋된 결과가 없습니다.",
       "optional-eval-lane":

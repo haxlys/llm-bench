@@ -62,6 +62,7 @@ DEFAULT_TIMEOUT_S = 30 * 60
 def run_with_time(
     cmd: list[str],
     env: dict | None = None,
+    cwd: str | None = None,
     timeout_s: int = DEFAULT_TIMEOUT_S,
     check: bool = True,
 ) -> tuple[str, str, float, float]:
@@ -79,6 +80,7 @@ def run_with_time(
         stderr=subprocess.PIPE,
         text=True,
         env=env,
+        cwd=cwd,
         start_new_session=True,
     )
     try:

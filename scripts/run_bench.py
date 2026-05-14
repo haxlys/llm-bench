@@ -28,7 +28,7 @@ from llm_bench import BENCH_VERSION
 from llm_bench.aggregate import write_summary
 from llm_bench.manifest import speed_is_measured, speed_manifest
 from llm_bench.registry import Variant, get_registry
-from llm_bench.runners import GGUFRunner, MLXRunner, MTPLXRunner, OpenAICompatibleRunner
+from llm_bench.runners import DS4Runner, GGUFRunner, MLXRunner, MTPLXRunner, OpenAICompatibleRunner
 from llm_bench.runners.base import write_raw
 from llm_bench.scenarios import default_scenarios, smoke_scenarios
 
@@ -45,6 +45,9 @@ def _build_runner(variant: Variant):
     if backend == "gguf":
         return GGUFRunner(model_id=variant.model_id, model_path=variant.resolved_path,
                           quant=variant.quant, variant_key=variant.key)
+    if backend == "ds4":
+        return DS4Runner(model_id=variant.model_id, model_path=variant.resolved_path,
+                         quant=variant.quant, variant_key=variant.key)
     if backend == "mtplx":
         return MTPLXRunner(
             model_id=variant.model_id,

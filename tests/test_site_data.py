@@ -81,15 +81,15 @@ def _write_index(path: Path) -> None:
                         "evals": {
                             "coverage": [
                                 {
-                                    "dim": "source_grounding",
+                                    "dim": "diagnostic",
                                     "task": "sourceqa",
                                     "runner": "sourceqa",
-                                    "lane": "primary",
-                                    "required": True,
+                                    "lane": "diagnostic",
+                                    "required": False,
                                     "supported": True,
                                     "measured": True,
-                                    "confidence": "measured",
-                                    "status": "measured",
+                                    "confidence": "diagnostic",
+                                    "status": "diagnostic",
                                 },
                                 {
                                     "dim": "agentic_code",
@@ -147,7 +147,7 @@ def _accuracy_row(**overrides: object) -> dict[str, object]:
         "tier": "8bit",
         "family": "qwen",
         "architecture": "dense",
-        "dim": "source_grounding",
+        "dim": "diagnostic",
         "task": "sourceqa",
         "run_id": "run-1",
         "ts": "20260506T000000Z",
@@ -380,7 +380,7 @@ def test_build_site_data_uses_bench_version_from_most_recent_speed_row(
                 "tier": "8bit",
                 "family": "qwen",
                 "architecture": "dense",
-                "dim": "source_grounding",
+                "dim": "diagnostic",
                 "task": "sourceqa",
                 "run_id": "run-1",
                 "ts": "20260506T000000Z",
@@ -465,13 +465,25 @@ def test_programbench_accuracy_rows_carry_agentic_caveat(tmp_path: Path) -> None
     assert {"id": "mtplx-speed-only", "status": "speed_only"} in data["caveats"]
 
 
+def test_sourceqa_accuracy_rows_are_diagnostic(tmp_path: Path) -> None:
+    _write_site_inputs(tmp_path)
+
+    data = build_site_data(repo_root=tmp_path)
+
+    assert data["accuracy"][0]["confidence"] == "diagnostic"
+    assert data["accuracy"][0]["caveats"] == ["diagnostic-sourceqa"]
+    assert {"id": "diagnostic-sourceqa", "status": "diagnostic"} in data["caveats"]
+
+
 def test_build_site_data_exports_index_coverage(tmp_path: Path) -> None:
     _write_site_inputs(tmp_path)
 
     data = build_site_data(repo_root=tmp_path)
 
     assert data["coverage"][0]["task"] == "sourceqa"
-    assert data["coverage"][0]["status"] == "measured"
+    assert data["coverage"][0]["lane"] == "diagnostic"
+    assert data["coverage"][0]["required"] is False
+    assert data["coverage"][0]["status"] == "diagnostic"
     assert data["coverage"][1]["task"] == "programbench"
     assert data["coverage"][1]["status"] == "optional"
 
@@ -546,7 +558,7 @@ def test_write_site_data_outputs_stable_json(tmp_path: Path) -> None:
                 "tier": "8bit",
                 "family": "qwen",
                 "architecture": "dense",
-                "dim": "source_grounding",
+                "dim": "diagnostic",
                 "task": "sourceqa",
                 "run_id": "run-1",
                 "ts": "20260506T000000Z",

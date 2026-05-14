@@ -76,16 +76,16 @@ const fixture: BenchmarkData = {
       variant: "b",
     },
     {
-      confidence: "measured",
-      dim: "source_grounding",
+      confidence: "diagnostic",
+      dim: "diagnostic",
       family: "test",
-      lane: "mtplx_speedup",
-      measured: false,
+      lane: "diagnostic",
+      measured: true,
       modelId: "model-b",
       required: false,
       runner: "sourceqa",
-      status: "speed_only",
-      supported: false,
+      status: "diagnostic",
+      supported: true,
       task: "sourceqa",
       variant: "b",
     },
@@ -198,11 +198,11 @@ describe("benchmark data helpers", () => {
   });
 
   it("summarizes coverage statuses", () => {
-    expect(dimensions(fixture)).toEqual(["code", "source_grounding", "tool"]);
+    expect(dimensions(fixture)).toEqual(["code", "diagnostic", "tool"]);
     expect(tasks(fixture)).toEqual(["bfcl", "humaneval", "sourceqa"]);
     expect(coverageSummary(fixture).measured).toBe(1);
     expect(coverageSummary(fixture).optional).toBe(1);
-    expect(coverageSummary(fixture).speed_only).toBe(1);
+    expect(coverageSummary(fixture).diagnostic).toBe(1);
   });
 
   it("labels the ProgramBench caveat", () => {
@@ -232,6 +232,7 @@ describe("benchmark data helpers", () => {
     expect(firstCaveat.id).toBeTruthy();
     expect([
       "directional",
+      "diagnostic",
       "measured",
       "unavailable",
       "optional",

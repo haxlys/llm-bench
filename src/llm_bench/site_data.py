@@ -28,6 +28,9 @@ _DIRECTIONAL_TASKS = {
     "truthfulqa-multi_gen_en",
     "longbench",
 }
+_DIAGNOSTIC_TASKS = {
+    "sourceqa",
+}
 _AGENTIC_TASKS = {"programbench"}
 
 
@@ -351,6 +354,8 @@ def _speed_variant(row: dict[str, str], registry: Registry) -> Variant:
 
 
 def _accuracy_confidence(task: str, metric: str) -> str:
+    if task in _DIAGNOSTIC_TASKS:
+        return "diagnostic"
     if task in _DIRECTIONAL_TASKS:
         return "directional"
     if "strict-match" in metric or "get_response" in metric:
@@ -359,6 +364,8 @@ def _accuracy_confidence(task: str, metric: str) -> str:
 
 
 def _accuracy_caveats(task: str, metric: str) -> list[str]:
+    if task in _DIAGNOSTIC_TASKS:
+        return ["diagnostic-sourceqa"]
     if task in _AGENTIC_TASKS:
         return ["agentic-scaffold-dependent"]
     if _accuracy_confidence(task, metric) == "directional":
@@ -379,6 +386,10 @@ def _caveats() -> list[dict[str, str]]:
         {
             "id": "agentic-scaffold-dependent",
             "status": "measured",
+        },
+        {
+            "id": "diagnostic-sourceqa",
+            "status": "diagnostic",
         },
         {
             "id": "coverage-missing",

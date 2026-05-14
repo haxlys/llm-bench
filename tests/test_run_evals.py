@@ -26,7 +26,7 @@ def test_trace_task_result_records_runner_status_and_artifacts(tmp_path):
         variant_key="26B-MoE-gguf-q8",
         task="sourceqa",
         runner="sourceqa",
-        dim="source_grounding",
+        dim="diagnostic",
         wall_s=1.23,
         result={
             "task": "sourceqa",
@@ -41,7 +41,7 @@ def test_trace_task_result_records_runner_status_and_artifacts(tmp_path):
     assert row["variant"] == "26B-MoE-gguf-q8"
     assert row["task"] == "sourceqa"
     assert row["runner"] == "sourceqa"
-    assert row["dim"] == "source_grounding"
+    assert row["dim"] == "diagnostic"
     assert row["status"] == "ok"
     assert row["results_file"] == "/tmp/results.json"
     assert row["samples_file"] == "/tmp/results.json"

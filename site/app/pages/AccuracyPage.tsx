@@ -12,6 +12,7 @@ const allDimensionsOption = "all";
 const coverageStatuses: MetricStatus[] = [
   "measured",
   "directional",
+  "diagnostic",
   "missing",
   "optional",
   "speed_only",

@@ -208,7 +208,7 @@ def _interpolate(s: str, defaults: dict) -> str:
 
 
 ALLOWED_FMTS = {"mlx", "gguf", "api"}
-ALLOWED_TIERS = {"4bit", "5bit", "6bit", "8bit", "16bit", "fp16", "bf16", "hosted"}
+ALLOWED_TIERS = {"2bit", "4bit", "5bit", "6bit", "8bit", "16bit", "fp16", "bf16", "hosted"}
 ALLOWED_ARCHS = {"dense", "moe"}
 
 
@@ -224,7 +224,7 @@ def default_artifact_type(fmt: str) -> str:
 
 def default_capabilities(backend: str, fmt: str) -> frozenset[str]:
     key = backend or fmt
-    if key == "gguf":
+    if key in {"gguf", "ds4"}:
         return frozenset({"chat", "completions", "code_eval_chat", "tool_use_eval"})
     if key == "mlx":
         return frozenset({"chat", "completions"})

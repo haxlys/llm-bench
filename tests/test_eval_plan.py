@@ -42,7 +42,7 @@ def test_build_eval_catchup_plan_orders_primary_speed_and_optional_work():
             _variant(
                 "model-b",
                 [
-                    _row("sourceqa", "missing"),
+                    _row("sourceqa", "diagnostic", lane="diagnostic"),
                     _row("mbpp", "missing"),
                     _row("programbench", "optional", lane="optional"),
                 ],
@@ -57,13 +57,13 @@ def test_build_eval_catchup_plan_orders_primary_speed_and_optional_work():
     })
 
     assert plan["summary"] == {
-        "primary_missing": 3,
+        "primary_missing": 2,
         "optional_pending": 2,
         "speed_incomplete": 2,
     }
-    assert plan["primary"][0]["id"] == "sourceqa_kmmlu_pro"
-    assert plan["primary"][0]["tasks"] == ["sourceqa", "kmmlu_pro"]
-    assert "TASKS=\"sourceqa kmmlu_pro\"" in plan["primary"][0]["command"]
+    assert plan["primary"][0]["id"] == "kmmlu_pro"
+    assert plan["primary"][0]["tasks"] == ["kmmlu_pro"]
+    assert "TASKS=\"kmmlu_pro\"" in plan["primary"][0]["command"]
     assert plan["primary"][1]["id"] == "primary_code"
     assert plan["speed"]["variants"][0]["variant"] == "model-a"
     assert plan["optional"][0]["id"] == "optional_bigcodebench_bfcl_livebench"

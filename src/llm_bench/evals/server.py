@@ -54,7 +54,7 @@ class ModelServer:
         self.fmt = fmt
         self.backend = backend or fmt
         self.artifact_type = artifact_type or _default_artifact_type(fmt)
-        if self.backend not in ("mlx", "gguf", "openai-compatible"):
+        if self.backend not in ("mlx", "gguf", "ds4", "openai-compatible"):
             raise ValueError(f"unknown backend: {self.backend}")
         self.model_path = model_path
         self.port = port
@@ -96,6 +96,18 @@ class ModelServer:
                     "--chat-template-args",
                     json.dumps(chat_template_args, separators=(",", ":")),
                 ])
+            if self.server_args:
+                cmd.extend(self.server_args)
+            return cmd
+        if self.backend == "ds4":
+            ds4_server = _find_ds4_binary("ds4-server", self.model_path)
+            cmd = [
+                ds4_server,
+                "-m", self.model_path,
+                "--host", self.host, "--port", str(self.port),
+                "-c", str(self.context_size),
+                "-n", str(MLX_DEFAULT_MAX_TOKENS),
+            ]
             if self.server_args:
                 cmd.extend(self.server_args)
             return cmd
@@ -175,6 +187,17 @@ def _default_artifact_type(fmt: str) -> str:
     if fmt == "gguf":
         return "gguf_file"
     return "hf_repo"
+
+
+def _find_ds4_binary(name: str, model_path: str) -> str:
+    ds4_root = Path(model_path).expanduser().resolve().parent.parent
+    local = ds4_root / name
+    if local.is_file():
+        return str(local)
+    found = shutil.which(name)
+    if found:
+        return found
+    raise RuntimeError(f"{name} not found. Build ds4 or put {name} on PATH.")
 
 
 def _normalize_endpoint_base_url(url: str) -> str:

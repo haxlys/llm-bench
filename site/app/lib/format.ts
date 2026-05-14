@@ -3,6 +3,7 @@ import { defaultLocale, messages, type Locale } from "./i18n";
 export type MetricStatus =
   | "measured"
   | "directional"
+  | "diagnostic"
   | "unavailable"
   | "optional"
   | "speed_only"
