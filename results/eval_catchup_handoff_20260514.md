@@ -156,5 +156,8 @@ LIVE_CODE_BENCH_REPO=.external/LiveCodeBench uv run pytest \
 ## Worktree Notes
 
 - `.external/LiveCodeBench` is untracked and required for local LiveCodeBench runs.
+  Current checkout: `28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24`
+  from `https://github.com/LiveCodeBench/LiveCodeBench.git`.
 - Many `results/eval_traces/*.jsonl` files are untracked generated outputs.
-- No files have been staged or committed.
+- Do not commit `.external/` itself; keep the checkout local and reproducible
+  through the commit hash above.
