@@ -50,6 +50,7 @@ class ModelServer:
         log_file: Path | None = None,
         chat_template_args: dict[str, Any] | None = None,
         server_args: list[str] | None = None,
+        runtime_root: str = "",
     ):
         self.fmt = fmt
         self.backend = backend or fmt
@@ -65,6 +66,7 @@ class ModelServer:
         self.log_file = log_file
         self.chat_template_args = chat_template_args
         self.server_args = server_args or []
+        self.runtime_root = runtime_root
         self.proc: subprocess.Popen | None = None
 
     @property
@@ -100,7 +102,7 @@ class ModelServer:
                 cmd.extend(self.server_args)
             return cmd
         if self.backend == "ds4":
-            ds4_server = _find_ds4_binary("ds4-server", self.model_path)
+            ds4_server = _find_ds4_binary("ds4-server", self.model_path, self.runtime_root)
             cmd = [
                 ds4_server,
                 "-m", self.model_path,
@@ -132,6 +134,11 @@ class ModelServer:
             cmd.extend(self.server_args)
         return cmd
 
+    def _subprocess_cwd(self) -> str | None:
+        if self.backend == "ds4":
+            return str(_resolve_ds4_root(self.model_path, self.runtime_root))
+        return None
+
     def _is_ready(self) -> bool:
         try:
             r = requests.get(f"{self.base_url}/models", timeout=2)
@@ -147,6 +154,7 @@ class ModelServer:
         try:
             self.proc = subprocess.Popen(
                 cmd, stdout=log_target, stderr=subprocess.STDOUT,
+                cwd=self._subprocess_cwd(),
             )
         finally:
             # Popen dup'd the fd; the parent's handle is no longer needed.
@@ -189,8 +197,8 @@ def _default_artifact_type(fmt: str) -> str:
     return "hf_repo"
 
 
-def _find_ds4_binary(name: str, model_path: str) -> str:
-    ds4_root = Path(model_path).expanduser().resolve().parent.parent
+def _find_ds4_binary(name: str, model_path: str, runtime_root: str = "") -> str:
+    ds4_root = _resolve_ds4_root(model_path, runtime_root)
     local = ds4_root / name
     if local.is_file():
         return str(local)
@@ -198,6 +206,12 @@ def _find_ds4_binary(name: str, model_path: str) -> str:
     if found:
         return found
     raise RuntimeError(f"{name} not found. Build ds4 or put {name} on PATH.")
+
+
+def _resolve_ds4_root(model_path: str, runtime_root: str = "") -> Path:
+    if runtime_root:
+        return Path(runtime_root).expanduser().resolve()
+    return Path(model_path).expanduser().resolve().parent.parent
 
 
 def _normalize_endpoint_base_url(url: str) -> str:

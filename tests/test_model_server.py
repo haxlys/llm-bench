@@ -79,6 +79,30 @@ def test_ds4_model_server_uses_sibling_binary_and_context_size(tmp_path):
     assert cmd[cmd.index("-m") + 1] == str(model_path)
 
 
+def test_ds4_model_server_accepts_separate_runtime_root(tmp_path):
+    runtime_root = tmp_path / "ds4"
+    model_dir = tmp_path / "models"
+    runtime_root.mkdir()
+    model_dir.mkdir()
+    server_bin = runtime_root / "ds4-server"
+    server_bin.write_text("#!/bin/sh\n")
+    model_path = model_dir / "model.gguf"
+    model_path.write_text("fake")
+
+    server = ModelServer(
+        fmt="gguf",
+        backend="ds4",
+        artifact_type="gguf_file",
+        model_path=str(model_path),
+        runtime_root=str(runtime_root),
+    )
+
+    cmd = server._build_cmd()
+
+    assert cmd[0] == str(server_bin)
+    assert server._subprocess_cwd() == str(runtime_root)
+
+
 def test_mlx_model_server_disables_thinking_by_default():
     server = ModelServer(fmt="mlx", model_path="org/model")
 

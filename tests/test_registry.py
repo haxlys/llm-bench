@@ -214,6 +214,29 @@ models:
     assert r.variant("v1").tokenizer == "Qwen/Qwen3.5-4B"
 
 
+def test_variant_can_define_runtime_root(tmp_path):
+    body = """
+defaults:
+  ds4_root: /tmp/ds4
+models:
+  - id: m1
+    family: deepseek
+    architecture: moe
+    variants:
+      - key: v1
+        fmt: gguf
+        backend: ds4
+        path: /tmp/model.gguf
+        runtime_root: "{ds4_root}"
+        quant: IQ2XXS
+        tier: 2bit
+        download: {repo: org/m1, revision: abc123}
+"""
+    r = load_registry(_write(tmp_path, body))
+
+    assert r.variant("v1").runtime_root == "/tmp/ds4"
+
+
 def test_variant_defaults_backend_artifact_and_capabilities_from_fmt(tmp_path):
     body = """
 defaults:

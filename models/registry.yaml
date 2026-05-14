@@ -334,16 +334,17 @@ models:
       - key: deepseek-v4-flash-gguf-iq2xxs
         fmt: gguf
         backend: ds4
-        path: "/Users/haxlys/projects/ds4/gguf/DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2.gguf"
+        path: "/Users/haxlys/models/gguf/deepseek-v4-gguf/DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2-imatrix.gguf"
+        runtime_root: "/Users/haxlys/projects/ds4"
         quant: IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8
         tokenizer: deepseek-ai/DeepSeek-V4-Flash
         api_model: deepseek-chat
         tier: 2bit
         approx_size_gb: 80.8
-        notes: "Routed experts use IQ2_XXS/Q2_K; attention projections, shared experts, and output use Q8_0. File is already present locally."
+        notes: "Routed experts use IQ2_XXS/Q2_K; attention projections, shared experts, and output use Q8_0. Uses the imatrix-calibrated GGUF now present under ~/models/gguf/deepseek-v4-gguf."
         download:
           repo: antirez/deepseek-v4-gguf
-          pattern: "DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2.gguf"
+          pattern: "DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2-imatrix.gguf"
           revision: 3274cdc42be178f7384211c7463565dccfc444d7
 
   # ─── OpenAI gpt-oss ─────────────────────────────────────────────────────

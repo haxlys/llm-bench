@@ -217,7 +217,7 @@ Currently shipped:
 | `qwen-3.6-27b-mtplx-optimized-mtplx-mtp` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-on | 4bit |
 | `qwen-3.6-27b-mtplx-optimized-mtplx-ar` | qwen-3.6-27B-MTPLX | MTPLX | mixed 4/8-bit MTP-off | 4bit |
 | `qwen-3-coder-next-gguf-q4` | Qwen3-Coder-Next (MoE) | GGUF | Q4_K_M | 4bit |
-| `deepseek-v4-flash-gguf-iq2xxs` | DeepSeek-V4-Flash (MoE) | GGUF | IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8 | 2bit |
+| `deepseek-v4-flash-gguf-iq2xxs` | DeepSeek-V4-Flash (MoE) | GGUF DS4 imatrix | IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8 | 2bit |
 | `gpt-oss-20b-gguf-q4` | gpt-oss-20b (MoE) | GGUF | Q4_K_M | 4bit |
 | `gpt-oss-120b-gguf-q4` | gpt-oss-120b (MoE, split GGUF) | GGUF | Q4_K_M | 4bit |
 | `nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4` | Nemotron-3-Nano-Omni-30B-A3B-Reasoning (MoE) | GGUF | UD-Q4_K_M | 4bit |

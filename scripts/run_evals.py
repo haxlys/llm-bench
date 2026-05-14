@@ -434,6 +434,7 @@ def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str,
                 port=port,
                 context_size=server_context_size,
                 log_file=server_log,
+                runtime_root=getattr(v, "runtime_root", ""),
             ) as base_url:
                 click.echo(f"  server: {base_url} (booted in {time.perf_counter()-t0:.1f}s)")
                 api_model_label = _api_model_label(v)

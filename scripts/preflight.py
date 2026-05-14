@@ -103,6 +103,7 @@ def main(variant_key: str | None, port: int, limit: int) -> None:
         model_path=v.resolved_path,
         port=port,
         log_file=log_file,
+        runtime_root=getattr(v, "runtime_root", ""),
     ) as base_url:
         api_label = getattr(v, "api_model_label", v.path if v.fmt == "mlx" else v.key)
         api_key = _api_key(v)

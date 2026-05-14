@@ -21,6 +21,7 @@ class DS4Runner:
         variant_key: str = "",
         backend_name: str = "metal",
         prompt_file: str | None = None,
+        runtime_root: str = "",
     ):
         self.model_id = model_id
         self.model_path = model_path
@@ -28,7 +29,7 @@ class DS4Runner:
         self.n_threads = n_threads
         self.variant_key = variant_key
         self.backend_name = backend_name
-        self.ds4_root = Path(model_path).expanduser().resolve().parent.parent
+        self.ds4_root = _resolve_ds4_root(model_path, runtime_root)
         self.ds4_bench = _find_ds4_binary("ds4-bench", self.ds4_root)
         self.prompt_file = (
             Path(prompt_file).expanduser()
@@ -93,6 +94,12 @@ def _find_ds4_binary(name: str, ds4_root: Path) -> str:
     if found:
         return found
     raise RuntimeError(f"{name} not found. Build ds4 or put {name} on PATH.")
+
+
+def _resolve_ds4_root(model_path: str, runtime_root: str = "") -> Path:
+    if runtime_root:
+        return Path(runtime_root).expanduser().resolve()
+    return Path(model_path).expanduser().resolve().parent.parent
 
 
 def _parse_single_row(stdout: str) -> dict[str, str]:

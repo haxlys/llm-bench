@@ -47,6 +47,7 @@ class Variant:
     tokenizer: str = ""           # HF tokenizer repo/path for completion evals
     api_key_env: str = ""         # env var copied to Authorization/OpenAI_API_KEY
     generation_mode: str = ""     # "mtp" / "ar" for MTPLX comparison variants
+    runtime_root: str = ""        # local runtime checkout, for adapters like ds4
     params_total_b: float | None = None
     params_active_b: float | None = None
     approx_size_gb: float | None = None
@@ -332,6 +333,7 @@ def load_registry(path: Path | None = None) -> Registry:
                 tokenizer=v_raw.get("tokenizer", ""),
                 api_key_env=v_raw.get("api_key_env", ""),
                 generation_mode=v_raw.get("generation_mode", ""),
+                runtime_root=_interpolate(v_raw.get("runtime_root", ""), defaults),
                 params_total_b=m_raw.get("params_total_b") or v_raw.get("params_total_b"),
                 params_active_b=m_raw.get("params_active_b") or v_raw.get("params_active_b"),
                 approx_size_gb=v_raw.get("approx_size_gb"),

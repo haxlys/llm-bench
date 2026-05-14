@@ -7642,7 +7642,7 @@
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     }
   ],
-  "generatedAt": "2026-05-14T02:07:49.039803+00:00",
+  "generatedAt": "2026-05-14T04:39:10.698522+00:00",
   "hardware": {
     "machine": "Apple M5 Max",
     "memoryGb": 128,
@@ -7755,7 +7755,7 @@
       "verifyMsPerCallMean": 86.086
     }
   ],
-  "sourceCommit": "b6601e6",
+  "sourceCommit": "58d6951",
   "speed": [
     {
       "backend": "gguf",
@@ -12910,7 +12910,7 @@
       "generationMode": "",
       "key": "deepseek-v4-flash-gguf-iq2xxs",
       "modelId": "deepseek-v4-flash",
-      "notes": "Routed experts use IQ2_XXS/Q2_K; attention projections, shared experts, and output use Q8_0. File is already present locally.",
+      "notes": "Routed experts use IQ2_XXS/Q2_K; attention projections, shared experts, and output use Q8_0. Uses the imatrix-calibrated GGUF now present under ~/models/gguf/deepseek-v4-gguf.",
       "paramsActiveB": 13,
       "paramsTotalB": 284,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",

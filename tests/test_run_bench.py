@@ -143,11 +143,13 @@ def test_build_runner_supports_ds4_backend(monkeypatch):
         quant = "IQ2XXS"
         model_id = "deepseek-v4-flash"
         resolved_path = "/models/deepseek.gguf"
+        runtime_root = "/runtimes/ds4"
 
     runner = run_bench._build_runner(DS4Variant())
 
     assert runner.kwargs["variant_key"] == "deepseek-v4-flash-gguf-iq2xxs"
     assert runner.kwargs["model_path"] == "/models/deepseek.gguf"
+    assert runner.kwargs["runtime_root"] == "/runtimes/ds4"
 
 
 def test_select_scenarios_filters_default_matrix():

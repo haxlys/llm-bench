@@ -47,7 +47,8 @@ def _build_runner(variant: Variant):
                           quant=variant.quant, variant_key=variant.key)
     if backend == "ds4":
         return DS4Runner(model_id=variant.model_id, model_path=variant.resolved_path,
-                         quant=variant.quant, variant_key=variant.key)
+                         quant=variant.quant, variant_key=variant.key,
+                         runtime_root=getattr(variant, "runtime_root", ""))
     if backend == "mtplx":
         return MTPLXRunner(
             model_id=variant.model_id,
