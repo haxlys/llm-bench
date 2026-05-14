@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-14T01:49:58+00:00",
+  "generated_at": "2026-05-14T02:07:49+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -4688,9 +4688,9 @@
       "approx_size_gb": 80.8,
       "exists_locally": true,
       "speed": {
-        "scenarios_measured": 0,
+        "scenarios_measured": 8,
         "scenarios_total": 8,
-        "last_measured": "2026-05-14T01:39:43+00:00"
+        "last_measured": "2026-05-14T02:07:16+00:00"
       },
       "evals": {
         "tasks_measured": 0,
@@ -5657,7 +5657,7 @@
   ],
   "totals": {
     "variants": 23,
-    "speed_complete": 16,
+    "speed_complete": 17,
     "evals_started": 18,
     "evals_missing_required": 28
   }

@@ -7642,7 +7642,7 @@
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     }
   ],
-  "generatedAt": "2026-05-14T01:51:24.144927+00:00",
+  "generatedAt": "2026-05-14T02:07:49.039803+00:00",
   "hardware": {
     "machine": "Apple M5 Max",
     "memoryGb": 128,
@@ -7755,7 +7755,7 @@
       "verifyMsPerCallMean": 86.086
     }
   ],
-  "sourceCommit": "41c5c41",
+  "sourceCommit": "b6601e6",
   "speed": [
     {
       "backend": "gguf",
@@ -9208,26 +9208,209 @@
         "latency-not-measured"
       ],
       "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T01:57:28+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T01:57:44+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.19666666666666668,
+      "ppTpsMean": 322.5566666666667,
+      "promptTokens": 1024,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g128",
+      "tgTpsMean": 36.516666666666666,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 7.760000000000001
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T01:58:22+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T01:59:01+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.19933333333333333,
+      "ppTpsMean": 302.6933333333333,
+      "promptTokens": 1024,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p1024_g512",
+      "tgTpsMean": 34.36333333333334,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 19.30333333333333
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
       "firstMeasuredAt": "2026-05-14T01:38:38+00:00",
       "fmt": "gguf",
       "generationTokens": 128,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T01:38:38+00:00",
+      "lastMeasuredAt": "2026-05-14T01:56:07+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.137,
-      "ppTpsMean": 199.01,
+      "peakMemGbMean": 0.1365,
+      "ppTpsMean": 199.25,
       "promptTokens": 256,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
-        1
+        1,
+        1,
+        2,
+        3
       ],
-      "runs": 1,
+      "runs": 4,
       "scenario": "p256_g128",
-      "tgTpsMean": 36.88,
+      "tgTpsMean": 37.0675,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 5.63
+      "wallSecondsMean": 5.7
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T01:56:39+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T01:57:13+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.13633333333333333,
+      "ppTpsMean": 192.81000000000003,
+      "promptTokens": 256,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p256_g512",
+      "tgTpsMean": 36.31,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 16.540000000000003
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T01:59:36+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T02:00:12+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.19499999999999998,
+      "ppTpsMean": 327.1333333333333,
+      "promptTokens": 4096,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g128",
+      "tgTpsMean": 30.150000000000002,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 17.793333333333333
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T02:01:13+00:00",
+      "fmt": "gguf",
+      "generationTokens": 512,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T02:02:14+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.19499999999999998,
+      "ppTpsMean": 331.46666666666664,
+      "promptTokens": 4096,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p4096_g512",
+      "tgTpsMean": 30.083333333333332,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 30.406666666666666
+    },
+    {
+      "backend": "ds4",
+      "benchVersion": "0.3",
+      "caveats": [
+        "latency-not-measured"
+      ],
+      "confidence": "measured",
+      "firstMeasuredAt": "2026-05-14T02:03:16+00:00",
+      "fmt": "gguf",
+      "generationTokens": 128,
+      "itlMs": null,
+      "lastMeasuredAt": "2026-05-14T02:04:19+00:00",
+      "modelId": "deepseek-v4-flash",
+      "peakMemGbMean": 0.302,
+      "ppTpsMean": 314.9166666666667,
+      "promptTokens": 8192,
+      "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
+      "runIndices": [
+        1,
+        2,
+        3
+      ],
+      "runs": 3,
+      "scenario": "p8192_g128",
+      "tgTpsMean": 29.80333333333333,
+      "tier": "2bit",
+      "ttftMs": null,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs",
+      "wallSecondsMean": 31.343333333333334
     },
     {
       "backend": "ds4",
@@ -9240,22 +9423,25 @@
       "fmt": "gguf",
       "generationTokens": 512,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T01:39:43+00:00",
+      "lastMeasuredAt": "2026-05-14T02:07:16+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.302,
-      "ppTpsMean": 332.25,
+      "peakMemGbMean": 0.30225,
+      "ppTpsMean": 318.6675,
       "promptTokens": 8192,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
-        1
+        1,
+        1,
+        2,
+        3
       ],
-      "runs": 1,
+      "runs": 4,
       "scenario": "p8192_g512",
-      "tgTpsMean": 29.71,
+      "tgTpsMean": 29.6425,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 42.77
+      "wallSecondsMean": 43.9975
     },
     {
       "backend": "gguf",
