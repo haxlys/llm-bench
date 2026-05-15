@@ -28,6 +28,44 @@ def test_apply_family_oracles_are_deterministic():
     assert ms.apply_family("f58", grid) == [[9, 2, 6], [4, 1, 0]]
 
 
+def test_solve_prompt_marks_memory_as_retrieved_strategy():
+    case = ms.build_eval_cases(limit=1)[0]
+
+    prompt = ms.build_solve_prompt(case, "General lesson: keep the largest frame.")
+
+    assert "Final retrieved long-term memory for this task" in prompt
+    assert "Use this memory as optional prior experience" in prompt
+    assert "MEMORY OVERRIDES CURRENT TASK EXAMPLES" not in prompt
+    assert "Current task examples" in prompt
+    assert prompt.index("Current task examples") < prompt.index("Final retrieved")
+
+
+def test_solve_prompt_can_mark_memory_as_override():
+    case = ms.build_eval_cases(limit=1)[0]
+
+    prompt = ms.build_solve_prompt(
+        case,
+        "General lesson: keep the largest frame.",
+        memory_priority="override",
+    )
+
+    assert "MEMORY OVERRIDES CURRENT TASK EXAMPLES" in prompt
+    assert "base the high-level transformation" in prompt
+
+
+def test_solve_prompt_can_withhold_current_examples_for_forced_mode():
+    case = ms.build_eval_cases(limit=1)[0]
+
+    prompt = ms.build_solve_prompt(
+        case,
+        "General lesson: keep the largest frame.",
+        include_examples=False,
+    )
+
+    assert "withheld in stress-replacement mode" in prompt
+    assert case.examples[0].id not in prompt
+
+
 def test_run_memory_stability_detects_forced_abstraction_collapse(tmp_path):
     def fake_consolidate(prompt: str, _max_tokens: int) -> str:
         if "family-specific memory note" in prompt:
@@ -43,14 +81,17 @@ def test_run_memory_stability_detects_forced_abstraction_collapse(tmp_path):
         _policy: str,
         memory_context: str,
     ) -> str:
-        if f"Task code: {case.task_code}" in memory_context:
+        if f"Task code: {case.rule_id}" in memory_context:
             output = case.expected_output
-        elif f"{case.task_code}:" in memory_context:
+        elif f"{case.rule_id}:" in memory_context:
             output = case.expected_output
-        elif "erase color 6" in memory_context:
+        elif "erase color 6" in memory_context and (
+            "withheld in stress-replacement mode" in _prompt
+            or "MEMORY OVERRIDES CURRENT TASK EXAMPLES" in _prompt
+        ):
             output = ms.apply_family("f17", case.input_grid)
         else:
-            output = case.input_grid
+            output = case.expected_output
         return json.dumps({"output": output})
 
     result = ms.run_memory_stability(
@@ -65,6 +106,10 @@ def test_run_memory_stability_detects_forced_abstraction_collapse(tmp_path):
     assert metrics["episodic_only_acc,none"] == pytest.approx(1.0)
     assert metrics["gated_abstraction_acc,none"] == pytest.approx(1.0)
     assert metrics["forced_abstraction_acc,none"] < metrics["episodic_only_acc,none"]
+    assert metrics["forced_abstraction_acc,none"] < metrics["no_memory_acc,none"]
+    assert metrics["stress_replacement_forced_abstraction_acc,none"] < 1.0
+    assert metrics["fair_same_evidence_forced_abstraction_acc,none"] == pytest.approx(1.0)
+    assert metrics["fair_same_evidence_gap,none"] == pytest.approx(0.0)
     assert metrics["forced_memory_collapse_rate,none"] == pytest.approx(1.0)
 
     results_file = tmp_path / result["results_file"].split("/")[-1]
@@ -75,4 +120,8 @@ def test_run_memory_stability_detects_forced_abstraction_collapse(tmp_path):
         "episodic_only",
         "forced_abstraction",
         "gated_abstraction",
+    }
+    assert {sample["mode"] for sample in parsed["samples"]} == {
+        "stress_replacement",
+        "fair_same_evidence",
     }

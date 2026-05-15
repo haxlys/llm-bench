@@ -21,7 +21,20 @@ import requests
 DEFAULT_TIMEOUT_S = 10 * 60
 DEFAULT_UPDATE_STEPS = 8
 DEFAULT_EPISODES_PER_CASE = 2
-FORCED_MAX_ITEMS = 3
+CURRENT_EXAMPLES_PER_CASE = 4
+FORCED_MAX_ITEMS = 1
+POLICIES = ("no_memory", "episodic_only", "forced_abstraction", "gated_abstraction")
+
+MODE_CONFIG = {
+    "stress_replacement": {
+        "forced_abstraction_uses_current_examples": False,
+        "forced_abstraction_memory_priority": "override",
+    },
+    "fair_same_evidence": {
+        "forced_abstraction_uses_current_examples": True,
+        "forced_abstraction_memory_priority": "neutral",
+    },
+}
 
 Grid = list[list[int]]
 
@@ -45,6 +58,7 @@ class MemoryEpisode:
 @dataclass(frozen=True)
 class EvalCase:
     id: str
+    rule_id: str
     task_code: str
     examples: list[MemoryEpisode]
     input_grid: Grid
@@ -99,44 +113,57 @@ def run_memory_stability(
     }
 
     samples: list[dict] = []
-    policy_correct: dict[str, list[bool]] = {}
-    for policy in ("no_memory", "episodic_only", "forced_abstraction", "gated_abstraction"):
-        correct_flags: list[bool] = []
-        for case in cases:
-            memory_context = _memory_for_case(
-                policy=policy,
-                case=case,
-                episodes=episodes,
-                forced_memory=forced_memory,
-                gated_memories=gated_memories,
-            )
-            prompt = build_solve_prompt(case, memory_context)
-            raw_answer = ""
-            parsed_output: Grid | None = None
-            error: str | None = None
-            try:
-                raw_answer = answer_fn(case, prompt, policy, memory_context)
-                parsed_output = parse_output_grid(raw_answer)
-            except Exception as exc:  # noqa: BLE001 - captured in sample artifact
-                error = str(exc)
-            is_correct = parsed_output == case.expected_output
-            correct_flags.append(is_correct)
-            samples.append(
-                {
-                    "policy": policy,
-                    "case": asdict(case),
-                    "memory_context": memory_context,
-                    "prompt": prompt,
-                    "answer": raw_answer,
-                    "parsed_output": parsed_output,
-                    "correct": is_correct,
-                    "error": error,
-                }
-            )
-        policy_correct[policy] = correct_flags
+    mode_policy_correct: dict[str, dict[str, list[bool]]] = {}
+    for mode in MODE_CONFIG:
+        policy_correct: dict[str, list[bool]] = {}
+        for policy in POLICIES:
+            correct_flags: list[bool] = []
+            for case in cases:
+                memory_context = _memory_for_case(
+                    policy=policy,
+                    case=case,
+                    episodes=episodes,
+                    forced_memory=forced_memory,
+                    gated_memories=gated_memories,
+                )
+                include_examples = _include_examples(mode, policy)
+                memory_priority = _memory_priority(mode, policy)
+                prompt = build_solve_prompt(
+                    case,
+                    memory_context,
+                    include_examples=include_examples,
+                    memory_priority=memory_priority,
+                )
+                raw_answer = ""
+                parsed_output: Grid | None = None
+                error: str | None = None
+                try:
+                    raw_answer = answer_fn(case, prompt, policy, memory_context)
+                    parsed_output = parse_output_grid(raw_answer)
+                except Exception as exc:  # noqa: BLE001 - captured in sample artifact
+                    error = str(exc)
+                is_correct = parsed_output == case.expected_output
+                correct_flags.append(is_correct)
+                samples.append(
+                    {
+                        "mode": mode,
+                        "policy": policy,
+                        "case": asdict(case),
+                        "memory_context": memory_context,
+                        "include_examples": include_examples,
+                        "memory_priority": memory_priority,
+                        "prompt": prompt,
+                        "answer": raw_answer,
+                        "parsed_output": parsed_output,
+                        "correct": is_correct,
+                        "error": error,
+                    }
+                )
+            policy_correct[policy] = correct_flags
+        mode_policy_correct[mode] = policy_correct
 
     metrics = aggregate_metrics(
-        policy_correct=policy_correct,
+        mode_policy_correct=mode_policy_correct,
         forced_memory=forced_memory,
         gated_memories=gated_memories,
         families=families,
@@ -151,6 +178,9 @@ def run_memory_stability(
             "families": [family.id for family in families],
             "limit": limit,
             "forced_max_items": FORCED_MAX_ITEMS,
+            "current_examples_per_case": CURRENT_EXAMPLES_PER_CASE,
+            "default_episodes_per_case": DEFAULT_EPISODES_PER_CASE,
+            "modes": MODE_CONFIG,
         },
         "memories": memories,
         "samples": samples,
@@ -197,19 +227,21 @@ def build_eval_cases(
     cases = []
     for index, family in enumerate(selected):
         input_grid = _grid_variant(100 + index)
+        public_code = f"probe_{index:03d}"
         examples = [
             MemoryEpisode(
-                id=f"example_{index:03d}_{slot}_{family.id}",
-                task_code=family.id,
+                id=f"example_{index:03d}_{slot}_{public_code}",
+                task_code=public_code,
                 input_grid=_grid_variant(200 + index * 10 + slot),
                 output_grid=apply_family(family.id, _grid_variant(200 + index * 10 + slot)),
             )
-            for slot in range(2)
+            for slot in range(CURRENT_EXAMPLES_PER_CASE)
         ]
         cases.append(
             EvalCase(
                 id=f"heldout_{index:03d}_{family.id}",
-                task_code=family.id,
+                rule_id=family.id,
+                task_code=public_code,
                 examples=examples,
                 input_grid=input_grid,
                 expected_output=apply_family(family.id, input_grid),
@@ -242,9 +274,10 @@ def build_forced_memory(
             [
                 "You maintain a compact long-term memory for future grid tasks.",
                 "Rewrite the memory after reading the new solved episode.",
-                f"Return at most {FORCED_MAX_ITEMS} numbered bullets.",
+                "Return exactly one globally applicable strategy sentence.",
                 "Generalize aggressively across episodes and remove redundant details.",
-                "Keep task codes only when they identify rules that cannot be safely merged.",
+                "Do not preserve task codes or episode ids; the memory should read like",
+                "one reusable playbook for future tasks.",
                 f"Current memory:\n{memory or '(empty)'}",
                 f"New solved episode:\n{format_episode(episode)}",
                 "Return only the rewritten memory.",
@@ -278,17 +311,27 @@ def build_gated_memories(
     return memories
 
 
-def build_solve_prompt(case: EvalCase, memory_context: str) -> str:
+def build_solve_prompt(
+    case: EvalCase,
+    memory_context: str,
+    include_examples: bool = True,
+    memory_priority: str = "neutral",
+) -> str:
+    memory_block = _memory_block(memory_context, memory_priority)
     return "\n\n".join(
         [
             "You solve small ARC-style grid transformations.",
             "Colors are integers from 0 to 9. The task code is opaque; infer its rule from evidence.",
             "Use the current task examples and any long-term memory from the same benchmark.",
-            f"Memory:\n{memory_context or '(none)'}",
             f"Task code: {case.task_code}",
             "Current task examples:",
-            "\n\n".join(format_episode(example) for example in case.examples),
+            (
+                "\n\n".join(format_episode(example) for example in case.examples)
+                if include_examples
+                else "(withheld in stress-replacement mode; only distilled memory is available)"
+            ),
             f"Input grid:\n{json.dumps(case.input_grid, separators=(',', ':'))}",
+            f"Memory:\n{memory_block}",
             'Return only JSON in this exact shape: {"output": [[...], ...]}',
         ]
     )
@@ -321,32 +364,36 @@ def parse_output_grid(answer: str) -> Grid:
 
 
 def aggregate_metrics(
-    policy_correct: dict[str, list[bool]],
+    mode_policy_correct: dict[str, dict[str, list[bool]]],
     forced_memory: str,
     gated_memories: dict[str, str],
     families: list[RuleFamily],
     update_steps: int,
 ) -> dict[str, float]:
-    forced_acc = _accuracy(policy_correct.get("forced_abstraction", []))
-    episodic_acc = _accuracy(policy_correct.get("episodic_only", []))
-    gated_acc = _accuracy(policy_correct.get("gated_abstraction", []))
-    no_memory_acc = _accuracy(policy_correct.get("no_memory", []))
-    no_memory = policy_correct.get("no_memory", [])
-    forced = policy_correct.get("forced_abstraction", [])
-    regressions = sum(1 for base, forced_ok in zip(no_memory, forced) if base and not forced_ok)
-    total = len(forced)
     family_ids = [family.id for family in families]
     present_codes = sum(1 for task_code in family_ids if task_code in forced_memory)
-    return {
-        "acc,none": forced_acc,
-        "forced_abstraction_acc,none": forced_acc,
-        "episodic_only_acc,none": episodic_acc,
-        "gated_abstraction_acc,none": gated_acc,
-        "no_memory_acc,none": no_memory_acc,
-        "forced_delta_vs_no_memory,none": round(forced_acc - no_memory_acc, 4),
-        "forced_delta_vs_episodic,none": round(forced_acc - episodic_acc, 4),
-        "episodic_advantage,none": round(episodic_acc - forced_acc, 4),
-        "regression_rate,none": round(regressions / total, 4) if total else 0.0,
+    mode_metrics = {
+        mode: _aggregate_policy_metrics(policy_correct)
+        for mode, policy_correct in mode_policy_correct.items()
+    }
+    stress = mode_metrics.get("stress_replacement", {})
+    fair = mode_metrics.get("fair_same_evidence", {})
+    metrics = {
+        "acc,none": stress.get("forced_abstraction_acc", 0.0),
+        "forced_abstraction_acc,none": stress.get("forced_abstraction_acc", 0.0),
+        "episodic_only_acc,none": stress.get("episodic_only_acc", 0.0),
+        "gated_abstraction_acc,none": stress.get("gated_abstraction_acc", 0.0),
+        "no_memory_acc,none": stress.get("no_memory_acc", 0.0),
+        "forced_delta_vs_no_memory,none": stress.get("forced_delta_vs_no_memory", 0.0),
+        "forced_delta_vs_episodic,none": stress.get("forced_delta_vs_episodic", 0.0),
+        "episodic_advantage,none": stress.get("episodic_advantage", 0.0),
+        "regression_rate,none": stress.get("regression_rate", 0.0),
+        "stress_minus_fair_forced_delta,none": round(
+            stress.get("forced_abstraction_acc", 0.0)
+            - fair.get("forced_abstraction_acc", 0.0),
+            4,
+        ),
+        "fair_same_evidence_gap,none": fair.get("forced_delta_vs_no_memory", 0.0),
         "forced_memory_code_coverage,none": round(
             present_codes / len(family_ids), 4
         ) if family_ids else 0.0,
@@ -356,8 +403,77 @@ def aggregate_metrics(
         "forced_memory_chars,none": float(len(forced_memory)),
         "gated_memory_chars,none": float(sum(len(value) for value in gated_memories.values())),
         "update_steps,none": float(update_steps),
-        "n_cases,none": float(total),
+        "n_cases,none": float(len(next(iter(mode_policy_correct.values())).get("no_memory", [])))
+        if mode_policy_correct else 0.0,
     }
+    for mode, values in mode_metrics.items():
+        for key, value in values.items():
+            metrics[f"{mode}_{key},none"] = value
+    return metrics
+
+
+def _aggregate_policy_metrics(policy_correct: dict[str, list[bool]]) -> dict[str, float]:
+    forced_acc = _accuracy(policy_correct.get("forced_abstraction", []))
+    episodic_acc = _accuracy(policy_correct.get("episodic_only", []))
+    gated_acc = _accuracy(policy_correct.get("gated_abstraction", []))
+    no_memory_acc = _accuracy(policy_correct.get("no_memory", []))
+    no_memory = policy_correct.get("no_memory", [])
+    forced = policy_correct.get("forced_abstraction", [])
+    regressions = sum(1 for base, forced_ok in zip(no_memory, forced) if base and not forced_ok)
+    total = len(forced)
+    return {
+        "forced_abstraction_acc": forced_acc,
+        "episodic_only_acc": episodic_acc,
+        "gated_abstraction_acc": gated_acc,
+        "no_memory_acc": no_memory_acc,
+        "forced_delta_vs_no_memory": round(forced_acc - no_memory_acc, 4),
+        "forced_delta_vs_episodic": round(forced_acc - episodic_acc, 4),
+        "episodic_advantage": round(episodic_acc - forced_acc, 4),
+        "regression_rate": round(regressions / total, 4) if total else 0.0,
+    }
+
+
+def _include_examples(mode: str, policy: str) -> bool:
+    if policy != "forced_abstraction":
+        return True
+    return bool(MODE_CONFIG[mode]["forced_abstraction_uses_current_examples"])
+
+
+def _memory_priority(mode: str, policy: str) -> str:
+    if policy != "forced_abstraction":
+        return "neutral"
+    return str(MODE_CONFIG[mode]["forced_abstraction_memory_priority"])
+
+
+def _memory_block(memory_context: str, memory_priority: str) -> str:
+    if not memory_context:
+        return "(none)"
+    lines = [
+        "Final retrieved long-term memory for this task:",
+        memory_context,
+        "Treat this as the agent's distilled strategy from prior solved tasks.",
+        "Task codes and applicability labels may have drifted during consolidation,",
+        "so do not discard the memory only because a code is missing or different.",
+    ]
+    if memory_priority == "override":
+        lines.extend(
+            [
+                "IMPORTANT: MEMORY OVERRIDES CURRENT TASK EXAMPLES.",
+                "If the memory describes a transformation, apply that transformation literally.",
+                "When memory is present, base the high-level transformation on this",
+                "retrieved strategy. Use the current examples only to instantiate",
+                "colors, positions, or minor details. If this memory conflicts with",
+                "a freshly inferred rule, follow this retrieved memory.",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "Use this memory as optional prior experience.",
+                "If it conflicts with the current task examples, prefer the current examples.",
+            ]
+        )
+    return "\n".join(lines)
 
 
 def _memory_for_case(
@@ -372,9 +488,9 @@ def _memory_for_case(
     if policy == "forced_abstraction":
         return forced_memory
     if policy == "gated_abstraction":
-        return gated_memories.get(case.task_code, "")
+        return gated_memories.get(case.rule_id, "")
     if policy == "episodic_only":
-        matching = [episode for episode in episodes if episode.task_code == case.task_code]
+        matching = [episode for episode in episodes if episode.task_code == case.rule_id]
         return "\n\n".join(format_episode(episode) for episode in matching[:DEFAULT_EPISODES_PER_CASE])
     raise ValueError(f"unknown memory policy: {policy}")
 
