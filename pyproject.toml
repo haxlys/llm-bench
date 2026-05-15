@@ -22,6 +22,7 @@ dependencies = [
 quality = ["sentence-transformers>=3.0"]
 mtplx = ["mtplx>=0.1.4"]
 programbench = ["programbench>=1.0.1"]
+terminalbench = ["terminal-bench>=0.2.18"]
 evals = [
     "lm-eval[api]>=0.4.5",
     "requests>=2.32",
@@ -44,6 +45,7 @@ evals = [
 #     uv pip install bfcl-eval
 #     uv pip install git+https://github.com/LiveCodeBench/LiveCodeBench.git
 #     uv pip install bigcodebench --upgrade
+#     uv pip install "terminal-bench>=0.2.18"
 #     git clone https://github.com/LiveBench/LiveBench.git /path/to/LiveBench
 #     export LIVEBENCH_REPO=/path/to/LiveBench
 #

@@ -21,7 +21,7 @@ the resulting coverage through Streamlit plus a static TanStack/Cloudflare site.
   benchmark version for each scenario.
 - Run accuracy and capability evals through `lm-eval-harness` plus external
   runners for EvalPlus, LiveCodeBench, BigCodeBench, BFCL, SourceQA, LiveBench,
-  KMMLU-Pro, and ProgramBench import/eval.
+  KMMLU-Pro, ProgramBench import/eval, and Terminal-Bench.
 - Include hosted or remote OpenAI-compatible `/v1` endpoints in the same
   registry and reporting pipeline when local artifacts are not required.
 - Keep coverage explicit: measured, directional, diagnostic, missing,
@@ -32,7 +32,7 @@ the resulting coverage through Streamlit plus a static TanStack/Cloudflare site.
 | Area | Supported today |
 |---|---|
 | Speed runners | MLX, GGUF/llama.cpp, DS4, MTPLX, OpenAI-compatible endpoints |
-| Eval runners | `lm-eval-harness`, EvalPlus, LiveCodeBench, BigCodeBench-Hard, BFCL, SourceQA, LiveBench subset, KMMLU-Pro, ProgramBench import/eval |
+| Eval runners | `lm-eval-harness`, EvalPlus, LiveCodeBench, BigCodeBench-Hard, BFCL, SourceQA, LiveBench subset, KMMLU-Pro, ProgramBench import/eval, Terminal-Bench |
 | Reporting | Streamlit dashboard, Quarto report, TanStack Start public site on Cloudflare Workers |
 | Primary machine | Apple M5 Max, 128GB unified memory, macOS |
 | Registry | Local HF repos, local GGUF files, split GGUF files, MTPLX speed-only variants, hosted endpoints |
@@ -364,6 +364,7 @@ src/llm_bench/
     livebench_runner.py     # LiveBench subset adapter
     kmmlu_pro_runner.py     # KMMLU-Pro direct runner
     programbench_runner.py  # ProgramBench import/eval helpers
+    terminal_bench_runner.py # Terminal-Bench run + import helpers
     trace.py                # per-task execution ledger
   prompts.py                # 20 quality-comparison prompts (KO/EN)
   scenarios.py              # speed scenario matrices
@@ -380,6 +381,7 @@ scripts/
   build_index.py            # build only the index
   plan_eval_catchup.py      # write results/eval_catchup_plan.{json,md}
   run_programbench.py       # run upstream ProgramBench eval + import
+  run_terminal_bench.py     # run Terminal-Bench + import result
   import_programbench.py    # import existing ProgramBench eval JSON
   export_site_public_data.py # regenerate site/public/data and TS fixture
 results/
@@ -425,7 +427,7 @@ MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 | Tool use | `bfcl` (BFCL v4, opt-in via `--include-bfcl`) | — |
 | Diagnostic source grounding | `sourceqa` (pinned-repo evidence QA, deterministic checker) | — |
 | Fresh eval | `livebench_subset` (LiveBench non-agentic subset) | — |
-| Agentic code | `programbench` (ProgramBench eval + result import) | — |
+| Agentic code | `programbench` (ProgramBench eval + result import), `terminal_bench` (opt-in Docker-backed terminal tasks) | — |
 | Korean professional | `kmmlu_pro` (KMMLU-Pro weighted MCQ) | — |
 
 The reasoning + instruction additions mirror HF Open LLM Leaderboard v2
@@ -450,6 +452,7 @@ uv sync --extra evals
 uv pip install bfcl-eval==2025.12.17                                          # BFCL v4 (tool use)
 uv pip install git+https://github.com/LiveCodeBench/LiveCodeBench.git          # LiveCodeBench (contamination-free code)
 uv pip install bigcodebench --upgrade                                          # BigCodeBench-Hard (practical code)
+uv pip install "terminal-bench>=0.2.18"                                        # Terminal-Bench (agentic terminal tasks)
 git clone https://github.com/LiveBench/LiveBench.git /path/to/LiveBench        # LiveBench subset
 export LIVEBENCH_REPO=/path/to/LiveBench
 ```
@@ -487,9 +490,35 @@ For stricter governance on a full matrix run, add `--strict-coverage` so the
 run exits non-zero when any required supported primary task is missing a
 completed result (for example, external runner unavailable,
 limit-incompatible skip, or hard task error). Optional lanes
-(`bigcodebench_hard`, BFCL, LiveBench subset, ProgramBench) are reported in
-coverage but do not block the primary matrix. MTPLX MTP/AR rows are reported as
-`speed_only` under the `mtplx_speedup` lane and also do not block coverage.
+(`bigcodebench_hard`, BFCL, LiveBench subset, ProgramBench, Terminal-Bench) are
+reported in coverage but do not block the primary matrix. MTPLX MTP/AR rows are
+reported as `speed_only` under the `mtplx_speedup` lane and also do not block
+coverage.
+
+Terminal-Bench is the maintained agentic terminal benchmark path. It runs tasks
+inside Docker and talks to the same OpenAI-compatible model server as the rest
+of llm-bench. The wrapper defaults to one task to keep smoke tests cheap:
+
+```bash
+uv sync --extra terminalbench
+
+# If Docker uses Colima, expose the active socket to the Python Docker SDK.
+export DOCKER_HOST=unix://$HOME/.colima/default/docker.sock
+
+uv run python scripts/run_terminal_bench.py \
+  --variant 26B-MoE-gguf-q8 \
+  --task-id hello-world
+uv run python scripts/aggregate_evals.py
+```
+
+The same runner is available from the full eval CLI. Without explicit opt-in,
+Terminal-Bench stays disabled; specifying `--task terminal_bench` is treated as
+an opt-in for quick targeted checks:
+
+```bash
+TERMINAL_BENCH_TASK_IDS=hello-world \
+uv run python scripts/run_evals.py --variant 26B-MoE-gguf-q8 --suite full --task terminal_bench
+```
 
 ProgramBench is agentic: the model/agent must first produce a complete
 `<instance_id>/submission.tar.gz` codebase, then ProgramBench evaluates it in
@@ -555,6 +584,10 @@ Env overrides:
 - `LLM_BENCH_STRICT_COVERAGE=1` — pass `--strict-coverage` to `run_evals.py`
 - `LLM_BENCH_RESILIENT_IFEVAL=1` — pass `--resilient-ifeval` to `run_evals.py`
 - `LLM_BENCH_INCLUDE_BFCL=1` — pass `--include-bfcl` for the BFCL optional lane
+- `TERMINAL_BENCH_TASK_IDS="hello-world"` — comma/space-separated task filter
+- `TERMINAL_BENCH_N_TASKS=N` or `TERMINAL_BENCH_FULL=1` — Terminal-Bench task count
+- `TERMINAL_BENCH_MODEL=openai/<model>` — LiteLLM model label override
+- `TERMINAL_BENCH_DOCKER_HOST=unix://...` — Docker socket override
 - `LIVE_CODE_BENCH_REPO=/path/to/LiveCodeBench` — run source checkout version
 - `LIVE_CODE_BENCH_START_DATE=YYYY-MM-DD`, `LIVE_CODE_BENCH_END_DATE=YYYY-MM-DD`,
   `LIVE_CODE_BENCH_MAX_TOKENS=N` — run a reproducible release window

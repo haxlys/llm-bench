@@ -52,6 +52,11 @@ from llm_bench.evals.suites import (
     supports_capabilities,
     task_lane,
 )
+from llm_bench.evals.terminal_bench_runner import DEFAULT_AGENT as TERMINAL_BENCH_AGENT
+from llm_bench.evals.terminal_bench_runner import DEFAULT_BIN as TERMINAL_BENCH_BIN
+from llm_bench.evals.terminal_bench_runner import DEFAULT_DATASET as TERMINAL_BENCH_DATASET
+from llm_bench.evals.terminal_bench_runner import run_terminal_bench
+from llm_bench.evals.terminal_bench_runner import terminal_bench_available
 from llm_bench.evals.trace import append_trace
 from llm_bench.manifest import eval_is_measured, eval_manifest
 from llm_bench.registry import Variant, get_registry, is_speed_only_variant
@@ -201,6 +206,8 @@ def _external_skip_reason(runner: str, effective_limit: int | None) -> str | Non
         return "skipped_unavailable_external"
     if runner == "kmmlu_pro" and not kmmlu_pro_available():
         return "skipped_unavailable_external"
+    if runner == "terminal_bench" and not terminal_bench_available(_terminal_bench_bin()):
+        return "skipped_unavailable_external"
     return None
 
 
@@ -259,6 +266,60 @@ def _livecodebench_release() -> str:
     return os.environ.get("LIVE_CODE_BENCH_RELEASE", LCB_RELEASE)
 
 
+def _terminal_bench_dataset() -> str:
+    return os.environ.get("TERMINAL_BENCH_DATASET", TERMINAL_BENCH_DATASET)
+
+
+def _terminal_bench_agent() -> str:
+    return os.environ.get("TERMINAL_BENCH_AGENT", TERMINAL_BENCH_AGENT)
+
+
+def _terminal_bench_bin() -> str:
+    return os.environ.get("TERMINAL_BENCH_BIN", TERMINAL_BENCH_BIN)
+
+
+def _terminal_bench_model_label(api_model_label: str) -> str:
+    override = os.environ.get("TERMINAL_BENCH_MODEL", "").strip()
+    if override:
+        return override
+    litellm_prefixes = (
+        "openai/",
+        "azure/",
+        "anthropic/",
+        "gemini/",
+        "vertex_ai/",
+        "deepseek/",
+        "xai/",
+        "groq/",
+        "together_ai/",
+        "openrouter/",
+    )
+    if api_model_label.startswith(litellm_prefixes):
+        return api_model_label
+    return f"openai/{api_model_label}"
+
+
+def _terminal_bench_task_ids() -> list[str]:
+    raw = os.environ.get("TERMINAL_BENCH_TASK_IDS", "")
+    return [part for token in raw.split(",") for part in token.split() if part]
+
+
+def _terminal_bench_n_tasks(task_ids: list[str], effective_limit: int | None) -> int | None:
+    raw = os.environ.get("TERMINAL_BENCH_N_TASKS", "").strip()
+    if raw:
+        return int(raw)
+    if task_ids:
+        return None
+    if os.environ.get("TERMINAL_BENCH_FULL", "").lower() in {"1", "true", "yes"}:
+        return None
+    return effective_limit if effective_limit is not None else 1
+
+
+def _terminal_bench_timeout(name: str, default: int) -> int:
+    raw = os.environ.get(name, "").strip()
+    return int(raw) if raw else default
+
+
 def _lmeval_runner_for_task(task: str, resilient_ifeval: bool) -> str:
     if task == "leaderboard_ifeval" and resilient_ifeval:
         return "ifeval_resilient"
@@ -277,6 +338,8 @@ def _lmeval_runner_for_task(task: str, resilient_ifeval: bool) -> str:
 @click.option("--skip-existing/--no-skip-existing", default=True)
 @click.option("--include-bfcl", is_flag=True,
               help="Run BFCL v4 tool-use eval (requires `uv pip install bfcl-eval`, ~30 min/variant).")
+@click.option("--include-terminal-bench", is_flag=True,
+              help="Run Terminal-Bench agentic terminal eval (Docker-backed; default task cap = 1).")
 @click.option("--resilient-ifeval/--strict-ifeval", default=False,
               help="Use resilient leaderboard_ifeval runner for per-sample API errors.")
 @click.option("--strict-coverage", is_flag=True, default=False,
@@ -288,7 +351,8 @@ def _lmeval_runner_for_task(task: str, resilient_ifeval: bool) -> str:
               help="Optional judge model label for sourceqa metadata; deterministic score remains primary.")
 def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str, ...],
          limit: int | None,
-         port: int, skip_existing: bool, include_bfcl: bool, resilient_ifeval: bool,
+         port: int, skip_existing: bool, include_bfcl: bool,
+         include_terminal_bench: bool, resilient_ifeval: bool,
          strict_coverage: bool, sourceqa_tasks: str | None, sourceqa_judge_model: str | None):
     targets = _filter_eval_targets(_resolve_targets(variant, all_variants))
     if not targets:
@@ -308,7 +372,8 @@ def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str,
             "unknown task id(s): "
             + ", ".join(sorted(unknown_tasks))
             + ". External tasks require --suite full; ProgramBench is imported "
-            "with scripts/import_programbench.py."
+            "with scripts/import_programbench.py; Terminal-Bench can also run "
+            "with scripts/run_terminal_bench.py."
         )
     tasks = _filter_tasks(tasks, selected_tasks)
     effective_limit = limit if limit is not None else (3 if suite == "smoke" else 1 if suite == "long" else None)
@@ -374,6 +439,20 @@ def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str,
                         "runner": runner, "status": "skipped_bfcl_disabled",
                     })
                     variant_coverage.append(_build_coverage_row(dim, task, runner, "skipped_optional_disabled"))
+                    continue
+                if (
+                    runner == "terminal_bench"
+                    and not include_terminal_bench
+                    and task not in selected_tasks
+                ):
+                    grand_summary.append({
+                        "variant": v.key, "model_id": v.model_id, "fmt": v.fmt,
+                        "quant": v.quant, "dim": dim, "task": task,
+                        "runner": runner, "status": "skipped_terminal_bench_disabled",
+                    })
+                    variant_coverage.append(
+                        _build_coverage_row(dim, task, runner, "skipped_optional_disabled")
+                    )
                     continue
                 if reason := _external_skip_reason(runner, effective_limit):
                     grand_summary.append({
@@ -562,6 +641,34 @@ def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str,
                                 output_dir=out_dir / task,
                                 limit=effective_limit,
                                 api_key=api_key,
+                            )
+                        elif runner == "terminal_bench":
+                            terminal_task_ids = _terminal_bench_task_ids()
+                            res = run_terminal_bench(
+                                base_url=base_url,
+                                model_label=_terminal_bench_model_label(api_model_label),
+                                output_dir=out_dir / task,
+                                dataset=_terminal_bench_dataset(),
+                                agent=_terminal_bench_agent(),
+                                task_ids=terminal_task_ids,
+                                n_tasks=_terminal_bench_n_tasks(
+                                    terminal_task_ids,
+                                    effective_limit,
+                                ),
+                                terminal_bench_bin=_terminal_bench_bin(),
+                                docker_host=(
+                                    os.environ.get("TERMINAL_BENCH_DOCKER_HOST")
+                                    or os.environ.get("DOCKER_HOST")
+                                ),
+                                api_key=api_key,
+                                global_agent_timeout_sec=_terminal_bench_timeout(
+                                    "TERMINAL_BENCH_AGENT_TIMEOUT_SEC",
+                                    600,
+                                ),
+                                global_test_timeout_sec=_terminal_bench_timeout(
+                                    "TERMINAL_BENCH_TEST_TIMEOUT_SEC",
+                                    300,
+                                ),
                             )
                         else:
                             # Surface newly declared-but-unimplemented runners in

@@ -17,6 +17,8 @@ from __future__ import annotations
 #     mirror HF Open LLM Leaderboard v2's normalization.
 #   - livecodebench (external runner) addresses HumanEval/MBPP contamination.
 #   - bfcl (external runner) fills the previously-empty tool-use dim.
+#   - terminal_bench (external runner) adds maintained agentic terminal tasks
+#     with current frontier-model leaderboard coverage.
 
 # mlx_lm.server's /v1/completions endpoint does not return logprobs, so
 # loglikelihood-based MCQ tasks (mmlu, hellaswag, kobest, ...) cannot run on
@@ -95,6 +97,9 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
     # Professional Korean license exam benchmark. Implemented as a direct
     # OpenAI-compatible runner so smoke runs can limit question count.
     "korean": [("kmmlu_pro", "kmmlu_pro")],
+    # Agentic terminal benchmark. Opt-in because it uses Docker and can run for
+    # minutes to hours depending on task selection.
+    "agentic_code": [("terminal_bench", "terminal_bench")],
     # simple-evals MMLU and KMMLU-Pro are planned but not yet wired.
     # Removed from this list so run_evals.py doesn't surface 'runner not
     # implemented' noise on every variant. Re-add once the wrappers exist.
@@ -105,6 +110,7 @@ OPTIONAL_EVAL_TASKS = {
     "bfcl",
     "livebench_subset",
     "programbench",
+    "terminal_bench",
 }
 
 DIAGNOSTIC_EVAL_TASKS = {
@@ -200,6 +206,8 @@ def external_supports_capabilities(
     if runner == "sourceqa":
         return "chat" in capabilities
     if runner == "memory_stability":
+        return "chat" in capabilities
+    if runner == "terminal_bench":
         return "chat" in capabilities
     return True
 

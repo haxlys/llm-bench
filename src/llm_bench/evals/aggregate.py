@@ -60,6 +60,7 @@ TASK_DIM = {
     "leaderboard_ifeval": "instruction",
     "livebench_subset": "fresh",
     "programbench": "agentic_code",
+    "terminal_bench": "agentic_code",
     "longbench": "long",
     "bfcl": "tool",
     "sourceqa": "diagnostic",

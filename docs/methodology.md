@@ -89,7 +89,7 @@ their configured `/v1` endpoint directly and do not spawn a subprocess.
 | code / contamination-fresh | — | primary: `humaneval`, `mbpp` (EvalPlus), `livecodebench`; optional: `bigcodebench_hard`, `livebench_subset` |
 | tool use | — | optional: `bfcl` (opt-in via `--include-bfcl`) |
 | long context | `longbench` (21 sub-tasks, run with `--suite long`) | — |
-| agentic code | — | optional: `programbench` eval + result import |
+| agentic code | — | optional: `programbench` eval + result import, `terminal_bench` |
 
 ### Why two task families?
 
@@ -111,9 +111,10 @@ For each variant (model_id × fmt × quant):
 2. Run each task in the suite via `lm_eval` subprocess. Tasks tagged "chat"
    use `local-chat-completions` model class with `--apply_chat_template`;
    loglikelihood tasks use `local-completions` with HF tokenizer.
-3. For code-eval external runners (`EvalPlus`, `LiveCodeBench`, `BigCodeBench-Hard`),
-   required toolchains are wrapped in their own runner environments. They can still
-   execute user code, so use trusted checkpoints for safety and keep runner-level
+3. For code-eval external runners (`EvalPlus`, `LiveCodeBench`,
+   `BigCodeBench-Hard`, `Terminal-Bench`), required toolchains are wrapped in
+   their own runner environments. They can still execute user code or Docker
+   workloads, so use trusted checkpoints for safety and keep runner-level
    sandboxing in mind.
 4. Tear down server before next variant.
 
@@ -157,6 +158,13 @@ are supporting diagnostics. When a ProgramBench `data/tasks` directory is
 provided, ignored branches/tests from `tests.json` are excluded to mirror
 `programbench info`.
 
+`terminal_bench` is the maintained agentic terminal-task dimension. llm-bench
+invokes upstream `tb run` against the same OpenAI-compatible endpoint and then
+imports Terminal-Bench `results.json` into synthetic results with primary metric
+`resolved_rate,none`. It is optional and Docker-backed; the default wrapper path
+runs one task unless `TERMINAL_BENCH_N_TASKS`, `TERMINAL_BENCH_TASK_IDS`, or
+`TERMINAL_BENCH_FULL=1` is set.
+
 Every eval task execution also appends one row to
 `results/eval_traces/<run_id>.jsonl` with variant, task, runner, status, wall
 time, result artifact path, optional sample path, log path, and error text.
@@ -169,7 +177,8 @@ code (`humaneval`, `mbpp`, `livecodebench`), and speed where applicable.
 SourceQA is a diagnostic lane for source-grounding smoke/regression checks, not
 primary coverage debt. MTPLX native MTP/AR variants are a separate
 `mtplx_speedup` lane, not accuracy candidates. Optional lanes are intentionally separated:
-`bigcodebench_hard`, `bfcl`, `livebench_subset`, and `programbench`.
+`bigcodebench_hard`, `bfcl`, `livebench_subset`, `programbench`, and
+`terminal_bench`.
 
 The site reads `results/index.json` before showing score tables. That lets it
 distinguish:
@@ -244,6 +253,8 @@ changes over time:
 - ProgramBench is imported from explicit `*.eval.json` artifacts; record the
   upstream ProgramBench package/release beside the agent run when generating
   those submissions.
+- Terminal-Bench defaults to `terminal-bench-core==0.1.1` through
+  `terminal-bench>=0.2.18`; override with `TERMINAL_BENCH_DATASET`.
 
 ## Out of scope (v0.2)
 

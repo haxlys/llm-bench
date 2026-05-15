@@ -32,6 +32,7 @@ SCRIPTS = [
     "scripts/export_site_public_data.py",
     "scripts/import_programbench.py",
     "scripts/run_programbench.py",
+    "scripts/run_terminal_bench.py",
 ]
 DASHBOARD = "dashboard/app.py"
 

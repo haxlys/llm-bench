@@ -176,6 +176,29 @@ def test_livecodebench_release_reads_env_override(monkeypatch):
     assert run_evals._livecodebench_release() == "release_v9"
 
 
+def test_terminal_bench_helpers_read_env_overrides(monkeypatch):
+    run_evals = _load_run_evals()
+    monkeypatch.setenv("TERMINAL_BENCH_MODEL", "openrouter/frontier")
+    monkeypatch.setenv("TERMINAL_BENCH_TASK_IDS", "hello-world, git-fix")
+    monkeypatch.setenv("TERMINAL_BENCH_N_TASKS", "2")
+
+    assert run_evals._terminal_bench_model_label("local-model") == "openrouter/frontier"
+    assert run_evals._terminal_bench_task_ids() == ["hello-world", "git-fix"]
+    assert run_evals._terminal_bench_n_tasks([], None) == 2
+
+
+def test_terminal_bench_defaults_to_one_task_unless_task_ids_are_set(monkeypatch):
+    run_evals = _load_run_evals()
+    monkeypatch.delenv("TERMINAL_BENCH_MODEL", raising=False)
+    monkeypatch.delenv("TERMINAL_BENCH_TASK_IDS", raising=False)
+    monkeypatch.delenv("TERMINAL_BENCH_N_TASKS", raising=False)
+    monkeypatch.delenv("TERMINAL_BENCH_FULL", raising=False)
+
+    assert run_evals._terminal_bench_model_label("local-model") == "openai/local-model"
+    assert run_evals._terminal_bench_n_tasks([], None) == 1
+    assert run_evals._terminal_bench_n_tasks(["hello-world"], None) is None
+
+
 def test_coverage_summary_marks_status_completion():
     run_evals = _load_run_evals()
     coverage = [
@@ -247,7 +270,9 @@ def test_frontier_runners_are_skipped_when_unavailable(monkeypatch):
     monkeypatch.setattr(run_evals, "bigcodebench_available", lambda: False)
     monkeypatch.setattr(run_evals, "livebench_available", lambda: False)
     monkeypatch.setattr(run_evals, "kmmlu_pro_available", lambda: False)
+    monkeypatch.setattr(run_evals, "terminal_bench_available", lambda _bin: False)
 
     assert run_evals._external_skip_reason("bigcodebench", 1) == "skipped_unavailable_external"
     assert run_evals._external_skip_reason("livebench", 1) == "skipped_unavailable_external"
     assert run_evals._external_skip_reason("kmmlu_pro", 1) == "skipped_unavailable_external"
+    assert run_evals._external_skip_reason("terminal_bench", 1) == "skipped_unavailable_external"

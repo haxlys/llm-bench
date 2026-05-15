@@ -32,7 +32,7 @@ _DIAGNOSTIC_TASKS = {
     "sourceqa",
     "memory_stability",
 }
-_AGENTIC_TASKS = {"programbench"}
+_AGENTIC_TASKS = {"programbench", "terminal_bench"}
 
 
 def parse_scenario(value: str) -> tuple[int, int]:
