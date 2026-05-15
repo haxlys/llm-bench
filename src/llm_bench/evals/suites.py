@@ -85,7 +85,10 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
     # Source-grounded QA: deterministic scoring over curated evidence from
     # pinned repositories. This is intentionally diagnostic: the current task
     # set is too small/saturated to affect headline ranking or primary debt.
-    "diagnostic": [("sourceqa", "sourceqa")],
+    "diagnostic": [
+        ("sourceqa", "sourceqa"),
+        ("memory_stability", "memory_stability"),
+    ],
     # Fresh, contamination-resistant general eval. Runs a non-agentic subset by
     # default; agentic coding remains out of scope for local smoke runs.
     "fresh": [("livebench_subset", "livebench")],
@@ -106,6 +109,7 @@ OPTIONAL_EVAL_TASKS = {
 
 DIAGNOSTIC_EVAL_TASKS = {
     "sourceqa",
+    "memory_stability",
 }
 
 DIRECTIONAL_EVAL_TASKS = {
@@ -194,6 +198,8 @@ def external_supports_capabilities(
     if runner == "bfcl":
         return "tool_use_eval" in capabilities
     if runner == "sourceqa":
+        return "chat" in capabilities
+    if runner == "memory_stability":
         return "chat" in capabilities
     return True
 

@@ -30,6 +30,7 @@ _DIRECTIONAL_TASKS = {
 }
 _DIAGNOSTIC_TASKS = {
     "sourceqa",
+    "memory_stability",
 }
 _AGENTIC_TASKS = {"programbench"}
 
@@ -364,8 +365,10 @@ def _accuracy_confidence(task: str, metric: str) -> str:
 
 
 def _accuracy_caveats(task: str, metric: str) -> list[str]:
-    if task in _DIAGNOSTIC_TASKS:
+    if task == "sourceqa":
         return ["diagnostic-sourceqa"]
+    if task == "memory_stability":
+        return ["diagnostic-memory-stability"]
     if task in _AGENTIC_TASKS:
         return ["agentic-scaffold-dependent"]
     if _accuracy_confidence(task, metric) == "directional":
@@ -389,6 +392,10 @@ def _caveats() -> list[dict[str, str]]:
         },
         {
             "id": "diagnostic-sourceqa",
+            "status": "diagnostic",
+        },
+        {
+            "id": "diagnostic-memory-stability",
             "status": "diagnostic",
         },
         {

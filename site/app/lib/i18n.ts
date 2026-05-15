@@ -17,6 +17,7 @@ export type KnownCaveatId =
   | "generative-exact-match"
   | "agentic-scaffold-dependent"
   | "diagnostic-sourceqa"
+  | "diagnostic-memory-stability"
   | "coverage-missing"
   | "optional-eval-lane"
   | "mtplx-speed-only";
@@ -299,6 +300,8 @@ export const messages = {
         "ProgramBench scores include the agent scaffold, tools, and execution environment, not only the base model.",
       "diagnostic-sourceqa":
         "SourceQA is a small source-grounding smoke/regression check, so it is not used for headline ranking or primary coverage debt.",
+      "diagnostic-memory-stability":
+        "Memory Stability is a synthetic diagnostic for repeated memory rewriting, so it is not used for headline ranking or primary coverage debt.",
       "coverage-missing":
         "A primary supported evaluation has no committed result yet.",
       "optional-eval-lane":
@@ -643,6 +646,8 @@ export const messages = {
         "ProgramBench 점수는 base model뿐 아니라 agent scaffold, 도구, 실행 환경의 영향도 포함합니다.",
       "diagnostic-sourceqa":
         "SourceQA는 작은 source-grounding smoke/regression check이므로 headline ranking이나 primary coverage 부채에 사용하지 않습니다.",
+      "diagnostic-memory-stability":
+        "Memory Stability는 반복적인 기억 재작성 문제를 보는 합성 진단용 평가이므로 headline ranking이나 primary coverage 부채에 사용하지 않습니다.",
       "coverage-missing":
         "지원되는 primary 평가인데 아직 커밋된 결과가 없습니다.",
       "optional-eval-lane":

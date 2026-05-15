@@ -63,6 +63,7 @@ TASK_DIM = {
     "longbench": "long",
     "bfcl": "tool",
     "sourceqa": "diagnostic",
+    "memory_stability": "diagnostic",
     "truthfulqa-multi_gen_en": "safety",
     "toxigen": "safety",
 }

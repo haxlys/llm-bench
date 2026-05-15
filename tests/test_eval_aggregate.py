@@ -107,3 +107,28 @@ def test_programbench_primary_metric_is_resolved_rate(tmp_path, monkeypatch):
     assert full.iloc[0]["dim"] == "agentic_code"
     assert primary.iloc[0]["metric"] == "resolved_rate,none"
     assert primary.iloc[0]["value"] == 0.2
+
+
+def test_memory_stability_results_load_as_diagnostic(tmp_path, monkeypatch):
+    monkeypatch.setattr(aggregate_mod, "get_registry", lambda: _FakeRegistry())
+    task_dir = tmp_path / "20260101T000000Z_vA_full" / "memory_stability"
+    task_dir.mkdir(parents=True)
+    (task_dir / "results_memory_stability.json").write_text(
+        json.dumps(
+            {
+                "results": {
+                    "memory_stability": {
+                        "acc,none": 0.25,
+                        "episodic_only_acc,none": 1.0,
+                    }
+                }
+            }
+        )
+    )
+
+    full = load_eval_results(tmp_path)
+    primary = primary_metric_view(full)
+
+    assert full.iloc[0]["dim"] == "diagnostic"
+    assert primary.iloc[0]["metric"] == "acc,none"
+    assert primary.iloc[0]["value"] == 0.25

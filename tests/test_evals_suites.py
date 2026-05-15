@@ -31,6 +31,12 @@ def test_sourceqa_external_runner_is_supported_for_both_formats():
     assert external_supports_fmt("sourceqa", "sourceqa", "gguf") is True
 
 
+def test_memory_stability_external_runner_is_supported_for_chat_formats():
+    assert ("diagnostic", "memory_stability", "memory_stability") in external_suite()
+    assert external_supports_fmt("memory_stability", "memory_stability", "mlx") is True
+    assert external_supports_fmt("memory_stability", "memory_stability", "gguf") is True
+
+
 def test_fresh_and_korean_external_runners_are_supported_for_chat_formats():
     assert ("fresh", "livebench_subset", "livebench") in external_suite()
     assert ("korean", "kmmlu_pro", "kmmlu_pro") in external_suite()

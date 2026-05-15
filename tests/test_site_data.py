@@ -475,6 +475,27 @@ def test_sourceqa_accuracy_rows_are_diagnostic(tmp_path: Path) -> None:
     assert {"id": "diagnostic-sourceqa", "status": "diagnostic"} in data["caveats"]
 
 
+def test_memory_stability_accuracy_rows_are_diagnostic(tmp_path: Path) -> None:
+    _write_site_inputs(
+        tmp_path,
+        accuracy_rows=[
+            _accuracy_row(
+                dim="diagnostic",
+                task="memory_stability",
+                subtask="memory_stability",
+                metric="acc,none",
+                value=0.25,
+            )
+        ],
+    )
+
+    data = build_site_data(repo_root=tmp_path)
+
+    assert data["accuracy"][0]["confidence"] == "diagnostic"
+    assert data["accuracy"][0]["caveats"] == ["diagnostic-memory-stability"]
+    assert {"id": "diagnostic-memory-stability", "status": "diagnostic"} in data["caveats"]
+
+
 def test_build_site_data_exports_index_coverage(tmp_path: Path) -> None:
     _write_site_inputs(tmp_path)
 

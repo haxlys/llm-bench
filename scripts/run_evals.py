@@ -40,6 +40,7 @@ from llm_bench.evals.livebench_runner import DEFAULT_RELEASE as LIVEBENCH_RELEAS
 from llm_bench.evals.livebench_runner import livebench_available
 from llm_bench.evals.livebench_runner import run_livebench
 from llm_bench.evals.lmeval import run_lmeval
+from llm_bench.evals.memory_stability import run_memory_stability
 from llm_bench.evals.sourceqa import DEFAULT_TASKS_PATH as SOURCEQA_DEFAULT_TASKS
 from llm_bench.evals.sourceqa import run_sourceqa
 from llm_bench.evals.suites import (
@@ -535,6 +536,14 @@ def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str,
                                 tasks_path=Path(sourceqa_tasks) if sourceqa_tasks else SOURCEQA_DEFAULT_TASKS,
                                 limit=effective_limit,
                                 judge_model=sourceqa_judge_model,
+                                api_key=api_key,
+                            )
+                        elif runner == "memory_stability":
+                            res = run_memory_stability(
+                                base_url=base_url,
+                                model_label=api_model_label,
+                                output_dir=out_dir / task,
+                                limit=effective_limit,
                                 api_key=api_key,
                             )
                         elif runner == "livebench":

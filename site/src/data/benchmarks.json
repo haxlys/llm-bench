@@ -1811,6 +1811,204 @@
       "timestamp": "20260513T144526Z",
       "value": 0.9047619047619048,
       "variant": "31B-Dense-gguf-q8"
+    },
+    {
+      "caveats": [
+        "generative-exact-match"
+      ],
+      "confidence": "directional",
+      "dim": "reasoning",
+      "metric": "exact_match,flexible-extract",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T071405Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": 0.007980396874560178,
+      "subtask": "gsm8k_cot_zeroshot",
+      "task": "gsm8k_cot_zeroshot",
+      "timestamp": "20260514T071405Z",
+      "value": 0.9075056861258529,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [
+        "generative-exact-match"
+      ],
+      "confidence": "directional",
+      "dim": "korean",
+      "metric": "exact_match,none",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T071405Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": 0.044378089189867485,
+      "subtask": "<aggregated>",
+      "task": "hrm8k",
+      "timestamp": "20260514T071405Z",
+      "value": 0.7166666666666666,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [],
+      "confidence": "measured",
+      "dim": "code",
+      "metric": "pass_at_1,base",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T071405Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": null,
+      "subtask": "humaneval",
+      "task": "humaneval",
+      "timestamp": "20260514T071405Z",
+      "value": 0.9207317073170732,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [],
+      "confidence": "measured",
+      "dim": "instruction",
+      "metric": "prompt_level_strict_acc,none",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T071405Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": 0.01780876522180194,
+      "subtask": "leaderboard_ifeval",
+      "task": "leaderboard_ifeval",
+      "timestamp": "20260514T071405Z",
+      "value": 0.7800369685767098,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [],
+      "confidence": "measured",
+      "dim": "code",
+      "metric": "pass_at_1,base",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T071405Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": null,
+      "subtask": "mbpp",
+      "task": "mbpp",
+      "timestamp": "20260514T071405Z",
+      "value": 0.8941798941798942,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [
+        "diagnostic-memory-stability"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "metric": "acc,none",
+      "modelId": "qwen-3.5-4B",
+      "runId": "20260514T112314Z_qwen-3.5-4b-gguf-q8_full",
+      "stderr": null,
+      "subtask": "memory_stability",
+      "task": "memory_stability",
+      "timestamp": "20260514T112314Z",
+      "value": 0.5,
+      "variant": "qwen-3.5-4b-gguf-q8"
+    },
+    {
+      "caveats": [
+        "diagnostic-memory-stability"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "metric": "acc,none",
+      "modelId": "qwen-3.5-9B",
+      "runId": "20260514T112709Z_qwen-3.5-9b-gguf-q8_full",
+      "stderr": null,
+      "subtask": "memory_stability",
+      "task": "memory_stability",
+      "timestamp": "20260514T112709Z",
+      "value": 0.5,
+      "variant": "qwen-3.5-9b-gguf-q8"
+    },
+    {
+      "caveats": [
+        "diagnostic-memory-stability"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "metric": "acc,none",
+      "modelId": "gpt-oss-20b",
+      "runId": "20260514T113006Z_gpt-oss-20b-gguf-q4_full",
+      "stderr": null,
+      "subtask": "memory_stability",
+      "task": "memory_stability",
+      "timestamp": "20260514T113006Z",
+      "value": 0.0,
+      "variant": "gpt-oss-20b-gguf-q4"
+    },
+    {
+      "caveats": [
+        "diagnostic-memory-stability"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "metric": "acc,none",
+      "modelId": "gemma-4-E4B-it",
+      "runId": "20260514T113328Z_gemma-4-E4B-gguf-q8_full",
+      "stderr": null,
+      "subtask": "memory_stability",
+      "task": "memory_stability",
+      "timestamp": "20260514T113328Z",
+      "value": 0.5,
+      "variant": "gemma-4-E4B-gguf-q8"
+    },
+    {
+      "caveats": [],
+      "confidence": "measured",
+      "dim": "korean",
+      "metric": "acc,none",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T124615Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": null,
+      "subtask": "kmmlu_pro",
+      "task": "kmmlu_pro",
+      "timestamp": "20260514T124615Z",
+      "value": 0.5227475468331847,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [],
+      "confidence": "measured",
+      "dim": "code",
+      "metric": "pass@1,none",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T124615Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": null,
+      "subtask": "livecodebench",
+      "task": "livecodebench",
+      "timestamp": "20260514T124615Z",
+      "value": 0.37251184834123224,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [
+        "diagnostic-memory-stability"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "metric": "acc,none",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T124615Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": null,
+      "subtask": "memory_stability",
+      "task": "memory_stability",
+      "timestamp": "20260514T124615Z",
+      "value": 0.0,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "caveats": [
+        "diagnostic-sourceqa"
+      ],
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "metric": "acc,none",
+      "modelId": "deepseek-v4-flash",
+      "runId": "20260514T124615Z_deepseek-v4-flash-gguf-iq2xxs_full",
+      "stderr": null,
+      "subtask": "sourceqa",
+      "task": "sourceqa",
+      "timestamp": "20260514T124615Z",
+      "value": 0.9,
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
     }
   ],
   "benchVersion": "0.3",
@@ -1829,6 +2027,10 @@
     },
     {
       "id": "diagnostic-sourceqa",
+      "status": "diagnostic"
+    },
+    {
+      "id": "diagnostic-memory-stability",
       "status": "diagnostic"
     },
     {
@@ -2056,6 +2258,20 @@
       "variant": "26B-MoE-mlx-8bit"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "gemma",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "gemma-4-26B-A4B-it",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "26B-MoE-mlx-8bit"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "gemma",
@@ -2308,6 +2524,20 @@
       "variant": "26B-MoE-mlx-4bit"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "gemma",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "gemma-4-26B-A4B-it",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "26B-MoE-mlx-4bit"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "gemma",
@@ -2560,6 +2790,20 @@
       "variant": "26B-MoE-gguf-q8"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "gemma",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "gemma-4-26B-A4B-it",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "26B-MoE-gguf-q8"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "gemma",
@@ -2812,6 +3056,20 @@
       "variant": "26B-MoE-gguf-q4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "gemma",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "gemma-4-26B-A4B-it",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "26B-MoE-gguf-q4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "gemma",
@@ -3064,6 +3322,20 @@
       "variant": "31B-Dense-mlx-8bit"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "gemma",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "gemma-4-31B-it",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "31B-Dense-mlx-8bit"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "gemma",
@@ -3316,6 +3588,20 @@
       "variant": "31B-Dense-gguf-q8"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "gemma",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "gemma-4-31B-it",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "31B-Dense-gguf-q8"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "gemma",
@@ -3568,6 +3854,20 @@
       "variant": "gemma-4-E4B-gguf-q8"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "gemma",
+      "lane": "diagnostic",
+      "measured": true,
+      "modelId": "gemma-4-E4B-it",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "gemma-4-E4B-gguf-q8"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "gemma",
@@ -3820,6 +4120,20 @@
       "variant": "qwen-3.5-4b-gguf-q8"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": true,
+      "modelId": "qwen-3.5-4B",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3.5-4b-gguf-q8"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -4072,6 +4386,20 @@
       "variant": "qwen-3.5-9b-gguf-q8"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": true,
+      "modelId": "qwen-3.5-9B",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3.5-9b-gguf-q8"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -4324,6 +4652,20 @@
       "variant": "qwen-3.6-35b-a3b-gguf-q4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "qwen-3.6-35B-A3B",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3.6-35b-a3b-gguf-q4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -4576,6 +4918,20 @@
       "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "qwen-3-next-80B-A3B-instruct",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3-next-80b-a3b-instruct-gguf-q4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -4828,6 +5184,20 @@
       "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "qwen-3-coder-30B-A3B-instruct",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3-coder-30b-a3b-instruct-gguf-q4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -5080,6 +5450,20 @@
       "variant": "qwen-3.6-27b-mtplx-speed-mlx-4bit"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "qwen-3.6-27B-MTPLX",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3.6-27b-mtplx-speed-mlx-4bit"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -5332,6 +5716,20 @@
       "variant": "qwen-3.6-27b-mtplx-speed-mtplx-mtp"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "mtplx_speedup",
+      "measured": false,
+      "modelId": "qwen-3.6-27B-MTPLX",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "speed_only",
+      "supported": false,
+      "task": "memory_stability",
+      "variant": "qwen-3.6-27b-mtplx-speed-mtplx-mtp"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -5584,6 +5982,20 @@
       "variant": "qwen-3.6-27b-mtplx-speed-mtplx-ar"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "mtplx_speedup",
+      "measured": false,
+      "modelId": "qwen-3.6-27B-MTPLX",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "speed_only",
+      "supported": false,
+      "task": "memory_stability",
+      "variant": "qwen-3.6-27b-mtplx-speed-mtplx-ar"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -5836,6 +6248,20 @@
       "variant": "qwen-3.6-27b-mtplx-optimized-mlx-mixed4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "qwen-3.6-27B-MTPLX",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3.6-27b-mtplx-optimized-mlx-mixed4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -6088,6 +6514,20 @@
       "variant": "qwen-3.6-27b-mtplx-optimized-mtplx-mtp"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "mtplx_speedup",
+      "measured": false,
+      "modelId": "qwen-3.6-27B-MTPLX",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "speed_only",
+      "supported": false,
+      "task": "memory_stability",
+      "variant": "qwen-3.6-27b-mtplx-optimized-mtplx-mtp"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -6340,6 +6780,20 @@
       "variant": "qwen-3.6-27b-mtplx-optimized-mtplx-ar"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "mtplx_speedup",
+      "measured": false,
+      "modelId": "qwen-3.6-27B-MTPLX",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "speed_only",
+      "supported": false,
+      "task": "memory_stability",
+      "variant": "qwen-3.6-27b-mtplx-optimized-mtplx-ar"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -6592,6 +7046,20 @@
       "variant": "qwen-3-coder-next-gguf-q4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "qwen",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "qwen-3-coder-next",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "qwen-3-coder-next-gguf-q4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "qwen",
@@ -6638,11 +7106,11 @@
       "dim": "reasoning",
       "family": "deepseek",
       "lane": "primary",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": true,
       "runner": "lm-eval",
-      "status": "missing",
+      "status": "directional",
       "supported": true,
       "task": "gsm8k_cot_zeroshot",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
@@ -6694,11 +7162,11 @@
       "dim": "korean",
       "family": "deepseek",
       "lane": "primary",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": true,
       "runner": "lm-eval",
-      "status": "missing",
+      "status": "directional",
       "supported": true,
       "task": "hrm8k",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
@@ -6736,11 +7204,11 @@
       "dim": "instruction",
       "family": "deepseek",
       "lane": "primary",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": true,
       "runner": "lm-eval",
-      "status": "missing",
+      "status": "measured",
       "supported": true,
       "task": "leaderboard_ifeval",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
@@ -6764,11 +7232,11 @@
       "dim": "code",
       "family": "deepseek",
       "lane": "primary",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": true,
       "runner": "evalplus",
-      "status": "missing",
+      "status": "measured",
       "supported": true,
       "task": "humaneval",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
@@ -6778,11 +7246,11 @@
       "dim": "code",
       "family": "deepseek",
       "lane": "primary",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": true,
       "runner": "evalplus",
-      "status": "missing",
+      "status": "measured",
       "supported": true,
       "task": "mbpp",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
@@ -6792,11 +7260,11 @@
       "dim": "code",
       "family": "deepseek",
       "lane": "primary",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": true,
       "runner": "livecodebench",
-      "status": "missing",
+      "status": "measured",
       "supported": true,
       "task": "livecodebench",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
@@ -6834,13 +7302,27 @@
       "dim": "diagnostic",
       "family": "deepseek",
       "lane": "diagnostic",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": false,
       "runner": "sourceqa",
       "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
+      "variant": "deepseek-v4-flash-gguf-iq2xxs"
+    },
+    {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "deepseek",
+      "lane": "diagnostic",
+      "measured": true,
+      "modelId": "deepseek-v4-flash",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
     },
     {
@@ -6862,11 +7344,11 @@
       "dim": "korean",
       "family": "deepseek",
       "lane": "primary",
-      "measured": false,
+      "measured": true,
       "modelId": "deepseek-v4-flash",
       "required": true,
       "runner": "kmmlu_pro",
-      "status": "missing",
+      "status": "measured",
       "supported": true,
       "task": "kmmlu_pro",
       "variant": "deepseek-v4-flash-gguf-iq2xxs"
@@ -7096,6 +7578,20 @@
       "variant": "gpt-oss-20b-gguf-q4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "openai",
+      "lane": "diagnostic",
+      "measured": true,
+      "modelId": "gpt-oss-20b",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "gpt-oss-20b-gguf-q4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "openai",
@@ -7348,6 +7844,20 @@
       "variant": "gpt-oss-120b-gguf-q4"
     },
     {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "openai",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "gpt-oss-120b",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
+      "variant": "gpt-oss-120b-gguf-q4"
+    },
+    {
       "confidence": "measured",
       "dim": "fresh",
       "family": "openai",
@@ -7597,6 +8107,20 @@
       "status": "diagnostic",
       "supported": true,
       "task": "sourceqa",
+      "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
+    },
+    {
+      "confidence": "diagnostic",
+      "dim": "diagnostic",
+      "family": "nemotron",
+      "lane": "diagnostic",
+      "measured": false,
+      "modelId": "nemotron-3-nano-omni-30B-A3B-reasoning",
+      "required": false,
+      "runner": "memory_stability",
+      "status": "diagnostic",
+      "supported": true,
+      "task": "memory_stability",
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     },
     {
@@ -7642,7 +8166,7 @@
       "variant": "nemotron-3-nano-omni-30b-a3b-reasoning-gguf-q4"
     }
   ],
-  "generatedAt": "2026-05-14T04:39:10.698522+00:00",
+  "generatedAt": "2026-05-15T04:19:23.037719+00:00",
   "hardware": {
     "machine": "Apple M5 Max",
     "memoryGb": 128,
@@ -7755,7 +8279,7 @@
       "verifyMsPerCallMean": 86.086
     }
   ],
-  "sourceCommit": "58d6951",
+  "sourceCommit": "d2e989a",
   "speed": [
     {
       "backend": "gguf",
@@ -9212,24 +9736,27 @@
       "fmt": "gguf",
       "generationTokens": 128,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T01:57:44+00:00",
+      "lastMeasuredAt": "2026-05-14T07:03:39+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.19666666666666668,
-      "ppTpsMean": 322.5566666666667,
+      "peakMemGbMean": 0.19899999999999998,
+      "ppTpsMean": 319.4116666666667,
       "promptTokens": 1024,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 3,
+      "runs": 6,
       "scenario": "p1024_g128",
-      "tgTpsMean": 36.516666666666666,
+      "tgTpsMean": 36.435,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 7.760000000000001
+      "wallSecondsMean": 7.82
     },
     {
       "backend": "ds4",
@@ -9242,24 +9769,27 @@
       "fmt": "gguf",
       "generationTokens": 512,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T01:59:01+00:00",
+      "lastMeasuredAt": "2026-05-14T07:04:55+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.19933333333333333,
-      "ppTpsMean": 302.6933333333333,
+      "peakMemGbMean": 0.19399999999999998,
+      "ppTpsMean": 305.6933333333333,
       "promptTokens": 1024,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 3,
+      "runs": 6,
       "scenario": "p1024_g512",
-      "tgTpsMean": 34.36333333333334,
+      "tgTpsMean": 34.56666666666667,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 19.30333333333333
+      "wallSecondsMean": 19.218333333333334
     },
     {
       "backend": "ds4",
@@ -9272,25 +9802,28 @@
       "fmt": "gguf",
       "generationTokens": 128,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T01:56:07+00:00",
+      "lastMeasuredAt": "2026-05-14T07:02:01+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.1365,
-      "ppTpsMean": 199.25,
+      "peakMemGbMean": 0.13671428571428573,
+      "ppTpsMean": 200.37142857142857,
       "promptTokens": 256,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 4,
+      "runs": 7,
       "scenario": "p256_g128",
-      "tgTpsMean": 37.0675,
+      "tgTpsMean": 37.082857142857144,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 5.7
+      "wallSecondsMean": 5.721428571428571
     },
     {
       "backend": "ds4",
@@ -9303,24 +9836,27 @@
       "fmt": "gguf",
       "generationTokens": 512,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T01:57:13+00:00",
+      "lastMeasuredAt": "2026-05-14T07:03:07+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.13633333333333333,
-      "ppTpsMean": 192.81000000000003,
+      "peakMemGbMean": 0.1366666666666667,
+      "ppTpsMean": 193.20666666666668,
       "promptTokens": 256,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 3,
+      "runs": 6,
       "scenario": "p256_g512",
-      "tgTpsMean": 36.31,
+      "tgTpsMean": 36.13666666666666,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 16.540000000000003
+      "wallSecondsMean": 16.63
     },
     {
       "backend": "ds4",
@@ -9333,24 +9869,27 @@
       "fmt": "gguf",
       "generationTokens": 128,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T02:00:12+00:00",
+      "lastMeasuredAt": "2026-05-14T07:06:06+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.19499999999999998,
-      "ppTpsMean": 327.1333333333333,
+      "peakMemGbMean": 0.1955,
+      "ppTpsMean": 328.3833333333333,
       "promptTokens": 4096,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 3,
+      "runs": 6,
       "scenario": "p4096_g128",
-      "tgTpsMean": 30.150000000000002,
+      "tgTpsMean": 30.185000000000002,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 17.793333333333333
+      "wallSecondsMean": 17.761666666666667
     },
     {
       "backend": "ds4",
@@ -9363,24 +9902,27 @@
       "fmt": "gguf",
       "generationTokens": 512,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T02:02:14+00:00",
+      "lastMeasuredAt": "2026-05-14T07:08:06+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.19499999999999998,
-      "ppTpsMean": 331.46666666666664,
+      "peakMemGbMean": 0.1955,
+      "ppTpsMean": 330.46999999999997,
       "promptTokens": 4096,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 3,
+      "runs": 6,
       "scenario": "p4096_g512",
-      "tgTpsMean": 30.083333333333332,
+      "tgTpsMean": 30.123333333333335,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 30.406666666666666
+      "wallSecondsMean": 30.438333333333333
     },
     {
       "backend": "ds4",
@@ -9393,24 +9935,27 @@
       "fmt": "gguf",
       "generationTokens": 128,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T02:04:19+00:00",
+      "lastMeasuredAt": "2026-05-14T07:10:12+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.302,
-      "ppTpsMean": 314.9166666666667,
+      "peakMemGbMean": 0.3025,
+      "ppTpsMean": 314.84,
       "promptTokens": 8192,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 3,
+      "runs": 6,
       "scenario": "p8192_g128",
-      "tgTpsMean": 29.80333333333333,
+      "tgTpsMean": 29.735,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 31.343333333333334
+      "wallSecondsMean": 31.378333333333334
     },
     {
       "backend": "ds4",
@@ -9423,25 +9968,28 @@
       "fmt": "gguf",
       "generationTokens": 512,
       "itlMs": null,
-      "lastMeasuredAt": "2026-05-14T02:07:16+00:00",
+      "lastMeasuredAt": "2026-05-14T07:13:24+00:00",
       "modelId": "deepseek-v4-flash",
-      "peakMemGbMean": 0.30225,
-      "ppTpsMean": 318.6675,
+      "peakMemGbMean": 0.30257142857142855,
+      "ppTpsMean": 305.21999999999997,
       "promptTokens": 8192,
       "quant": "IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8",
       "runIndices": [
         1,
         1,
         2,
+        3,
+        1,
+        2,
         3
       ],
-      "runs": 4,
+      "runs": 7,
       "scenario": "p8192_g512",
-      "tgTpsMean": 29.6425,
+      "tgTpsMean": 28.717142857142857,
       "tier": "2bit",
       "ttftMs": null,
       "variant": "deepseek-v4-flash-gguf-iq2xxs",
-      "wallSecondsMean": 43.9975
+      "wallSecondsMean": 45.82
     },
     {
       "backend": "gguf",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-14T04:39:10+00:00",
+  "generated_at": "2026-05-15T04:19:19+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -200,6 +200,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -236,12 +247,12 @@
         "coverage_summary": {
           "measured": 2,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 0,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [
           "humaneval_instruct",
@@ -448,6 +459,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -484,12 +506,12 @@
         "coverage_summary": {
           "measured": 1,
           "directional": 1,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 2,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-13T06:43:23Z"
@@ -697,6 +719,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -733,12 +766,12 @@
         "coverage_summary": {
           "measured": 5,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [
           "kmmlu_direct",
@@ -947,6 +980,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -983,12 +1027,12 @@
         "coverage_summary": {
           "measured": 4,
           "directional": 0,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 3,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-13T12:13:40Z"
@@ -1188,6 +1232,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -1224,12 +1279,12 @@
         "coverage_summary": {
           "measured": 1,
           "directional": 0,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 3,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-13T09:51:58Z"
@@ -1433,6 +1488,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -1469,12 +1535,12 @@
         "coverage_summary": {
           "measured": 3,
           "directional": 0,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 4,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-13T14:45:26Z"
@@ -1682,6 +1748,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": true,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -1718,15 +1795,15 @@
         "coverage_summary": {
           "measured": 5,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T18:59:27Z"
+        "last_measured": "2026-05-14T11:33:28Z"
       }
     },
     {
@@ -1931,6 +2008,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": true,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -1967,19 +2055,19 @@
         "coverage_summary": {
           "measured": 5,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [
           "kmmlu_direct",
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-13T05:54:58Z"
+        "last_measured": "2026-05-14T11:23:14Z"
       }
     },
     {
@@ -2181,6 +2269,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": true,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -2217,15 +2316,15 @@
         "coverage_summary": {
           "measured": 2,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 3,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T06:01:42Z"
+        "last_measured": "2026-05-14T11:27:09Z"
       }
     },
     {
@@ -2429,6 +2528,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -2465,12 +2575,12 @@
         "coverage_summary": {
           "measured": 4,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-13T06:16:39Z"
@@ -2677,6 +2787,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -2713,12 +2834,12 @@
         "coverage_summary": {
           "measured": 4,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-08T14:22:18Z"
@@ -2925,6 +3046,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -2961,12 +3093,12 @@
         "coverage_summary": {
           "measured": 4,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-08T19:34:16Z"
@@ -3169,6 +3301,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -3205,12 +3348,12 @@
         "coverage_summary": {
           "measured": 2,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 0,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [
           "kmmlu_direct"
@@ -3410,6 +3553,17 @@
             "status": "speed_only"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "speed_only"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -3449,9 +3603,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 18,
+          "speed_only": 19,
           "unsupported": 0,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": null
@@ -3649,6 +3803,17 @@
             "status": "speed_only"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "speed_only"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -3688,9 +3853,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 18,
+          "speed_only": 19,
           "unsupported": 0,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": null
@@ -3893,6 +4058,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -3929,12 +4105,12 @@
         "coverage_summary": {
           "measured": 2,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 0,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [
           "kmmlu_direct"
@@ -4134,6 +4310,17 @@
             "status": "speed_only"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "speed_only"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -4173,9 +4360,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 18,
+          "speed_only": 19,
           "unsupported": 0,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": null
@@ -4373,6 +4560,17 @@
             "status": "speed_only"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "speed_only"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -4412,9 +4610,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 18,
+          "speed_only": 19,
           "unsupported": 0,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": null
@@ -4622,6 +4820,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -4658,12 +4867,12 @@
         "coverage_summary": {
           "measured": 5,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-13T08:52:33Z"
@@ -4690,12 +4899,20 @@
       "speed": {
         "scenarios_measured": 8,
         "scenarios_total": 8,
-        "last_measured": "2026-05-14T02:07:16+00:00"
+        "last_measured": "2026-05-14T07:13:24+00:00"
       },
       "evals": {
-        "tasks_measured": 0,
+        "tasks_measured": 7,
         "tasks_supported": 7,
-        "tasks": [],
+        "tasks": [
+          "gsm8k_cot_zeroshot",
+          "hrm8k",
+          "humaneval",
+          "kmmlu_pro",
+          "leaderboard_ifeval",
+          "livecodebench",
+          "mbpp"
+        ],
         "coverage": [
           {
             "dim": "reasoning",
@@ -4704,9 +4921,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "directional",
-            "status": "missing"
+            "status": "directional"
           },
           {
             "dim": "reasoning",
@@ -4748,9 +4965,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "directional",
-            "status": "missing"
+            "status": "directional"
           },
           {
             "dim": "korean",
@@ -4781,9 +4998,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "safety",
@@ -4803,9 +5020,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -4814,9 +5031,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -4825,9 +5042,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "code",
@@ -4858,7 +5075,18 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -4880,9 +5108,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "measured",
-            "status": "missing"
+            "status": "measured"
           },
           {
             "dim": "agentic_code",
@@ -4897,17 +5125,17 @@
           }
         ],
         "coverage_summary": {
-          "measured": 0,
-          "directional": 0,
-          "diagnostic": 1,
-          "missing": 7,
+          "measured": 5,
+          "directional": 2,
+          "diagnostic": 2,
+          "missing": 0,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
-        "last_measured": null
+        "last_measured": "2026-05-14T12:46:15Z"
       }
     },
     {
@@ -5111,6 +5339,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": true,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -5147,15 +5386,15 @@
         "coverage_summary": {
           "measured": 4,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-08T22:46:03Z"
+        "last_measured": "2026-05-14T11:30:06Z"
       }
     },
     {
@@ -5359,6 +5598,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -5395,12 +5645,12 @@
         "coverage_summary": {
           "measured": 4,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-13T18:59:27Z"
@@ -5607,6 +5857,17 @@
             "status": "diagnostic"
           },
           {
+            "dim": "diagnostic",
+            "task": "memory_stability",
+            "runner": "memory_stability",
+            "lane": "diagnostic",
+            "required": false,
+            "supported": true,
+            "measured": false,
+            "confidence": "diagnostic",
+            "status": "diagnostic"
+          },
+          {
             "dim": "fresh",
             "task": "livebench_subset",
             "runner": "livebench",
@@ -5643,12 +5904,12 @@
         "coverage_summary": {
           "measured": 4,
           "directional": 2,
-          "diagnostic": 1,
+          "diagnostic": 2,
           "missing": 1,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 18
+          "total": 19
         },
         "extra_tasks": [],
         "last_measured": "2026-05-09T05:49:51Z"
@@ -5658,7 +5919,7 @@
   "totals": {
     "variants": 23,
     "speed_complete": 17,
-    "evals_started": 18,
-    "evals_missing_required": 28
+    "evals_started": 19,
+    "evals_missing_required": 21
   }
 }

@@ -48,7 +48,7 @@ def run_livecodebench(
     model_label: str,
     output_dir: Path,
     limit: int | None = None,
-    timeout_s: int = DEFAULT_TASK_TIMEOUT_S,
+    timeout_s: int | None = None,
     api_key: str | None = None,
 ) -> dict:
     """Generate + evaluate a LiveCodeBench release against an OpenAI-compatible server.
@@ -58,6 +58,7 @@ def run_livecodebench(
     """
     output_dir.mkdir(parents=True, exist_ok=True)
     log_path = output_dir / "livecodebench.log"
+    task_timeout_s = _task_timeout_s(timeout_s)
 
     source_checkout = _source_checkout()
     if not livecodebench_available():
@@ -116,19 +117,19 @@ def run_livecodebench(
             capture_output=True,
             text=True,
             env=env,
-            timeout=timeout_s,
+            timeout=task_timeout_s,
             cwd=str(work_dir),
         )
     except subprocess.TimeoutExpired as e:
         log_path.write_text(
             "=== cmd ===\n" + " ".join(cmd) +
-            f"\n=== TIMEOUT after {timeout_s}s ===\n" +
+            f"\n=== TIMEOUT after {task_timeout_s}s ===\n" +
             _decode_timeout_stream(e.stdout) +
             "\n=== stderr ===\n" +
             _decode_timeout_stream(e.stderr)
         )
         return {"task": "livecodebench",
-                "error": f"timeout after {timeout_s}s",
+                "error": f"timeout after {task_timeout_s}s",
                 "log": str(log_path)}
 
     log_path.write_text(
@@ -180,6 +181,21 @@ def run_livecodebench(
             }
         },
     }
+
+
+def _task_timeout_s(timeout_s: int | None) -> int:
+    if timeout_s is not None:
+        return timeout_s
+    raw = os.environ.get("LIVE_CODE_BENCH_TASK_TIMEOUT_S")
+    if not raw:
+        return DEFAULT_TASK_TIMEOUT_S
+    try:
+        value = int(raw)
+    except ValueError as e:
+        raise ValueError("LIVE_CODE_BENCH_TASK_TIMEOUT_S must be an integer") from e
+    if value <= 0:
+        raise ValueError("LIVE_CODE_BENCH_TASK_TIMEOUT_S must be positive")
+    return value
 
 
 def _extract_pass_at_1(score_roots: Path | list[Path], stdout: str) -> float | None:
