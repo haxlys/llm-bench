@@ -65,6 +65,7 @@ uv run python scripts/run_bench.py --all-pending
 
 # Visualize
 uv run streamlit run dashboard/app.py
+# Opens on http://127.0.0.1:8502 by default.
 ```
 
 Use the full registry download only when you intentionally want the whole local
@@ -420,20 +421,21 @@ MLX, `llama-server` for GGUF) booted ad-hoc per model variant.
 |---|---|---|
 | Reasoning | `mmlu_generative`, `gsm8k_cot_zeroshot` | `hellaswag`, `leaderboard_mmlu_pro`, `leaderboard_gpqa_diamond` |
 | Korean | `kmmlu_direct`, `hrm8k` | `haerae`, `kobest` |
-| Code | `humaneval` / `mbpp` (EvalPlus), `livecodebench`, `bigcodebench_hard` | — |
+| Code | primary: `humaneval` / `mbpp` (EvalPlus), `bigcodebench_hard`; optional legacy: `livecodebench` | — |
 | Instruction | `leaderboard_ifeval` | — |
 | Long context | `longbench` (21 sub-tasks, EN+ZH) | — |
 | Safety | `truthfulqa-multi_gen_en` | `toxigen` |
 | Tool use | `bfcl` (BFCL v4, opt-in via `--include-bfcl`) | — |
 | Diagnostic source grounding | `sourceqa` (pinned-repo evidence QA, deterministic checker) | — |
 | Fresh eval | `livebench_subset` (LiveBench non-agentic subset) | — |
-| Agentic code | `programbench` (ProgramBench eval + result import), `terminal_bench` (opt-in Docker-backed terminal tasks) | — |
+| Agentic code | primary: `terminal_bench` (Docker-backed terminal tasks); optional: `programbench` eval + result import | — |
 | Korean professional | `kmmlu_pro` (KMMLU-Pro weighted MCQ) | — |
 
 The reasoning + instruction additions mirror HF Open LLM Leaderboard v2
-(MMLU-Pro / GPQA-Diamond / IFEval). LiveCodeBench complements EvalPlus
-with contamination-free contest problems. BFCL fills the previously-
-empty tool-use dim.
+(MMLU-Pro / GPQA-Diamond / IFEval). BigCodeBench-Hard is the primary practical
+code-generation task; LiveCodeBench remains available as a legacy
+contest-code baseline. Terminal-Bench is the primary agentic code task, and
+BFCL fills the tool-use dim.
 
 `mlx_lm.server` does not return token logprobs in `/v1/completions`, so
 loglikelihood-based MCQ tasks (`hellaswag`, `kobest`, `haerae`, `toxigen`,
@@ -490,10 +492,10 @@ For stricter governance on a full matrix run, add `--strict-coverage` so the
 run exits non-zero when any required supported primary task is missing a
 completed result (for example, external runner unavailable,
 limit-incompatible skip, or hard task error). Optional lanes
-(`bigcodebench_hard`, BFCL, LiveBench subset, ProgramBench, Terminal-Bench) are
-reported in coverage but do not block the primary matrix. MTPLX MTP/AR rows are
-reported as `speed_only` under the `mtplx_speedup` lane and also do not block
-coverage.
+(`livecodebench`, BFCL, LiveBench subset, ProgramBench) are reported in
+coverage but do not block the primary matrix. `bigcodebench_hard` and
+`terminal_bench` are primary rows. MTPLX MTP/AR rows are reported as
+`speed_only` under the `mtplx_speedup` lane and also do not block coverage.
 
 Terminal-Bench is the maintained agentic terminal benchmark path. It runs tasks
 inside Docker and talks to the same OpenAI-compatible model server as the rest
@@ -511,9 +513,10 @@ uv run python scripts/run_terminal_bench.py \
 uv run python scripts/aggregate_evals.py
 ```
 
-The same runner is available from the full eval CLI. Without explicit opt-in,
-Terminal-Bench stays disabled; specifying `--task terminal_bench` is treated as
-an opt-in for quick targeted checks:
+The same runner is available from the full eval CLI. In `--suite full`,
+Terminal-Bench is part of the primary matrix and defaults to one sampled task
+unless `TERMINAL_BENCH_TASK_IDS`, `TERMINAL_BENCH_N_TASKS`, or
+`TERMINAL_BENCH_FULL=1` is set:
 
 ```bash
 TERMINAL_BENCH_TASK_IDS=hello-world \
@@ -632,14 +635,17 @@ Results:
 After the eval run, `scripts/aggregate_evals.py` rebuilds the CSVs and the
 coverage index. The overnight wrapper calls this for you.
 
-## Dashboard (11 pages)
+## Dashboard (13 pages)
 
 ```bash
 uv run streamlit run dashboard/app.py
+# Opens on http://127.0.0.1:8502 by default.
 ```
 
 | Group | Page | What it shows |
 |---|---|---|
+| Status | **Model Status** | Model-first benchmark progress, task matrix, and weak/missing task list |
+| Status | **Model Compare** | Side-by-side model comparison for speed, eval scores, and coverage debt |
 | Status | **Catalog** | Registry × measurement progress bars (entry point) |
 | Speed | **Speed Overview** | TG/PP bar charts, peak memory, Pareto scatter |
 | Speed | **Speed Scaling** | Context-length sweep by runtime |

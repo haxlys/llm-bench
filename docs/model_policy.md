@@ -85,13 +85,14 @@ Avoid promoting the 35B-A3B Qwen row until its output formatting/scoring behavio
 |---|---|---|
 | Reasoning | GSM8K, HRM8K, IFEval, GPQA/MMLU-Pro where supported | Gemma, Qwen, gpt-oss, Nemotron |
 | Korean | HRM8K, KMMLU-Pro | Gemma, Qwen, Qwen3.6 |
-| Code | EvalPlus, LiveCodeBench | Qwen3-Coder, gpt-oss, Gemma baseline |
+| Code | EvalPlus, BigCodeBench-Hard | Qwen3-Coder, gpt-oss, Gemma baseline |
+| Agentic code | Terminal-Bench | Qwen3-Coder, DeepSeek, gpt-oss |
 | Diagnostic source grounding | SourceQA | All chat-capable local and endpoint variants |
 | Speed | `summary.csv` scenarios | MLX, GGUF, MTPLX MTP/AR |
 | MTPLX speedup | `mtplx_speedups.csv` matching pairs | Qwen3.6 MTPLX MTP vs AR only |
 
-Optional lanes are BigCodeBench-Hard, BFCL V4, LiveBench subset, and
-ProgramBench. They are important for frontier interpretation, but they should
+Optional lanes are LiveCodeBench, BFCL V4, LiveBench subset, and ProgramBench.
+They are important for frontier interpretation, but they should
 not block the minimum common matrix or be blended into a single headline score.
 
 ## Reproducibility policy
@@ -102,7 +103,8 @@ When a task needs a practical cap, the cap belongs in the trace or documentation
 
 For overnight catch-up runs, fill the common primary matrix first:
 `gsm8k_cot_zeroshot`, `hrm8k`, `leaderboard_ifeval`, `humaneval`,
-`mbpp`, `livecodebench`, and `kmmlu_pro` where the variant supports the runner.
+`mbpp`, `bigcodebench_hard`, `terminal_bench`, and `kmmlu_pro` where the
+variant supports the runner.
 Then schedule optional lanes separately with their own release/package pins.
 MTPLX MTP/AR variants are speed-only; use their paired flat MLX variant for
 quality comparisons and their MTP/AR rows only for speedup claims.

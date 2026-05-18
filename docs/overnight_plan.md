@@ -34,12 +34,17 @@ TASKS="kmmlu_pro" \
 LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
 bash scripts/run_evals_overnight.sh
 
-# 2. Primary code coverage
-TASKS="humaneval mbpp livecodebench" \
+# 2. Primary practical code coverage
+TASKS="humaneval mbpp bigcodebench_hard" \
 LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
 bash scripts/run_evals_overnight.sh
 
-# 3. Remaining reasoning / Korean / instruction coverage
+# 3. Primary agentic code coverage
+TASKS="terminal_bench" \
+LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
+bash scripts/run_evals_overnight.sh
+
+# 4. Remaining reasoning / Korean / instruction coverage
 TASKS="gsm8k_cot_zeroshot hrm8k leaderboard_ifeval" \
 LLM_BENCH_RESILIENT_IFEVAL=1 LLM_BENCH_STRICT_COVERAGE=1 \
 bash scripts/run_evals_overnight.sh
@@ -51,7 +56,8 @@ Primary tasks to fill where supported:
 |---|---|
 | Reasoning / instruction | `gsm8k_cot_zeroshot`, `hrm8k`, `leaderboard_ifeval` |
 | Korean | `kmmlu_pro` |
-| Code | `humaneval`, `mbpp`, `livecodebench` |
+| Code | `humaneval`, `mbpp`, `bigcodebench_hard` |
+| Agentic code | `terminal_bench` |
 | Diagnostic source grounding | `sourceqa` (visible diagnostic, not primary debt) |
 | Speed | all `results/summary.csv` scenarios via `scripts/run_bench.py --all-pending` |
 | MTPLX speedup | `scripts/compare_mtplx.py` after paired MTPLX speed runs |
@@ -104,8 +110,8 @@ Run optional lanes after primary coverage is green:
 TASKS="bfcl" LLM_BENCH_INCLUDE_BFCL=1 \
 bash scripts/run_evals_overnight.sh
 
-# BigCodeBench-Hard and LiveBench subset stay separate from the primary matrix
-TASKS="bigcodebench_hard livebench_subset" \
+# Legacy LiveCodeBench and LiveBench subset stay separate from the primary matrix
+TASKS="livecodebench livebench_subset" \
 bash scripts/run_evals_overnight.sh
 
 # ProgramBench import after agent submissions exist

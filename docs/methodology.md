@@ -86,10 +86,10 @@ their configured `/v1` endpoint directly and do not spawn a subprocess.
 | instruction | `leaderboard_ifeval` | — |
 | safety | `truthfulqa-multi_gen_en`, `toxigen` | — |
 | diagnostic source grounding | — | `sourceqa` (pinned-repo evidence QA) |
-| code / contamination-fresh | — | primary: `humaneval`, `mbpp` (EvalPlus), `livecodebench`; optional: `bigcodebench_hard`, `livebench_subset` |
+| code / practical generation | — | primary: `humaneval`, `mbpp` (EvalPlus), `bigcodebench_hard`; optional: `livecodebench`, `livebench_subset` |
 | tool use | — | optional: `bfcl` (opt-in via `--include-bfcl`) |
 | long context | `longbench` (21 sub-tasks, run with `--suite long`) | — |
-| agentic code | — | optional: `programbench` eval + result import, `terminal_bench` |
+| agentic code | — | primary: `terminal_bench`; optional: `programbench` eval + result import |
 
 ### Why two task families?
 
@@ -158,11 +158,11 @@ are supporting diagnostics. When a ProgramBench `data/tasks` directory is
 provided, ignored branches/tests from `tests.json` are excluded to mirror
 `programbench info`.
 
-`terminal_bench` is the maintained agentic terminal-task dimension. llm-bench
+`terminal_bench` is the primary maintained agentic terminal-task dimension. llm-bench
 invokes upstream `tb run` against the same OpenAI-compatible endpoint and then
 imports Terminal-Bench `results.json` into synthetic results with primary metric
-`resolved_rate,none`. It is optional and Docker-backed; the default wrapper path
-runs one task unless `TERMINAL_BENCH_N_TASKS`, `TERMINAL_BENCH_TASK_IDS`, or
+`resolved_rate,none`. It is Docker-backed; the default wrapper path runs one
+task unless `TERMINAL_BENCH_N_TASKS`, `TERMINAL_BENCH_TASK_IDS`, or
 `TERMINAL_BENCH_FULL=1` is set.
 
 Every eval task execution also appends one row to
@@ -173,12 +173,12 @@ time, result artifact path, optional sample path, log path, and error text.
 
 Primary lanes are the minimum common matrix used for model-family comparisons:
 reasoning (`gsm8k_cot_zeroshot`, instruction), Korean (`hrm8k`, `kmmlu_pro`),
-code (`humaneval`, `mbpp`, `livecodebench`), and speed where applicable.
+code (`humaneval`, `mbpp`, `bigcodebench_hard`), agentic code
+(`terminal_bench`), and speed where applicable.
 SourceQA is a diagnostic lane for source-grounding smoke/regression checks, not
 primary coverage debt. MTPLX native MTP/AR variants are a separate
 `mtplx_speedup` lane, not accuracy candidates. Optional lanes are intentionally separated:
-`bigcodebench_hard`, `bfcl`, `livebench_subset`, `programbench`, and
-`terminal_bench`.
+`livecodebench`, `bfcl`, `livebench_subset`, and `programbench`.
 
 The site reads `results/index.json` before showing score tables. That lets it
 distinguish:
