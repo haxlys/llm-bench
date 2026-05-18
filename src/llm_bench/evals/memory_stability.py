@@ -23,6 +23,9 @@ DEFAULT_UPDATE_STEPS = 8
 DEFAULT_EPISODES_PER_CASE = 2
 CURRENT_EXAMPLES_PER_CASE = 4
 FORCED_MAX_ITEMS = 1
+DEFAULT_ANSWER_MAX_TOKENS = 2048
+FORCED_MEMORY_MAX_TOKENS = 512
+GATED_MEMORY_MAX_TOKENS = 256
 POLICIES = ("no_memory", "episodic_only", "forced_abstraction", "gated_abstraction")
 
 MODE_CONFIG = {
@@ -92,7 +95,14 @@ def run_memory_stability(
     """Run the memory-stability diagnostic and write a synthetic results JSON."""
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    model_call = _model_call_factory(base_url, model_label, timeout_s, api_key)
+    model_call_records: list[dict] = []
+    model_call = _model_call_factory(
+        base_url,
+        model_label,
+        timeout_s,
+        api_key,
+        call_records=model_call_records,
+    )
     if consolidate_fn is None:
         consolidate_fn = model_call
     if answer_fn is None:
@@ -102,8 +112,13 @@ def run_memory_stability(
     episodes = build_episode_stream(update_steps=update_steps, families=families)
     cases = build_eval_cases(families=families, limit=limit)
 
+    forced_start = len(model_call_records)
     forced_memory = build_forced_memory(episodes, consolidate_fn)
+    _mark_call_records(model_call_records, forced_start, purpose="forced_memory")
+
+    gated_start = len(model_call_records)
     gated_memories = build_gated_memories(episodes, consolidate_fn)
+    _mark_call_records(model_call_records, gated_start, purpose="gated_memory")
 
     memories = {
         "no_memory": "",
@@ -137,11 +152,20 @@ def run_memory_stability(
                 raw_answer = ""
                 parsed_output: Grid | None = None
                 error: str | None = None
+                call_start = len(model_call_records)
                 try:
                     raw_answer = answer_fn(case, prompt, policy, memory_context)
                     parsed_output = parse_output_grid(raw_answer)
                 except Exception as exc:  # noqa: BLE001 - captured in sample artifact
                     error = str(exc)
+                answer_call_indices = _mark_call_records(
+                    model_call_records,
+                    call_start,
+                    purpose="answer",
+                    mode=mode,
+                    policy=policy,
+                    case_id=case.id,
+                )
                 is_correct = parsed_output == case.expected_output
                 correct_flags.append(is_correct)
                 samples.append(
@@ -155,6 +179,7 @@ def run_memory_stability(
                         "prompt": prompt,
                         "answer": raw_answer,
                         "parsed_output": parsed_output,
+                        "model_call_indices": answer_call_indices,
                         "correct": is_correct,
                         "error": error,
                     }
@@ -180,10 +205,14 @@ def run_memory_stability(
             "forced_max_items": FORCED_MAX_ITEMS,
             "current_examples_per_case": CURRENT_EXAMPLES_PER_CASE,
             "default_episodes_per_case": DEFAULT_EPISODES_PER_CASE,
+            "answer_max_tokens": DEFAULT_ANSWER_MAX_TOKENS,
+            "forced_memory_max_tokens": FORCED_MEMORY_MAX_TOKENS,
+            "gated_memory_max_tokens": GATED_MEMORY_MAX_TOKENS,
             "modes": MODE_CONFIG,
         },
         "memories": memories,
         "samples": samples,
+        "model_calls": model_call_records,
     }
     results_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
 
@@ -283,7 +312,7 @@ def build_forced_memory(
                 "Return only the rewritten memory.",
             ]
         )
-        memory = consolidate_fn(prompt, 512).strip()
+        memory = consolidate_fn(prompt, FORCED_MEMORY_MAX_TOKENS).strip()
     return memory
 
 
@@ -307,7 +336,7 @@ def build_gated_memories(
                 "Return exactly one concise sentence that starts with the task code.",
             ]
         )
-        memories[task_code] = consolidate_fn(prompt, 256).strip()
+        memories[task_code] = consolidate_fn(prompt, GATED_MEMORY_MAX_TOKENS).strip()
     return memories
 
 
@@ -333,6 +362,8 @@ def build_solve_prompt(
             f"Input grid:\n{json.dumps(case.input_grid, separators=(',', ':'))}",
             f"Memory:\n{memory_block}",
             'Return only JSON in this exact shape: {"output": [[...], ...]}',
+            "Do not explain. Do not include markdown fences.",
+            'The first character of your reply must be "{".',
         ]
     )
 
@@ -349,18 +380,13 @@ def format_episode(episode: MemoryEpisode) -> str:
 
 
 def parse_output_grid(answer: str) -> Grid:
-    """Parse a model answer as either {"output": grid} or a bare grid."""
-    candidates = _json_candidates(answer)
-    for candidate in candidates:
-        try:
-            parsed = json.loads(candidate)
-        except json.JSONDecodeError:
-            continue
-        if isinstance(parsed, dict):
-            parsed = parsed.get("output")
-        if _is_grid(parsed):
-            return [[int(cell) for cell in row] for row in parsed]
-    raise ValueError("answer did not contain a valid output grid")
+    """Parse the final answer as a strict {"output": grid} JSON object."""
+    candidates = _json_object_candidates(answer)
+    for parsed in reversed(candidates):
+        output = parsed.get("output")
+        if _is_grid(output):
+            return [[int(cell) for cell in row] for row in output]
+    raise ValueError('answer did not contain a JSON object with an "output" grid')
 
 
 def aggregate_metrics(
@@ -497,7 +523,7 @@ def _memory_for_case(
 
 def _answer_with_model(model_call: ConsolidateFn) -> AnswerFn:
     def answer(_case: EvalCase, prompt: str, _policy: str, _memory_context: str) -> str:
-        return model_call(prompt, 512)
+        return model_call(prompt, DEFAULT_ANSWER_MAX_TOKENS)
 
     return answer
 
@@ -507,31 +533,47 @@ def _model_call_factory(
     model_label: str,
     timeout_s: int,
     api_key: str | None,
+    call_records: list[dict] | None = None,
 ) -> ConsolidateFn:
     def call(prompt: str, max_tokens: int) -> str:
+        request_payload = {
+            "model": model_label,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a deterministic benchmark participant. "
+                        "Follow the requested output format exactly. "
+                        "Do not explain or reason out loud. "
+                        'Reply with JSON only; the first character must be "{".'
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0,
+            "max_tokens": max_tokens,
+        }
         response = requests.post(
             base_url.rstrip("/") + "/chat/completions",
-            json={
-                "model": model_label,
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": (
-                            "You are a deterministic benchmark participant. "
-                            "Follow the requested output format exactly."
-                        ),
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                "temperature": 0,
-                "max_tokens": max_tokens,
-            },
+            json=request_payload,
             headers=_auth_headers(api_key),
             timeout=timeout_s,
         )
         response.raise_for_status()
         data = response.json()
-        return data["choices"][0]["message"]["content"].strip()
+        text, extraction_source = _extract_response_text(data)
+        if call_records is not None:
+            call_records.append(
+                _model_call_record(
+                    index=len(call_records),
+                    prompt=prompt,
+                    max_tokens=max_tokens,
+                    response_json=data,
+                    extracted_text=text,
+                    extraction_source=extraction_source,
+                )
+            )
+        return text.strip()
 
     return call
 
@@ -555,19 +597,145 @@ def _grid_variant(index: int) -> Grid:
     return [row[:] for row in rotated_rows]
 
 
-def _json_candidates(answer: str) -> list[str]:
+def _mark_call_records(
+    records: list[dict],
+    start_index: int,
+    purpose: str,
+    **metadata: str,
+) -> list[int]:
+    indices: list[int] = []
+    for record in records[start_index:]:
+        record["purpose"] = purpose
+        record.update(metadata)
+        indices.append(int(record["index"]))
+    return indices
+
+
+def _json_object_candidates(answer: str) -> list[dict]:
     stripped = answer.strip()
-    candidates = [stripped]
-    fence = re.search(r"```(?:json)?\s*(.*?)```", stripped, flags=re.DOTALL | re.IGNORECASE)
-    if fence:
-        candidates.append(fence.group(1).strip())
-    obj_start, obj_end = stripped.find("{"), stripped.rfind("}")
-    if obj_start != -1 and obj_end > obj_start:
-        candidates.append(stripped[obj_start : obj_end + 1])
-    arr_start, arr_end = stripped.find("["), stripped.rfind("]")
-    if arr_start != -1 and arr_end > arr_start:
-        candidates.append(stripped[arr_start : arr_end + 1])
+    if not stripped:
+        return []
+
+    texts = [stripped]
+    texts.extend(
+        match.group(1).strip()
+        for match in re.finditer(
+            r"```(?:json)?\s*(.*?)```",
+            stripped,
+            flags=re.DOTALL | re.IGNORECASE,
+        )
+    )
+
+    decoder = json.JSONDecoder()
+    candidates: list[dict] = []
+    seen: set[str] = set()
+    for text in texts:
+        for index, char in enumerate(text):
+            if char != "{":
+                continue
+            try:
+                parsed, end = decoder.raw_decode(text[index:])
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(parsed, dict):
+                continue
+            raw = text[index : index + end]
+            if raw in seen:
+                continue
+            seen.add(raw)
+            candidates.append(parsed)
     return candidates
+
+
+def _extract_response_text(data: object) -> tuple[str, str]:
+    choice = _first_choice(data)
+    if choice is None:
+        return "", "missing_choice"
+
+    message = choice.get("message") if isinstance(choice.get("message"), dict) else {}
+    content = _coerce_text(message.get("content"))
+    if content.strip():
+        final = _extract_final_channel_text(content)
+        if final:
+            return final, "message.content.final_channel"
+        return content, "message.content"
+
+    for key in ("reasoning_content", "reasoning"):
+        final = _extract_final_channel_text(_coerce_text(message.get(key)))
+        if final:
+            return final, f"message.{key}.final_channel"
+
+    text = _coerce_text(choice.get("text"))
+    if text.strip():
+        final = _extract_final_channel_text(text)
+        if final:
+            return final, "choice.text.final_channel"
+        return text, "choice.text"
+
+    return "", "empty"
+
+
+def _first_choice(data: object) -> dict | None:
+    if not isinstance(data, dict):
+        return None
+    choices = data.get("choices")
+    if not isinstance(choices, list) or not choices:
+        return None
+    choice = choices[0]
+    return choice if isinstance(choice, dict) else None
+
+
+def _coerce_text(value: object) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        parts: list[str] = []
+        for item in value:
+            if isinstance(item, str):
+                parts.append(item)
+            elif isinstance(item, dict):
+                text = item.get("text") or item.get("content")
+                if isinstance(text, str):
+                    parts.append(text)
+        return "".join(parts)
+    return ""
+
+
+def _extract_final_channel_text(text: str) -> str:
+    matches = re.findall(
+        r"<\|channel\|>\s*final\s*<\|message\|>(.*?)(?=<\|return\|>|<\|end\|>|<\|start\|>|$)",
+        text,
+        flags=re.DOTALL,
+    )
+    nonempty = [match.strip() for match in matches if match.strip()]
+    return nonempty[-1] if nonempty else ""
+
+
+def _model_call_record(
+    index: int,
+    prompt: str,
+    max_tokens: int,
+    response_json: object,
+    extracted_text: str,
+    extraction_source: str,
+) -> dict:
+    choice = _first_choice(response_json)
+    message = choice.get("message") if choice and isinstance(choice.get("message"), dict) else {}
+    usage = response_json.get("usage") if isinstance(response_json, dict) else None
+    return {
+        "index": index,
+        "purpose": "unknown",
+        "max_tokens": max_tokens,
+        "prompt_chars": len(prompt),
+        "finish_reason": choice.get("finish_reason") if choice else None,
+        "usage": usage if isinstance(usage, dict) else None,
+        "message_keys": sorted(str(key) for key in message.keys()),
+        "content_chars": len(extracted_text),
+        "extraction_source": extraction_source,
+        "raw_response": response_json,
+    }
 
 
 def _is_grid(value: object) -> bool:

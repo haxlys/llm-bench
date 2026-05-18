@@ -16,6 +16,94 @@ def test_parse_output_grid_accepts_fenced_json_object():
     ]
 
 
+def test_parse_output_grid_rejects_bare_grid_candidates():
+    with pytest.raises(ValueError, match="output"):
+        ms.parse_output_grid("[[1, 2], [3, 4]]")
+
+
+def test_parse_output_grid_uses_last_output_object():
+    answer = (
+        'Example output: {"output": [[0, 0], [0, 0]]}\n'
+        'Final answer: {"output": [[1, 2], [3, 4]]}'
+    )
+
+    assert ms.parse_output_grid(answer) == [[1, 2], [3, 4]]
+
+
+def test_parse_output_grid_rejects_explanatory_example_grids():
+    answer = (
+        "Example input:\n"
+        "```json\n"
+        "[[0, 1], [2, 3]]\n"
+        "```\n"
+        "I will now compare the examples."
+    )
+
+    with pytest.raises(ValueError, match="output"):
+        ms.parse_output_grid(answer)
+
+
+def test_answer_with_model_uses_larger_answer_budget():
+    calls: list[int] = []
+
+    def fake_model_call(_prompt: str, max_tokens: int) -> str:
+        calls.append(max_tokens)
+        return '{"output": [[1]]}'
+
+    case = ms.build_eval_cases(limit=1)[0]
+    answer = ms._answer_with_model(fake_model_call)
+
+    assert answer(case, "prompt", "no_memory", "") == '{"output": [[1]]}'
+    assert calls == [ms.DEFAULT_ANSWER_MAX_TOKENS]
+
+
+def test_model_call_records_raw_response_and_extracts_harmony_final(monkeypatch):
+    records: list[dict] = []
+    requests_seen: list[dict] = []
+
+    class FakeResponse:
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return {
+                "choices": [
+                    {
+                        "finish_reason": "stop",
+                        "message": {
+                            "content": (
+                                "<|channel|>analysis<|message|>thinking<|end|>"
+                                '<|start|>assistant<|channel|>final<|message|>{"output": [[1]]}<|return|>'
+                            )
+                        },
+                    }
+                ],
+                "usage": {"completion_tokens": 12},
+            }
+
+    def fake_post(*_args, **kwargs):
+        requests_seen.append(kwargs["json"])
+        return FakeResponse()
+
+    monkeypatch.setattr(ms.requests, "post", fake_post)
+    call = ms._model_call_factory(
+        "http://localhost:9090/v1",
+        "fake-model",
+        timeout_s=30,
+        api_key=None,
+        call_records=records,
+    )
+
+    assert call("prompt", 2048) == '{"output": [[1]]}'
+    assert requests_seen[0]["max_tokens"] == 2048
+    assert requests_seen[0]["messages"][0]["role"] == "system"
+    assert records[0]["finish_reason"] == "stop"
+    assert records[0]["usage"] == {"completion_tokens": 12}
+    assert records[0]["content_chars"] == len('{"output": [[1]]}')
+    assert records[0]["extraction_source"] == "message.content.final_channel"
+    assert records[0]["raw_response"]["choices"][0]["finish_reason"] == "stop"
+
+
 def test_apply_family_oracles_are_deterministic():
     grid = [
         [1, 2, 6],
