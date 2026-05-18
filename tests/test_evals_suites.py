@@ -9,6 +9,7 @@ from llm_bench.evals.suites import (
     smoke_suite,
     supports_capabilities,
     supports_fmt,
+    task_lane,
 )
 
 
@@ -41,6 +42,12 @@ def test_terminal_bench_external_runner_is_supported_for_chat_formats():
     assert ("agentic_code", "terminal_bench", "terminal_bench") in external_suite()
     assert external_supports_fmt("terminal_bench", "terminal_bench", "mlx") is True
     assert external_supports_fmt("terminal_bench", "terminal_bench", "gguf") is True
+
+
+def test_code_lane_promotes_bigcodebench_and_demotes_livecodebench():
+    assert task_lane("bigcodebench_hard") == "primary"
+    assert task_lane("terminal_bench") == "primary"
+    assert task_lane("livecodebench") == "optional"
 
 
 def test_fresh_and_korean_external_runners_are_supported_for_chat_formats():

@@ -15,8 +15,13 @@ PRIMARY_GROUPS = [
     ),
     (
         "primary_code",
-        "Fill standard code coverage before optional agentic/code lanes.",
-        ("humaneval", "mbpp", "livecodebench"),
+        "Fill standard code coverage before optional legacy/tool lanes.",
+        ("humaneval", "mbpp", "bigcodebench_hard"),
+    ),
+    (
+        "primary_agentic_code",
+        "Fill Terminal-Bench coverage for modern coding-agent comparisons.",
+        ("terminal_bench",),
     ),
     (
         "reasoning_instruction_catchup",
@@ -27,9 +32,9 @@ PRIMARY_GROUPS = [
 
 OPTIONAL_GROUPS = [
     (
-        "optional_bigcodebench_bfcl_livebench",
-        "Run optional frontier lanes separately after primary coverage.",
-        ("bigcodebench_hard", "bfcl", "livebench_subset"),
+        "optional_legacy_code_bfcl_livebench",
+        "Run optional legacy/tool/fresh lanes separately after primary coverage.",
+        ("livecodebench", "bfcl", "livebench_subset"),
     ),
     (
         "optional_programbench",

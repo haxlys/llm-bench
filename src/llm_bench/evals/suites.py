@@ -5,7 +5,7 @@ from __future__ import annotations
 # Priority sequence (mirrors the user's stated ordering):
 #   1. lm-eval reasoning: MMLU + GSM8K + HellaSwag + MMLU-Pro + GPQA-Diamond
 #   2. Korean: KMMLU + HRM-8K (+ HAE-RAE, KoBEST as bonus)
-#   3. Code: HumanEval + MBPP + LiveCodeBench
+#   3. Code: HumanEval + MBPP + BigCodeBench-Hard
 #   4. Long context: LongBench
 #   5. Instruction following: IFEval
 #   6. Tool use: BFCL v4
@@ -15,7 +15,8 @@ from __future__ import annotations
 # Frontier additions (2026-05-01):
 #   - leaderboard_mmlu_pro / leaderboard_gpqa_diamond / leaderboard_ifeval
 #     mirror HF Open LLM Leaderboard v2's normalization.
-#   - livecodebench (external runner) addresses HumanEval/MBPP contamination.
+#   - bigcodebench_hard is the current primary practical code-generation task.
+#   - livecodebench remains available as a legacy/contest-code optional lane.
 #   - bfcl (external runner) fills the previously-empty tool-use dim.
 #   - terminal_bench (external runner) adds maintained agentic terminal tasks
 #     with current frontier-model leaderboard coverage.
@@ -97,8 +98,8 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
     # Professional Korean license exam benchmark. Implemented as a direct
     # OpenAI-compatible runner so smoke runs can limit question count.
     "korean": [("kmmlu_pro", "kmmlu_pro")],
-    # Agentic terminal benchmark. Opt-in because it uses Docker and can run for
-    # minutes to hours depending on task selection.
+    # Agentic terminal benchmark. Primary for modern coding-agent comparisons;
+    # the runner defaults to a one-task cap unless configured otherwise.
     "agentic_code": [("terminal_bench", "terminal_bench")],
     # simple-evals MMLU and KMMLU-Pro are planned but not yet wired.
     # Removed from this list so run_evals.py doesn't surface 'runner not
@@ -106,11 +107,10 @@ EXTERNAL_SUITES: dict[str, list[tuple[str, str]]] = {
 }
 
 OPTIONAL_EVAL_TASKS = {
-    "bigcodebench_hard",
     "bfcl",
+    "livecodebench",
     "livebench_subset",
     "programbench",
-    "terminal_bench",
 }
 
 DIAGNOSTIC_EVAL_TASKS = {

@@ -339,7 +339,7 @@ def _lmeval_runner_for_task(task: str, resilient_ifeval: bool) -> str:
 @click.option("--include-bfcl", is_flag=True,
               help="Run BFCL v4 tool-use eval (requires `uv pip install bfcl-eval`, ~30 min/variant).")
 @click.option("--include-terminal-bench", is_flag=True,
-              help="Run Terminal-Bench agentic terminal eval (Docker-backed; default task cap = 1).")
+              help="Deprecated no-op: Terminal-Bench is a primary full-suite task.")
 @click.option("--resilient-ifeval/--strict-ifeval", default=False,
               help="Use resilient leaderboard_ifeval runner for per-sample API errors.")
 @click.option("--strict-coverage", is_flag=True, default=False,
@@ -439,20 +439,6 @@ def main(variant: tuple, all_variants: bool, suite: str, task_filter: tuple[str,
                         "runner": runner, "status": "skipped_bfcl_disabled",
                     })
                     variant_coverage.append(_build_coverage_row(dim, task, runner, "skipped_optional_disabled"))
-                    continue
-                if (
-                    runner == "terminal_bench"
-                    and not include_terminal_bench
-                    and task not in selected_tasks
-                ):
-                    grand_summary.append({
-                        "variant": v.key, "model_id": v.model_id, "fmt": v.fmt,
-                        "quant": v.quant, "dim": dim, "task": task,
-                        "runner": runner, "status": "skipped_terminal_bench_disabled",
-                    })
-                    variant_coverage.append(
-                        _build_coverage_row(dim, task, runner, "skipped_optional_disabled")
-                    )
                     continue
                 if reason := _external_skip_reason(runner, effective_limit):
                     grand_summary.append({

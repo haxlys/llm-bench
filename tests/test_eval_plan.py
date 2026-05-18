@@ -34,6 +34,7 @@ def test_build_eval_catchup_plan_orders_primary_speed_and_optional_work():
                 "model-a",
                 [
                     _row("kmmlu_pro", "missing"),
+                    _row("livecodebench", "optional", lane="optional"),
                     _row("bfcl", "optional", lane="optional"),
                 ],
                 measured=4,
@@ -44,6 +45,8 @@ def test_build_eval_catchup_plan_orders_primary_speed_and_optional_work():
                 [
                     _row("sourceqa", "diagnostic", lane="diagnostic"),
                     _row("mbpp", "missing"),
+                    _row("bigcodebench_hard", "missing"),
+                    _row("terminal_bench", "missing"),
                     _row("programbench", "optional", lane="optional"),
                 ],
             ),
@@ -57,16 +60,20 @@ def test_build_eval_catchup_plan_orders_primary_speed_and_optional_work():
     })
 
     assert plan["summary"] == {
-        "primary_missing": 2,
-        "optional_pending": 2,
+        "primary_missing": 4,
+        "optional_pending": 3,
         "speed_incomplete": 2,
     }
     assert plan["primary"][0]["id"] == "kmmlu_pro"
     assert plan["primary"][0]["tasks"] == ["kmmlu_pro"]
     assert "TASKS=\"kmmlu_pro\"" in plan["primary"][0]["command"]
     assert plan["primary"][1]["id"] == "primary_code"
+    assert plan["primary"][1]["tasks"] == ["mbpp", "bigcodebench_hard"]
+    assert plan["primary"][2]["id"] == "primary_agentic_code"
+    assert plan["primary"][2]["tasks"] == ["terminal_bench"]
     assert plan["speed"]["variants"][0]["variant"] == "model-a"
-    assert plan["optional"][0]["id"] == "optional_bigcodebench_bfcl_livebench"
+    assert plan["optional"][0]["id"] == "optional_legacy_code_bfcl_livebench"
+    assert plan["optional"][0]["tasks"] == ["livecodebench", "bfcl"]
     assert "LLM_BENCH_INCLUDE_BFCL=1" in plan["optional"][0]["command"]
     assert plan["optional"][1]["id"] == "optional_programbench"
     assert "scripts/import_programbench.py" in plan["optional"][1]["command"]
