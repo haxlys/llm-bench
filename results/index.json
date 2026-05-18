@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T05:11:59+00:00",
+  "generated_at": "2026-05-18T07:14:14+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -206,7 +206,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -272,7 +272,7 @@
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-13T07:19:08Z"
+        "last_measured": "2026-05-18T05:17:29Z"
       }
     },
     {
@@ -476,7 +476,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -536,7 +536,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T06:43:23Z"
+        "last_measured": "2026-05-18T05:19:30Z"
       }
     },
     {
@@ -746,7 +746,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -810,7 +810,7 @@
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-13T12:58:51Z"
+        "last_measured": "2026-05-18T05:20:21Z"
       }
     },
     {
@@ -837,9 +837,10 @@
         "last_measured": "2026-04-28T06:32:25+00:00"
       },
       "evals": {
-        "tasks_measured": 3,
+        "tasks_measured": 4,
         "tasks_supported": 8,
         "tasks": [
+          "gsm8k_cot_zeroshot",
           "humaneval",
           "kmmlu_pro",
           "mbpp"
@@ -852,9 +853,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "directional",
-            "status": "missing"
+            "status": "directional"
           },
           {
             "dim": "reasoning",
@@ -1017,7 +1018,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -1068,16 +1069,16 @@
         ],
         "coverage_summary": {
           "measured": 4,
-          "directional": 0,
+          "directional": 1,
           "diagnostic": 2,
-          "missing": 5,
+          "missing": 4,
           "optional": 3,
           "speed_only": 0,
           "unsupported": 6,
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T12:13:40Z"
+        "last_measured": "2026-05-18T06:11:41Z"
       }
     },
     {
@@ -1280,7 +1281,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -1340,7 +1341,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T09:51:58Z"
+        "last_measured": "2026-05-18T07:10:06Z"
       }
     },
     {
@@ -1547,7 +1548,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -1607,7 +1608,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T14:45:26Z"
+        "last_measured": "2026-05-18T05:28:44Z"
       }
     },
     {
@@ -2629,7 +2630,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -2689,7 +2690,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T06:16:39Z"
+        "last_measured": "2026-05-18T05:35:43Z"
       }
     },
     {
@@ -2899,7 +2900,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -2959,7 +2960,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-08T14:22:18Z"
+        "last_measured": "2026-05-18T05:36:51Z"
       }
     },
     {
@@ -3169,7 +3170,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -3229,7 +3230,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-08T19:34:16Z"
+        "last_measured": "2026-05-18T05:37:45Z"
       }
     },
     {
@@ -3435,7 +3436,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -3497,7 +3498,7 @@
         "extra_tasks": [
           "kmmlu_direct"
         ],
-        "last_measured": "2026-05-13T07:33:54Z"
+        "last_measured": "2026-05-18T05:38:42Z"
       }
     },
     {
@@ -4225,7 +4226,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -4287,7 +4288,7 @@
         "extra_tasks": [
           "kmmlu_direct"
         ],
-        "last_measured": "2026-05-13T08:10:28Z"
+        "last_measured": "2026-05-18T05:40:48Z"
       }
     },
     {
@@ -5019,7 +5020,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -5079,7 +5080,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T08:52:33Z"
+        "last_measured": "2026-05-18T05:45:15Z"
       }
     },
     {
@@ -5830,7 +5831,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -5890,7 +5891,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T18:59:27Z"
+        "last_measured": "2026-05-18T05:49:12Z"
       }
     },
     {
@@ -6100,7 +6101,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -6160,7 +6161,7 @@
           "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-09T05:49:51Z"
+        "last_measured": "2026-05-18T05:53:26Z"
       }
     }
   ],
@@ -6168,6 +6169,6 @@
     "variants": 23,
     "speed_complete": 17,
     "evals_started": 19,
-    "evals_missing_required": 45
+    "evals_missing_required": 44
   }
 }

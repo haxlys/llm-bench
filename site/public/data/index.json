@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T04:19:19+00:00",
+  "generated_at": "2026-05-18T07:14:14+00:00",
   "bench_version": "0.3",
   "registry_path": "models/registry.yaml",
   "variants": [
@@ -26,7 +26,7 @@
       },
       "evals": {
         "tasks_measured": 4,
-        "tasks_supported": 4,
+        "tasks_supported": 5,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -159,8 +159,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -170,8 +170,8 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -206,7 +206,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -234,6 +234,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -248,11 +259,11 @@
           "measured": 2,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
+          "missing": 1,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [
           "humaneval_instruct",
@@ -261,7 +272,7 @@
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-13T07:19:08Z"
+        "last_measured": "2026-05-18T05:17:29Z"
       }
     },
     {
@@ -287,7 +298,7 @@
       },
       "evals": {
         "tasks_measured": 2,
-        "tasks_supported": 4,
+        "tasks_supported": 5,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "kmmlu_pro"
@@ -418,8 +429,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -429,8 +440,8 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -465,7 +476,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -493,6 +504,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -507,14 +529,14 @@
           "measured": 1,
           "directional": 1,
           "diagnostic": 2,
-          "missing": 2,
+          "missing": 3,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T06:43:23Z"
+        "last_measured": "2026-05-18T05:19:30Z"
       }
     },
     {
@@ -541,15 +563,14 @@
         "last_measured": "2026-04-28T04:04:32+00:00"
       },
       "evals": {
-        "tasks_measured": 7,
-        "tasks_supported": 7,
+        "tasks_measured": 6,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
-          "livecodebench",
           "mbpp"
         ],
         "coverage": [
@@ -678,8 +699,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": true,
             "measured": true,
             "confidence": "measured",
@@ -689,12 +710,12 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": true,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -725,7 +746,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -753,6 +774,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -767,18 +799,18 @@
           "measured": 5,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
-          "optional": 4,
+          "missing": 2,
+          "optional": 3,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [
           "kmmlu_direct",
           "mmlu_generative",
           "truthfulqa-multi_gen_en"
         ],
-        "last_measured": "2026-05-13T12:58:51Z"
+        "last_measured": "2026-05-18T05:20:21Z"
       }
     },
     {
@@ -806,11 +838,11 @@
       },
       "evals": {
         "tasks_measured": 4,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
+          "gsm8k_cot_zeroshot",
           "humaneval",
           "kmmlu_pro",
-          "livecodebench",
           "mbpp"
         ],
         "coverage": [
@@ -821,9 +853,9 @@
             "lane": "primary",
             "required": true,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "directional",
-            "status": "missing"
+            "status": "directional"
           },
           {
             "dim": "reasoning",
@@ -939,8 +971,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": true,
             "measured": true,
             "confidence": "measured",
@@ -950,12 +982,12 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": true,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -986,7 +1018,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -1014,6 +1046,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -1026,16 +1069,16 @@
         ],
         "coverage_summary": {
           "measured": 4,
-          "directional": 0,
+          "directional": 1,
           "diagnostic": 2,
-          "missing": 3,
-          "optional": 4,
+          "missing": 4,
+          "optional": 3,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T12:13:40Z"
+        "last_measured": "2026-05-18T06:11:41Z"
       }
     },
     {
@@ -1061,7 +1104,7 @@
       },
       "evals": {
         "tasks_measured": 1,
-        "tasks_supported": 4,
+        "tasks_supported": 5,
         "tasks": [
           "kmmlu_pro"
         ],
@@ -1191,8 +1234,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -1202,8 +1245,8 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -1238,7 +1281,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -1266,6 +1309,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -1280,14 +1334,14 @@
           "measured": 1,
           "directional": 0,
           "diagnostic": 2,
-          "missing": 3,
+          "missing": 4,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T09:51:58Z"
+        "last_measured": "2026-05-18T07:10:06Z"
       }
     },
     {
@@ -1315,7 +1369,7 @@
       },
       "evals": {
         "tasks_measured": 3,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "humaneval",
           "kmmlu_pro",
@@ -1447,23 +1501,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -1494,7 +1548,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -1522,6 +1576,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -1536,14 +1601,14 @@
           "measured": 3,
           "directional": 0,
           "diagnostic": 2,
-          "missing": 4,
+          "missing": 5,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T14:45:26Z"
+        "last_measured": "2026-05-18T05:28:44Z"
       }
     },
     {
@@ -1570,15 +1635,14 @@
         "last_measured": "2026-05-04T01:56:58+00:00"
       },
       "evals": {
-        "tasks_measured": 7,
-        "tasks_supported": 7,
+        "tasks_measured": 6,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
-          "livecodebench",
           "mbpp"
         ],
         "coverage": [
@@ -1707,8 +1771,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": true,
             "measured": true,
             "confidence": "measured",
@@ -1718,12 +1782,12 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": true,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -1782,6 +1846,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -1796,14 +1871,14 @@
           "measured": 5,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
-          "optional": 4,
+          "missing": 2,
+          "optional": 3,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-14T11:33:28Z"
+        "last_measured": "2026-05-15T04:49:16Z"
       }
     },
     {
@@ -1830,15 +1905,14 @@
         "last_measured": "2026-05-04T02:01:09+00:00"
       },
       "evals": {
-        "tasks_measured": 7,
-        "tasks_supported": 7,
+        "tasks_measured": 6,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
-          "livecodebench",
           "mbpp"
         ],
         "coverage": [
@@ -1967,8 +2041,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": true,
             "measured": true,
             "confidence": "measured",
@@ -1978,12 +2052,12 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": true,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -2042,6 +2116,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -2056,11 +2141,11 @@
           "measured": 5,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
-          "optional": 4,
+          "missing": 2,
+          "optional": 3,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [
           "kmmlu_direct",
@@ -2095,7 +2180,7 @@
       },
       "evals": {
         "tasks_measured": 4,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -2228,23 +2313,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -2303,6 +2388,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -2317,14 +2413,14 @@
           "measured": 2,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 3,
+          "missing": 4,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-14T11:27:09Z"
+        "last_measured": "2026-05-15T05:01:57Z"
       }
     },
     {
@@ -2352,7 +2448,7 @@
       },
       "evals": {
         "tasks_measured": 6,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -2487,23 +2583,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -2534,7 +2630,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -2562,6 +2658,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -2576,14 +2683,14 @@
           "measured": 4,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 1,
+          "missing": 2,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T06:16:39Z"
+        "last_measured": "2026-05-18T05:35:43Z"
       }
     },
     {
@@ -2611,7 +2718,7 @@
       },
       "evals": {
         "tasks_measured": 6,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -2746,23 +2853,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -2793,7 +2900,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -2821,6 +2928,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -2835,14 +2953,14 @@
           "measured": 4,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 1,
+          "missing": 2,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-08T14:22:18Z"
+        "last_measured": "2026-05-18T05:36:51Z"
       }
     },
     {
@@ -2870,7 +2988,7 @@
       },
       "evals": {
         "tasks_measured": 6,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -3005,23 +3123,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -3052,7 +3170,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -3080,6 +3198,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -3094,14 +3223,14 @@
           "measured": 4,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 1,
+          "missing": 2,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-08T19:34:16Z"
+        "last_measured": "2026-05-18T05:37:45Z"
       }
     },
     {
@@ -3127,7 +3256,7 @@
       },
       "evals": {
         "tasks_measured": 4,
-        "tasks_supported": 4,
+        "tasks_supported": 5,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -3260,8 +3389,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -3271,8 +3400,8 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -3307,7 +3436,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -3335,6 +3464,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -3349,16 +3489,16 @@
           "measured": 2,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
+          "missing": 1,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [
           "kmmlu_direct"
         ],
-        "last_measured": "2026-05-13T07:33:54Z"
+        "last_measured": "2026-05-18T05:38:42Z"
       }
     },
     {
@@ -3587,6 +3727,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "speed_only"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "mtplx_speedup",
@@ -3603,9 +3754,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 19,
+          "speed_only": 20,
           "unsupported": 0,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
         "last_measured": null
@@ -3837,6 +3988,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "speed_only"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "mtplx_speedup",
@@ -3853,9 +4015,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 19,
+          "speed_only": 20,
           "unsupported": 0,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
         "last_measured": null
@@ -3884,7 +4046,7 @@
       },
       "evals": {
         "tasks_measured": 4,
-        "tasks_supported": 4,
+        "tasks_supported": 5,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -4017,8 +4179,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -4028,8 +4190,8 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": false,
             "measured": false,
             "confidence": "measured",
@@ -4064,7 +4226,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -4092,6 +4254,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -4106,16 +4279,16 @@
           "measured": 2,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
+          "missing": 1,
           "optional": 2,
           "speed_only": 0,
           "unsupported": 11,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [
           "kmmlu_direct"
         ],
-        "last_measured": "2026-05-13T08:10:28Z"
+        "last_measured": "2026-05-18T05:40:48Z"
       }
     },
     {
@@ -4344,6 +4517,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "speed_only"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "mtplx_speedup",
@@ -4360,9 +4544,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 19,
+          "speed_only": 20,
           "unsupported": 0,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
         "last_measured": null
@@ -4594,6 +4778,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "mtplx_speedup",
+            "required": false,
+            "supported": false,
+            "measured": false,
+            "confidence": "measured",
+            "status": "speed_only"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "mtplx_speedup",
@@ -4610,9 +4805,9 @@
           "diagnostic": 0,
           "missing": 0,
           "optional": 0,
-          "speed_only": 19,
+          "speed_only": 20,
           "unsupported": 0,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
         "last_measured": null
@@ -4642,15 +4837,14 @@
         "last_measured": "2026-05-04T02:18:49+00:00"
       },
       "evals": {
-        "tasks_measured": 7,
-        "tasks_supported": 7,
+        "tasks_measured": 6,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
-          "livecodebench",
           "mbpp"
         ],
         "coverage": [
@@ -4779,8 +4973,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": true,
             "measured": true,
             "confidence": "measured",
@@ -4790,12 +4984,12 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": true,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -4826,7 +5020,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -4854,6 +5048,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -4868,14 +5073,14 @@
           "measured": 5,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
-          "optional": 4,
+          "missing": 2,
+          "optional": 3,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T08:52:33Z"
+        "last_measured": "2026-05-18T05:45:15Z"
       }
     },
     {
@@ -4903,15 +5108,15 @@
       },
       "evals": {
         "tasks_measured": 7,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
           "humaneval",
           "kmmlu_pro",
           "leaderboard_ifeval",
-          "livecodebench",
-          "mbpp"
+          "mbpp",
+          "terminal_bench"
         ],
         "coverage": [
           {
@@ -5039,8 +5244,8 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
+            "lane": "optional",
+            "required": false,
             "supported": true,
             "measured": true,
             "confidence": "measured",
@@ -5050,12 +5255,12 @@
             "dim": "code",
             "task": "bigcodebench_hard",
             "runner": "bigcodebench",
-            "lane": "optional",
-            "required": false,
+            "lane": "primary",
+            "required": true,
             "supported": true,
             "measured": false,
             "confidence": "measured",
-            "status": "optional"
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -5114,6 +5319,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": true,
+            "confidence": "measured",
+            "status": "measured"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -5125,17 +5341,17 @@
           }
         ],
         "coverage_summary": {
-          "measured": 5,
+          "measured": 6,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 0,
-          "optional": 4,
+          "missing": 1,
+          "optional": 3,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-14T12:46:15Z"
+        "last_measured": "2026-05-15T05:00:09Z"
       }
     },
     {
@@ -5163,7 +5379,7 @@
       },
       "evals": {
         "tasks_measured": 6,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -5298,23 +5514,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -5373,6 +5589,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -5387,11 +5614,11 @@
           "measured": 4,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 1,
+          "missing": 2,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
         "last_measured": "2026-05-14T11:30:06Z"
@@ -5422,7 +5649,7 @@
       },
       "evals": {
         "tasks_measured": 6,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -5557,23 +5784,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -5604,7 +5831,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -5632,6 +5859,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -5646,14 +5884,14 @@
           "measured": 4,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 1,
+          "missing": 2,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-13T18:59:27Z"
+        "last_measured": "2026-05-18T05:49:12Z"
       }
     },
     {
@@ -5681,7 +5919,7 @@
       },
       "evals": {
         "tasks_measured": 6,
-        "tasks_supported": 7,
+        "tasks_supported": 8,
         "tasks": [
           "gsm8k_cot_zeroshot",
           "hrm8k",
@@ -5816,23 +6054,23 @@
             "dim": "code",
             "task": "livecodebench",
             "runner": "livecodebench",
-            "lane": "primary",
-            "required": true,
-            "supported": true,
-            "measured": false,
-            "confidence": "measured",
-            "status": "missing"
-          },
-          {
-            "dim": "code",
-            "task": "bigcodebench_hard",
-            "runner": "bigcodebench",
             "lane": "optional",
             "required": false,
             "supported": true,
             "measured": false,
             "confidence": "measured",
             "status": "optional"
+          },
+          {
+            "dim": "code",
+            "task": "bigcodebench_hard",
+            "runner": "bigcodebench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
           },
           {
             "dim": "tool",
@@ -5863,7 +6101,7 @@
             "lane": "diagnostic",
             "required": false,
             "supported": true,
-            "measured": false,
+            "measured": true,
             "confidence": "diagnostic",
             "status": "diagnostic"
           },
@@ -5891,6 +6129,17 @@
           },
           {
             "dim": "agentic_code",
+            "task": "terminal_bench",
+            "runner": "terminal_bench",
+            "lane": "primary",
+            "required": true,
+            "supported": true,
+            "measured": false,
+            "confidence": "measured",
+            "status": "missing"
+          },
+          {
+            "dim": "agentic_code",
             "task": "programbench",
             "runner": "programbench",
             "lane": "optional",
@@ -5905,14 +6154,14 @@
           "measured": 4,
           "directional": 2,
           "diagnostic": 2,
-          "missing": 1,
+          "missing": 2,
           "optional": 4,
           "speed_only": 0,
           "unsupported": 6,
-          "total": 19
+          "total": 20
         },
         "extra_tasks": [],
-        "last_measured": "2026-05-09T05:49:51Z"
+        "last_measured": "2026-05-18T05:53:26Z"
       }
     }
   ],
@@ -5920,6 +6169,6 @@
     "variants": 23,
     "speed_complete": 17,
     "evals_started": 19,
-    "evals_missing_required": 21
+    "evals_missing_required": 44
   }
 }
